@@ -17,6 +17,15 @@ Marketplace leadership teams often rely on GMV as the primary growth signal. GMV
 
 This project builds a decision-support operating model that combines growth, profitability, fraud, seller quality, and operational reliability in one control-tower workflow.
 
+## Repository Scope
+To keep GitHub clean and reviewable, generated runtime artifacts are not versioned:
+- `data/raw/*.csv`
+- `data/processed/*.csv`
+- `outputs/*`
+- `reports/*`
+
+All of these are reproducible from source scripts and pipeline entrypoints in this repository.
+
 ## Why It Matters
 If leadership tracks only GMV, they can miss:
 - hidden contribution margin destruction
@@ -304,6 +313,12 @@ Equivalent direct entrypoint:
 ```
 
 ## 3) Tests
+Run tests after generating artifacts (fresh clones do not include generated `data/` tables by design):
+```bash
+make all
+```
+
+Then:
 ```bash
 .venv/bin/pytest -q
 ```
@@ -339,7 +354,6 @@ docker compose run --rm test
 - [docs/release_readiness_governance.md](docs/release_readiness_governance.md)
 - [docs/scoring_framework.md](docs/scoring_framework.md)
 - [docs/scenario_decision_analysis.md](docs/scenario_decision_analysis.md)
-- [reports/validation_report.md](reports/validation_report.md)
 
 ## GitHub Polish Notes
 - CI workflow is included at `.github/workflows/ci.yml` (tests + validation smoke check).

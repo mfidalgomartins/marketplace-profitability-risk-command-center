@@ -12,13 +12,13 @@
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 ```
-2. Run tests:
-```bash
-.venv/bin/pytest -q
-```
-3. Run full pipeline:
+2. Generate reproducible artifacts (required on fresh clone):
 ```bash
 make all
+```
+3. Run tests:
+```bash
+.venv/bin/pytest -q
 ```
 4. Regenerate governance execution queue only:
 ```bash
