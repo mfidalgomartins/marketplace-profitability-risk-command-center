@@ -1,0 +1,1150 @@
+{
+  "contract_version": "v1.0.0",
+  "schema_family": "marketplace_command_center",
+  "tables": [
+    {
+      "column_types": {
+        "acquisition_channel": "string",
+        "buyer_id": "string",
+        "customer_type": "string",
+        "loyalty_tier": "string",
+        "region": "string",
+        "signup_date": "string"
+      },
+      "columns": [
+        "buyer_id",
+        "signup_date",
+        "region",
+        "acquisition_channel",
+        "customer_type",
+        "loyalty_tier"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/buyers.csv",
+      "primary_key_candidate": [
+        "buyer_id"
+      ],
+      "table_name": "buyers"
+    },
+    {
+      "column_types": {
+        "category_focus": "string",
+        "commission_plan": "string",
+        "fulfillment_model": "string",
+        "onboarding_date": "string",
+        "seller_id": "string",
+        "seller_region": "string",
+        "seller_tier": "string",
+        "seller_type": "string"
+      },
+      "columns": [
+        "seller_id",
+        "onboarding_date",
+        "seller_region",
+        "seller_type",
+        "category_focus",
+        "seller_tier",
+        "commission_plan",
+        "fulfillment_model"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/sellers.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "sellers"
+    },
+    {
+      "column_types": {
+        "category": "string",
+        "estimated_cost": "number",
+        "list_price": "number",
+        "product_id": "string",
+        "seller_id": "string",
+        "shipping_cost_proxy": "number",
+        "subcategory": "string"
+      },
+      "columns": [
+        "product_id",
+        "seller_id",
+        "category",
+        "subcategory",
+        "list_price",
+        "estimated_cost",
+        "shipping_cost_proxy"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/products.csv",
+      "primary_key_candidate": [
+        "product_id"
+      ],
+      "table_name": "products"
+    },
+    {
+      "column_types": {
+        "buyer_id": "string",
+        "gross_order_value": "number",
+        "net_paid_amount": "number",
+        "order_channel": "string",
+        "order_date": "string",
+        "order_id": "string",
+        "order_status": "string",
+        "payment_method": "string",
+        "promo_code_used": "string",
+        "subsidy_amount": "number"
+      },
+      "columns": [
+        "order_id",
+        "buyer_id",
+        "order_date",
+        "payment_method",
+        "order_channel",
+        "promo_code_used",
+        "gross_order_value",
+        "subsidy_amount",
+        "net_paid_amount",
+        "order_status"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/orders.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "table_name": "orders"
+    },
+    {
+      "column_types": {
+        "commission_fee": "number",
+        "discount_amount": "number",
+        "estimated_cost": "number",
+        "gross_item_value": "number",
+        "margin_proxy": "number",
+        "net_item_value": "number",
+        "order_id": "string",
+        "order_item_id": "string",
+        "product_id": "string",
+        "quantity": "integer",
+        "sale_price": "number",
+        "seller_id": "string"
+      },
+      "columns": [
+        "order_item_id",
+        "order_id",
+        "product_id",
+        "seller_id",
+        "quantity",
+        "sale_price",
+        "gross_item_value",
+        "net_item_value",
+        "discount_amount",
+        "commission_fee",
+        "estimated_cost",
+        "margin_proxy"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/order_items.csv",
+      "primary_key_candidate": [
+        "order_item_id"
+      ],
+      "table_name": "order_items"
+    },
+    {
+      "column_types": {
+        "chargeback_flag": "integer",
+        "order_id": "string",
+        "payment_attempts": "integer",
+        "payment_id": "string",
+        "payment_risk_signal": "string",
+        "payment_status": "string"
+      },
+      "columns": [
+        "payment_id",
+        "order_id",
+        "payment_status",
+        "payment_attempts",
+        "chargeback_flag",
+        "payment_risk_signal"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/payments.csv",
+      "primary_key_candidate": [
+        "payment_id"
+      ],
+      "table_name": "payments"
+    },
+    {
+      "column_types": {
+        "full_refund_flag": "integer",
+        "order_id": "string",
+        "refund_amount": "number",
+        "refund_date": "string",
+        "refund_id": "string",
+        "refund_reason": "string"
+      },
+      "columns": [
+        "refund_id",
+        "order_id",
+        "refund_date",
+        "refund_reason",
+        "refund_amount",
+        "full_refund_flag"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/refunds.csv",
+      "primary_key_candidate": [
+        "refund_id"
+      ],
+      "table_name": "refunds"
+    },
+    {
+      "column_types": {
+        "dispute_amount": "number",
+        "dispute_date": "string",
+        "dispute_id": "string",
+        "dispute_reason": "string",
+        "dispute_status": "string",
+        "order_id": "string"
+      },
+      "columns": [
+        "dispute_id",
+        "order_id",
+        "dispute_date",
+        "dispute_reason",
+        "dispute_status",
+        "dispute_amount"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/disputes.csv",
+      "primary_key_candidate": [
+        "dispute_id"
+      ],
+      "table_name": "disputes"
+    },
+    {
+      "column_types": {
+        "cancellation_flag": "integer",
+        "delay_days": "number",
+        "delivered_date": "string",
+        "event_id": "string",
+        "order_id": "string",
+        "promised_delivery_date": "string",
+        "seller_id": "string",
+        "shipped_date": "string"
+      },
+      "columns": [
+        "event_id",
+        "order_id",
+        "seller_id",
+        "shipped_date",
+        "delivered_date",
+        "promised_delivery_date",
+        "delay_days",
+        "cancellation_flag"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/raw/logistics_events.csv",
+      "primary_key_candidate": [
+        "event_id"
+      ],
+      "table_name": "logistics_events"
+    },
+    {
+      "column_types": {
+        "buyer_id": "string",
+        "category": "string",
+        "commission_fee": "number",
+        "dispute_amount": "number",
+        "estimated_margin_after_risk": "number",
+        "gross_value": "number",
+        "net_value": "number",
+        "order_date": "string",
+        "order_id": "string",
+        "profitability_flag": "string",
+        "refund_amount": "number",
+        "risk_adjusted_order_value": "number",
+        "seller_id": "string",
+        "subsidy_amount": "number"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "buyer_id",
+        "seller_id",
+        "category",
+        "gross_value",
+        "net_value",
+        "subsidy_amount",
+        "commission_fee",
+        "refund_amount",
+        "dispute_amount",
+        "estimated_margin_after_risk",
+        "risk_adjusted_order_value",
+        "profitability_flag"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/order_profitability_features.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "table_name": "order_profitability_features"
+    },
+    {
+      "column_types": {
+        "GMV": "number",
+        "avg_margin_proxy": "number",
+        "cancellation_rate": "number",
+        "chargeback_rate": "number",
+        "delay_rate": "number",
+        "dispute_rate": "number",
+        "fragility_flag": "string",
+        "month": "string",
+        "net_value": "number",
+        "on_time_rate": "number",
+        "orders": "integer",
+        "promo_dependency_rate": "number",
+        "refund_rate": "number",
+        "repeat_buyer_rate": "number",
+        "seller_id": "string",
+        "seller_quality_proxy": "number"
+      },
+      "columns": [
+        "seller_id",
+        "month",
+        "orders",
+        "GMV",
+        "net_value",
+        "avg_margin_proxy",
+        "refund_rate",
+        "dispute_rate",
+        "chargeback_rate",
+        "cancellation_rate",
+        "delay_rate",
+        "on_time_rate",
+        "promo_dependency_rate",
+        "repeat_buyer_rate",
+        "seller_quality_proxy",
+        "fragility_flag"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/seller_monthly_quality.csv",
+      "primary_key_candidate": [],
+      "table_name": "seller_monthly_quality"
+    },
+    {
+      "column_types": {
+        "abnormal_behavior_flags": "string",
+        "average_order_value": "number",
+        "buyer_id": "string",
+        "chargeback_frequency": "number",
+        "dispute_frequency": "number",
+        "order_risk_proxy": "number",
+        "promo_usage_rate": "number",
+        "refund_frequency": "number",
+        "trailing_order_count": "integer"
+      },
+      "columns": [
+        "buyer_id",
+        "trailing_order_count",
+        "refund_frequency",
+        "dispute_frequency",
+        "chargeback_frequency",
+        "average_order_value",
+        "promo_usage_rate",
+        "abnormal_behavior_flags",
+        "order_risk_proxy"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/buyer_behavior_risk.csv",
+      "primary_key_candidate": [
+        "buyer_id"
+      ],
+      "table_name": "buyer_behavior_risk"
+    },
+    {
+      "column_types": {
+        "GMV": "number",
+        "category": "string",
+        "dispute_rate": "number",
+        "margin_fragility_index": "number",
+        "month": "string",
+        "net_value": "number",
+        "refund_rate": "number",
+        "subsidy_rate": "number"
+      },
+      "columns": [
+        "month",
+        "category",
+        "GMV",
+        "net_value",
+        "refund_rate",
+        "dispute_rate",
+        "subsidy_rate",
+        "margin_fragility_index"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/category_risk_summary.csv",
+      "primary_key_candidate": [],
+      "table_name": "category_risk_summary"
+    },
+    {
+      "column_types": {
+        "concentration_inputs": "string",
+        "current_period": "string",
+        "fraud_inputs": "string",
+        "operational_inputs": "string",
+        "profitability_inputs": "string",
+        "quality_inputs": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "quality_inputs",
+        "fraud_inputs",
+        "profitability_inputs",
+        "operational_inputs",
+        "concentration_inputs"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/seller_risk_base.csv",
+      "primary_key_candidate": [],
+      "table_name": "seller_risk_base"
+    },
+    {
+      "column_types": {
+        "buyer_id": "string",
+        "category": "string",
+        "order_channel": "string",
+        "order_date": "string",
+        "order_id": "string",
+        "order_risk_main_driver": "string",
+        "order_risk_score": "number",
+        "order_risk_tier": "string",
+        "payment_method": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "buyer_id",
+        "seller_id",
+        "category",
+        "order_channel",
+        "payment_method",
+        "order_risk_score",
+        "order_risk_tier",
+        "order_risk_main_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/order_risk_scores.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "table_name": "order_risk_scores"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "main_risk_driver": "string",
+        "recommended_action": "string",
+        "seller_id": "string",
+        "seller_quality_score": "number",
+        "seller_quality_tier": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "seller_quality_score",
+        "seller_quality_tier",
+        "main_risk_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/seller_quality_scores.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "seller_quality_scores"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "fraud_exposure_score": "number",
+        "fraud_exposure_tier": "string",
+        "main_risk_driver": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "fraud_exposure_score",
+        "fraud_exposure_tier",
+        "main_risk_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/fraud_exposure_scores.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "fraud_exposure_scores"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "main_risk_driver": "string",
+        "margin_fragility_score": "number",
+        "margin_fragility_tier": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "margin_fragility_score",
+        "margin_fragility_tier",
+        "main_risk_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/margin_fragility_scores.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "margin_fragility_scores"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "governance_priority_score": "number",
+        "governance_priority_tier": "string",
+        "main_risk_driver": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "governance_priority_score",
+        "governance_priority_tier",
+        "main_risk_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/governance_priority_scores.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "governance_priority_scores"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "fraud_exposure_score": "number",
+        "fraud_exposure_tier": "string",
+        "gmv": "number",
+        "governance_priority_score": "number",
+        "governance_priority_tier": "string",
+        "main_risk_driver": "string",
+        "margin_fragility_score": "number",
+        "margin_fragility_tier": "string",
+        "net_value": "number",
+        "orders": "integer",
+        "recommended_action": "string",
+        "seller_id": "string",
+        "seller_quality_score": "number",
+        "seller_quality_tier": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "governance_priority_score",
+        "governance_priority_tier",
+        "main_risk_driver",
+        "recommended_action",
+        "seller_quality_score",
+        "seller_quality_tier",
+        "fraud_exposure_score",
+        "fraud_exposure_tier",
+        "margin_fragility_score",
+        "margin_fragility_tier",
+        "orders",
+        "gmv",
+        "net_value"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/seller_scorecard.csv",
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "table_name": "seller_scorecard"
+    },
+    {
+      "column_types": {
+        "buyer_id": "string",
+        "category": "string",
+        "order_channel": "string",
+        "order_date": "string",
+        "order_id": "string",
+        "order_risk_main_driver": "string",
+        "order_risk_score": "number",
+        "order_risk_tier": "string",
+        "payment_method": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "buyer_id",
+        "seller_id",
+        "category",
+        "order_channel",
+        "payment_method",
+        "order_risk_score",
+        "order_risk_tier",
+        "order_risk_main_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/order_scorecard.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "table_name": "order_scorecard"
+    },
+    {
+      "column_types": {
+        "current_period": "string",
+        "fraud_exposure_score": "number",
+        "fraud_exposure_tier": "string",
+        "gmv": "number",
+        "governance_priority_score": "number",
+        "governance_priority_tier": "string",
+        "main_risk_driver": "string",
+        "margin_fragility_score": "number",
+        "margin_fragility_tier": "string",
+        "net_value": "number",
+        "orders": "integer",
+        "recommended_action": "string",
+        "seller_id": "string",
+        "seller_quality_score": "number",
+        "seller_quality_tier": "string"
+      },
+      "columns": [
+        "seller_id",
+        "current_period",
+        "governance_priority_score",
+        "governance_priority_tier",
+        "main_risk_driver",
+        "recommended_action",
+        "seller_quality_score",
+        "seller_quality_tier",
+        "fraud_exposure_score",
+        "fraud_exposure_tier",
+        "margin_fragility_score",
+        "margin_fragility_tier",
+        "orders",
+        "gmv",
+        "net_value"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/top_high_priority_sellers.csv",
+      "primary_key_candidate": [],
+      "table_name": "top_high_priority_sellers"
+    },
+    {
+      "column_types": {
+        "buyer_id": "string",
+        "category": "string",
+        "order_channel": "string",
+        "order_date": "string",
+        "order_id": "string",
+        "order_risk_main_driver": "string",
+        "order_risk_score": "number",
+        "order_risk_tier": "string",
+        "payment_method": "string",
+        "recommended_action": "string",
+        "seller_id": "string"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "buyer_id",
+        "seller_id",
+        "category",
+        "order_channel",
+        "payment_method",
+        "order_risk_score",
+        "order_risk_tier",
+        "order_risk_main_driver",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/top_high_risk_orders.csv",
+      "primary_key_candidate": [],
+      "table_name": "top_high_risk_orders"
+    },
+    {
+      "column_types": {
+        "avg_score": "number",
+        "median_score": "number",
+        "scenario": "string",
+        "top50_overlap_rate": "number",
+        "top50_overlap_vs_baseline": "integer"
+      },
+      "columns": [
+        "scenario",
+        "avg_score",
+        "median_score",
+        "top50_overlap_vs_baseline",
+        "top50_overlap_rate"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scoring_sensitivity_summary.csv",
+      "primary_key_candidate": [],
+      "table_name": "scoring_sensitivity_summary"
+    },
+    {
+      "column_types": {
+        "assumption_summary": "string",
+        "chargeback_rate_factor": "number",
+        "correct_bad_actor_effectiveness": "number",
+        "dispute_rate_factor": "number",
+        "gmv_factor": "number",
+        "net_to_gmv_factor": "number",
+        "refund_rate_factor": "number",
+        "remove_bad_actor_intensity": "number",
+        "risk_gap_factor": "number",
+        "scenario": "string",
+        "scenario_type": "string",
+        "subsidy_rate_factor": "number",
+        "top_risk_exposure_factor": "number"
+      },
+      "columns": [
+        "scenario",
+        "scenario_type",
+        "gmv_factor",
+        "net_to_gmv_factor",
+        "subsidy_rate_factor",
+        "refund_rate_factor",
+        "dispute_rate_factor",
+        "chargeback_rate_factor",
+        "risk_gap_factor",
+        "top_risk_exposure_factor",
+        "remove_bad_actor_intensity",
+        "correct_bad_actor_effectiveness",
+        "assumption_summary"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_assumptions.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_assumptions"
+    },
+    {
+      "column_types": {
+        "assumption_summary": "string",
+        "chargeback_loss": "number",
+        "cm_rate": "number",
+        "commission_revenue": "number",
+        "contribution_margin_change_vs_baseline": "number",
+        "contribution_margin_proxy": "number",
+        "correct_bad_actor_leakage_avoided": "number",
+        "decision_priority_score": "number",
+        "disputes": "number",
+        "gmv": "number",
+        "gmv_change_vs_baseline_pct": "number",
+        "growth_quality_tradeoff": "string",
+        "leakage_avoided_vs_baseline": "number",
+        "leakage_rate": "number",
+        "net_value": "number",
+        "quality_ratio": "number",
+        "quality_ratio_change_pp_vs_baseline": "number",
+        "refunds": "number",
+        "remove_bad_actor_gmv_loss": "number",
+        "remove_bad_actor_leakage_avoided": "number",
+        "risk_adjusted_change_vs_baseline_pct": "number",
+        "risk_adjusted_gmv": "number",
+        "scenario": "string",
+        "scenario_type": "string",
+        "subsidy": "number",
+        "top_risk_seller_downside_exposure": "number",
+        "total_bad_actor_intervention_leakage_avoided": "number",
+        "total_leakage": "number",
+        "tradeoff_index": "number"
+      },
+      "columns": [
+        "scenario",
+        "scenario_type",
+        "gmv",
+        "net_value",
+        "risk_adjusted_gmv",
+        "contribution_margin_proxy",
+        "commission_revenue",
+        "subsidy",
+        "refunds",
+        "disputes",
+        "chargeback_loss",
+        "total_leakage",
+        "leakage_rate",
+        "cm_rate",
+        "top_risk_seller_downside_exposure",
+        "remove_bad_actor_gmv_loss",
+        "remove_bad_actor_leakage_avoided",
+        "correct_bad_actor_leakage_avoided",
+        "total_bad_actor_intervention_leakage_avoided",
+        "assumption_summary",
+        "gmv_change_vs_baseline_pct",
+        "risk_adjusted_change_vs_baseline_pct",
+        "contribution_margin_change_vs_baseline",
+        "leakage_avoided_vs_baseline",
+        "quality_ratio",
+        "quality_ratio_change_pp_vs_baseline",
+        "tradeoff_index",
+        "growth_quality_tradeoff",
+        "decision_priority_score"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_results_summary.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_results_summary"
+    },
+    {
+      "column_types": {
+        "chargeback_loss": "number",
+        "commission_revenue": "number",
+        "contribution_margin_change_vs_baseline": "number",
+        "contribution_margin_proxy": "number",
+        "disputes": "number",
+        "leakage_avoided_vs_baseline": "number",
+        "refunds": "number",
+        "scenario": "string",
+        "subsidy": "number",
+        "total_leakage": "number"
+      },
+      "columns": [
+        "scenario",
+        "commission_revenue",
+        "subsidy",
+        "refunds",
+        "disputes",
+        "chargeback_loss",
+        "total_leakage",
+        "contribution_margin_proxy",
+        "leakage_avoided_vs_baseline",
+        "contribution_margin_change_vs_baseline"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_component_bridge.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_component_bridge"
+    },
+    {
+      "column_types": {
+        "bad_actor_gmv_share": "number",
+        "bad_actor_leak_rate": "number",
+        "bad_actor_net_share": "number",
+        "bad_actor_seller_count": "integer",
+        "baseline_months_used": "integer",
+        "horizon_months": "integer",
+        "top_risk_leak_rate": "number",
+        "top_risk_net_share": "number"
+      },
+      "columns": [
+        "horizon_months",
+        "baseline_months_used",
+        "top_risk_net_share",
+        "top_risk_leak_rate",
+        "bad_actor_seller_count",
+        "bad_actor_gmv_share",
+        "bad_actor_net_share",
+        "bad_actor_leak_rate"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_top_risk_exposure.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_top_risk_exposure"
+    },
+    {
+      "column_types": {
+        "contribution_margin_change_vs_baseline": "number",
+        "decision_priority_score": "number",
+        "gmv_change_vs_baseline_pct": "number",
+        "growth_quality_tradeoff": "string",
+        "leakage_avoided_vs_baseline": "number",
+        "quality_ratio_change_pp_vs_baseline": "number",
+        "recommended_decision": "string",
+        "scenario": "string",
+        "scenario_type": "string"
+      },
+      "columns": [
+        "scenario",
+        "scenario_type",
+        "decision_priority_score",
+        "gmv_change_vs_baseline_pct",
+        "quality_ratio_change_pp_vs_baseline",
+        "contribution_margin_change_vs_baseline",
+        "leakage_avoided_vs_baseline",
+        "growth_quality_tradeoff",
+        "recommended_decision"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_decision_matrix.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_decision_matrix"
+    },
+    {
+      "column_types": {
+        "chargeback_loss": "number",
+        "commission_revenue": "number",
+        "contribution_margin_proxy": "number",
+        "disputes": "number",
+        "gmv": "number",
+        "iteration": "integer",
+        "net_value": "number",
+        "refunds": "number",
+        "risk_adjusted_gmv": "number",
+        "scenario": "string",
+        "scenario_type": "string",
+        "subsidy": "number",
+        "top_risk_seller_downside_exposure": "number",
+        "total_leakage": "number"
+      },
+      "columns": [
+        "iteration",
+        "scenario",
+        "scenario_type",
+        "gmv",
+        "net_value",
+        "risk_adjusted_gmv",
+        "commission_revenue",
+        "subsidy",
+        "refunds",
+        "disputes",
+        "chargeback_loss",
+        "total_leakage",
+        "contribution_margin_proxy",
+        "top_risk_seller_downside_exposure"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_monte_carlo_samples.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_monte_carlo_samples"
+    },
+    {
+      "column_types": {
+        "contribution_margin_proxy_mean": "number",
+        "contribution_margin_proxy_p05": "number",
+        "contribution_margin_proxy_p50": "number",
+        "contribution_margin_proxy_p95": "number",
+        "contribution_margin_proxy_std": "number",
+        "expected_cm_delta_vs_baseline": "number",
+        "gmv_mean": "number",
+        "gmv_p05": "number",
+        "gmv_p50": "number",
+        "gmv_p95": "number",
+        "gmv_std": "number",
+        "net_value_mean": "number",
+        "net_value_p05": "number",
+        "net_value_p50": "number",
+        "net_value_p95": "number",
+        "net_value_std": "number",
+        "prob_cm_better_than_baseline": "number",
+        "prob_cm_positive": "number",
+        "prob_leakage_better_than_baseline": "number",
+        "risk_adjusted_gmv_mean": "number",
+        "risk_adjusted_gmv_p05": "number",
+        "risk_adjusted_gmv_p50": "number",
+        "risk_adjusted_gmv_p95": "number",
+        "risk_adjusted_gmv_std": "number",
+        "scenario": "string",
+        "scenario_type": "string",
+        "top_risk_seller_downside_exposure_mean": "number",
+        "top_risk_seller_downside_exposure_p05": "number",
+        "top_risk_seller_downside_exposure_p50": "number",
+        "top_risk_seller_downside_exposure_p95": "number",
+        "top_risk_seller_downside_exposure_std": "number",
+        "total_leakage_mean": "number",
+        "total_leakage_p05": "number",
+        "total_leakage_p50": "number",
+        "total_leakage_p95": "number",
+        "total_leakage_std": "number"
+      },
+      "columns": [
+        "scenario",
+        "scenario_type",
+        "gmv_mean",
+        "gmv_p05",
+        "gmv_p50",
+        "gmv_p95",
+        "gmv_std",
+        "net_value_mean",
+        "net_value_p05",
+        "net_value_p50",
+        "net_value_p95",
+        "net_value_std",
+        "risk_adjusted_gmv_mean",
+        "risk_adjusted_gmv_p05",
+        "risk_adjusted_gmv_p50",
+        "risk_adjusted_gmv_p95",
+        "risk_adjusted_gmv_std",
+        "total_leakage_mean",
+        "total_leakage_p05",
+        "total_leakage_p50",
+        "total_leakage_p95",
+        "total_leakage_std",
+        "contribution_margin_proxy_mean",
+        "contribution_margin_proxy_p05",
+        "contribution_margin_proxy_p50",
+        "contribution_margin_proxy_p95",
+        "contribution_margin_proxy_std",
+        "top_risk_seller_downside_exposure_mean",
+        "top_risk_seller_downside_exposure_p05",
+        "top_risk_seller_downside_exposure_p50",
+        "top_risk_seller_downside_exposure_p95",
+        "top_risk_seller_downside_exposure_std",
+        "prob_cm_positive",
+        "prob_cm_better_than_baseline",
+        "prob_leakage_better_than_baseline",
+        "expected_cm_delta_vs_baseline"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_monte_carlo_summary.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_monte_carlo_summary"
+    },
+    {
+      "column_types": {
+        "contribution_margin_proxy_p05": "number",
+        "contribution_margin_proxy_p50": "number",
+        "contribution_margin_proxy_p95": "number",
+        "decision_score_uncertain": "number",
+        "expected_cm_delta_vs_baseline": "number",
+        "prob_cm_better_than_baseline": "number",
+        "prob_cm_positive": "number",
+        "prob_leakage_better_than_baseline": "number",
+        "scenario": "string",
+        "scenario_type": "string"
+      },
+      "columns": [
+        "scenario",
+        "scenario_type",
+        "decision_score_uncertain",
+        "expected_cm_delta_vs_baseline",
+        "prob_cm_positive",
+        "prob_cm_better_than_baseline",
+        "prob_leakage_better_than_baseline",
+        "contribution_margin_proxy_p05",
+        "contribution_margin_proxy_p50",
+        "contribution_margin_proxy_p95"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/scenario_monte_carlo_decision.csv",
+      "primary_key_candidate": [],
+      "table_name": "scenario_monte_carlo_decision"
+    },
+    {
+      "column_types": {
+        "conversion_friction_cost": "number",
+        "efficacy_assumption": "number",
+        "expected_avoided_loss": "number",
+        "false_positives": "integer",
+        "lift_vs_base_bad_rate": "number",
+        "net_benefit": "number",
+        "precision": "number",
+        "recall": "number",
+        "review_cost": "number",
+        "review_rate": "number",
+        "reviewed_orders": "integer",
+        "threshold": "integer",
+        "true_positives": "integer"
+      },
+      "columns": [
+        "threshold",
+        "reviewed_orders",
+        "review_rate",
+        "true_positives",
+        "false_positives",
+        "precision",
+        "recall",
+        "lift_vs_base_bad_rate",
+        "expected_avoided_loss",
+        "review_cost",
+        "conversion_friction_cost",
+        "net_benefit",
+        "efficacy_assumption"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/backtesting_threshold_curve.csv",
+      "primary_key_candidate": [],
+      "table_name": "backtesting_threshold_curve"
+    },
+    {
+      "column_types": {
+        "conversion_friction_cost": "number",
+        "efficacy_assumption": "number",
+        "expected_avoided_loss": "number",
+        "false_positives": "integer",
+        "lift_vs_base_bad_rate": "number",
+        "net_benefit": "number",
+        "precision": "number",
+        "recall": "number",
+        "review_cost": "number",
+        "review_rate": "number",
+        "reviewed_orders": "integer",
+        "threshold": "integer",
+        "true_positives": "integer"
+      },
+      "columns": [
+        "threshold",
+        "reviewed_orders",
+        "review_rate",
+        "true_positives",
+        "false_positives",
+        "precision",
+        "recall",
+        "lift_vs_base_bad_rate",
+        "expected_avoided_loss",
+        "review_cost",
+        "conversion_friction_cost",
+        "net_benefit",
+        "efficacy_assumption"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/backtesting_action_impact.csv",
+      "primary_key_candidate": [],
+      "table_name": "backtesting_action_impact"
+    },
+    {
+      "column_types": {
+        "conversion_friction_cost": "number",
+        "expected_avoided_loss": "number",
+        "net_benefit": "number",
+        "policy_guidance": "string",
+        "precision": "number",
+        "recall": "number",
+        "recommended_threshold": "integer",
+        "review_cost": "number",
+        "review_rate": "number"
+      },
+      "columns": [
+        "recommended_threshold",
+        "review_rate",
+        "precision",
+        "recall",
+        "expected_avoided_loss",
+        "review_cost",
+        "conversion_friction_cost",
+        "net_benefit",
+        "policy_guidance"
+      ],
+      "enforcement": "exact_columns",
+      "path": "data/processed/backtesting_recommended_policy.csv",
+      "primary_key_candidate": [],
+      "table_name": "backtesting_recommended_policy"
+    }
+  ]
+}

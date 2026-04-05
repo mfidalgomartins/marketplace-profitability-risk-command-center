@@ -1,0 +1,23 @@
+# OS / editor artifacts
+.DS_Store
+.vscode/
+.idea/
+
+# Python environment / cache
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated data artifacts (reproducible via pipeline)
+data/raw/*.csv
+data/processed/*.csv
+
+# Generated reports and outputs
+outputs/
+reports/*.csv
+reports/*.md
+reports/*.png
+
+# Optional local scratch files
+*.log

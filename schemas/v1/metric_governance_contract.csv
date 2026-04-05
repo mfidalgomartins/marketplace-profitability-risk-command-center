@@ -1,0 +1,10 @@
+metric_name,min_value,max_value,recompute_tolerance,severity_on_range,severity_on_recompute,committee_required,definition
+gmv,1000000,1000000000,0.000001,High,Critical,1,Sum of order-level gross_value
+net_value,500000,1000000000,0.000001,High,Critical,1,Sum of order-level net_value
+risk_adjusted_value,400000,1000000000,0.000001,High,Critical,1,Sum of order-level risk_adjusted_order_value
+take_rate,0.02,0.30,0.000000001,High,Critical,1,Commission fee over GMV
+subsidy_share,0.00,0.20,0.000000001,Medium,High,1,Subsidy amount over GMV
+realized_contribution_margin_proxy,-50000000,50000000,0.000001,Medium,Critical,1,Realized commission minus leakage
+refund_rate,0.00,0.60,0.000000001,High,High,1,Share of orders with refund amount > 0
+dispute_rate,0.00,0.50,0.000000001,High,High,1,Share of orders with dispute amount > 0
+critical_sellers,0,1200,0.000000001,Medium,High,1,Count of sellers in Critical governance tier
