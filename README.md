@@ -37,35 +37,40 @@ The system is designed for Finance, Risk, Operations, and Seller Management to a
 
 ## Repository Structure
 ```text
-marketplace-profitability-fraud-seller-quality-command-center/
-├── .github/workflows/
+marketplace-profitability-risk-command-center/
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── src/
+│   ├── backtesting/
+│   ├── dashboard/
+│   ├── data_generation/
+│   ├── features/
+│   ├── governance/
+│   ├── pipeline/
+│   ├── scenario_analysis/
+│   ├── scoring/
+│   ├── validation/
+│   └── visualization/
 ├── data/
 │   ├── raw/
 │   └── processed/
 ├── docs/
-├── notebooks/
+├── tests/
 ├── outputs/
 │   ├── charts/
 │   └── dashboard/
+├── notebooks/
+├── config/
+│   └── contracts/
+│       ├── history/
+│       └── v1/
 ├── reports/
-├── schemas/
-│   └── v1/
-├── src/
-│   ├── data_generation/
-│   ├── features/
-│   ├── backtesting/
-│   ├── scoring/
-│   ├── governance/
-│   ├── scenario_analysis/
-│   ├── visualization/
-│   ├── dashboard/
-│   ├── pipeline/
-│   └── validation/
-├── tests/
+├── .github/workflows/
+├── Makefile
 ├── Dockerfile
 ├── docker-compose.yml
-├── requirements.txt
-└── README.md
+└── pytest.ini
 ```
 
 ## Datasets
@@ -107,7 +112,7 @@ marketplace-profitability-fraud-seller-quality-command-center/
 7. **Formal validation + schema contracts** across coherence, reconciliation, arithmetic, and schema drift.
 8. **Release-readiness governance gate** with explicit states (`technically valid`, `analytically acceptable`, `decision-support only`, `screening-grade only`, `not committee-grade`, `publish-blocked`).
 
-See full methodology in [methodology.md](methodology.md).
+See full methodology in [docs/methodology.md](docs/methodology.md).
 
 ## Scoring Framework (Summary)
 All scores are 0-100 and tiered (`Low`, `Moderate`, `High`, `Critical`):
@@ -186,7 +191,7 @@ Pipeline now generates `data/processed/governance_action_register.csv`:
 12. **Hardened schema type contracts** with datetime parse validation rather than string-only dtype checks.
 13. **Packaging and test reliability hardening** (`pytest.ini`, `src/__init__.py`) so `pytest -q` works without manual `PYTHONPATH` overrides.
 14. **Release-state enforcement** (`reports/validation_release_assessment.csv`) with blocker-aware publish gating.
-15. **Metric governance contracts** (`schemas/v1/metric_governance_contract.csv`) with recomputation checks and governed KPI range enforcement.
+15. **Metric governance contracts** (`config/contracts/v1/metric_governance_contract.csv`) with recomputation checks and governed KPI range enforcement.
 16. **Hard release gate script** (`src/validation/enforce_release_gate.py`) integrated into pipeline/CI so weak states cannot pass silently.
 
 ## How To Run
@@ -208,7 +213,7 @@ Equivalent direct entrypoint:
   --processed-dir data/processed \
   --charts-dir outputs/charts \
   --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html \
-  --metric-contract-file schemas/v1/metric_governance_contract.csv \
+  --metric-contract-file config/contracts/v1/metric_governance_contract.csv \
   --required-release-state "decision-support only" \
   --reports-dir reports
 ```
@@ -275,15 +280,15 @@ Equivalent direct entrypoint:
 .venv/bin/python src/validation/generate_schema_contracts.py \
   --raw-dir data/raw \
   --processed-dir data/processed \
-  --output-file schemas/v1/schema_contracts.json
+  --output-file config/contracts/v1/schema_contracts.json
 
 .venv/bin/python src/validation/validate_schema_contracts.py \
-  --schema-file schemas/v1/schema_contracts.json \
+  --schema-file config/contracts/v1/schema_contracts.json \
   --output-file reports/schema_contract_issues.csv
 
 .venv/bin/python src/validation/generate_schema_drift_report.py \
-  --current-schema-file schemas/v1/schema_contracts.json \
-  --history-dir schemas/history \
+  --current-schema-file config/contracts/v1/schema_contracts.json \
+  --history-dir config/contracts/history \
   --output-csv reports/schema_drift_changes.csv \
   --output-report reports/schema_drift_report.md \
   --snapshot-current
@@ -292,14 +297,14 @@ Equivalent direct entrypoint:
   --raw-dir data/raw \
   --processed-dir data/processed \
   --report-dir reports \
-  --schema-file schemas/v1/schema_contracts.json \
-  --metric-contract-file schemas/v1/metric_governance_contract.csv
+  --schema-file config/contracts/v1/schema_contracts.json \
+  --metric-contract-file config/contracts/v1/metric_governance_contract.csv
 
 .venv/bin/python src/validation/validate_metric_governance.py \
   --raw-dir data/raw \
   --processed-dir data/processed \
   --reports-dir reports \
-  --contract-file schemas/v1/metric_governance_contract.csv \
+  --contract-file config/contracts/v1/metric_governance_contract.csv \
   --output-file reports/metric_governance_issues.csv
 
 .venv/bin/python src/validation/enforce_release_gate.py \
@@ -345,9 +350,9 @@ docker compose run --rm test
 5. Add policy-outcome tracking on realized interventions (post-deployment feedback loop).
 
 ## Documentation Index
-- [methodology.md](methodology.md)
-- [data_dictionary.md](data_dictionary.md)
-- [executive_summary.md](executive_summary.md)
+- [docs/methodology.md](docs/methodology.md)
+- [docs/data_dictionary.md](docs/data_dictionary.md)
+- [docs/executive_summary.md](docs/executive_summary.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [docs/portfolio_readiness.md](docs/portfolio_readiness.md)
 - [docs/dashboard_architecture.md](docs/dashboard_architecture.md)

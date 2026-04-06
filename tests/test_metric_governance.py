@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_metric_governance_contract_exists_and_has_core_metrics() -> None:
-    contract_path = ROOT / "schemas" / "v1" / "metric_governance_contract.csv"
+    contract_path = ROOT / "config" / "contracts" / "v1" / "metric_governance_contract.csv"
     assert contract_path.exists()
 
     contract = pd.read_csv(contract_path)
@@ -32,9 +32,8 @@ def test_metric_governance_validator_passes_on_current_outputs() -> None:
         raw_dir=ROOT / "data" / "raw",
         processed_dir=ROOT / "data" / "processed",
         reports_dir=ROOT / "reports",
-        contract_file=ROOT / "schemas" / "v1" / "metric_governance_contract.csv",
+        contract_file=ROOT / "config" / "contracts" / "v1" / "metric_governance_contract.csv",
         output_file=ROOT / "reports" / "metric_governance_issues.csv",
     )
     issues = validate_metric_governance(cfg)
     assert issues.empty
-

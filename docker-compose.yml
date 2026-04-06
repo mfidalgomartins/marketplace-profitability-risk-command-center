@@ -14,7 +14,7 @@ services:
       --dashboard-demo-file outputs/dashboard/marketplace_command_center_dashboard_demo.html
       --dashboard-demo-max-orders 25000
       --monte-carlo-iterations 2000
-      --schema-file schemas/v1/schema_contracts.json
+      --schema-file config/contracts/v1/schema_contracts.json
       --reports-dir reports
 
   test:

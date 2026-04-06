@@ -23,8 +23,8 @@ class ValidationConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     report_dir: Path = Path("reports")
-    schema_file: Path = Path("schemas/v1/schema_contracts.json")
-    metric_contract_file: Path = Path("schemas/v1/metric_governance_contract.csv")
+    schema_file: Path = Path("config/contracts/v1/schema_contracts.json")
+    metric_contract_file: Path = Path("config/contracts/v1/metric_governance_contract.csv")
     report_file: str = "validation_report.md"
     issues_file: str = "validation_issue_log.csv"
 
@@ -767,7 +767,7 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         Path("docs/scoring_framework.md"),
         Path("docs/dashboard_architecture.md"),
         Path("README.md"),
-        Path("executive_summary.md"),
+        Path("docs/executive_summary.md"),
     ]
     risky_terms = ["proves", "guarantees", "always", "certainly", "directly causes"]
     hits: List[str] = []
@@ -1276,8 +1276,8 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--report-dir", type=Path, default=Path("reports"))
-    parser.add_argument("--schema-file", type=Path, default=Path("schemas/v1/schema_contracts.json"))
-    parser.add_argument("--metric-contract-file", type=Path, default=Path("schemas/v1/metric_governance_contract.csv"))
+    parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
+    parser.add_argument("--metric-contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
     parser.add_argument("--report-file", type=str, default="validation_report.md")
     parser.add_argument("--issues-file", type=str, default="validation_issue_log.csv")
     args = parser.parse_args()

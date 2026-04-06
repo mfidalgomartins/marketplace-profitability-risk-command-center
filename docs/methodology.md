@@ -199,7 +199,7 @@ Contract-driven checks protect reproducibility and drift control:
 - missing-file and schema-change detection
 
 ## Contract artifacts
-- `schemas/v1/schema_contracts.json`
+- `config/contracts/v1/schema_contracts.json`
 - `reports/schema_contract_issues.csv`
 
 ## 9) Validation Approach
@@ -248,7 +248,7 @@ The validation gate explicitly classifies each run into one release state:
 ## Metric governance contract
 Source implementation: `src/validation/validate_metric_governance.py`
 
-Contract file: `schemas/v1/metric_governance_contract.csv`
+Contract file: `config/contracts/v1/metric_governance_contract.csv`
 
 Checks enforce:
 - governed KPI presence in executive snapshot

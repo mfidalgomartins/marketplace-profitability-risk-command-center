@@ -5,7 +5,7 @@ from src.validation.validate_schema_contracts import validate_schema_contracts
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_FILE = ROOT / "schemas" / "v1" / "schema_contracts.json"
+SCHEMA_FILE = ROOT / "config" / "contracts" / "v1" / "schema_contracts.json"
 
 
 def test_schema_contract_file_exists_and_has_expected_core_tables() -> None:

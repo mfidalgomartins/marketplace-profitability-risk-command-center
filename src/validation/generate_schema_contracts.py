@@ -130,7 +130,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate schema contract file from current data artifacts.")
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--output-file", type=Path, default=Path("schemas/v1/schema_contracts.json"))
+    parser.add_argument("--output-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
     args = parser.parse_args()
 
     contract = generate_contract(args.raw_dir, args.processed_dir)

@@ -23,7 +23,7 @@ class MetricGovernanceConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     reports_dir: Path = Path("reports")
-    contract_file: Path = Path("schemas/v1/metric_governance_contract.csv")
+    contract_file: Path = Path("config/contracts/v1/metric_governance_contract.csv")
     output_file: Path = Path("reports/metric_governance_issues.csv")
 
 
@@ -185,7 +185,7 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--reports-dir", type=Path, default=Path("reports"))
-    parser.add_argument("--contract-file", type=Path, default=Path("schemas/v1/metric_governance_contract.csv"))
+    parser.add_argument("--contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
     parser.add_argument("--output-file", type=Path, default=Path("reports/metric_governance_issues.csv"))
     args = parser.parse_args()
 

@@ -12,9 +12,9 @@ import pandas as pd
 
 @dataclass(frozen=True)
 class DriftConfig:
-    current_schema_file: Path = Path("schemas/v1/schema_contracts.json")
+    current_schema_file: Path = Path("config/contracts/v1/schema_contracts.json")
     previous_schema_file: Optional[Path] = None
-    history_dir: Path = Path("schemas/history")
+    history_dir: Path = Path("config/contracts/history")
     output_csv: Path = Path("reports/schema_drift_changes.csv")
     output_report: Path = Path("reports/schema_drift_report.md")
     snapshot_current: bool = True
@@ -178,9 +178,9 @@ def run_drift(cfg: DriftConfig) -> Tuple[pd.DataFrame, Optional[Path], Optional[
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate schema drift report from schema contracts.")
-    parser.add_argument("--current-schema-file", type=Path, default=Path("schemas/v1/schema_contracts.json"))
+    parser.add_argument("--current-schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
     parser.add_argument("--previous-schema-file", type=Path, default=None)
-    parser.add_argument("--history-dir", type=Path, default=Path("schemas/history"))
+    parser.add_argument("--history-dir", type=Path, default=Path("config/contracts/history"))
     parser.add_argument("--output-csv", type=Path, default=Path("reports/schema_drift_changes.csv"))
     parser.add_argument("--output-report", type=Path, default=Path("reports/schema_drift_report.md"))
     parser.add_argument("--snapshot-current", action="store_true")

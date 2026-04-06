@@ -71,20 +71,20 @@ snapshot:
 	$(PYTHON) src/validation/generate_executive_snapshot.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports
 
 schema-contracts:
-	$(PYTHON) src/validation/generate_schema_contracts.py --raw-dir data/raw --processed-dir data/processed --output-file schemas/v1/schema_contracts.json
-	$(PYTHON) src/validation/validate_schema_contracts.py --schema-file schemas/v1/schema_contracts.json --output-file reports/schema_contract_issues.csv
+	$(PYTHON) src/validation/generate_schema_contracts.py --raw-dir data/raw --processed-dir data/processed --output-file config/contracts/v1/schema_contracts.json
+	$(PYTHON) src/validation/validate_schema_contracts.py --schema-file config/contracts/v1/schema_contracts.json --output-file reports/schema_contract_issues.csv
 
 metric-governance:
-	$(PYTHON) src/validation/validate_metric_governance.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --contract-file schemas/v1/metric_governance_contract.csv --output-file reports/metric_governance_issues.csv
+	$(PYTHON) src/validation/validate_metric_governance.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --contract-file config/contracts/v1/metric_governance_contract.csv --output-file reports/metric_governance_issues.csv
 
 schema-drift:
-	$(PYTHON) src/validation/generate_schema_drift_report.py --current-schema-file schemas/v1/schema_contracts.json --history-dir schemas/history --output-csv reports/schema_drift_changes.csv --output-report reports/schema_drift_report.md --snapshot-current
+	$(PYTHON) src/validation/generate_schema_drift_report.py --current-schema-file config/contracts/v1/schema_contracts.json --history-dir config/contracts/history --output-csv reports/schema_drift_changes.csv --output-report reports/schema_drift_report.md --snapshot-current
 
 validate:
-	$(PYTHON) src/validation/run_full_validation.py --raw-dir data/raw --processed-dir data/processed --report-dir reports --schema-file schemas/v1/schema_contracts.json --metric-contract-file schemas/v1/metric_governance_contract.csv
+	$(PYTHON) src/validation/run_full_validation.py --raw-dir data/raw --processed-dir data/processed --report-dir reports --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv
 
 release-gate:
 	$(PYTHON) src/validation/enforce_release_gate.py --release-file reports/validation_release_assessment.csv --required-state decision-support\ only
 
 all:
-	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --preview-image outputs/charts/00_executive_preview_pack.png --preview-manifest outputs/charts/00_executive_preview_pack.md --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html --monte-carlo-iterations 2000 --schema-file schemas/v1/schema_contracts.json --metric-contract-file schemas/v1/metric_governance_contract.csv --schema-history-dir schemas/history --reports-dir reports --required-release-state decision-support\ only
+	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --preview-image outputs/charts/00_executive_preview_pack.png --preview-manifest outputs/charts/00_executive_preview_pack.md --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only

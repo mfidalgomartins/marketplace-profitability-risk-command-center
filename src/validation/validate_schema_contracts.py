@@ -107,7 +107,7 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate data tables against schema contracts.")
-    parser.add_argument("--schema-file", type=Path, default=Path("schemas/v1/schema_contracts.json"))
+    parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
     parser.add_argument("--output-file", type=Path, default=Path("reports/schema_contract_issues.csv"))
     args = parser.parse_args()
 

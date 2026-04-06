@@ -35,9 +35,9 @@ def main() -> None:
         help="Build optional sampled dashboard artifact (non-official).",
     )
     parser.add_argument("--monte-carlo-iterations", type=int, default=2000)
-    parser.add_argument("--schema-file", type=Path, default=Path("schemas/v1/schema_contracts.json"))
-    parser.add_argument("--metric-contract-file", type=Path, default=Path("schemas/v1/metric_governance_contract.csv"))
-    parser.add_argument("--schema-history-dir", type=Path, default=Path("schemas/history"))
+    parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
+    parser.add_argument("--metric-contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
+    parser.add_argument("--schema-history-dir", type=Path, default=Path("config/contracts/history"))
     parser.add_argument("--reports-dir", type=Path, default=Path("reports"))
     parser.add_argument(
         "--required-release-state",
