@@ -392,7 +392,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin: 0;
       background: linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
       color: var(--ink);
-      font-family: "Avenir Next", "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-family: "IBM Plex Sans", "Source Sans 3", "Avenir Next", "Segoe UI", Arial, sans-serif;
+      line-height: 1.45;
     }
     .top-shell {
       position: sticky;
@@ -405,7 +406,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .header {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 14px 20px 10px 20px;
+      padding: 16px 22px 12px 22px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
@@ -413,13 +414,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .title h1 {
       margin: 0;
-      font-size: 26px;
-      letter-spacing: 0.2px;
+      font-size: 28px;
+      letter-spacing: 0.1px;
+      line-height: 1.2;
     }
     .title p {
       margin: 4px 0 0 0;
       color: var(--muted);
       font-size: 13px;
+      max-width: 980px;
     }
     .header-meta {
       display: grid;
@@ -442,6 +445,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       padding: 8px 12px;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.12s ease-in-out;
     }
     button.primary {
       background: var(--brand);
@@ -455,10 +459,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .filter-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 0 20px 14px 20px;
+      padding: 0 22px 16px 22px;
       display: grid;
-      grid-template-columns: repeat(8, minmax(120px, 1fr)) auto auto;
-      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 10px;
       align-items: end;
     }
     .filter {
@@ -479,12 +483,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border-radius: 10px;
       padding: 8px 10px;
       font-size: 13px;
-      min-height: 38px;
+      min-height: 40px;
+    }
+    .filter-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
     .container {
       max-width: 1680px;
-      margin: 16px auto 28px auto;
-      padding: 0 20px 30px 20px;
+      margin: 18px auto 30px auto;
+      padding: 0 22px 30px 22px;
     }
     .tabs {
       display: flex;
@@ -507,20 +518,71 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
+    .hero-strip {
+      margin: 0 0 12px 0;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 10px;
+    }
+    .hero-message {
+      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-soft) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .signal-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 10px;
+    }
+    .signal-card .name {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .signal-card .state {
+      margin-top: 4px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .signal-card .hint {
+      margin-top: 3px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .signal-card.good .state { color: var(--good); }
+    .signal-card.warn .state { color: var(--warn); }
+    .signal-card.bad .state { color: var(--bad); }
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
     }
     .kpi {
       background: var(--panel);
       border: 1px solid var(--line);
+      border-top: 4px solid var(--brand);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 12px;
-      min-height: 88px;
+      padding: 13px;
+      min-height: 96px;
     }
+    .kpi.good { border-top-color: var(--good); }
+    .kpi.warn { border-top-color: var(--warn); }
+    .kpi.bad { border-top-color: var(--bad); }
     .kpi .label {
       color: var(--muted);
       font-size: 11px;
@@ -530,8 +592,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .kpi .value {
       margin-top: 8px;
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 700;
+      letter-spacing: -0.2px;
     }
     .kpi .delta {
       margin-top: 4px;
@@ -540,8 +603,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .row {
       display: grid;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
     .row-2 { grid-template-columns: 1fr 1fr; }
     .row-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -550,11 +613,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 12px;
+      padding: 14px;
     }
     .panel h3 {
       margin: 0 0 8px 0;
-      font-size: 16px;
+      font-size: 17px;
+      line-height: 1.3;
     }
     .panel .sub {
       margin: 0 0 10px 0;
@@ -563,9 +627,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .plot {
       width: 100%;
-      min-height: 320px;
+      min-height: 340px;
+      border-radius: 10px;
+      overflow: hidden;
     }
-    .plot.short { min-height: 250px; }
+    .plot.short { min-height: 280px; }
     .narrative {
       line-height: 1.6;
       color: var(--ink);
@@ -728,17 +794,91 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: var(--panel-soft);
     }
     @media (max-width: 1280px) {
+      .hero-strip { grid-template-columns: 1fr; }
+      .signal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .row-3 { grid-template-columns: 1fr; }
       .row-2 { grid-template-columns: 1fr; }
-      .filter-bar { grid-template-columns: repeat(4, minmax(140px, 1fr)); }
       .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 860px) {
       .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .filter-bar { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .signal-grid { grid-template-columns: 1fr; }
       .bench-grid { grid-template-columns: 1fr; }
       .drawer { width: 100vw; right: -100vw; }
+    }
+    @media print {
+      :root {
+        --panel: #ffffff;
+        --panel-soft: #ffffff;
+        --ink: #111827;
+        --muted: #4b5563;
+        --line: #d1d5db;
+        --line-soft: #e5e7eb;
+      }
+      body {
+        background: #ffffff;
+        color: #111827;
+      }
+      .top-shell {
+        position: static;
+        border-bottom: none;
+        background: #ffffff;
+        backdrop-filter: none;
+      }
+      .tabs,
+      .drawer,
+      .actions button,
+      #methodologyOpen,
+      #themeToggle,
+      #resetFiltersTop,
+      #applyFilters,
+      #resetFilters,
+      .table-tools,
+      .pager {
+        display: none !important;
+      }
+      .filter-bar {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding-bottom: 8px;
+      }
+      .filter input, .filter select {
+        border: none;
+        background: transparent;
+        color: #111827;
+        padding: 0;
+        min-height: auto;
+      }
+      .container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+      .tab-panel {
+        display: block !important;
+        page-break-before: always;
+      }
+      #tab-overview {
+        page-break-before: auto;
+      }
+      .panel, .kpi, .scenario-card, .hero-message, .signal-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      .plot {
+        min-height: 260px;
+      }
+      .table-wrap {
+        max-height: none;
+        overflow: visible;
+      }
+      thead th {
+        position: static;
+      }
+      .row, .kpi-grid, .hero-strip, .signal-grid, .scenario-cards {
+        gap: 8px;
+      }
     }
   </style>
 </head>
@@ -752,6 +892,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       <div class="header-meta">
         <div class="actions">
           <button id="themeToggle" class="subtle">Dark Mode</button>
+          <button id="printDashboard" class="subtle">Print</button>
           <button id="methodologyOpen">Methodology</button>
           <button class="primary" id="resetFiltersTop">Reset Filters</button>
         </div>
@@ -768,8 +909,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       <div class="filter"><label for="fAcquisition">Acquisition Channel</label><select id="fAcquisition"></select></div>
       <div class="filter"><label for="fBuyerType">Buyer Type</label><select id="fBuyerType"></select></div>
       <div class="filter"><label for="fRiskTier">Risk Tier</label><select id="fRiskTier"></select></div>
-      <button id="applyFilters" class="primary">Apply Filters</button>
-      <button id="resetFilters">Reset</button>
+      <div class="filter-actions">
+        <button id="applyFilters" class="primary">Apply Filters</button>
+        <button id="resetFilters">Reset</button>
+      </div>
     </div>
   </div>
 
@@ -782,6 +925,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       <button class="tab-btn" data-tab="ops">Operations & CX</button>
       <button class="tab-btn" data-tab="scenario">Scenario Center</button>
       <button class="tab-btn" data-tab="methodology">Methodology & Definitions</button>
+    </div>
+    <div class="hero-strip">
+      <div class="hero-message" id="heroMessage"></div>
+      <div class="signal-grid" id="signalCards"></div>
     </div>
 
     <section id="tab-overview" class="tab-panel active">
@@ -1103,9 +1250,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     return {
       paper_bgcolor: t.panel,
       plot_bgcolor: t.panel,
-      margin: { l: 52, r: 18, t: 56, b: 46 },
-      font: { family: 'Avenir Next, Segoe UI, Arial, sans-serif', size: 12, color: t.ink },
-      legend: { orientation: 'h', y: -0.24, font: { color: t.axis } },
+      margin: { l: 56, r: 22, t: 60, b: 74 },
+      font: { family: 'IBM Plex Sans, Source Sans 3, Segoe UI, Arial, sans-serif', size: 13, color: t.ink },
+      legend: { orientation: 'h', y: -0.32, x: 0, xanchor: 'left', font: { color: t.axis, size: 12 } },
       hoverlabel: { bgcolor: t.hoverBg, font: { color: t.hoverInk } }
     };
   }
@@ -1526,18 +1673,44 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       criticalSellers: governedMetric('critical_sellers', b.criticalSellers),
     };
     const cards = [
-      { label: 'GMV', value: money(official.gmv), delta: `Filtered scope ${money(k.gmv)} (${pct(k.gmv / (official.gmv || 1))} of official)` },
-      { label: 'Net Value', value: money(official.net), delta: `Filtered scope ${money(k.net)} (${pct(k.net / (official.net || 1))} of official)` },
-      { label: 'Take Rate', value: pct(official.takeRate), delta: `Filtered scope ${pct(k.takeRate)} (${((k.takeRate - official.takeRate) * 100).toFixed(2)}pp delta)` },
-      { label: 'Contribution Margin Proxy', value: money(official.margin), delta: `Filtered scope ${money(k.margin)} (${money(k.margin - official.margin)} delta)` },
-      { label: 'Refund Rate', value: pct(official.refundRate), delta: `Filtered scope ${pct(k.refundRate)} (${((k.refundRate - official.refundRate) * 100).toFixed(2)}pp delta)` },
-      { label: 'Dispute Rate', value: pct(official.disputeRate), delta: `Filtered scope ${pct(k.disputeRate)} (${((k.disputeRate - official.disputeRate) * 100).toFixed(2)}pp delta)` },
-      { label: 'Subsidy Share', value: pct(official.subsidyShare), delta: `Filtered scope ${pct(k.subsidyShare)} (${((k.subsidyShare - official.subsidyShare) * 100).toFixed(2)}pp delta)` },
-      { label: 'Risk-Adjusted GMV', value: money(official.riskAdj), delta: `Filtered scope ${money(k.riskAdj)} (${pct(k.riskAdj / (official.riskAdj || 1))} of official)` },
-      { label: 'Critical Sellers', value: String(Math.round(official.criticalSellers)), delta: `${k.criticalSellers} critical sellers in active slice` },
+      { label: 'GMV', value: money(official.gmv), delta: `Filtered scope ${money(k.gmv)} (${pct(k.gmv / (official.gmv || 1))} of official)`, tone: 'good' },
+      { label: 'Net Value', value: money(official.net), delta: `Filtered scope ${money(k.net)} (${pct(k.net / (official.net || 1))} of official)`, tone: 'good' },
+      { label: 'Take Rate', value: pct(official.takeRate), delta: `Filtered scope ${pct(k.takeRate)} (${((k.takeRate - official.takeRate) * 100).toFixed(2)}pp delta)`, tone: 'good' },
+      { label: 'Contribution Margin Proxy', value: money(official.margin), delta: `Filtered scope ${money(k.margin)} (${money(k.margin - official.margin)} delta)`, tone: official.margin >= 0 ? 'good' : 'bad' },
+      { label: 'Refund Rate', value: pct(official.refundRate), delta: `Filtered scope ${pct(k.refundRate)} (${((k.refundRate - official.refundRate) * 100).toFixed(2)}pp delta)`, tone: official.refundRate <= 0.12 ? 'good' : official.refundRate <= 0.17 ? 'warn' : 'bad' },
+      { label: 'Dispute Rate', value: pct(official.disputeRate), delta: `Filtered scope ${pct(k.disputeRate)} (${((k.disputeRate - official.disputeRate) * 100).toFixed(2)}pp delta)`, tone: official.disputeRate <= 0.015 ? 'good' : official.disputeRate <= 0.03 ? 'warn' : 'bad' },
+      { label: 'Subsidy Share', value: pct(official.subsidyShare), delta: `Filtered scope ${pct(k.subsidyShare)} (${((k.subsidyShare - official.subsidyShare) * 100).toFixed(2)}pp delta)`, tone: official.subsidyShare <= 0.03 ? 'good' : official.subsidyShare <= 0.05 ? 'warn' : 'bad' },
+      { label: 'Risk-Adjusted GMV', value: money(official.riskAdj), delta: `Filtered scope ${money(k.riskAdj)} (${pct(k.riskAdj / (official.riskAdj || 1))} of official)`, tone: 'good' },
+      { label: 'Critical Sellers', value: String(Math.round(official.criticalSellers)), delta: `${k.criticalSellers} critical sellers in active slice`, tone: official.criticalSellers <= 20 ? 'good' : official.criticalSellers <= 40 ? 'warn' : 'bad' },
     ];
     const grid = document.getElementById('kpiGrid');
-    grid.innerHTML = cards.map(c => `<div class="kpi"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="delta">${c.delta}</div></div>`).join('');
+    grid.innerHTML = cards.map(c => `<div class="kpi ${c.tone}"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="delta">${c.delta}</div></div>`).join('');
+  }
+
+  function renderHero(state, baseline) {
+    const k = state.kpi;
+    const qualRatio = k.net ? k.riskAdj / k.net : 0;
+    const baseQual = baseline.kpi.net ? baseline.kpi.riskAdj / baseline.kpi.net : 0;
+    const qualityDelta = (qualRatio - baseQual) * 100;
+    const growthHealth = qualityDelta >= 1 ? 'good' : qualityDelta >= -0.3 ? 'warn' : 'bad';
+    const marginHealth = k.margin >= 0 ? 'good' : 'bad';
+    const riskHealth = k.disputeRate <= 0.015 ? 'good' : k.disputeRate <= 0.03 ? 'warn' : 'bad';
+
+    const headline = `Decision signal: selected scope shows ${qualityDelta >= 0 ? 'improving' : 'deteriorating'} quality-adjusted growth (${qualityDelta.toFixed(2)}pp vs baseline). Prioritize ${marginHealth === 'bad' ? 'margin containment' : 'risk control'} and ${riskHealth === 'bad' ? 'dispute/chargeback actions' : 'operational discipline'} in current slice.`;
+    document.getElementById('heroMessage').textContent = headline;
+
+    const signals = [
+      { name: 'Growth Quality', state: growthHealth === 'good' ? 'Healthy' : growthHealth === 'warn' ? 'Watchlist' : 'Fragile', hint: `${qualityDelta.toFixed(2)}pp vs baseline`, cls: growthHealth },
+      { name: 'Margin Discipline', state: marginHealth === 'good' ? 'Stable' : 'At Risk', hint: `Realized CM ${money(k.margin)}`, cls: marginHealth },
+      { name: 'Fraud Pressure', state: riskHealth === 'good' ? 'Contained' : riskHealth === 'warn' ? 'Elevated' : 'Severe', hint: `Dispute rate ${pct(k.disputeRate)}`, cls: riskHealth },
+    ];
+    document.getElementById('signalCards').innerHTML = signals.map(s => `
+      <div class="signal-card ${s.cls}">
+        <div class="name">${s.name}</div>
+        <div class="state">${s.state}</div>
+        <div class="hint">${s.hint}</div>
+      </div>
+    `).join('');
   }
 
   function renderNarrativeAndAlerts(state, baseline) {
@@ -1805,6 +1978,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: top.map(x => x.gvt === 'Critical' ? '#08519c' : x.gvt === 'High' ? '#3182bd' : x.gvt === 'Moderate' ? '#6baed6' : '#9ecae1') },
       text: top.map(x => fixed(x.gvs, 1)),
       textposition: 'outside',
+      cliponaxis: false,
       hovertemplate: 'Seller %{y}<br>Governance score: %{x:.1f}<extra></extra>'
     }], {
       title: { text: 'Top Governance Priority Sellers Concentrate Enterprise Risk', font: { size: 15 } },
@@ -1892,9 +2066,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     plotOrEmpty('plotScenarioComparison', [{
       x: s.map(r => r.gmv_change_vs_baseline_pct),
       y: s.map(r => r.quality_ratio_change_pp_vs_baseline),
-      mode: 'markers+text',
+      mode: 'markers',
       text: s.map(r => r.scenario),
-      textposition: 'top center',
       marker: {
         size: s.map(r => 18 + Math.abs(r.top_risk_seller_downside_exposure) / 200000),
         color: s.map(r => r.contribution_margin_change_vs_baseline),
@@ -2030,6 +2203,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const state = computeState(rows);
     APP.currentState = state;
     buildKpiCards(state, APP.baselineState);
+    renderHero(state, APP.baselineState);
     renderNarrativeAndAlerts(state, APP.baselineState);
     renderAllCharts(state);
     renderSellerTable(state);
@@ -2048,6 +2222,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     document.getElementById('resetFiltersTop').addEventListener('click', resetFilters);
     document.getElementById('themeToggle').addEventListener('click', () => {
       applyTheme(APP.theme === 'dark' ? 'light' : 'dark', true);
+    });
+    document.getElementById('printDashboard').addEventListener('click', () => {
+      window.print();
     });
 
     for (const id of ['fDateFrom','fDateTo','fRegion','fCategory','fSellerTier','fSellerType','fAcquisition','fBuyerType','fRiskTier']) {

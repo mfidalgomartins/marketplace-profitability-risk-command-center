@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 PYTEST := .venv/bin/pytest
 
-.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz preview-pack dashboard dashboard-demo snapshot schema-contracts metric-governance schema-drift validate release-gate all
+.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz dashboard snapshot schema-contracts metric-governance schema-drift validate release-gate all
 
 help:
 	@echo "Targets:"
@@ -16,9 +16,7 @@ help:
 	@echo "  montecarlo Build Monte Carlo scenario uncertainty tables"
 	@echo "  backtest   Build score policy backtesting outputs"
 	@echo "  viz        Build chart pack"
-	@echo "  preview-pack Build executive preview chart artifact"
 	@echo "  dashboard  Build executive HTML dashboard"
-	@echo "  dashboard-demo Build lightweight demo HTML dashboard"
 	@echo "  snapshot   Build executive KPI snapshot artifacts"
 	@echo "  schema-contracts Generate + validate schema contracts"
 	@echo "  metric-governance Validate governed KPI contracts and recomputation"
@@ -58,14 +56,8 @@ backtest:
 viz:
 	$(PYTHON) src/visualization/build_marketplace_visualizations.py --raw-dir data/raw --processed-dir data/processed --output-dir outputs/charts
 
-preview-pack:
-	$(PYTHON) src/visualization/generate_executive_preview_pack.py --charts-dir outputs/charts --output-image outputs/charts/00_executive_preview_pack.png --output-manifest outputs/charts/00_executive_preview_pack.md
-
 dashboard:
 	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/marketplace_command_center_dashboard.html
-
-dashboard-demo:
-	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/marketplace_command_center_dashboard_demo.html --max-orders 25000 --sample-seed 42
 
 snapshot:
 	$(PYTHON) src/validation/generate_executive_snapshot.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports
@@ -87,4 +79,4 @@ release-gate:
 	$(PYTHON) src/validation/enforce_release_gate.py --release-file reports/validation_release_assessment.csv --required-state decision-support\ only
 
 all:
-	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --preview-image outputs/charts/00_executive_preview_pack.png --preview-manifest outputs/charts/00_executive_preview_pack.md --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only
+	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only

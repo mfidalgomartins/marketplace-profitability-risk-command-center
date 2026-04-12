@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.dashboard.build_executive_dashboard import DashboardConfig, _build_payload
+from src.dashboard.build_executive_dashboard import DashboardConfig, _build_payload, _dashboard_html
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,3 +36,13 @@ def test_dashboard_payload_includes_governed_kpis_and_official_path() -> None:
     }
     assert required_metrics.issubset(official.keys())
 
+
+def test_dashboard_html_includes_print_mode_and_controls() -> None:
+    html = _dashboard_html(data_json="{}", plotly_js="")
+
+    assert '@media print' in html
+    assert 'id="printDashboard"' in html
+    assert 'window.print()' in html
+    assert 'id="applyFilters"' in html
+    assert 'id="resetFilters"' in html
+    assert 'id="themeToggle"' in html

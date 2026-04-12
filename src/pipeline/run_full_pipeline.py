@@ -16,23 +16,10 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--charts-dir", type=Path, default=Path("outputs/charts"))
-    parser.add_argument("--preview-image", type=Path, default=Path("outputs/charts/00_executive_preview_pack.png"))
-    parser.add_argument("--preview-manifest", type=Path, default=Path("outputs/charts/00_executive_preview_pack.md"))
     parser.add_argument(
         "--dashboard-file",
         type=Path,
         default=Path("outputs/dashboard/marketplace_command_center_dashboard.html"),
-    )
-    parser.add_argument(
-        "--dashboard-demo-file",
-        type=Path,
-        default=Path("outputs/dashboard/marketplace_command_center_dashboard_demo.html"),
-    )
-    parser.add_argument("--dashboard-demo-max-orders", type=int, default=25000)
-    parser.add_argument(
-        "--build-demo-dashboard",
-        action="store_true",
-        help="Build optional sampled dashboard artifact (non-official).",
     )
     parser.add_argument("--monte-carlo-iterations", type=int, default=2000)
     parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
@@ -157,19 +144,6 @@ def main() -> None:
         ],
     )
     _run(
-        "build executive preview pack",
-        [
-            py,
-            "src/visualization/generate_executive_preview_pack.py",
-            "--charts-dir",
-            str(args.charts_dir),
-            "--output-image",
-            str(args.preview_image),
-            "--output-manifest",
-            str(args.preview_manifest),
-        ],
-    )
-    _run(
         "generate executive snapshot",
         [
             py,
@@ -197,26 +171,6 @@ def main() -> None:
             str(args.dashboard_file),
         ],
     )
-    if args.build_demo_dashboard:
-        _run(
-            "build executive dashboard (demo mode)",
-            [
-                py,
-                "src/dashboard/build_executive_dashboard.py",
-                "--raw-dir",
-                str(args.raw_dir),
-                "--processed-dir",
-                str(args.processed_dir),
-                "--reports-dir",
-                str(args.reports_dir),
-                "--output-file",
-                str(args.dashboard_demo_file),
-                "--max-orders",
-                str(args.dashboard_demo_max_orders),
-                "--sample-seed",
-                "42",
-            ],
-        )
     _run(
         "generate schema contracts",
         [

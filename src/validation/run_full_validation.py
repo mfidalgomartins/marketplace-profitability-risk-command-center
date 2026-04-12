@@ -763,11 +763,9 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
 
     # 15) Narrative overclaiming risk.
     docs = [
-        Path("docs/scenario_decision_analysis.md"),
-        Path("docs/scoring_framework.md"),
-        Path("docs/dashboard_architecture.md"),
-        Path("README.md"),
+        Path("docs/methodology.md"),
         Path("docs/executive_summary.md"),
+        Path("README.md"),
     ]
     risky_terms = ["proves", "guarantees", "always", "certainly", "directly causes"]
     hits: List[str] = []
