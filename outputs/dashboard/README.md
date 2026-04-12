@@ -1,11 +1,8 @@
-# Dashboard Access
+# Executive Dashboard
 
-This folder contains the official generated dashboard artifact:
+This folder contains the project’s published dashboard artifact.
 
-- `executive-marketplace-command-center.html`
+- **Open the live interactive dashboard (recommended):** [Marketplace Command Center](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
+- Secondary access: [Published HTML artifact](/docs/executive-marketplace-command-center.html)
 
-For direct browser access (recommended), use the live GitHub Pages deployment:
-
-- [Open Live Dashboard](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
-
-If you are reviewing the repository on GitHub, open this link instead of the raw HTML file view.
+Note: GitHub renders `.html` files as source preview. Use the live link above for the full interactive experience.

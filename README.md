@@ -2,7 +2,7 @@
 
 This project is an executive analytics control tower for digital marketplaces. It was built to answer a practical leadership question: is growth economically healthy, or is GMV being inflated by subsidy dependence, weak seller behavior, fraud exposure, and operational deterioration.
 
-Live dashboard: [mfidalgomartins.github.io/marketplace-profitability-risk-command-center](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
+Live interactive dashboard: [Marketplace Command Center](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
 
 Most marketplace reporting overweights topline volume. That creates blind spots: loss-making cohorts can look like growth winners, high-volume sellers can quietly degrade CX, and disputes or chargebacks can scale before governance reacts. This repository focuses on those blind spots and turns them into decision-ready outputs.
 

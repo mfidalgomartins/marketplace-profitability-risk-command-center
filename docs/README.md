@@ -1,9 +1,8 @@
-# GitHub Pages Dashboard
+# Dashboard Publish Surface
 
-This folder is the GitHub Pages publish surface for the dashboard.
+This folder serves the live dashboard on GitHub Pages.
 
-- Entry URL: [Live Dashboard](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
-- Named dashboard file: `executive-marketplace-command-center.html`
-- Technical entrypoint: `index.html` (kept for GitHub Pages root routing)
+- **Live URL:** [Marketplace Command Center](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
+- Published file: `executive-marketplace-command-center.html`
 
-Publishing is automated by `.github/workflows/pages.yml`.
+`index.html` exists only as the technical root entrypoint for Pages routing.
