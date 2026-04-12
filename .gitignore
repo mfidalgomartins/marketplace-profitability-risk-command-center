@@ -1,1 +1,28 @@
-# Intentionally empty: all project files are versioned in this repository.
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python envs and caches
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+**/__pycache__/
+**/*.py[cod]
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs / runtime
+*.log
+
+# Local temp artifacts
+.tmp/
+tmp/
