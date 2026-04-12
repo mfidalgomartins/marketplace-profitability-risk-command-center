@@ -13,8 +13,7 @@ __pycache__/
 data/raw/*.csv
 data/processed/*.csv
 
-# Generated reports and outputs
-outputs/
+# Generated reports
 reports/*.csv
 reports/*.md
 reports/*.png
