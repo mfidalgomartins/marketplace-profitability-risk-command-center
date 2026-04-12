@@ -21,6 +21,11 @@ def main() -> None:
         type=Path,
         default=Path("outputs/dashboard/marketplace_command_center_dashboard.html"),
     )
+    parser.add_argument(
+        "--pages-file",
+        type=Path,
+        default=Path("docs/index.html"),
+    )
     parser.add_argument("--monte-carlo-iterations", type=int, default=2000)
     parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
     parser.add_argument("--metric-contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
@@ -169,6 +174,17 @@ def main() -> None:
             str(args.reports_dir),
             "--output-file",
             str(args.dashboard_file),
+        ],
+    )
+    _run(
+        "publish GitHub Pages dashboard entrypoint",
+        [
+            py,
+            "src/dashboard/publish_github_pages.py",
+            "--source-html",
+            str(args.dashboard_file),
+            "--destination-html",
+            str(args.pages_file),
         ],
     )
     _run(

@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 PYTEST := .venv/bin/pytest
 
-.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz dashboard snapshot schema-contracts metric-governance schema-drift validate release-gate all
+.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz dashboard pages snapshot schema-contracts metric-governance schema-drift validate release-gate all
 
 help:
 	@echo "Targets:"
@@ -17,6 +17,7 @@ help:
 	@echo "  backtest   Build score policy backtesting outputs"
 	@echo "  viz        Build chart pack"
 	@echo "  dashboard  Build executive HTML dashboard"
+	@echo "  pages      Publish dashboard entrypoint for GitHub Pages (docs/index.html)"
 	@echo "  snapshot   Build executive KPI snapshot artifacts"
 	@echo "  schema-contracts Generate + validate schema contracts"
 	@echo "  metric-governance Validate governed KPI contracts and recomputation"
@@ -58,6 +59,9 @@ viz:
 
 dashboard:
 	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/marketplace_command_center_dashboard.html
+
+pages:
+	$(PYTHON) src/dashboard/publish_github_pages.py --source-html outputs/dashboard/marketplace_command_center_dashboard.html --destination-html docs/index.html
 
 snapshot:
 	$(PYTHON) src/validation/generate_executive_snapshot.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports

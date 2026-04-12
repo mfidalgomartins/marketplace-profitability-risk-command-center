@@ -1,0 +1,49 @@
+name: pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "outputs/dashboard/marketplace_command_center_dashboard.html"
+      - "src/dashboard/publish_github_pages.py"
+      - ".github/workflows/pages.yml"
+      - "docs/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare dashboard entrypoint
+        run: |
+          python3 src/dashboard/publish_github_pages.py \
+            --source-html outputs/dashboard/marketplace_command_center_dashboard.html \
+            --destination-html docs/index.html
+          touch docs/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
