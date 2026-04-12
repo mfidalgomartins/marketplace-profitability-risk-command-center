@@ -18,7 +18,7 @@ class DashboardConfig:
     processed_dir: Path = Path("data/processed")
     reports_dir: Path = Path("reports")
     output_file: Path = Path("outputs/dashboard/marketplace_command_center_dashboard.html")
-    max_orders: int = 0
+    max_orders: int = 15000
     sample_seed: int = 42
 
 
@@ -2345,7 +2345,7 @@ def main() -> None:
         type=Path,
         default=Path("outputs/dashboard/marketplace_command_center_dashboard.html"),
     )
-    parser.add_argument("--max-orders", type=int, default=0)
+    parser.add_argument("--max-orders", type=int, default=15000)
     parser.add_argument("--sample-seed", type=int, default=42)
     args = parser.parse_args()
 
