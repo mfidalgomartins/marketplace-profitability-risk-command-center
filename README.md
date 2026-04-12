@@ -42,7 +42,7 @@ The design is intentionally end-to-end: profitability, fraud risk, seller qualit
 ```
 
 ## Core outputs
-- `outputs/dashboard/marketplace_command_center_dashboard.html`
+- `outputs/dashboard/executive-marketplace-command-center.html`
 - `outputs/charts/*.png`
 - `data/processed/*.csv`
 - `reports/validation_report.md`
@@ -58,9 +58,8 @@ python3 -m venv .venv
 make all
 .venv/bin/pytest -q
 ```
-Dashboard: `outputs/dashboard/marketplace_command_center_dashboard.html`
-
-GitHub Pages publish entrypoint: `docs/index.html` (auto-deployed via `.github/workflows/pages.yml`).
+Dashboard artifact: `outputs/dashboard/executive-marketplace-command-center.html`
+GitHub Pages entrypoint: `docs/index.html` and `docs/executive-marketplace-command-center.html` (auto-deployed via `.github/workflows/pages.yml`).
 
 ## Limits and scope
 - Data is synthetic and assumption-driven.

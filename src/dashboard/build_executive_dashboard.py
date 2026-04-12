@@ -17,7 +17,7 @@ class DashboardConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     reports_dir: Path = Path("reports")
-    output_file: Path = Path("outputs/dashboard/marketplace_command_center_dashboard.html")
+    output_file: Path = Path("outputs/dashboard/executive-marketplace-command-center.html")
     max_orders: int = 15000
     sample_seed: int = 42
 
@@ -291,7 +291,7 @@ def _build_payload(cfg: DashboardConfig) -> Dict[str, object]:
             "is_sampled": bool(len(fact) < len(fact_all)),
             "sellers": int(seller_meta["sid"].nunique()),
             "buyers": int(raw["buyers"]["buyer_id"].nunique()),
-            "official_dashboard_output": "outputs/dashboard/marketplace_command_center_dashboard.html",
+            "official_dashboard_output": "outputs/dashboard/executive-marketplace-command-center.html",
             "official_kpi_source": str(official["source"]),
         },
         "filters": options,
@@ -2343,7 +2343,7 @@ def main() -> None:
     parser.add_argument(
         "--output-file",
         type=Path,
-        default=Path("outputs/dashboard/marketplace_command_center_dashboard.html"),
+        default=Path("outputs/dashboard/executive-marketplace-command-center.html"),
     )
     parser.add_argument("--max-orders", type=int, default=15000)
     parser.add_argument("--sample-seed", type=int, default=42)

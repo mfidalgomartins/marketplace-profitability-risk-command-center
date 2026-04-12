@@ -11,13 +11,13 @@ def test_dashboard_payload_includes_governed_kpis_and_official_path() -> None:
         raw_dir=ROOT / "data" / "raw",
         processed_dir=ROOT / "data" / "processed",
         reports_dir=ROOT / "reports",
-        output_file=ROOT / "outputs" / "dashboard" / "marketplace_command_center_dashboard.html",
+        output_file=ROOT / "outputs" / "dashboard" / "executive-marketplace-command-center.html",
         max_orders=2000,
         sample_seed=42,
     )
     payload = _build_payload(cfg)
 
-    assert payload["meta"]["official_dashboard_output"] == "outputs/dashboard/marketplace_command_center_dashboard.html"
+    assert payload["meta"]["official_dashboard_output"] == "outputs/dashboard/executive-marketplace-command-center.html"
     assert str(payload["meta"]["official_kpi_source"]).endswith("reports/executive_kpi_snapshot.csv")
     assert payload["meta"]["is_sampled"] is True
     assert payload["meta"]["orders"] <= 2000

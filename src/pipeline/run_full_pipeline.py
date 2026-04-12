@@ -19,10 +19,15 @@ def main() -> None:
     parser.add_argument(
         "--dashboard-file",
         type=Path,
-        default=Path("outputs/dashboard/marketplace_command_center_dashboard.html"),
+        default=Path("outputs/dashboard/executive-marketplace-command-center.html"),
     )
     parser.add_argument(
-        "--pages-file",
+        "--pages-dashboard-file",
+        type=Path,
+        default=Path("docs/executive-marketplace-command-center.html"),
+    )
+    parser.add_argument(
+        "--pages-index-file",
         type=Path,
         default=Path("docs/index.html"),
     )
@@ -184,7 +189,9 @@ def main() -> None:
             "--source-html",
             str(args.dashboard_file),
             "--destination-html",
-            str(args.pages_file),
+            str(args.pages_dashboard_file),
+            "--index-html",
+            str(args.pages_index_file),
         ],
     )
     _run(

@@ -17,7 +17,7 @@ help:
 	@echo "  backtest   Build score policy backtesting outputs"
 	@echo "  viz        Build chart pack"
 	@echo "  dashboard  Build executive HTML dashboard"
-	@echo "  pages      Publish dashboard entrypoint for GitHub Pages (docs/index.html)"
+	@echo "  pages      Publish GitHub Pages entrypoint + named dashboard artifact"
 	@echo "  snapshot   Build executive KPI snapshot artifacts"
 	@echo "  schema-contracts Generate + validate schema contracts"
 	@echo "  metric-governance Validate governed KPI contracts and recomputation"
@@ -58,10 +58,10 @@ viz:
 	$(PYTHON) src/visualization/build_marketplace_visualizations.py --raw-dir data/raw --processed-dir data/processed --output-dir outputs/charts
 
 dashboard:
-	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/marketplace_command_center_dashboard.html
+	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/executive-marketplace-command-center.html
 
 pages:
-	$(PYTHON) src/dashboard/publish_github_pages.py --source-html outputs/dashboard/marketplace_command_center_dashboard.html --destination-html docs/index.html
+	$(PYTHON) src/dashboard/publish_github_pages.py --source-html outputs/dashboard/executive-marketplace-command-center.html --destination-html docs/executive-marketplace-command-center.html --index-html docs/index.html
 
 snapshot:
 	$(PYTHON) src/validation/generate_executive_snapshot.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports
@@ -83,4 +83,4 @@ release-gate:
 	$(PYTHON) src/validation/enforce_release_gate.py --release-file reports/validation_release_assessment.csv --required-state decision-support\ only
 
 all:
-	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/marketplace_command_center_dashboard.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only
+	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/executive-marketplace-command-center.html --pages-dashboard-file docs/executive-marketplace-command-center.html --pages-index-file docs/index.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only
