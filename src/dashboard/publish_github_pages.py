@@ -76,9 +76,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--destination-html",
         type=Path,
-        default=Path("docs/executive-marketplace-command-center.html"),
+        default=Path(".pages/executive-marketplace-command-center.html"),
     )
-    parser.add_argument("--index-html", type=Path, default=Path("docs/index.html"))
+    parser.add_argument("--index-html", type=Path, default=Path(".pages/index.html"))
     return parser.parse_args()
 
 

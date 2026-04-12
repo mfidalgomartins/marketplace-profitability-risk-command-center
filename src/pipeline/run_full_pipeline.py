@@ -24,12 +24,12 @@ def main() -> None:
     parser.add_argument(
         "--pages-dashboard-file",
         type=Path,
-        default=Path("docs/executive-marketplace-command-center.html"),
+        default=Path(".pages/executive-marketplace-command-center.html"),
     )
     parser.add_argument(
         "--pages-index-file",
         type=Path,
-        default=Path("docs/index.html"),
+        default=Path(".pages/index.html"),
     )
     parser.add_argument("--monte-carlo-iterations", type=int, default=2000)
     parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))

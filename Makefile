@@ -61,7 +61,7 @@ dashboard:
 	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/executive-marketplace-command-center.html
 
 pages:
-	$(PYTHON) src/dashboard/publish_github_pages.py --source-html outputs/dashboard/executive-marketplace-command-center.html --destination-html docs/executive-marketplace-command-center.html --index-html docs/index.html
+	$(PYTHON) src/dashboard/publish_github_pages.py --source-html outputs/dashboard/executive-marketplace-command-center.html --destination-html .pages/executive-marketplace-command-center.html --index-html .pages/index.html
 
 snapshot:
 	$(PYTHON) src/validation/generate_executive_snapshot.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports
@@ -83,4 +83,4 @@ release-gate:
 	$(PYTHON) src/validation/enforce_release_gate.py --release-file reports/validation_release_assessment.csv --required-state decision-support\ only
 
 all:
-	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/executive-marketplace-command-center.html --pages-dashboard-file docs/executive-marketplace-command-center.html --pages-index-file docs/index.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only
+	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/executive-marketplace-command-center.html --pages-dashboard-file .pages/executive-marketplace-command-center.html --pages-index-file .pages/index.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only

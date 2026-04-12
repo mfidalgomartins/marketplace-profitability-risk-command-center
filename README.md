@@ -59,7 +59,7 @@ make all
 .venv/bin/pytest -q
 ```
 Dashboard artifact: `outputs/dashboard/executive-marketplace-command-center.html`
-GitHub Pages entrypoint: `docs/index.html` and `docs/executive-marketplace-command-center.html` (auto-deployed via `.github/workflows/pages.yml`).
+GitHub Pages is deployed automatically from `.github/workflows/pages.yml`.
 
 ## Limits and scope
 - Data is synthetic and assumption-driven.

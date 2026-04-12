@@ -5,9 +5,10 @@ on:
     branches: ["main"]
     paths:
       - "outputs/dashboard/executive-marketplace-command-center.html"
+      - "outputs/dashboard/README.md"
+      - "outputs/README.md"
       - "src/dashboard/publish_github_pages.py"
       - ".github/workflows/pages.yml"
-      - "docs/**"
   workflow_dispatch:
 
 permissions:
@@ -33,9 +34,9 @@ jobs:
         run: |
           python3 src/dashboard/publish_github_pages.py \
             --source-html outputs/dashboard/executive-marketplace-command-center.html \
-            --destination-html docs/executive-marketplace-command-center.html \
-            --index-html docs/index.html
-          touch docs/.nojekyll
+            --destination-html .pages/executive-marketplace-command-center.html \
+            --index-html .pages/index.html
+          touch .pages/.nojekyll
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -43,7 +44,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: .pages
 
       - name: Deploy to GitHub Pages
         id: deployment

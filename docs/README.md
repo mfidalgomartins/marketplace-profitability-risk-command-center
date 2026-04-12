@@ -1,8 +1,9 @@
-# Dashboard Publish Surface
+# Documentation
 
-This folder serves the live dashboard on GitHub Pages.
+This folder contains project documentation:
 
-- **Live URL:** [Marketplace Command Center](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)
-- Published file: `executive-marketplace-command-center.html`
+- `methodology.md`
+- `data_dictionary.md`
+- `executive_summary.md`
 
-`index.html` exists only as the technical root entrypoint for Pages routing.
+Live dashboard: https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/

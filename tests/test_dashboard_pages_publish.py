@@ -22,17 +22,16 @@ def test_publish_pages_entry_copies_dashboard_html(tmp_path: Path) -> None:
 
 
 def test_docs_index_contains_required_dashboard_controls() -> None:
-    index_path = ROOT / "docs" / "index.html"
-    assert index_path.exists(), "docs/index.html must exist for GitHub Pages publishing"
-    index_html = index_path.read_text(encoding="utf-8")
-    named_dashboard = ROOT / "docs" / "executive-marketplace-command-center.html"
-    assert named_dashboard.exists(), "Named dashboard publish file must exist in docs/"
+    named_dashboard = ROOT / "outputs" / "dashboard" / "executive-marketplace-command-center.html"
+    assert named_dashboard.exists(), "Final dashboard artifact must exist in outputs/dashboard"
     dashboard_html = named_dashboard.read_text(encoding="utf-8")
 
-    assert "executive-marketplace-command-center.html" in index_html
     assert 'id="applyFilters"' in dashboard_html
     assert 'id="resetFilters"' in dashboard_html
     assert 'id="themeToggle"' in dashboard_html
     assert 'id="printDashboard"' in dashboard_html
     assert "const EMBEDDED =" in dashboard_html
     assert "/Users/" not in dashboard_html
+
+    duplicate_docs_dashboard = ROOT / "docs" / "executive-marketplace-command-center.html"
+    assert not duplicate_docs_dashboard.exists(), "Duplicate dashboard should not be tracked in docs/"

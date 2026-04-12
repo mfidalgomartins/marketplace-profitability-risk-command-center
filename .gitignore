@@ -26,3 +26,6 @@ dist/
 # Local temp artifacts
 .tmp/
 tmp/
+
+# GitHub Pages build staging
+.pages/
