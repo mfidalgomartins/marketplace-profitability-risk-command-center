@@ -1,0 +1,1201 @@
+seller_id,current_period,margin_fragility_score,margin_fragility_tier,main_risk_driver,recommended_action
+S00001,2026-02,33.25468185313144,Moderate,negative_margin_share,reduce subsidy exposure
+S00002,2026-02,46.3657600659627,Moderate,negative_margin_share,reduce subsidy exposure
+S00003,2026-02,29.33660836137624,Low,negative_margin_share,monitor only
+S00004,2026-02,39.43134052664042,Moderate,negative_margin_share,reduce subsidy exposure
+S00005,2026-02,34.245022970744216,Moderate,negative_margin_share,reduce subsidy exposure
+S00006,2026-02,46.67123594812778,Moderate,negative_margin_share,reduce subsidy exposure
+S00007,2026-02,32.85764433081474,Moderate,negative_margin_share,reduce subsidy exposure
+S00008,2026-02,38.651769823785735,Moderate,negative_margin_share,reduce subsidy exposure
+S00009,2026-02,35.96807752484856,Moderate,negative_margin_share,reduce subsidy exposure
+S00010,2026-02,31.280831057637286,Moderate,negative_margin_share,reduce subsidy exposure
+S00011,2026-02,30.617049955440404,Moderate,negative_margin_share,reduce subsidy exposure
+S00012,2026-02,22.595219866033048,Low,subsidy_dependency,monitor only
+S00013,2026-02,33.426771736425835,Moderate,negative_margin_share,reduce subsidy exposure
+S00014,2026-02,40.010106035660954,Moderate,refund_value_risk,reduce subsidy exposure
+S00015,2026-02,51.68273813701563,Moderate,negative_margin_share,reduce subsidy exposure
+S00016,2026-02,48.85542477499412,Moderate,negative_margin_share,reduce subsidy exposure
+S00017,2026-02,23.526143795650686,Low,negative_margin_share,monitor only
+S00018,2026-02,14.86016357644247,Low,negative_margin_share,monitor only
+S00019,2026-02,29.7366471711224,Low,negative_margin_share,monitor only
+S00020,2026-02,42.87933793465887,Moderate,refund_value_risk,reduce subsidy exposure
+S00021,2026-02,37.921307012694506,Moderate,negative_margin_share,reduce subsidy exposure
+S00022,2026-02,26.5358920270676,Low,negative_margin_share,monitor only
+S00023,2026-02,27.124299998885203,Low,negative_margin_share,monitor only
+S00024,2026-02,44.7946744305684,Moderate,refund_value_risk,reduce subsidy exposure
+S00025,2026-02,27.261166857452494,Low,refund_value_risk,monitor only
+S00026,2026-02,29.512877547858764,Low,negative_margin_share,monitor only
+S00027,2026-02,39.596649512098196,Moderate,negative_margin_share,reduce subsidy exposure
+S00028,2026-02,37.13253831056091,Moderate,negative_margin_share,reduce subsidy exposure
+S00029,2026-02,43.66960397752113,Moderate,negative_margin_share,reduce subsidy exposure
+S00030,2026-02,42.539677124569785,Moderate,negative_margin_share,reduce subsidy exposure
+S00031,2026-02,34.111051363024416,Moderate,refund_value_risk,reduce subsidy exposure
+S00032,2026-02,26.50770134831948,Low,negative_margin_share,monitor only
+S00033,2026-02,43.61250218539463,Moderate,refund_value_risk,reduce subsidy exposure
+S00034,2026-02,54.83253530663571,Moderate,negative_margin_share,reduce subsidy exposure
+S00035,2026-02,24.93783816829862,Low,negative_margin_share,monitor only
+S00036,2026-02,52.76645141165954,Moderate,negative_margin_share,reduce subsidy exposure
+S00037,2026-02,31.566399038626518,Moderate,negative_margin_share,reduce subsidy exposure
+S00038,2026-02,23.719671565243125,Low,negative_margin_share,monitor only
+S00039,2026-02,15.685275782557813,Low,negative_margin_share,monitor only
+S00040,2026-02,50.953721504003035,Moderate,negative_margin_share,reduce subsidy exposure
+S00041,2026-02,32.00785443398204,Moderate,negative_margin_share,reduce subsidy exposure
+S00042,2026-02,45.76654125931596,Moderate,negative_margin_share,reduce subsidy exposure
+S00043,2026-02,39.01134527343612,Moderate,refund_value_risk,reduce subsidy exposure
+S00044,2026-02,44.13262265356272,Moderate,negative_margin_share,reduce subsidy exposure
+S00045,2026-02,37.998210809329436,Moderate,negative_margin_share,reduce subsidy exposure
+S00046,2026-02,50.53693550366637,Moderate,negative_margin_share,reduce subsidy exposure
+S00047,2026-02,27.775212328807246,Low,negative_margin_share,monitor only
+S00048,2026-02,44.72844544212834,Moderate,negative_margin_share,reduce subsidy exposure
+S00049,2026-02,50.0,Moderate,negative_margin_share,reduce subsidy exposure
+S00050,2026-02,25.078426131863026,Low,negative_margin_share,monitor only
+S00051,2026-02,31.643091508189308,Moderate,negative_margin_share,reduce subsidy exposure
+S00052,2026-02,30.55426686281104,Moderate,negative_margin_share,reduce subsidy exposure
+S00053,2026-02,40.79864329349403,Moderate,negative_margin_share,reduce subsidy exposure
+S00054,2026-02,33.26526250767637,Moderate,negative_margin_share,reduce subsidy exposure
+S00055,2026-02,31.838375472138424,Moderate,negative_margin_share,reduce subsidy exposure
+S00056,2026-02,23.036672716718506,Low,refund_value_risk,monitor only
+S00057,2026-02,39.725663458915726,Moderate,refund_value_risk,reduce subsidy exposure
+S00058,2026-02,26.66757328198293,Low,negative_margin_share,monitor only
+S00059,2026-02,45.72724004391901,Moderate,refund_value_risk,reduce subsidy exposure
+S00060,2026-02,33.921961711875305,Moderate,negative_margin_share,reduce subsidy exposure
+S00061,2026-02,46.626182159370025,Moderate,negative_margin_share,reduce subsidy exposure
+S00062,2026-02,21.65576916291429,Low,negative_margin_share,monitor only
+S00063,2026-02,26.63621028143372,Low,negative_margin_share,monitor only
+S00064,2026-02,57.27384308981174,High,negative_margin_share,reduce subsidy exposure
+S00065,2026-02,26.46508901582399,Low,negative_margin_share,monitor only
+S00066,2026-02,16.888359892010016,Low,refund_value_risk,monitor only
+S00067,2026-02,48.362407695243164,Moderate,negative_margin_share,reduce subsidy exposure
+S00068,2026-02,28.209115536651492,Low,negative_margin_share,monitor only
+S00069,2026-02,48.757626524598614,Moderate,negative_margin_share,reduce subsidy exposure
+S00070,2026-02,36.08135230314144,Moderate,negative_margin_share,reduce subsidy exposure
+S00071,2026-02,39.49152185254806,Moderate,subsidy_dependency,reduce subsidy exposure
+S00072,2026-02,25.412208612925504,Low,negative_margin_share,monitor only
+S00073,2026-02,31.58890924577109,Moderate,negative_margin_share,reduce subsidy exposure
+S00074,2026-02,30.173915067746737,Moderate,negative_margin_share,reduce subsidy exposure
+S00075,2026-02,57.36712652049426,High,negative_margin_share,reduce subsidy exposure
+S00076,2026-02,41.84001993629553,Moderate,negative_margin_share,reduce subsidy exposure
+S00077,2026-02,44.85383566782224,Moderate,negative_margin_share,reduce subsidy exposure
+S00078,2026-02,25.431867477933917,Low,negative_margin_share,monitor only
+S00079,2026-02,50.92101655877204,Moderate,refund_value_risk,reduce subsidy exposure
+S00080,2026-02,54.65172674640566,Moderate,negative_margin_share,reduce subsidy exposure
+S00081,2026-02,36.498909632661125,Moderate,negative_margin_share,reduce subsidy exposure
+S00082,2026-02,20.616348175161697,Low,negative_margin_share,monitor only
+S00083,2026-02,28.54581627530308,Low,negative_margin_share,monitor only
+S00084,2026-02,44.360919922458265,Moderate,negative_margin_share,reduce subsidy exposure
+S00085,2026-02,30.6766610589768,Moderate,refund_value_risk,reduce subsidy exposure
+S00086,2026-02,41.1951643772496,Moderate,refund_value_risk,reduce subsidy exposure
+S00087,2026-02,30.996894398898466,Moderate,negative_margin_share,reduce subsidy exposure
+S00088,2026-02,30.860401161227337,Moderate,negative_margin_share,reduce subsidy exposure
+S00089,2026-02,47.14365843978501,Moderate,negative_margin_share,reduce subsidy exposure
+S00090,2026-02,33.828783306795806,Moderate,negative_margin_share,reduce subsidy exposure
+S00091,2026-02,47.29144855607167,Moderate,negative_margin_share,reduce subsidy exposure
+S00092,2026-02,27.232016491993154,Low,refund_value_risk,monitor only
+S00093,2026-02,48.36611489025349,Moderate,refund_value_risk,reduce subsidy exposure
+S00094,2026-02,40.415492844776765,Moderate,negative_margin_share,reduce subsidy exposure
+S00095,2026-02,37.77855672535316,Moderate,refund_value_risk,reduce subsidy exposure
+S00096,2026-02,29.50889605168747,Low,negative_margin_share,monitor only
+S00097,2026-02,35.45203722771225,Moderate,negative_margin_share,reduce subsidy exposure
+S00098,2026-02,42.89222998555645,Moderate,negative_margin_share,reduce subsidy exposure
+S00099,2026-02,32.868383526457656,Moderate,negative_margin_share,reduce subsidy exposure
+S00100,2026-02,31.01260996310232,Moderate,refund_value_risk,reduce subsidy exposure
+S00101,2026-02,43.93752176416884,Moderate,negative_margin_share,reduce subsidy exposure
+S00102,2026-02,45.42832715661858,Moderate,negative_margin_share,reduce subsidy exposure
+S00103,2026-02,53.9744669269305,Moderate,negative_margin_share,reduce subsidy exposure
+S00104,2026-02,32.351968234063875,Moderate,negative_margin_share,reduce subsidy exposure
+S00105,2026-02,32.16283500207799,Moderate,negative_margin_share,reduce subsidy exposure
+S00106,2026-02,41.41257518180972,Moderate,negative_margin_share,reduce subsidy exposure
+S00107,2026-02,34.53137009027436,Moderate,negative_margin_share,reduce subsidy exposure
+S00108,2026-02,43.40848534223544,Moderate,negative_margin_share,reduce subsidy exposure
+S00109,2026-02,24.2289506560788,Low,negative_margin_share,monitor only
+S00110,2026-02,27.58708920771975,Low,negative_margin_share,monitor only
+S00111,2026-02,30.679716559646565,Moderate,negative_margin_share,reduce subsidy exposure
+S00112,2026-02,22.86804065220496,Low,negative_margin_share,monitor only
+S00113,2026-02,41.996541679283496,Moderate,negative_margin_share,reduce subsidy exposure
+S00114,2026-02,36.07321506787024,Moderate,refund_value_risk,reduce subsidy exposure
+S00115,2026-02,44.52137652278705,Moderate,negative_margin_share,reduce subsidy exposure
+S00116,2026-02,33.874916542482325,Moderate,negative_margin_share,reduce subsidy exposure
+S00117,2026-02,38.65369501747256,Moderate,negative_margin_share,reduce subsidy exposure
+S00118,2026-02,44.79473679203918,Moderate,negative_margin_share,reduce subsidy exposure
+S00119,2026-02,45.63203265408261,Moderate,negative_margin_share,reduce subsidy exposure
+S00120,2026-02,52.636858666041974,Moderate,negative_margin_share,reduce subsidy exposure
+S00121,2026-02,27.52372696325211,Low,negative_margin_share,monitor only
+S00122,2026-02,34.703773232347416,Moderate,negative_margin_share,reduce subsidy exposure
+S00123,2026-02,37.360249556821316,Moderate,negative_margin_share,reduce subsidy exposure
+S00124,2026-02,29.799318131528462,Low,refund_value_risk,monitor only
+S00125,2026-02,40.74479713413243,Moderate,negative_margin_share,reduce subsidy exposure
+S00126,2026-02,30.5534748610747,Moderate,negative_margin_share,reduce subsidy exposure
+S00127,2026-02,31.194877255528066,Moderate,negative_margin_share,reduce subsidy exposure
+S00128,2026-02,24.640938751671147,Low,refund_value_risk,monitor only
+S00129,2026-02,50.55471442703724,Moderate,negative_margin_share,reduce subsidy exposure
+S00130,2026-02,46.13399665865953,Moderate,negative_margin_share,reduce subsidy exposure
+S00131,2026-02,26.221320074422767,Low,negative_margin_share,monitor only
+S00132,2026-02,28.899429047107333,Low,negative_margin_share,monitor only
+S00133,2026-02,34.6278614682661,Moderate,negative_margin_share,reduce subsidy exposure
+S00134,2026-02,7.806103920443372,Low,refund_value_risk,monitor only
+S00135,2026-02,31.43449330414266,Moderate,negative_margin_share,reduce subsidy exposure
+S00136,2026-02,48.46912128345039,Moderate,negative_margin_share,reduce subsidy exposure
+S00137,2026-02,56.57089909527833,High,refund_value_risk,reduce subsidy exposure
+S00138,2026-02,34.06492388683773,Moderate,negative_margin_share,reduce subsidy exposure
+S00139,2026-02,32.81885022297029,Moderate,refund_value_risk,reduce subsidy exposure
+S00140,2026-02,38.084006393934196,Moderate,negative_margin_share,reduce subsidy exposure
+S00141,2026-02,29.099316806490396,Low,negative_margin_share,monitor only
+S00142,2026-02,19.63230241787909,Low,dispute_value_risk,monitor only
+S00143,2026-02,55.263213183615086,High,refund_value_risk,reduce subsidy exposure
+S00144,2026-02,39.38986653699268,Moderate,refund_value_risk,reduce subsidy exposure
+S00145,2026-02,42.272905293227126,Moderate,negative_margin_share,reduce subsidy exposure
+S00146,2026-02,51.407326437085665,Moderate,negative_margin_share,reduce subsidy exposure
+S00147,2026-02,19.372402679291415,Low,dispute_value_risk,monitor only
+S00148,2026-02,18.951677816576254,Low,negative_margin_share,monitor only
+S00149,2026-02,33.75224289638436,Moderate,refund_value_risk,reduce subsidy exposure
+S00150,2026-02,40.02085052613998,Moderate,subsidy_dependency,reduce subsidy exposure
+S00151,2026-02,51.85441510492035,Moderate,negative_margin_share,reduce subsidy exposure
+S00152,2026-02,39.879518795787305,Moderate,negative_margin_share,reduce subsidy exposure
+S00153,2026-02,17.48546750855985,Low,refund_value_risk,monitor only
+S00154,2026-02,24.45680628272251,Low,refund_value_risk,monitor only
+S00155,2026-02,19.790561478759738,Low,refund_value_risk,monitor only
+S00156,2026-02,31.058451556104536,Moderate,negative_margin_share,reduce subsidy exposure
+S00157,2026-02,35.57700897893928,Moderate,negative_margin_share,reduce subsidy exposure
+S00158,2026-02,36.34655951192647,Moderate,negative_margin_share,reduce subsidy exposure
+S00159,2026-02,43.69006555962987,Moderate,negative_margin_share,reduce subsidy exposure
+S00160,2026-02,45.71845569942274,Moderate,negative_margin_share,reduce subsidy exposure
+S00161,2026-02,45.54754349846334,Moderate,negative_margin_share,reduce subsidy exposure
+S00162,2026-02,41.99135071405165,Moderate,negative_margin_share,reduce subsidy exposure
+S00163,2026-02,65.88107203215718,High,negative_margin_share,reduce subsidy exposure
+S00164,2026-02,37.99806185491835,Moderate,negative_margin_share,reduce subsidy exposure
+S00165,2026-02,34.519180754556494,Moderate,negative_margin_share,reduce subsidy exposure
+S00166,2026-02,27.792562461576594,Low,refund_value_risk,monitor only
+S00167,2026-02,28.034810112541983,Low,negative_margin_share,monitor only
+S00168,2026-02,59.43275435811158,High,negative_margin_share,reduce subsidy exposure
+S00169,2026-02,55.00861710220936,High,negative_margin_share,reduce subsidy exposure
+S00170,2026-02,69.99122255641818,High,negative_margin_share,reduce subsidy exposure
+S00171,2026-02,26.94687959616679,Low,refund_value_risk,monitor only
+S00172,2026-02,37.18998946864712,Moderate,negative_margin_share,reduce subsidy exposure
+S00173,2026-02,24.650557101341356,Low,refund_value_risk,monitor only
+S00174,2026-02,39.98907628405123,Moderate,negative_margin_share,reduce subsidy exposure
+S00175,2026-02,26.582529479009754,Low,negative_margin_share,monitor only
+S00176,2026-02,11.52757607402464,Low,negative_margin_share,monitor only
+S00177,2026-02,39.73959486738674,Moderate,negative_margin_share,reduce subsidy exposure
+S00178,2026-02,38.52143719345082,Moderate,negative_margin_share,reduce subsidy exposure
+S00179,2026-02,32.28777798167671,Moderate,refund_value_risk,reduce subsidy exposure
+S00180,2026-02,40.663448216213055,Moderate,negative_margin_share,reduce subsidy exposure
+S00181,2026-02,35.65694292987592,Moderate,negative_margin_share,reduce subsidy exposure
+S00182,2026-02,42.293515669171754,Moderate,negative_margin_share,reduce subsidy exposure
+S00183,2026-02,30.47404474985147,Moderate,negative_margin_share,reduce subsidy exposure
+S00184,2026-02,38.554561832535285,Moderate,negative_margin_share,reduce subsidy exposure
+S00185,2026-02,53.82172965789674,Moderate,negative_margin_share,reduce subsidy exposure
+S00186,2026-02,35.5613398120802,Moderate,negative_margin_share,reduce subsidy exposure
+S00187,2026-02,32.44013902028389,Moderate,negative_margin_share,reduce subsidy exposure
+S00188,2026-02,33.07292980762057,Moderate,negative_margin_share,reduce subsidy exposure
+S00189,2026-02,31.153757628096514,Moderate,negative_margin_share,reduce subsidy exposure
+S00190,2026-02,32.53743063876141,Moderate,negative_margin_share,reduce subsidy exposure
+S00191,2026-02,30.438880265512292,Moderate,refund_value_risk,reduce subsidy exposure
+S00192,2026-02,22.346792901159453,Low,negative_margin_share,monitor only
+S00193,2026-02,53.35071567511015,Moderate,negative_margin_share,reduce subsidy exposure
+S00194,2026-02,31.430121414554662,Moderate,dispute_value_risk,reduce subsidy exposure
+S00195,2026-02,44.77107387030771,Moderate,negative_margin_share,reduce subsidy exposure
+S00196,2026-02,36.538421651293746,Moderate,negative_margin_share,reduce subsidy exposure
+S00197,2026-02,52.26646974763615,Moderate,negative_margin_share,reduce subsidy exposure
+S00198,2026-02,32.45390525921217,Moderate,negative_margin_share,reduce subsidy exposure
+S00199,2026-02,15.447767164471776,Low,refund_value_risk,monitor only
+S00200,2026-02,45.027361100471644,Moderate,negative_margin_share,reduce subsidy exposure
+S00201,2026-02,33.33734689512207,Moderate,negative_margin_share,reduce subsidy exposure
+S00202,2026-02,57.388123296059405,High,negative_margin_share,reduce subsidy exposure
+S00203,2026-02,45.55483781439321,Moderate,negative_margin_share,reduce subsidy exposure
+S00204,2026-02,35.671413441515895,Moderate,negative_margin_share,reduce subsidy exposure
+S00205,2026-02,48.11745781056521,Moderate,negative_margin_share,reduce subsidy exposure
+S00206,2026-02,37.55040172277251,Moderate,negative_margin_share,reduce subsidy exposure
+S00207,2026-02,32.65779634328545,Moderate,refund_value_risk,reduce subsidy exposure
+S00208,2026-02,43.68022161315967,Moderate,negative_margin_share,reduce subsidy exposure
+S00209,2026-02,39.612925440961206,Moderate,refund_value_risk,reduce subsidy exposure
+S00210,2026-02,47.10361101465922,Moderate,refund_value_risk,reduce subsidy exposure
+S00211,2026-02,32.071786418806255,Moderate,refund_value_risk,reduce subsidy exposure
+S00212,2026-02,36.166738720742046,Moderate,negative_margin_share,reduce subsidy exposure
+S00213,2026-02,44.79433774090356,Moderate,negative_margin_share,reduce subsidy exposure
+S00214,2026-02,28.799538940817524,Low,negative_margin_share,monitor only
+S00215,2026-02,43.82851438121256,Moderate,negative_margin_share,reduce subsidy exposure
+S00216,2026-02,34.19578542974142,Moderate,refund_value_risk,reduce subsidy exposure
+S00217,2026-02,27.627821630969294,Low,negative_margin_share,monitor only
+S00218,2026-02,40.57186504708885,Moderate,refund_value_risk,reduce subsidy exposure
+S00219,2026-02,51.10143198599731,Moderate,negative_margin_share,reduce subsidy exposure
+S00220,2026-02,38.43294923665212,Moderate,negative_margin_share,reduce subsidy exposure
+S00221,2026-02,44.173832812903626,Moderate,negative_margin_share,reduce subsidy exposure
+S00222,2026-02,23.135406771933937,Low,negative_margin_share,monitor only
+S00223,2026-02,29.95699614377382,Low,negative_margin_share,monitor only
+S00224,2026-02,48.09865842339597,Moderate,negative_margin_share,reduce subsidy exposure
+S00225,2026-02,2.962430229824974,Low,refund_value_risk,monitor only
+S00226,2026-02,53.91696096760787,Moderate,negative_margin_share,reduce subsidy exposure
+S00227,2026-02,29.34112821759255,Low,negative_margin_share,monitor only
+S00228,2026-02,40.23995115671429,Moderate,negative_margin_share,reduce subsidy exposure
+S00229,2026-02,60.32813923920244,High,negative_margin_share,reduce subsidy exposure
+S00230,2026-02,28.31664973084614,Low,negative_margin_share,monitor only
+S00231,2026-02,43.869987422901694,Moderate,refund_value_risk,reduce subsidy exposure
+S00232,2026-02,51.07453712902032,Moderate,negative_margin_share,reduce subsidy exposure
+S00233,2026-02,16.15999137871923,Low,negative_margin_share,monitor only
+S00234,2026-02,35.669448063938965,Moderate,negative_margin_share,reduce subsidy exposure
+S00235,2026-02,50.92058858239783,Moderate,negative_margin_share,reduce subsidy exposure
+S00236,2026-02,25.027263266606145,Low,negative_margin_share,monitor only
+S00237,2026-02,32.04962305901546,Moderate,negative_margin_share,reduce subsidy exposure
+S00238,2026-02,41.38929496560551,Moderate,negative_margin_share,reduce subsidy exposure
+S00239,2026-02,15.697738325608501,Low,refund_value_risk,monitor only
+S00240,2026-02,34.06411026272795,Moderate,negative_margin_share,reduce subsidy exposure
+S00241,2026-02,39.380124943389205,Moderate,negative_margin_share,reduce subsidy exposure
+S00242,2026-02,39.617474587649724,Moderate,negative_margin_share,reduce subsidy exposure
+S00243,2026-02,38.46920733320522,Moderate,negative_margin_share,reduce subsidy exposure
+S00244,2026-02,43.29095340941385,Moderate,negative_margin_share,reduce subsidy exposure
+S00245,2026-02,18.058662771243092,Low,refund_value_risk,monitor only
+S00246,2026-02,44.30242722391138,Moderate,negative_margin_share,reduce subsidy exposure
+S00247,2026-02,33.64435418410603,Moderate,refund_value_risk,reduce subsidy exposure
+S00248,2026-02,17.366607270561268,Low,dispute_value_risk,monitor only
+S00249,2026-02,40.2800485585667,Moderate,negative_margin_share,reduce subsidy exposure
+S00250,2026-02,27.066335513237668,Low,negative_margin_share,monitor only
+S00251,2026-02,43.73051223671477,Moderate,negative_margin_share,reduce subsidy exposure
+S00252,2026-02,45.305580613426415,Moderate,negative_margin_share,reduce subsidy exposure
+S00253,2026-02,40.49856756739204,Moderate,negative_margin_share,reduce subsidy exposure
+S00254,2026-02,27.39238730449943,Low,dispute_value_risk,monitor only
+S00255,2026-02,39.57608882323849,Moderate,refund_value_risk,reduce subsidy exposure
+S00256,2026-02,26.428628819925112,Low,negative_margin_share,monitor only
+S00257,2026-02,29.89519421468417,Low,refund_value_risk,monitor only
+S00258,2026-02,15.539333005498072,Low,refund_value_risk,monitor only
+S00259,2026-02,35.500600814098725,Moderate,negative_margin_share,reduce subsidy exposure
+S00260,2026-02,42.95537041932209,Moderate,negative_margin_share,reduce subsidy exposure
+S00261,2026-02,39.951044473897426,Moderate,negative_margin_share,reduce subsidy exposure
+S00262,2026-02,37.528769824262625,Moderate,negative_margin_share,reduce subsidy exposure
+S00263,2026-02,18.68802753554202,Low,negative_margin_share,monitor only
+S00264,2026-02,32.657611378741336,Moderate,refund_value_risk,reduce subsidy exposure
+S00265,2026-02,51.53002571427047,Moderate,refund_value_risk,reduce subsidy exposure
+S00266,2026-02,31.527664992694792,Moderate,negative_margin_share,reduce subsidy exposure
+S00267,2026-02,45.31225831508335,Moderate,negative_margin_share,reduce subsidy exposure
+S00268,2026-02,21.88809012057403,Low,negative_margin_share,monitor only
+S00269,2026-02,46.9330599560289,Moderate,negative_margin_share,reduce subsidy exposure
+S00270,2026-02,46.29693589360417,Moderate,negative_margin_share,reduce subsidy exposure
+S00271,2026-02,42.73289754626713,Moderate,negative_margin_share,reduce subsidy exposure
+S00272,2026-02,40.643967580111564,Moderate,negative_margin_share,reduce subsidy exposure
+S00273,2026-02,27.47852165489533,Low,refund_value_risk,monitor only
+S00274,2026-02,42.83346483940736,Moderate,refund_value_risk,reduce subsidy exposure
+S00275,2026-02,42.608525559766946,Moderate,negative_margin_share,reduce subsidy exposure
+S00276,2026-02,32.23087567694942,Moderate,negative_margin_share,reduce subsidy exposure
+S00277,2026-02,22.65555725234347,Low,refund_value_risk,monitor only
+S00278,2026-02,42.61570935612224,Moderate,refund_value_risk,reduce subsidy exposure
+S00279,2026-02,35.405329765077525,Moderate,negative_margin_share,reduce subsidy exposure
+S00280,2026-02,39.945693162069446,Moderate,negative_margin_share,reduce subsidy exposure
+S00281,2026-02,43.21582745888431,Moderate,negative_margin_share,reduce subsidy exposure
+S00282,2026-02,37.748966210624864,Moderate,negative_margin_share,reduce subsidy exposure
+S00283,2026-02,38.21737669006695,Moderate,refund_value_risk,reduce subsidy exposure
+S00284,2026-02,31.050214657521195,Moderate,negative_margin_share,reduce subsidy exposure
+S00285,2026-02,34.72522539325841,Moderate,negative_margin_share,reduce subsidy exposure
+S00286,2026-02,35.983990374247206,Moderate,negative_margin_share,reduce subsidy exposure
+S00287,2026-02,26.089696803629188,Low,dispute_value_risk,monitor only
+S00288,2026-02,34.24942077508292,Moderate,negative_margin_share,reduce subsidy exposure
+S00289,2026-02,23.50842565328048,Low,negative_margin_share,monitor only
+S00290,2026-02,38.523432307674625,Moderate,negative_margin_share,reduce subsidy exposure
+S00291,2026-02,32.10698980940318,Moderate,negative_margin_share,reduce subsidy exposure
+S00292,2026-02,37.597155313643725,Moderate,negative_margin_share,reduce subsidy exposure
+S00293,2026-02,41.40943780821389,Moderate,negative_margin_share,reduce subsidy exposure
+S00294,2026-02,30.43115964743024,Moderate,negative_margin_share,reduce subsidy exposure
+S00295,2026-02,48.623257011116266,Moderate,negative_margin_share,reduce subsidy exposure
+S00296,2026-02,44.93518206039942,Moderate,negative_margin_share,reduce subsidy exposure
+S00297,2026-02,29.85673356166277,Low,negative_margin_share,monitor only
+S00298,2026-02,34.01248837506208,Moderate,negative_margin_share,reduce subsidy exposure
+S00299,2026-02,48.00469348697723,Moderate,negative_margin_share,reduce subsidy exposure
+S00300,2026-02,34.57222296764081,Moderate,negative_margin_share,reduce subsidy exposure
+S00301,2026-02,36.661082112455574,Moderate,negative_margin_share,reduce subsidy exposure
+S00302,2026-02,8.455093491366098,Low,dispute_value_risk,monitor only
+S00303,2026-02,37.63029017874203,Moderate,negative_margin_share,reduce subsidy exposure
+S00304,2026-02,46.45433848878191,Moderate,negative_margin_share,reduce subsidy exposure
+S00305,2026-02,27.883770914230176,Low,negative_margin_share,monitor only
+S00306,2026-02,42.381997085095065,Moderate,negative_margin_share,reduce subsidy exposure
+S00307,2026-02,22.055537502594376,Low,negative_margin_share,monitor only
+S00308,2026-02,38.67359587078583,Moderate,negative_margin_share,reduce subsidy exposure
+S00309,2026-02,67.10000310415198,High,negative_margin_share,reduce subsidy exposure
+S00310,2026-02,50.6497660347014,Moderate,negative_margin_share,reduce subsidy exposure
+S00311,2026-02,34.735835995168344,Moderate,negative_margin_share,reduce subsidy exposure
+S00312,2026-02,45.87883348645936,Moderate,refund_value_risk,reduce subsidy exposure
+S00313,2026-02,45.444380307531766,Moderate,negative_margin_share,reduce subsidy exposure
+S00314,2026-02,22.95465264092143,Low,dispute_value_risk,monitor only
+S00315,2026-02,39.96303845490528,Moderate,negative_margin_share,reduce subsidy exposure
+S00316,2026-02,33.07218606761995,Moderate,negative_margin_share,reduce subsidy exposure
+S00317,2026-02,30.82991656889393,Moderate,refund_value_risk,reduce subsidy exposure
+S00318,2026-02,48.255054582702286,Moderate,negative_margin_share,reduce subsidy exposure
+S00319,2026-02,20.565303733068873,Low,negative_margin_share,monitor only
+S00320,2026-02,33.38946504187699,Moderate,refund_value_risk,reduce subsidy exposure
+S00321,2026-02,32.09240141455734,Moderate,negative_margin_share,reduce subsidy exposure
+S00322,2026-02,37.205369376087916,Moderate,negative_margin_share,reduce subsidy exposure
+S00323,2026-02,20.889913067921896,Low,negative_margin_share,monitor only
+S00324,2026-02,26.699258512046665,Low,negative_margin_share,monitor only
+S00325,2026-02,33.597801283433924,Moderate,negative_margin_share,reduce subsidy exposure
+S00326,2026-02,32.706384091307456,Moderate,refund_value_risk,reduce subsidy exposure
+S00327,2026-02,36.79589844910832,Moderate,negative_margin_share,reduce subsidy exposure
+S00328,2026-02,36.94269448426587,Moderate,negative_margin_share,reduce subsidy exposure
+S00329,2026-02,46.2085416173092,Moderate,negative_margin_share,reduce subsidy exposure
+S00330,2026-02,36.72106549330178,Moderate,negative_margin_share,reduce subsidy exposure
+S00331,2026-02,56.67691191528689,High,negative_margin_share,reduce subsidy exposure
+S00332,2026-02,39.38654766560365,Moderate,negative_margin_share,reduce subsidy exposure
+S00333,2026-02,23.084138212073093,Low,dispute_value_risk,monitor only
+S00334,2026-02,42.76527060088482,Moderate,negative_margin_share,reduce subsidy exposure
+S00335,2026-02,25.58321941222939,Low,refund_value_risk,monitor only
+S00336,2026-02,32.71777041806847,Moderate,negative_margin_share,reduce subsidy exposure
+S00337,2026-02,32.290380052965816,Moderate,negative_margin_share,reduce subsidy exposure
+S00338,2026-02,33.161758100868596,Moderate,negative_margin_share,reduce subsidy exposure
+S00339,2026-02,35.415006246713745,Moderate,negative_margin_share,reduce subsidy exposure
+S00340,2026-02,25.117138632456623,Low,negative_margin_share,monitor only
+S00341,2026-02,14.217998277051821,Low,negative_margin_share,monitor only
+S00342,2026-02,41.29134670895749,Moderate,dispute_value_risk,reduce subsidy exposure
+S00343,2026-02,30.632974255166786,Moderate,refund_value_risk,reduce subsidy exposure
+S00344,2026-02,32.21158761740814,Moderate,negative_margin_share,reduce subsidy exposure
+S00345,2026-02,45.325699545208494,Moderate,negative_margin_share,reduce subsidy exposure
+S00346,2026-02,43.616104020679906,Moderate,negative_margin_share,reduce subsidy exposure
+S00347,2026-02,33.240387769306565,Moderate,negative_margin_share,reduce subsidy exposure
+S00348,2026-02,41.04276825144017,Moderate,negative_margin_share,reduce subsidy exposure
+S00349,2026-02,15.899836390973796,Low,refund_value_risk,monitor only
+S00350,2026-02,49.52155594779467,Moderate,negative_margin_share,reduce subsidy exposure
+S00351,2026-02,33.479646679867656,Moderate,negative_margin_share,reduce subsidy exposure
+S00352,2026-02,27.74717734562248,Low,negative_margin_share,monitor only
+S00353,2026-02,26.45675131379704,Low,subsidy_dependency,monitor only
+S00354,2026-02,27.580946533606458,Low,negative_margin_share,monitor only
+S00355,2026-02,17.47850656915125,Low,negative_margin_share,monitor only
+S00356,2026-02,58.251740701171165,High,negative_margin_share,reduce subsidy exposure
+S00357,2026-02,39.500960243088834,Moderate,negative_margin_share,reduce subsidy exposure
+S00358,2026-02,43.8984766160098,Moderate,negative_margin_share,reduce subsidy exposure
+S00359,2026-02,39.93664360261306,Moderate,negative_margin_share,reduce subsidy exposure
+S00360,2026-02,33.09727792628262,Moderate,negative_margin_share,reduce subsidy exposure
+S00361,2026-02,31.85665912837799,Moderate,negative_margin_share,reduce subsidy exposure
+S00362,2026-02,75.46196809978467,Critical,negative_margin_share,reduce subsidy exposure
+S00363,2026-02,25.765534758576642,Low,negative_margin_share,monitor only
+S00364,2026-02,46.308818859302455,Moderate,negative_margin_share,reduce subsidy exposure
+S00365,2026-02,43.26685257753837,Moderate,negative_margin_share,reduce subsidy exposure
+S00366,2026-02,44.319571563735224,Moderate,negative_margin_share,reduce subsidy exposure
+S00367,2026-02,51.10572276054749,Moderate,refund_value_risk,reduce subsidy exposure
+S00368,2026-02,37.25260224826376,Moderate,negative_margin_share,reduce subsidy exposure
+S00369,2026-02,41.216605942379786,Moderate,negative_margin_share,reduce subsidy exposure
+S00370,2026-02,46.23755545015197,Moderate,refund_value_risk,reduce subsidy exposure
+S00371,2026-02,38.864021486791046,Moderate,dispute_value_risk,reduce subsidy exposure
+S00372,2026-02,24.082483226336095,Low,refund_value_risk,monitor only
+S00373,2026-02,38.31321357369155,Moderate,negative_margin_share,reduce subsidy exposure
+S00374,2026-02,42.600855040808916,Moderate,negative_margin_share,reduce subsidy exposure
+S00375,2026-02,38.00349107832148,Moderate,negative_margin_share,reduce subsidy exposure
+S00376,2026-02,28.709005667274425,Low,negative_margin_share,monitor only
+S00377,2026-02,37.22090826420779,Moderate,negative_margin_share,reduce subsidy exposure
+S00378,2026-02,34.332195848382916,Moderate,negative_margin_share,reduce subsidy exposure
+S00379,2026-02,39.00474467991019,Moderate,negative_margin_share,reduce subsidy exposure
+S00380,2026-02,40.25505898520456,Moderate,negative_margin_share,reduce subsidy exposure
+S00381,2026-02,38.276368813804105,Moderate,negative_margin_share,reduce subsidy exposure
+S00382,2026-02,22.57667531468698,Low,negative_margin_share,monitor only
+S00383,2026-02,32.67224448575441,Moderate,negative_margin_share,reduce subsidy exposure
+S00384,2026-02,31.248596207005445,Moderate,negative_margin_share,reduce subsidy exposure
+S00385,2026-02,35.84540109238614,Moderate,negative_margin_share,reduce subsidy exposure
+S00386,2026-02,36.06016463760333,Moderate,refund_value_risk,reduce subsidy exposure
+S00387,2026-02,40.11113132408774,Moderate,negative_margin_share,reduce subsidy exposure
+S00388,2026-02,39.97510444853279,Moderate,negative_margin_share,reduce subsidy exposure
+S00389,2026-02,33.05606500809069,Moderate,negative_margin_share,reduce subsidy exposure
+S00390,2026-02,40.69354606678803,Moderate,negative_margin_share,reduce subsidy exposure
+S00391,2026-02,48.45089861975545,Moderate,negative_margin_share,reduce subsidy exposure
+S00392,2026-02,29.68564935526977,Low,negative_margin_share,monitor only
+S00393,2026-02,34.87213601450125,Moderate,refund_value_risk,reduce subsidy exposure
+S00394,2026-02,41.47328840288434,Moderate,negative_margin_share,reduce subsidy exposure
+S00395,2026-02,48.96554144836942,Moderate,negative_margin_share,reduce subsidy exposure
+S00396,2026-02,26.15904918667049,Low,negative_margin_share,monitor only
+S00397,2026-02,38.66033223131459,Moderate,negative_margin_share,reduce subsidy exposure
+S00398,2026-02,30.714008518707796,Moderate,negative_margin_share,reduce subsidy exposure
+S00399,2026-02,35.423254947874476,Moderate,negative_margin_share,reduce subsidy exposure
+S00400,2026-02,32.76459791258397,Moderate,negative_margin_share,reduce subsidy exposure
+S00401,2026-02,36.241943236650336,Moderate,negative_margin_share,reduce subsidy exposure
+S00402,2026-02,26.00161381620749,Low,negative_margin_share,monitor only
+S00403,2026-02,39.27862776075303,Moderate,negative_margin_share,reduce subsidy exposure
+S00404,2026-02,43.694428475953075,Moderate,negative_margin_share,reduce subsidy exposure
+S00405,2026-02,35.55522408027827,Moderate,negative_margin_share,reduce subsidy exposure
+S00406,2026-02,32.22778984466071,Moderate,negative_margin_share,reduce subsidy exposure
+S00407,2026-02,62.09350228108094,High,negative_margin_share,reduce subsidy exposure
+S00408,2026-02,20.779620967471274,Low,refund_value_risk,monitor only
+S00409,2026-02,44.446276386094965,Moderate,negative_margin_share,reduce subsidy exposure
+S00410,2026-02,48.24943546564666,Moderate,refund_value_risk,reduce subsidy exposure
+S00411,2026-02,45.099774522255544,Moderate,negative_margin_share,reduce subsidy exposure
+S00412,2026-02,40.52321586192498,Moderate,negative_margin_share,reduce subsidy exposure
+S00413,2026-02,35.75316936098076,Moderate,negative_margin_share,reduce subsidy exposure
+S00414,2026-02,24.64362178680711,Low,refund_value_risk,monitor only
+S00415,2026-02,58.68147866691661,High,negative_margin_share,reduce subsidy exposure
+S00416,2026-02,30.86704898000924,Moderate,negative_margin_share,reduce subsidy exposure
+S00417,2026-02,44.585713268585124,Moderate,negative_margin_share,reduce subsidy exposure
+S00418,2026-02,27.926353621135945,Low,refund_value_risk,monitor only
+S00419,2026-02,37.562188996751246,Moderate,negative_margin_share,reduce subsidy exposure
+S00420,2026-02,45.22551784346939,Moderate,negative_margin_share,reduce subsidy exposure
+S00421,2026-02,41.69497627768406,Moderate,negative_margin_share,reduce subsidy exposure
+S00422,2026-02,34.18896452199215,Moderate,negative_margin_share,reduce subsidy exposure
+S00423,2026-02,49.48551847354524,Moderate,negative_margin_share,reduce subsidy exposure
+S00424,2026-02,48.5072820213926,Moderate,negative_margin_share,reduce subsidy exposure
+S00425,2026-02,31.718203535129973,Moderate,refund_value_risk,reduce subsidy exposure
+S00426,2026-02,31.327816108487774,Moderate,negative_margin_share,reduce subsidy exposure
+S00427,2026-02,26.73893687633192,Low,refund_value_risk,monitor only
+S00428,2026-02,50.99475018545944,Moderate,negative_margin_share,reduce subsidy exposure
+S00429,2026-02,32.242872375765735,Moderate,negative_margin_share,reduce subsidy exposure
+S00430,2026-02,38.10715819841889,Moderate,negative_margin_share,reduce subsidy exposure
+S00431,2026-02,40.223283193587925,Moderate,negative_margin_share,reduce subsidy exposure
+S00432,2026-02,39.16169417743986,Moderate,negative_margin_share,reduce subsidy exposure
+S00433,2026-02,53.78786759747041,Moderate,negative_margin_share,reduce subsidy exposure
+S00434,2026-02,19.661239448874557,Low,negative_margin_share,monitor only
+S00435,2026-02,35.99653532284962,Moderate,negative_margin_share,reduce subsidy exposure
+S00436,2026-02,42.55101592262291,Moderate,negative_margin_share,reduce subsidy exposure
+S00437,2026-02,36.47968436959188,Moderate,negative_margin_share,reduce subsidy exposure
+S00438,2026-02,41.69518201799703,Moderate,negative_margin_share,reduce subsidy exposure
+S00439,2026-02,40.31036762319805,Moderate,negative_margin_share,reduce subsidy exposure
+S00440,2026-02,35.381761645142845,Moderate,dispute_value_risk,reduce subsidy exposure
+S00441,2026-02,25.653338560041814,Low,dispute_value_risk,monitor only
+S00442,2026-02,41.01743760034752,Moderate,negative_margin_share,reduce subsidy exposure
+S00443,2026-02,29.846292419164246,Low,negative_margin_share,monitor only
+S00444,2026-02,32.9678902536488,Moderate,negative_margin_share,reduce subsidy exposure
+S00445,2026-02,29.378590611213394,Low,negative_margin_share,monitor only
+S00446,2026-02,42.57749676454362,Moderate,negative_margin_share,reduce subsidy exposure
+S00447,2026-02,28.766066409554856,Low,negative_margin_share,monitor only
+S00448,2026-02,35.28772590257702,Moderate,negative_margin_share,reduce subsidy exposure
+S00449,2026-02,35.67573946329649,Moderate,negative_margin_share,reduce subsidy exposure
+S00450,2026-02,44.68127201911378,Moderate,negative_margin_share,reduce subsidy exposure
+S00451,2026-02,51.4866005404654,Moderate,negative_margin_share,reduce subsidy exposure
+S00452,2026-02,26.929163347243747,Low,negative_margin_share,monitor only
+S00453,2026-02,22.077248109792194,Low,refund_value_risk,monitor only
+S00454,2026-02,30.569739477284458,Moderate,negative_margin_share,reduce subsidy exposure
+S00455,2026-02,32.69530430679348,Moderate,negative_margin_share,reduce subsidy exposure
+S00456,2026-02,41.004974860119525,Moderate,negative_margin_share,reduce subsidy exposure
+S00457,2026-02,50.688531030362846,Moderate,negative_margin_share,reduce subsidy exposure
+S00458,2026-02,31.034383707651997,Moderate,negative_margin_share,reduce subsidy exposure
+S00459,2026-02,34.83936692944554,Moderate,negative_margin_share,reduce subsidy exposure
+S00460,2026-02,57.83491653152105,High,negative_margin_share,reduce subsidy exposure
+S00461,2026-02,34.600722200604245,Moderate,refund_value_risk,reduce subsidy exposure
+S00462,2026-02,35.93493661563618,Moderate,refund_value_risk,reduce subsidy exposure
+S00463,2026-02,23.394336505622746,Low,negative_margin_share,monitor only
+S00464,2026-02,24.79451898048211,Low,negative_margin_share,monitor only
+S00465,2026-02,38.1957528200219,Moderate,refund_value_risk,reduce subsidy exposure
+S00466,2026-02,28.683751451930128,Low,negative_margin_share,monitor only
+S00467,2026-02,30.591081137612004,Moderate,negative_margin_share,reduce subsidy exposure
+S00468,2026-02,48.60306230758577,Moderate,subsidy_dependency,reduce subsidy exposure
+S00469,2026-02,23.784131588931594,Low,negative_margin_share,monitor only
+S00470,2026-02,51.41731185350796,Moderate,negative_margin_share,reduce subsidy exposure
+S00471,2026-02,26.766423909618496,Low,negative_margin_share,monitor only
+S00472,2026-02,37.52637372174865,Moderate,refund_value_risk,reduce subsidy exposure
+S00473,2026-02,44.51499130096072,Moderate,negative_margin_share,reduce subsidy exposure
+S00474,2026-02,32.53419003041341,Moderate,negative_margin_share,reduce subsidy exposure
+S00475,2026-02,42.81597518051916,Moderate,negative_margin_share,reduce subsidy exposure
+S00476,2026-02,24.949504546655714,Low,negative_margin_share,monitor only
+S00477,2026-02,46.765503461071866,Moderate,negative_margin_share,reduce subsidy exposure
+S00478,2026-02,58.75555587128878,High,negative_margin_share,reduce subsidy exposure
+S00479,2026-02,46.868573146921825,Moderate,negative_margin_share,reduce subsidy exposure
+S00480,2026-02,43.47362440981022,Moderate,dispute_value_risk,reduce subsidy exposure
+S00481,2026-02,46.836477546715216,Moderate,negative_margin_share,reduce subsidy exposure
+S00482,2026-02,39.049730778407145,Moderate,negative_margin_share,reduce subsidy exposure
+S00483,2026-02,29.158356901682847,Low,negative_margin_share,monitor only
+S00484,2026-02,42.731619825108524,Moderate,negative_margin_share,reduce subsidy exposure
+S00485,2026-02,41.54536642089744,Moderate,negative_margin_share,reduce subsidy exposure
+S00486,2026-02,3.6784961918651757,Low,dispute_value_risk,monitor only
+S00487,2026-02,36.371413619097694,Moderate,negative_margin_share,reduce subsidy exposure
+S00488,2026-02,42.87967110976937,Moderate,negative_margin_share,reduce subsidy exposure
+S00489,2026-02,29.93870211814764,Low,refund_value_risk,monitor only
+S00490,2026-02,37.13745359059034,Moderate,negative_margin_share,reduce subsidy exposure
+S00491,2026-02,41.25806545966335,Moderate,negative_margin_share,reduce subsidy exposure
+S00492,2026-02,50.34526963023223,Moderate,negative_margin_share,reduce subsidy exposure
+S00493,2026-02,31.307643879035503,Moderate,negative_margin_share,reduce subsidy exposure
+S00494,2026-02,46.529666291379996,Moderate,negative_margin_share,reduce subsidy exposure
+S00495,2026-02,31.342814841741244,Moderate,refund_value_risk,reduce subsidy exposure
+S00496,2026-02,51.93928679184837,Moderate,negative_margin_share,reduce subsidy exposure
+S00497,2026-02,47.5981712988604,Moderate,refund_value_risk,reduce subsidy exposure
+S00498,2026-02,16.044841696765207,Low,negative_margin_share,monitor only
+S00499,2026-02,40.44046696396852,Moderate,refund_value_risk,reduce subsidy exposure
+S00500,2026-02,33.21460567248232,Moderate,negative_margin_share,reduce subsidy exposure
+S00501,2026-02,28.146632078738264,Low,negative_margin_share,monitor only
+S00502,2026-02,29.09299238724661,Low,negative_margin_share,monitor only
+S00503,2026-02,32.12474429954196,Moderate,negative_margin_share,reduce subsidy exposure
+S00504,2026-02,27.393860884217165,Low,negative_margin_share,monitor only
+S00505,2026-02,37.64673921642523,Moderate,negative_margin_share,reduce subsidy exposure
+S00506,2026-02,24.384633797751988,Low,dispute_value_risk,monitor only
+S00507,2026-02,24.75537045444807,Low,negative_margin_share,monitor only
+S00508,2026-02,16.388058185296263,Low,refund_value_risk,monitor only
+S00509,2026-02,33.170920466730394,Moderate,negative_margin_share,reduce subsidy exposure
+S00510,2026-02,35.987106470495064,Moderate,negative_margin_share,reduce subsidy exposure
+S00511,2026-02,46.36030670587782,Moderate,refund_value_risk,reduce subsidy exposure
+S00512,2026-02,34.40066177437872,Moderate,negative_margin_share,reduce subsidy exposure
+S00513,2026-02,46.05275664934487,Moderate,refund_value_risk,reduce subsidy exposure
+S00514,2026-02,35.55413603954392,Moderate,dispute_value_risk,reduce subsidy exposure
+S00515,2026-02,44.129552899771994,Moderate,negative_margin_share,reduce subsidy exposure
+S00516,2026-02,43.87058502272362,Moderate,negative_margin_share,reduce subsidy exposure
+S00517,2026-02,35.286182528466696,Moderate,negative_margin_share,reduce subsidy exposure
+S00518,2026-02,30.701899797707288,Moderate,refund_value_risk,reduce subsidy exposure
+S00519,2026-02,22.533157578122072,Low,negative_margin_share,monitor only
+S00520,2026-02,45.703183542257534,Moderate,negative_margin_share,reduce subsidy exposure
+S00521,2026-02,51.028380679493274,Moderate,negative_margin_share,reduce subsidy exposure
+S00522,2026-02,28.409699075880187,Low,negative_margin_share,monitor only
+S00523,2026-02,13.492394133201547,Low,refund_value_risk,monitor only
+S00524,2026-02,36.59514383533754,Moderate,negative_margin_share,reduce subsidy exposure
+S00525,2026-02,39.38705400544321,Moderate,negative_margin_share,reduce subsidy exposure
+S00526,2026-02,39.06953152866767,Moderate,negative_margin_share,reduce subsidy exposure
+S00527,2026-02,44.512069720061156,Moderate,negative_margin_share,reduce subsidy exposure
+S00528,2026-02,56.17092527575479,High,negative_margin_share,reduce subsidy exposure
+S00529,2026-02,21.15154883830089,Low,negative_margin_share,monitor only
+S00530,2026-02,38.912157580877654,Moderate,negative_margin_share,reduce subsidy exposure
+S00531,2026-02,43.083574086226704,Moderate,negative_margin_share,reduce subsidy exposure
+S00532,2026-02,40.06180393395086,Moderate,negative_margin_share,reduce subsidy exposure
+S00533,2026-02,36.383697453940826,Moderate,negative_margin_share,reduce subsidy exposure
+S00534,2026-02,33.61978253989367,Moderate,negative_margin_share,reduce subsidy exposure
+S00535,2026-02,37.786116802834826,Moderate,negative_margin_share,reduce subsidy exposure
+S00536,2026-02,29.531306335267594,Low,negative_margin_share,monitor only
+S00537,2026-02,62.212066687324985,High,negative_margin_share,reduce subsidy exposure
+S00538,2026-02,45.99351959658321,Moderate,refund_value_risk,reduce subsidy exposure
+S00539,2026-02,37.3669859742755,Moderate,negative_margin_share,reduce subsidy exposure
+S00540,2026-02,21.582773123999015,Low,negative_margin_share,monitor only
+S00541,2026-02,43.30770432278968,Moderate,negative_margin_share,reduce subsidy exposure
+S00542,2026-02,50.06544756032315,Moderate,refund_value_risk,reduce subsidy exposure
+S00543,2026-02,18.84780807671291,Low,refund_value_risk,monitor only
+S00544,2026-02,65.5116520896841,High,negative_margin_share,reduce subsidy exposure
+S00545,2026-02,73.04385957436826,High,negative_margin_share,reduce subsidy exposure
+S00546,2026-02,36.15507645379564,Moderate,negative_margin_share,reduce subsidy exposure
+S00547,2026-02,36.58520143288648,Moderate,negative_margin_share,reduce subsidy exposure
+S00548,2026-02,21.359058188828328,Low,negative_margin_share,monitor only
+S00549,2026-02,52.10733939624422,Moderate,refund_value_risk,reduce subsidy exposure
+S00550,2026-02,38.23762468071352,Moderate,negative_margin_share,reduce subsidy exposure
+S00551,2026-02,42.76195542697526,Moderate,negative_margin_share,reduce subsidy exposure
+S00552,2026-02,29.39805126223737,Low,negative_margin_share,monitor only
+S00553,2026-02,42.26090416300593,Moderate,negative_margin_share,reduce subsidy exposure
+S00554,2026-02,42.113700237120035,Moderate,refund_value_risk,reduce subsidy exposure
+S00555,2026-02,51.72549424544259,Moderate,negative_margin_share,reduce subsidy exposure
+S00556,2026-02,45.23090323583934,Moderate,negative_margin_share,reduce subsidy exposure
+S00557,2026-02,48.20274577612966,Moderate,negative_margin_share,reduce subsidy exposure
+S00558,2026-02,26.20276761680645,Low,refund_value_risk,monitor only
+S00559,2026-02,38.09623029136591,Moderate,negative_margin_share,reduce subsidy exposure
+S00560,2026-02,36.578618067035585,Moderate,negative_margin_share,reduce subsidy exposure
+S00561,2026-02,15.416534208962592,Low,negative_margin_share,monitor only
+S00562,2026-02,44.10988577407105,Moderate,negative_margin_share,reduce subsidy exposure
+S00563,2026-02,34.427250157924284,Moderate,negative_margin_share,reduce subsidy exposure
+S00564,2026-02,18.970373535597965,Low,negative_margin_share,monitor only
+S00565,2026-02,26.608453856143296,Low,negative_margin_share,monitor only
+S00566,2026-02,39.70004368118324,Moderate,negative_margin_share,reduce subsidy exposure
+S00567,2026-02,31.12054176759731,Moderate,refund_value_risk,reduce subsidy exposure
+S00568,2026-02,35.14406074071246,Moderate,negative_margin_share,reduce subsidy exposure
+S00569,2026-02,36.28423069143355,Moderate,negative_margin_share,reduce subsidy exposure
+S00570,2026-02,37.41180404075999,Moderate,negative_margin_share,reduce subsidy exposure
+S00571,2026-02,39.43649218573498,Moderate,negative_margin_share,reduce subsidy exposure
+S00572,2026-02,35.39665677533398,Moderate,negative_margin_share,reduce subsidy exposure
+S00573,2026-02,40.671550627822285,Moderate,negative_margin_share,reduce subsidy exposure
+S00574,2026-02,50.68173187141403,Moderate,negative_margin_share,reduce subsidy exposure
+S00575,2026-02,39.618334699774074,Moderate,refund_value_risk,reduce subsidy exposure
+S00576,2026-02,35.154879674730466,Moderate,refund_value_risk,reduce subsidy exposure
+S00577,2026-02,21.662480038317362,Low,refund_value_risk,monitor only
+S00578,2026-02,46.265319854253804,Moderate,negative_margin_share,reduce subsidy exposure
+S00579,2026-02,62.50655940406634,High,negative_margin_share,reduce subsidy exposure
+S00580,2026-02,38.25336393626157,Moderate,dispute_value_risk,reduce subsidy exposure
+S00581,2026-02,17.800457877356212,Low,refund_value_risk,monitor only
+S00582,2026-02,41.76463000865577,Moderate,negative_margin_share,reduce subsidy exposure
+S00583,2026-02,34.02170230322795,Moderate,negative_margin_share,reduce subsidy exposure
+S00584,2026-02,42.123244836170095,Moderate,negative_margin_share,reduce subsidy exposure
+S00585,2026-02,21.86579470369838,Low,negative_margin_share,monitor only
+S00586,2026-02,49.30555235837985,Moderate,negative_margin_share,reduce subsidy exposure
+S00587,2026-02,52.769881728493985,Moderate,negative_margin_share,reduce subsidy exposure
+S00588,2026-02,48.398277267420625,Moderate,negative_margin_share,reduce subsidy exposure
+S00589,2026-02,21.74591872951124,Low,negative_margin_share,monitor only
+S00590,2026-02,33.46992062648044,Moderate,negative_margin_share,reduce subsidy exposure
+S00591,2026-02,37.376276625862545,Moderate,negative_margin_share,reduce subsidy exposure
+S00592,2026-02,31.228016195039977,Moderate,refund_value_risk,reduce subsidy exposure
+S00593,2026-02,56.22347349819095,High,negative_margin_share,reduce subsidy exposure
+S00594,2026-02,44.91209817393667,Moderate,refund_value_risk,reduce subsidy exposure
+S00595,2026-02,43.59137418868198,Moderate,negative_margin_share,reduce subsidy exposure
+S00596,2026-02,20.868776250866535,Low,dispute_value_risk,monitor only
+S00597,2026-02,25.618585113060917,Low,negative_margin_share,monitor only
+S00598,2026-02,33.622658440051055,Moderate,negative_margin_share,reduce subsidy exposure
+S00599,2026-02,36.79217847285241,Moderate,negative_margin_share,reduce subsidy exposure
+S00600,2026-02,34.49696101394947,Moderate,negative_margin_share,reduce subsidy exposure
+S00601,2026-02,30.315251199811563,Moderate,negative_margin_share,reduce subsidy exposure
+S00602,2026-02,50.13429162518111,Moderate,negative_margin_share,reduce subsidy exposure
+S00603,2026-02,33.38189256054699,Moderate,negative_margin_share,reduce subsidy exposure
+S00604,2026-02,39.532330324095085,Moderate,negative_margin_share,reduce subsidy exposure
+S00605,2026-02,28.174699275625148,Low,negative_margin_share,monitor only
+S00606,2026-02,21.882496967142032,Low,negative_margin_share,monitor only
+S00607,2026-02,58.50305788932266,High,negative_margin_share,reduce subsidy exposure
+S00608,2026-02,37.20105795069101,Moderate,negative_margin_share,reduce subsidy exposure
+S00609,2026-02,50.29031473414459,Moderate,negative_margin_share,reduce subsidy exposure
+S00610,2026-02,44.595780527444646,Moderate,negative_margin_share,reduce subsidy exposure
+S00611,2026-02,40.27969372353422,Moderate,negative_margin_share,reduce subsidy exposure
+S00612,2026-02,36.22676120438328,Moderate,refund_value_risk,reduce subsidy exposure
+S00613,2026-02,42.48534236494382,Moderate,negative_margin_share,reduce subsidy exposure
+S00614,2026-02,14.46704511032854,Low,negative_margin_share,monitor only
+S00615,2026-02,16.90350241801843,Low,negative_margin_share,monitor only
+S00616,2026-02,36.11937460238797,Moderate,negative_margin_share,reduce subsidy exposure
+S00617,2026-02,34.11962697981484,Moderate,negative_margin_share,reduce subsidy exposure
+S00618,2026-02,56.54920149857363,High,negative_margin_share,reduce subsidy exposure
+S00619,2026-02,40.27216007526476,Moderate,refund_value_risk,reduce subsidy exposure
+S00620,2026-02,32.98542022000657,Moderate,negative_margin_share,reduce subsidy exposure
+S00621,2026-02,45.36368035879245,Moderate,refund_value_risk,reduce subsidy exposure
+S00622,2026-02,36.68262279569562,Moderate,negative_margin_share,reduce subsidy exposure
+S00623,2026-02,28.08903911894206,Low,negative_margin_share,monitor only
+S00624,2026-02,35.22335604743954,Moderate,negative_margin_share,reduce subsidy exposure
+S00625,2026-02,43.53186898770879,Moderate,negative_margin_share,reduce subsidy exposure
+S00626,2026-02,30.5897786738576,Moderate,negative_margin_share,reduce subsidy exposure
+S00627,2026-02,38.391537931759146,Moderate,refund_value_risk,reduce subsidy exposure
+S00628,2026-02,24.64990270314216,Low,negative_margin_share,monitor only
+S00629,2026-02,27.143257456814514,Low,negative_margin_share,monitor only
+S00630,2026-02,44.35587117995688,Moderate,negative_margin_share,reduce subsidy exposure
+S00631,2026-02,34.79891420926672,Moderate,negative_margin_share,reduce subsidy exposure
+S00632,2026-02,35.71048924963812,Moderate,negative_margin_share,reduce subsidy exposure
+S00633,2026-02,31.94906636039818,Moderate,refund_value_risk,reduce subsidy exposure
+S00634,2026-02,39.70839290931582,Moderate,negative_margin_share,reduce subsidy exposure
+S00635,2026-02,41.967831703854635,Moderate,refund_value_risk,reduce subsidy exposure
+S00636,2026-02,19.78275904729552,Low,negative_margin_share,monitor only
+S00637,2026-02,38.49460734748112,Moderate,negative_margin_share,reduce subsidy exposure
+S00638,2026-02,45.715784486206786,Moderate,negative_margin_share,reduce subsidy exposure
+S00639,2026-02,34.85129863272381,Moderate,negative_margin_share,reduce subsidy exposure
+S00640,2026-02,31.476681236825346,Moderate,negative_margin_share,reduce subsidy exposure
+S00641,2026-02,32.47567174419159,Moderate,negative_margin_share,reduce subsidy exposure
+S00642,2026-02,33.15314925616598,Moderate,refund_value_risk,reduce subsidy exposure
+S00643,2026-02,21.395594756261264,Low,negative_margin_share,monitor only
+S00644,2026-02,46.3745122972615,Moderate,negative_margin_share,reduce subsidy exposure
+S00645,2026-02,54.75391592489804,Moderate,negative_margin_share,reduce subsidy exposure
+S00646,2026-02,59.344354653569866,High,negative_margin_share,reduce subsidy exposure
+S00647,2026-02,34.17554976344403,Moderate,negative_margin_share,reduce subsidy exposure
+S00648,2026-02,28.78257616489195,Low,negative_margin_share,monitor only
+S00649,2026-02,25.634215042360132,Low,negative_margin_share,monitor only
+S00650,2026-02,51.620513584368894,Moderate,negative_margin_share,reduce subsidy exposure
+S00651,2026-02,37.7285987922705,Moderate,negative_margin_share,reduce subsidy exposure
+S00652,2026-02,38.92129389579266,Moderate,negative_margin_share,reduce subsidy exposure
+S00653,2026-02,30.96325857097071,Moderate,dispute_value_risk,reduce subsidy exposure
+S00654,2026-02,29.875929605839936,Low,negative_margin_share,monitor only
+S00655,2026-02,47.24609286848772,Moderate,negative_margin_share,reduce subsidy exposure
+S00656,2026-02,20.094583531224572,Low,negative_margin_share,monitor only
+S00657,2026-02,44.019193025918206,Moderate,refund_value_risk,reduce subsidy exposure
+S00658,2026-02,52.84759198488983,Moderate,negative_margin_share,reduce subsidy exposure
+S00659,2026-02,45.90442152257456,Moderate,negative_margin_share,reduce subsidy exposure
+S00660,2026-02,34.4602135640143,Moderate,negative_margin_share,reduce subsidy exposure
+S00661,2026-02,51.69869177491612,Moderate,negative_margin_share,reduce subsidy exposure
+S00662,2026-02,18.972107863831262,Low,dispute_value_risk,monitor only
+S00663,2026-02,46.247924358866435,Moderate,negative_margin_share,reduce subsidy exposure
+S00664,2026-02,46.6166388175423,Moderate,negative_margin_share,reduce subsidy exposure
+S00665,2026-02,34.41011116301739,Moderate,negative_margin_share,reduce subsidy exposure
+S00666,2026-02,44.258952002157514,Moderate,negative_margin_share,reduce subsidy exposure
+S00667,2026-02,35.264639698402775,Moderate,negative_margin_share,reduce subsidy exposure
+S00668,2026-02,45.91053110715781,Moderate,negative_margin_share,reduce subsidy exposure
+S00669,2026-02,22.67068229083808,Low,negative_margin_share,monitor only
+S00670,2026-02,32.88539125215381,Moderate,refund_value_risk,reduce subsidy exposure
+S00671,2026-02,29.602899813928264,Low,negative_margin_share,monitor only
+S00672,2026-02,27.272031828176686,Low,negative_margin_share,monitor only
+S00673,2026-02,40.63472097013879,Moderate,negative_margin_share,reduce subsidy exposure
+S00674,2026-02,33.916445589099105,Moderate,negative_margin_share,reduce subsidy exposure
+S00675,2026-02,23.4954821409923,Low,refund_value_risk,monitor only
+S00676,2026-02,34.992473404703745,Moderate,negative_margin_share,reduce subsidy exposure
+S00677,2026-02,26.123610550115373,Low,negative_margin_share,monitor only
+S00678,2026-02,33.74433124940484,Moderate,negative_margin_share,reduce subsidy exposure
+S00679,2026-02,42.02495527537312,Moderate,refund_value_risk,reduce subsidy exposure
+S00680,2026-02,15.864896125094514,Low,negative_margin_share,monitor only
+S00681,2026-02,20.617412272252697,Low,negative_margin_share,monitor only
+S00682,2026-02,23.230498848063803,Low,negative_margin_share,monitor only
+S00683,2026-02,44.234661111565956,Moderate,negative_margin_share,reduce subsidy exposure
+S00684,2026-02,47.83230547644854,Moderate,refund_value_risk,reduce subsidy exposure
+S00685,2026-02,46.42994093278109,Moderate,negative_margin_share,reduce subsidy exposure
+S00686,2026-02,32.52163130894529,Moderate,negative_margin_share,reduce subsidy exposure
+S00687,2026-02,33.73458506073923,Moderate,negative_margin_share,reduce subsidy exposure
+S00688,2026-02,19.816836029337615,Low,refund_value_risk,monitor only
+S00689,2026-02,67.59038913263208,High,negative_margin_share,reduce subsidy exposure
+S00690,2026-02,48.685261551337646,Moderate,refund_value_risk,reduce subsidy exposure
+S00691,2026-02,31.29203492063833,Moderate,negative_margin_share,reduce subsidy exposure
+S00692,2026-02,28.28862839744739,Low,negative_margin_share,monitor only
+S00693,2026-02,55.96607705555039,High,negative_margin_share,reduce subsidy exposure
+S00694,2026-02,33.05314755855821,Moderate,negative_margin_share,reduce subsidy exposure
+S00695,2026-02,32.25786147054393,Moderate,negative_margin_share,reduce subsidy exposure
+S00696,2026-02,38.5192285493331,Moderate,negative_margin_share,reduce subsidy exposure
+S00697,2026-02,35.26618555363278,Moderate,negative_margin_share,reduce subsidy exposure
+S00698,2026-02,23.312384128064252,Low,refund_value_risk,monitor only
+S00699,2026-02,28.594650394796304,Low,refund_value_risk,monitor only
+S00700,2026-02,31.23371538725301,Moderate,negative_margin_share,reduce subsidy exposure
+S00701,2026-02,6.143732813207552,Low,negative_margin_share,monitor only
+S00702,2026-02,25.645047493340545,Low,negative_margin_share,monitor only
+S00703,2026-02,43.19326781412911,Moderate,negative_margin_share,reduce subsidy exposure
+S00704,2026-02,24.124207728946725,Low,negative_margin_share,monitor only
+S00705,2026-02,50.2358264505864,Moderate,negative_margin_share,reduce subsidy exposure
+S00706,2026-02,53.41469715377293,Moderate,negative_margin_share,reduce subsidy exposure
+S00707,2026-02,32.874137660758024,Moderate,negative_margin_share,reduce subsidy exposure
+S00708,2026-02,31.091684895095348,Moderate,negative_margin_share,reduce subsidy exposure
+S00709,2026-02,36.956302909721295,Moderate,negative_margin_share,reduce subsidy exposure
+S00710,2026-02,32.51597866278059,Moderate,negative_margin_share,reduce subsidy exposure
+S00711,2026-02,27.393612590309864,Low,negative_margin_share,monitor only
+S00712,2026-02,30.945585764364687,Moderate,negative_margin_share,reduce subsidy exposure
+S00713,2026-02,44.74000100964905,Moderate,negative_margin_share,reduce subsidy exposure
+S00714,2026-02,30.782924077785292,Moderate,negative_margin_share,reduce subsidy exposure
+S00715,2026-02,27.05258526548106,Low,negative_margin_share,monitor only
+S00716,2026-02,38.46938520468062,Moderate,negative_margin_share,reduce subsidy exposure
+S00717,2026-02,63.73596775719763,High,negative_margin_share,reduce subsidy exposure
+S00718,2026-02,34.313467811549216,Moderate,negative_margin_share,reduce subsidy exposure
+S00719,2026-02,38.56977741063921,Moderate,negative_margin_share,reduce subsidy exposure
+S00720,2026-02,21.85574106385363,Low,negative_margin_share,monitor only
+S00721,2026-02,31.957463409548854,Moderate,negative_margin_share,reduce subsidy exposure
+S00722,2026-02,29.623117612294266,Low,negative_margin_share,monitor only
+S00723,2026-02,32.29686286965666,Moderate,negative_margin_share,reduce subsidy exposure
+S00724,2026-02,22.552249032063212,Low,negative_margin_share,monitor only
+S00725,2026-02,62.50842965410114,High,negative_margin_share,reduce subsidy exposure
+S00726,2026-02,27.363046741700426,Low,refund_value_risk,monitor only
+S00727,2026-02,36.4165647554079,Moderate,negative_margin_share,reduce subsidy exposure
+S00728,2026-02,47.807094022845185,Moderate,dispute_value_risk,reduce subsidy exposure
+S00729,2026-02,25.34453344756414,Low,negative_margin_share,monitor only
+S00730,2026-02,41.9903343566272,Moderate,refund_value_risk,reduce subsidy exposure
+S00731,2026-02,28.902849507991426,Low,refund_value_risk,monitor only
+S00732,2026-02,39.41850401390748,Moderate,negative_margin_share,reduce subsidy exposure
+S00733,2026-02,25.934458376211612,Low,refund_value_risk,monitor only
+S00734,2026-02,20.35952506894127,Low,negative_margin_share,monitor only
+S00735,2026-02,29.769359700143827,Low,negative_margin_share,monitor only
+S00736,2026-02,61.76061094843001,High,negative_margin_share,reduce subsidy exposure
+S00737,2026-02,29.335833524817993,Low,refund_value_risk,monitor only
+S00738,2026-02,24.939073861346497,Low,negative_margin_share,monitor only
+S00739,2026-02,40.05110848266514,Moderate,refund_value_risk,reduce subsidy exposure
+S00740,2026-02,23.23170160076474,Low,negative_margin_share,monitor only
+S00741,2026-02,36.749791985065784,Moderate,subsidy_dependency,reduce subsidy exposure
+S00742,2026-02,39.181348883404056,Moderate,negative_margin_share,reduce subsidy exposure
+S00743,2026-02,45.79049911991205,Moderate,negative_margin_share,reduce subsidy exposure
+S00744,2026-02,47.094284020842366,Moderate,refund_value_risk,reduce subsidy exposure
+S00745,2026-02,20.085813475711564,Low,negative_margin_share,monitor only
+S00746,2026-02,31.793657973505663,Moderate,dispute_value_risk,reduce subsidy exposure
+S00747,2026-02,46.9270613792264,Moderate,refund_value_risk,reduce subsidy exposure
+S00748,2026-02,11.495526611488955,Low,dispute_value_risk,monitor only
+S00749,2026-02,40.92728169979203,Moderate,negative_margin_share,reduce subsidy exposure
+S00750,2026-02,40.80832556925665,Moderate,negative_margin_share,reduce subsidy exposure
+S00751,2026-02,51.54809937925134,Moderate,negative_margin_share,reduce subsidy exposure
+S00752,2026-02,34.95629413819297,Moderate,negative_margin_share,reduce subsidy exposure
+S00753,2026-02,27.093875804889077,Low,negative_margin_share,monitor only
+S00754,2026-02,35.87632389931492,Moderate,negative_margin_share,reduce subsidy exposure
+S00755,2026-02,43.96658602049527,Moderate,negative_margin_share,reduce subsidy exposure
+S00756,2026-02,59.66516266442097,High,negative_margin_share,reduce subsidy exposure
+S00757,2026-02,44.745563244307405,Moderate,negative_margin_share,reduce subsidy exposure
+S00758,2026-02,25.687165784550356,Low,negative_margin_share,monitor only
+S00759,2026-02,40.50699074304337,Moderate,negative_margin_share,reduce subsidy exposure
+S00760,2026-02,52.93260926006907,Moderate,negative_margin_share,reduce subsidy exposure
+S00761,2026-02,31.86420187170232,Moderate,negative_margin_share,reduce subsidy exposure
+S00762,2026-02,32.005132007895185,Moderate,negative_margin_share,reduce subsidy exposure
+S00763,2026-02,39.5956790116289,Moderate,negative_margin_share,reduce subsidy exposure
+S00764,2026-02,0.0,Low,negative_margin_share,monitor only
+S00765,2026-02,32.15643818088945,Moderate,negative_margin_share,reduce subsidy exposure
+S00766,2026-02,28.71921370981754,Low,negative_margin_share,monitor only
+S00767,2026-02,35.991819969583325,Moderate,negative_margin_share,reduce subsidy exposure
+S00768,2026-02,34.73717506326202,Moderate,refund_value_risk,reduce subsidy exposure
+S00769,2026-02,56.07510377854935,High,negative_margin_share,reduce subsidy exposure
+S00770,2026-02,43.955189167540446,Moderate,refund_value_risk,reduce subsidy exposure
+S00771,2026-02,41.22847769333016,Moderate,negative_margin_share,reduce subsidy exposure
+S00772,2026-02,47.49546368487628,Moderate,negative_margin_share,reduce subsidy exposure
+S00773,2026-02,27.676117235685332,Low,negative_margin_share,monitor only
+S00774,2026-02,24.421690978296624,Low,refund_value_risk,monitor only
+S00775,2026-02,16.431087159108394,Low,refund_value_risk,monitor only
+S00776,2026-02,49.24624014283604,Moderate,negative_margin_share,reduce subsidy exposure
+S00777,2026-02,45.038043527639516,Moderate,refund_value_risk,reduce subsidy exposure
+S00778,2026-02,23.3595431927082,Low,negative_margin_share,monitor only
+S00779,2026-02,22.541941768081582,Low,negative_margin_share,monitor only
+S00780,2026-02,42.83866341120989,Moderate,negative_margin_share,reduce subsidy exposure
+S00781,2026-02,39.61422484097021,Moderate,negative_margin_share,reduce subsidy exposure
+S00782,2026-02,48.003395507484456,Moderate,negative_margin_share,reduce subsidy exposure
+S00783,2026-02,34.713565078675636,Moderate,negative_margin_share,reduce subsidy exposure
+S00784,2026-02,56.67266811613262,High,negative_margin_share,reduce subsidy exposure
+S00785,2026-02,52.66813217857469,Moderate,negative_margin_share,reduce subsidy exposure
+S00786,2026-02,42.22611133975573,Moderate,negative_margin_share,reduce subsidy exposure
+S00787,2026-02,30.90334571315717,Moderate,negative_margin_share,reduce subsidy exposure
+S00788,2026-02,30.147733391511668,Moderate,negative_margin_share,reduce subsidy exposure
+S00789,2026-02,33.00359004123211,Moderate,negative_margin_share,reduce subsidy exposure
+S00790,2026-02,41.780351827745996,Moderate,negative_margin_share,reduce subsidy exposure
+S00791,2026-02,48.446701178651246,Moderate,refund_value_risk,reduce subsidy exposure
+S00792,2026-02,23.871698310359612,Low,negative_margin_share,monitor only
+S00793,2026-02,42.81517200772289,Moderate,negative_margin_share,reduce subsidy exposure
+S00794,2026-02,13.832055275210895,Low,negative_margin_share,monitor only
+S00795,2026-02,37.69125723525363,Moderate,negative_margin_share,reduce subsidy exposure
+S00796,2026-02,37.35229227872717,Moderate,negative_margin_share,reduce subsidy exposure
+S00797,2026-02,41.25860362739857,Moderate,negative_margin_share,reduce subsidy exposure
+S00798,2026-02,33.15097727687707,Moderate,negative_margin_share,reduce subsidy exposure
+S00799,2026-02,38.81291553423279,Moderate,negative_margin_share,reduce subsidy exposure
+S00800,2026-02,43.72851292118488,Moderate,negative_margin_share,reduce subsidy exposure
+S00801,2026-02,32.846301296499405,Moderate,refund_value_risk,reduce subsidy exposure
+S00802,2026-02,8.623133094458321,Low,negative_margin_share,monitor only
+S00803,2026-02,42.6573511094926,Moderate,negative_margin_share,reduce subsidy exposure
+S00804,2026-02,37.711348107954464,Moderate,refund_value_risk,reduce subsidy exposure
+S00805,2026-02,29.774983802999625,Low,negative_margin_share,monitor only
+S00806,2026-02,2.633203306719795,Low,subsidy_dependency,monitor only
+S00807,2026-02,30.54152581630686,Moderate,negative_margin_share,reduce subsidy exposure
+S00808,2026-02,44.5358988163821,Moderate,negative_margin_share,reduce subsidy exposure
+S00809,2026-02,27.57098890245952,Low,negative_margin_share,monitor only
+S00810,2026-02,42.753396040878904,Moderate,negative_margin_share,reduce subsidy exposure
+S00811,2026-02,44.47869415646516,Moderate,refund_value_risk,reduce subsidy exposure
+S00812,2026-02,56.17082133016604,High,negative_margin_share,reduce subsidy exposure
+S00813,2026-02,50.25082945724493,Moderate,negative_margin_share,reduce subsidy exposure
+S00814,2026-02,20.48133412531255,Low,dispute_value_risk,monitor only
+S00815,2026-02,37.86069781557048,Moderate,negative_margin_share,reduce subsidy exposure
+S00816,2026-02,46.430800738704036,Moderate,refund_value_risk,reduce subsidy exposure
+S00817,2026-02,22.92663995823484,Low,refund_value_risk,monitor only
+S00818,2026-02,38.267304149153105,Moderate,refund_value_risk,reduce subsidy exposure
+S00819,2026-02,40.49848614119581,Moderate,negative_margin_share,reduce subsidy exposure
+S00820,2026-02,37.29273434497102,Moderate,negative_margin_share,reduce subsidy exposure
+S00821,2026-02,28.034596388999354,Low,negative_margin_share,monitor only
+S00822,2026-02,23.55180898852933,Low,refund_value_risk,monitor only
+S00823,2026-02,37.04180999697658,Moderate,negative_margin_share,reduce subsidy exposure
+S00824,2026-02,34.61935675213753,Moderate,negative_margin_share,reduce subsidy exposure
+S00825,2026-02,26.48104462819133,Low,negative_margin_share,monitor only
+S00826,2026-02,51.42163656509588,Moderate,negative_margin_share,reduce subsidy exposure
+S00827,2026-02,36.24175896786455,Moderate,negative_margin_share,reduce subsidy exposure
+S00828,2026-02,40.70413221679005,Moderate,negative_margin_share,reduce subsidy exposure
+S00829,2026-02,40.48592267500229,Moderate,negative_margin_share,reduce subsidy exposure
+S00830,2026-02,35.39672704639388,Moderate,negative_margin_share,reduce subsidy exposure
+S00831,2026-02,27.398437488228055,Low,negative_margin_share,monitor only
+S00832,2026-02,32.33839174668375,Moderate,refund_value_risk,reduce subsidy exposure
+S00833,2026-02,16.632185397150344,Low,negative_margin_share,monitor only
+S00834,2026-02,32.06191939148525,Moderate,negative_margin_share,reduce subsidy exposure
+S00835,2026-02,29.905487715062144,Low,negative_margin_share,monitor only
+S00836,2026-02,41.658094712918455,Moderate,refund_value_risk,reduce subsidy exposure
+S00837,2026-02,47.676818357982455,Moderate,negative_margin_share,reduce subsidy exposure
+S00838,2026-02,50.980727258517646,Moderate,refund_value_risk,reduce subsidy exposure
+S00839,2026-02,23.279048010312298,Low,negative_margin_share,monitor only
+S00840,2026-02,34.30891156202988,Moderate,negative_margin_share,reduce subsidy exposure
+S00841,2026-02,36.008962066207665,Moderate,negative_margin_share,reduce subsidy exposure
+S00842,2026-02,42.00428433615246,Moderate,negative_margin_share,reduce subsidy exposure
+S00843,2026-02,16.92112794497909,Low,refund_value_risk,monitor only
+S00844,2026-02,36.16977002017346,Moderate,negative_margin_share,reduce subsidy exposure
+S00845,2026-02,29.497407955865903,Low,negative_margin_share,monitor only
+S00846,2026-02,19.1200533511198,Low,negative_margin_share,monitor only
+S00847,2026-02,33.73877212561665,Moderate,negative_margin_share,reduce subsidy exposure
+S00848,2026-02,27.1672901214028,Low,negative_margin_share,monitor only
+S00849,2026-02,43.8300088998683,Moderate,negative_margin_share,reduce subsidy exposure
+S00850,2026-02,38.48573375812183,Moderate,refund_value_risk,reduce subsidy exposure
+S00851,2026-02,35.74910049305059,Moderate,negative_margin_share,reduce subsidy exposure
+S00852,2026-02,55.0,High,negative_margin_share,reduce subsidy exposure
+S00853,2026-02,29.317872209598093,Low,negative_margin_share,monitor only
+S00854,2026-02,27.549828630620606,Low,negative_margin_share,monitor only
+S00855,2026-02,34.566551614379364,Moderate,negative_margin_share,reduce subsidy exposure
+S00856,2026-02,23.96069246668361,Low,refund_value_risk,monitor only
+S00857,2026-02,50.41212557206036,Moderate,dispute_value_risk,reduce subsidy exposure
+S00858,2026-02,36.79325412514684,Moderate,refund_value_risk,reduce subsidy exposure
+S00859,2026-02,32.75824751514882,Moderate,negative_margin_share,reduce subsidy exposure
+S00860,2026-02,25.51166247027122,Low,negative_margin_share,monitor only
+S00861,2026-02,44.25760037584855,Moderate,negative_margin_share,reduce subsidy exposure
+S00862,2026-02,18.370821076901287,Low,negative_margin_share,monitor only
+S00863,2026-02,35.93774036463288,Moderate,negative_margin_share,reduce subsidy exposure
+S00864,2026-02,42.18146786872417,Moderate,refund_value_risk,reduce subsidy exposure
+S00865,2026-02,46.48433407562589,Moderate,refund_value_risk,reduce subsidy exposure
+S00866,2026-02,54.21581425998425,Moderate,negative_margin_share,reduce subsidy exposure
+S00867,2026-02,33.067832073613204,Moderate,negative_margin_share,reduce subsidy exposure
+S00868,2026-02,36.50539960545675,Moderate,negative_margin_share,reduce subsidy exposure
+S00869,2026-02,37.22217049015065,Moderate,negative_margin_share,reduce subsidy exposure
+S00870,2026-02,39.338046684113124,Moderate,negative_margin_share,reduce subsidy exposure
+S00871,2026-02,32.976813625062434,Moderate,negative_margin_share,reduce subsidy exposure
+S00872,2026-02,38.85919773203492,Moderate,refund_value_risk,reduce subsidy exposure
+S00873,2026-02,32.508737195560215,Moderate,refund_value_risk,reduce subsidy exposure
+S00874,2026-02,40.60445650672655,Moderate,negative_margin_share,reduce subsidy exposure
+S00875,2026-02,26.70486778870655,Low,negative_margin_share,monitor only
+S00876,2026-02,35.15144643286083,Moderate,refund_value_risk,reduce subsidy exposure
+S00877,2026-02,32.55643336110977,Moderate,refund_value_risk,reduce subsidy exposure
+S00878,2026-02,39.305973023858925,Moderate,refund_value_risk,reduce subsidy exposure
+S00879,2026-02,25.83952755769785,Low,negative_margin_share,monitor only
+S00880,2026-02,34.244251604548346,Moderate,negative_margin_share,reduce subsidy exposure
+S00881,2026-02,41.36534820848916,Moderate,negative_margin_share,reduce subsidy exposure
+S00882,2026-02,28.230745723902245,Low,dispute_value_risk,monitor only
+S00883,2026-02,47.37498003360142,Moderate,negative_margin_share,reduce subsidy exposure
+S00884,2026-02,31.749806756940377,Moderate,negative_margin_share,reduce subsidy exposure
+S00885,2026-02,42.44986716673204,Moderate,negative_margin_share,reduce subsidy exposure
+S00886,2026-02,39.428553131916395,Moderate,negative_margin_share,reduce subsidy exposure
+S00887,2026-02,38.49424112702815,Moderate,negative_margin_share,reduce subsidy exposure
+S00888,2026-02,37.66110326409941,Moderate,negative_margin_share,reduce subsidy exposure
+S00889,2026-02,29.94973537781591,Low,negative_margin_share,monitor only
+S00890,2026-02,35.45956379243523,Moderate,negative_margin_share,reduce subsidy exposure
+S00891,2026-02,45.69608961059205,Moderate,refund_value_risk,reduce subsidy exposure
+S00892,2026-02,33.23509805925054,Moderate,negative_margin_share,reduce subsidy exposure
+S00893,2026-02,55.535584460534025,High,negative_margin_share,reduce subsidy exposure
+S00894,2026-02,32.7842099333077,Moderate,negative_margin_share,reduce subsidy exposure
+S00895,2026-02,34.655071881349585,Moderate,refund_value_risk,reduce subsidy exposure
+S00896,2026-02,40.85173200684175,Moderate,negative_margin_share,reduce subsidy exposure
+S00897,2026-02,52.695308038021125,Moderate,refund_value_risk,reduce subsidy exposure
+S00898,2026-02,26.674847330920493,Low,negative_margin_share,monitor only
+S00899,2026-02,44.40888045581604,Moderate,negative_margin_share,reduce subsidy exposure
+S00900,2026-02,28.949503104081238,Low,negative_margin_share,monitor only
+S00901,2026-02,38.30573802646697,Moderate,negative_margin_share,reduce subsidy exposure
+S00902,2026-02,35.795970070858274,Moderate,negative_margin_share,reduce subsidy exposure
+S00903,2026-02,48.744227701038994,Moderate,refund_value_risk,reduce subsidy exposure
+S00904,2026-02,56.00549906352038,High,negative_margin_share,reduce subsidy exposure
+S00905,2026-02,53.15332880032413,Moderate,refund_value_risk,reduce subsidy exposure
+S00906,2026-02,31.43707129002009,Moderate,negative_margin_share,reduce subsidy exposure
+S00907,2026-02,52.58999703521303,Moderate,negative_margin_share,reduce subsidy exposure
+S00908,2026-02,38.1190709863086,Moderate,refund_value_risk,reduce subsidy exposure
+S00909,2026-02,21.14275178638602,Low,negative_margin_share,monitor only
+S00910,2026-02,28.21122366941437,Low,negative_margin_share,monitor only
+S00911,2026-02,47.67304228054549,Moderate,refund_value_risk,reduce subsidy exposure
+S00912,2026-02,44.807857474616306,Moderate,negative_margin_share,reduce subsidy exposure
+S00913,2026-02,10.476985868588052,Low,dispute_value_risk,monitor only
+S00914,2026-02,22.63718432060159,Low,negative_margin_share,monitor only
+S00915,2026-02,53.16557281306127,Moderate,negative_margin_share,reduce subsidy exposure
+S00916,2026-02,49.40516087809469,Moderate,negative_margin_share,reduce subsidy exposure
+S00917,2026-02,14.413029279421949,Low,negative_margin_share,monitor only
+S00918,2026-02,47.51438943471923,Moderate,negative_margin_share,reduce subsidy exposure
+S00919,2026-02,48.062432419191865,Moderate,negative_margin_share,reduce subsidy exposure
+S00920,2026-02,29.362897684995612,Low,refund_value_risk,monitor only
+S00921,2026-02,28.63470384443595,Low,negative_margin_share,monitor only
+S00922,2026-02,41.36540659264194,Moderate,negative_margin_share,reduce subsidy exposure
+S00923,2026-02,34.71109142055689,Moderate,negative_margin_share,reduce subsidy exposure
+S00924,2026-02,37.705460555251854,Moderate,negative_margin_share,reduce subsidy exposure
+S00925,2026-02,44.3139128236469,Moderate,negative_margin_share,reduce subsidy exposure
+S00926,2026-02,42.55670612296355,Moderate,negative_margin_share,reduce subsidy exposure
+S00927,2026-02,30.311788170111615,Moderate,negative_margin_share,reduce subsidy exposure
+S00928,2026-02,30.041829304538112,Moderate,negative_margin_share,reduce subsidy exposure
+S00929,2026-02,41.105669576462745,Moderate,negative_margin_share,reduce subsidy exposure
+S00930,2026-02,41.802482598794136,Moderate,negative_margin_share,reduce subsidy exposure
+S00931,2026-02,42.650642062205364,Moderate,negative_margin_share,reduce subsidy exposure
+S00932,2026-02,40.20501247214055,Moderate,negative_margin_share,reduce subsidy exposure
+S00933,2026-02,59.896824327979736,High,negative_margin_share,reduce subsidy exposure
+S00934,2026-02,30.03479257756987,Moderate,negative_margin_share,reduce subsidy exposure
+S00935,2026-02,54.27826683617356,Moderate,negative_margin_share,reduce subsidy exposure
+S00936,2026-02,40.30410341205808,Moderate,negative_margin_share,reduce subsidy exposure
+S00937,2026-02,47.60239506507389,Moderate,refund_value_risk,reduce subsidy exposure
+S00938,2026-02,20.142810366354592,Low,negative_margin_share,monitor only
+S00939,2026-02,52.817262790471425,Moderate,negative_margin_share,reduce subsidy exposure
+S00940,2026-02,58.1392796163283,High,negative_margin_share,reduce subsidy exposure
+S00941,2026-02,27.549742639758264,Low,negative_margin_share,monitor only
+S00942,2026-02,34.938968407467684,Moderate,negative_margin_share,reduce subsidy exposure
+S00943,2026-02,26.632777233539244,Low,refund_value_risk,monitor only
+S00944,2026-02,28.347140149265957,Low,refund_value_risk,monitor only
+S00945,2026-02,47.16718572259467,Moderate,negative_margin_share,reduce subsidy exposure
+S00946,2026-02,41.0222751821227,Moderate,negative_margin_share,reduce subsidy exposure
+S00947,2026-02,43.09790758992545,Moderate,negative_margin_share,reduce subsidy exposure
+S00948,2026-02,44.41521778134496,Moderate,negative_margin_share,reduce subsidy exposure
+S00949,2026-02,40.55601062130057,Moderate,negative_margin_share,reduce subsidy exposure
+S00950,2026-02,44.64742464929119,Moderate,negative_margin_share,reduce subsidy exposure
+S00951,2026-02,15.884434884089448,Low,negative_margin_share,monitor only
+S00952,2026-02,28.86220626256645,Low,negative_margin_share,monitor only
+S00953,2026-02,32.21887394884037,Moderate,refund_value_risk,reduce subsidy exposure
+S00954,2026-02,54.048336620692346,Moderate,negative_margin_share,reduce subsidy exposure
+S00955,2026-02,28.12752570454414,Low,negative_margin_share,monitor only
+S00956,2026-02,42.944622269301604,Moderate,negative_margin_share,reduce subsidy exposure
+S00957,2026-02,41.97843218247892,Moderate,negative_margin_share,reduce subsidy exposure
+S00958,2026-02,38.019138244715535,Moderate,refund_value_risk,reduce subsidy exposure
+S00959,2026-02,23.827430919612176,Low,negative_margin_share,monitor only
+S00960,2026-02,8.473605348904051,Low,negative_margin_share,monitor only
+S00961,2026-02,36.081535383972685,Moderate,negative_margin_share,reduce subsidy exposure
+S00962,2026-02,27.177052000302808,Low,refund_value_risk,monitor only
+S00963,2026-02,28.44677294172035,Low,negative_margin_share,monitor only
+S00964,2026-02,40.41125812301403,Moderate,refund_value_risk,reduce subsidy exposure
+S00965,2026-02,46.9735485388101,Moderate,refund_value_risk,reduce subsidy exposure
+S00966,2026-02,27.01317108631967,Low,negative_margin_share,monitor only
+S00967,2026-02,41.66666666666667,Moderate,subsidy_dependency,reduce subsidy exposure
+S00968,2026-02,45.80678866055858,Moderate,negative_margin_share,reduce subsidy exposure
+S00969,2026-02,41.41891562444435,Moderate,refund_value_risk,reduce subsidy exposure
+S00970,2026-02,38.860035183222124,Moderate,negative_margin_share,reduce subsidy exposure
+S00971,2026-02,36.777143924429424,Moderate,negative_margin_share,reduce subsidy exposure
+S00972,2026-02,46.363740507330206,Moderate,negative_margin_share,reduce subsidy exposure
+S00973,2026-02,27.733137056058386,Low,negative_margin_share,monitor only
+S00974,2026-02,29.39181769008852,Low,negative_margin_share,monitor only
+S00975,2026-02,54.17656799858469,Moderate,refund_value_risk,reduce subsidy exposure
+S00976,2026-02,9.305156575506787,Low,negative_margin_share,monitor only
+S00977,2026-02,21.273873800460414,Low,refund_value_risk,monitor only
+S00978,2026-02,55.245832599125805,High,negative_margin_share,reduce subsidy exposure
+S00979,2026-02,35.08359303373825,Moderate,negative_margin_share,reduce subsidy exposure
+S00980,2026-02,31.59989082108161,Moderate,negative_margin_share,reduce subsidy exposure
+S00981,2026-02,32.418478528035536,Moderate,negative_margin_share,reduce subsidy exposure
+S00982,2026-02,23.32181202170257,Low,refund_value_risk,monitor only
+S00983,2026-02,34.31889647015295,Moderate,negative_margin_share,reduce subsidy exposure
+S00984,2026-02,62.57038407802922,High,negative_margin_share,reduce subsidy exposure
+S00985,2026-02,42.981286216517624,Moderate,negative_margin_share,reduce subsidy exposure
+S00986,2026-02,32.79109549785437,Moderate,negative_margin_share,reduce subsidy exposure
+S00987,2026-02,51.76890846514436,Moderate,negative_margin_share,reduce subsidy exposure
+S00988,2026-02,61.235506697270225,High,negative_margin_share,reduce subsidy exposure
+S00989,2026-02,25.69297092262927,Low,negative_margin_share,monitor only
+S00990,2026-02,44.456730530595294,Moderate,negative_margin_share,reduce subsidy exposure
+S00991,2026-02,53.182921873701495,Moderate,negative_margin_share,reduce subsidy exposure
+S00992,2026-02,30.854981945441843,Moderate,negative_margin_share,reduce subsidy exposure
+S00993,2026-02,35.88678592162984,Moderate,negative_margin_share,reduce subsidy exposure
+S00994,2026-02,20.975002255616523,Low,refund_value_risk,monitor only
+S00995,2026-02,25.507487022885414,Low,negative_margin_share,monitor only
+S00996,2026-02,30.55175056142662,Moderate,negative_margin_share,reduce subsidy exposure
+S00997,2026-02,29.96573203791362,Low,negative_margin_share,monitor only
+S00998,2026-02,13.821424063756513,Low,negative_margin_share,monitor only
+S00999,2026-02,29.56442055585113,Low,negative_margin_share,monitor only
+S01000,2026-02,48.26055913273176,Moderate,negative_margin_share,reduce subsidy exposure
+S01001,2026-02,40.24284071404537,Moderate,negative_margin_share,reduce subsidy exposure
+S01002,2026-02,30.732017720410703,Moderate,negative_margin_share,reduce subsidy exposure
+S01003,2026-02,48.566064219291945,Moderate,negative_margin_share,reduce subsidy exposure
+S01004,2026-02,57.0849107977859,High,negative_margin_share,reduce subsidy exposure
+S01005,2026-02,25.49203276249707,Low,negative_margin_share,monitor only
+S01006,2026-02,38.41434151109102,Moderate,negative_margin_share,reduce subsidy exposure
+S01007,2026-02,37.89442114876766,Moderate,negative_margin_share,reduce subsidy exposure
+S01008,2026-02,24.955269221291893,Low,refund_value_risk,monitor only
+S01009,2026-02,44.47833837077103,Moderate,negative_margin_share,reduce subsidy exposure
+S01010,2026-02,53.2373972092209,Moderate,negative_margin_share,reduce subsidy exposure
+S01011,2026-02,58.35033652910805,High,negative_margin_share,reduce subsidy exposure
+S01012,2026-02,45.438150375731205,Moderate,negative_margin_share,reduce subsidy exposure
+S01013,2026-02,47.987067496975754,Moderate,refund_value_risk,reduce subsidy exposure
+S01014,2026-02,31.607391702127646,Moderate,refund_value_risk,reduce subsidy exposure
+S01015,2026-02,44.35529241300059,Moderate,refund_value_risk,reduce subsidy exposure
+S01016,2026-02,30.16882385787108,Moderate,negative_margin_share,reduce subsidy exposure
+S01017,2026-02,15.055832351192747,Low,negative_margin_share,monitor only
+S01018,2026-02,40.58110777515073,Moderate,refund_value_risk,reduce subsidy exposure
+S01019,2026-02,38.03145337757601,Moderate,negative_margin_share,reduce subsidy exposure
+S01020,2026-02,34.04798681990429,Moderate,refund_value_risk,reduce subsidy exposure
+S01021,2026-02,32.093653862668006,Moderate,negative_margin_share,reduce subsidy exposure
+S01022,2026-02,37.28261803152404,Moderate,negative_margin_share,reduce subsidy exposure
+S01023,2026-02,46.302318911135615,Moderate,negative_margin_share,reduce subsidy exposure
+S01024,2026-02,29.219609110780667,Low,negative_margin_share,monitor only
+S01025,2026-02,22.10191643948368,Low,negative_margin_share,monitor only
+S01026,2026-02,17.319639606011943,Low,dispute_value_risk,monitor only
+S01027,2026-02,42.88453079277714,Moderate,negative_margin_share,reduce subsidy exposure
+S01028,2026-02,33.870350486614214,Moderate,negative_margin_share,reduce subsidy exposure
+S01029,2026-02,37.32657666732726,Moderate,negative_margin_share,reduce subsidy exposure
+S01030,2026-02,29.10537419951525,Low,negative_margin_share,monitor only
+S01031,2026-02,24.82949084108639,Low,negative_margin_share,monitor only
+S01032,2026-02,40.453885852220814,Moderate,refund_value_risk,reduce subsidy exposure
+S01033,2026-02,19.352219915721435,Low,negative_margin_share,monitor only
+S01034,2026-02,48.45506839746021,Moderate,refund_value_risk,reduce subsidy exposure
+S01035,2026-02,17.892284737185985,Low,negative_margin_share,monitor only
+S01036,2026-02,35.8995753366879,Moderate,negative_margin_share,reduce subsidy exposure
+S01037,2026-02,41.18008782680601,Moderate,negative_margin_share,reduce subsidy exposure
+S01038,2026-02,30.305782287327474,Moderate,negative_margin_share,reduce subsidy exposure
+S01039,2026-02,41.16778370229043,Moderate,negative_margin_share,reduce subsidy exposure
+S01040,2026-02,38.278313575004915,Moderate,refund_value_risk,reduce subsidy exposure
+S01041,2026-02,36.979603633802085,Moderate,negative_margin_share,reduce subsidy exposure
+S01042,2026-02,22.602006609223604,Low,negative_margin_share,monitor only
+S01043,2026-02,35.24994688883847,Moderate,refund_value_risk,reduce subsidy exposure
+S01044,2026-02,28.804011378498174,Low,negative_margin_share,monitor only
+S01045,2026-02,64.5961218079081,High,negative_margin_share,reduce subsidy exposure
+S01046,2026-02,46.101828371887876,Moderate,negative_margin_share,reduce subsidy exposure
+S01047,2026-02,35.6137961076666,Moderate,negative_margin_share,reduce subsidy exposure
+S01048,2026-02,27.193372221254183,Low,negative_margin_share,monitor only
+S01049,2026-02,30.2853523951622,Moderate,refund_value_risk,reduce subsidy exposure
+S01050,2026-02,25.45389299517691,Low,refund_value_risk,monitor only
+S01051,2026-02,30.379737358787864,Moderate,refund_value_risk,reduce subsidy exposure
+S01052,2026-02,53.77388962712461,Moderate,negative_margin_share,reduce subsidy exposure
+S01053,2026-02,54.946622848691774,Moderate,negative_margin_share,reduce subsidy exposure
+S01054,2026-02,48.912924387512376,Moderate,negative_margin_share,reduce subsidy exposure
+S01055,2026-02,18.99925844200474,Low,negative_margin_share,monitor only
+S01056,2026-02,48.1004360072566,Moderate,negative_margin_share,reduce subsidy exposure
+S01057,2026-02,37.93001796678817,Moderate,negative_margin_share,reduce subsidy exposure
+S01058,2026-02,29.645022260523646,Low,negative_margin_share,monitor only
+S01059,2026-02,31.871721935677655,Moderate,negative_margin_share,reduce subsidy exposure
+S01060,2026-02,40.91529788816097,Moderate,negative_margin_share,reduce subsidy exposure
+S01061,2026-02,71.0690653721864,High,negative_margin_share,reduce subsidy exposure
+S01062,2026-02,31.54356823673708,Moderate,negative_margin_share,reduce subsidy exposure
+S01063,2026-02,42.52864241394403,Moderate,negative_margin_share,reduce subsidy exposure
+S01064,2026-02,40.03566573391212,Moderate,negative_margin_share,reduce subsidy exposure
+S01065,2026-02,29.24164368983699,Low,negative_margin_share,monitor only
+S01066,2026-02,32.5599986779273,Moderate,negative_margin_share,reduce subsidy exposure
+S01067,2026-02,48.133185689888485,Moderate,negative_margin_share,reduce subsidy exposure
+S01068,2026-02,40.9150024853759,Moderate,negative_margin_share,reduce subsidy exposure
+S01069,2026-02,37.99792676053362,Moderate,negative_margin_share,reduce subsidy exposure
+S01070,2026-02,50.33224189831814,Moderate,refund_value_risk,reduce subsidy exposure
+S01071,2026-02,42.62675681086886,Moderate,negative_margin_share,reduce subsidy exposure
+S01072,2026-02,31.62840249109751,Moderate,refund_value_risk,reduce subsidy exposure
+S01073,2026-02,48.73619955349125,Moderate,negative_margin_share,reduce subsidy exposure
+S01074,2026-02,52.6866656324547,Moderate,negative_margin_share,reduce subsidy exposure
+S01075,2026-02,22.881947157463138,Low,refund_value_risk,monitor only
+S01076,2026-02,26.461342396667032,Low,negative_margin_share,monitor only
+S01077,2026-02,42.34014714955349,Moderate,dispute_value_risk,reduce subsidy exposure
+S01078,2026-02,34.543394096237904,Moderate,refund_value_risk,reduce subsidy exposure
+S01079,2026-02,22.629903942464157,Low,negative_margin_share,monitor only
+S01080,2026-02,31.62569994738709,Moderate,negative_margin_share,reduce subsidy exposure
+S01081,2026-02,43.10168698259034,Moderate,refund_value_risk,reduce subsidy exposure
+S01082,2026-02,41.05703123041665,Moderate,negative_margin_share,reduce subsidy exposure
+S01083,2026-02,31.33005946108009,Moderate,refund_value_risk,reduce subsidy exposure
+S01084,2026-02,32.1058984680847,Moderate,negative_margin_share,reduce subsidy exposure
+S01085,2026-02,55.82383134773978,High,refund_value_risk,reduce subsidy exposure
+S01086,2026-02,36.36862240047559,Moderate,negative_margin_share,reduce subsidy exposure
+S01087,2026-02,27.70687996263358,Low,negative_margin_share,monitor only
+S01088,2026-02,54.50980578772572,Moderate,negative_margin_share,reduce subsidy exposure
+S01089,2026-02,32.698118782620284,Moderate,refund_value_risk,reduce subsidy exposure
+S01090,2026-02,42.62607895224997,Moderate,negative_margin_share,reduce subsidy exposure
+S01091,2026-02,35.64730387920336,Moderate,negative_margin_share,reduce subsidy exposure
+S01092,2026-02,30.726054969196113,Moderate,negative_margin_share,reduce subsidy exposure
+S01093,2026-02,34.565834108827964,Moderate,negative_margin_share,reduce subsidy exposure
+S01094,2026-02,59.84968633522287,High,negative_margin_share,reduce subsidy exposure
+S01095,2026-02,36.25179780515922,Moderate,negative_margin_share,reduce subsidy exposure
+S01096,2026-02,41.893058042111996,Moderate,negative_margin_share,reduce subsidy exposure
+S01097,2026-02,46.17776201386286,Moderate,negative_margin_share,reduce subsidy exposure
+S01098,2026-02,29.94349775659113,Low,negative_margin_share,monitor only
+S01099,2026-02,58.96780305162867,High,negative_margin_share,reduce subsidy exposure
+S01100,2026-02,28.78176183479218,Low,refund_value_risk,monitor only
+S01101,2026-02,52.119155122292504,Moderate,negative_margin_share,reduce subsidy exposure
+S01102,2026-02,50.53751312320814,Moderate,negative_margin_share,reduce subsidy exposure
+S01103,2026-02,37.63546949225262,Moderate,negative_margin_share,reduce subsidy exposure
+S01104,2026-02,36.69723936815514,Moderate,negative_margin_share,reduce subsidy exposure
+S01105,2026-02,32.62213101619455,Moderate,negative_margin_share,reduce subsidy exposure
+S01106,2026-02,54.94584571563013,Moderate,negative_margin_share,reduce subsidy exposure
+S01107,2026-02,43.477236232587764,Moderate,negative_margin_share,reduce subsidy exposure
+S01108,2026-02,21.547875786352556,Low,negative_margin_share,monitor only
+S01109,2026-02,27.906002420291912,Low,negative_margin_share,monitor only
+S01110,2026-02,24.329724181903813,Low,negative_margin_share,monitor only
+S01111,2026-02,48.33428337192295,Moderate,negative_margin_share,reduce subsidy exposure
+S01112,2026-02,50.977555288708224,Moderate,negative_margin_share,reduce subsidy exposure
+S01113,2026-02,24.461246183552696,Low,negative_margin_share,monitor only
+S01114,2026-02,31.044534525094488,Moderate,refund_value_risk,reduce subsidy exposure
+S01115,2026-02,40.137959058451365,Moderate,negative_margin_share,reduce subsidy exposure
+S01116,2026-02,20.090469025160793,Low,dispute_value_risk,monitor only
+S01117,2026-02,16.881529786349965,Low,negative_margin_share,monitor only
+S01118,2026-02,53.868222321017676,Moderate,negative_margin_share,reduce subsidy exposure
+S01119,2026-02,73.23319540466287,High,negative_margin_share,reduce subsidy exposure
+S01120,2026-02,28.499568722789277,Low,refund_value_risk,monitor only
+S01121,2026-02,46.218412963971886,Moderate,negative_margin_share,reduce subsidy exposure
+S01122,2026-02,21.45057326830339,Low,negative_margin_share,monitor only
+S01123,2026-02,36.01229482087654,Moderate,negative_margin_share,reduce subsidy exposure
+S01124,2026-02,35.87936421102501,Moderate,negative_margin_share,reduce subsidy exposure
+S01125,2026-02,31.201443143395156,Moderate,negative_margin_share,reduce subsidy exposure
+S01126,2026-02,38.28492388237426,Moderate,negative_margin_share,reduce subsidy exposure
+S01127,2026-02,36.89852033887052,Moderate,negative_margin_share,reduce subsidy exposure
+S01128,2026-02,37.04220762090668,Moderate,negative_margin_share,reduce subsidy exposure
+S01129,2026-02,39.63842199034879,Moderate,negative_margin_share,reduce subsidy exposure
+S01130,2026-02,41.12978075992089,Moderate,negative_margin_share,reduce subsidy exposure
+S01131,2026-02,44.68547285387078,Moderate,negative_margin_share,reduce subsidy exposure
+S01132,2026-02,33.553559536600865,Moderate,negative_margin_share,reduce subsidy exposure
+S01133,2026-02,60.785820991311404,High,negative_margin_share,reduce subsidy exposure
+S01134,2026-02,42.5024831239705,Moderate,negative_margin_share,reduce subsidy exposure
+S01135,2026-02,32.52094643351882,Moderate,negative_margin_share,reduce subsidy exposure
+S01136,2026-02,45.588113885631216,Moderate,negative_margin_share,reduce subsidy exposure
+S01137,2026-02,28.64849650016423,Low,negative_margin_share,monitor only
+S01138,2026-02,37.485381003699636,Moderate,negative_margin_share,reduce subsidy exposure
+S01139,2026-02,37.55552485834669,Moderate,negative_margin_share,reduce subsidy exposure
+S01140,2026-02,35.61801986388757,Moderate,negative_margin_share,reduce subsidy exposure
+S01141,2026-02,43.460384863324194,Moderate,negative_margin_share,reduce subsidy exposure
+S01142,2026-02,12.927459112606618,Low,dispute_value_risk,monitor only
+S01143,2026-02,44.43235062804848,Moderate,negative_margin_share,reduce subsidy exposure
+S01144,2026-02,53.75249473277252,Moderate,negative_margin_share,reduce subsidy exposure
+S01145,2026-02,49.32508137562514,Moderate,refund_value_risk,reduce subsidy exposure
+S01146,2026-02,36.6478762187674,Moderate,negative_margin_share,reduce subsidy exposure
+S01147,2026-02,29.75051403874785,Low,refund_value_risk,monitor only
+S01148,2026-02,41.5865421405551,Moderate,negative_margin_share,reduce subsidy exposure
+S01149,2026-02,37.265508400220625,Moderate,negative_margin_share,reduce subsidy exposure
+S01150,2026-02,31.307649831306716,Moderate,negative_margin_share,reduce subsidy exposure
+S01151,2026-02,50.108346822650795,Moderate,refund_value_risk,reduce subsidy exposure
+S01152,2026-02,36.33280990350093,Moderate,negative_margin_share,reduce subsidy exposure
+S01153,2026-02,45.48466615063699,Moderate,negative_margin_share,reduce subsidy exposure
+S01154,2026-02,56.843373136679844,High,negative_margin_share,reduce subsidy exposure
+S01155,2026-02,38.280121626600184,Moderate,negative_margin_share,reduce subsidy exposure
+S01156,2026-02,49.43697750648273,Moderate,refund_value_risk,reduce subsidy exposure
+S01157,2026-02,39.70503390633857,Moderate,negative_margin_share,reduce subsidy exposure
+S01158,2026-02,49.25718674580481,Moderate,refund_value_risk,reduce subsidy exposure
+S01159,2026-02,50.32094976261226,Moderate,negative_margin_share,reduce subsidy exposure
+S01160,2026-02,47.6074151388347,Moderate,negative_margin_share,reduce subsidy exposure
+S01161,2026-02,51.52492398697717,Moderate,negative_margin_share,reduce subsidy exposure
+S01162,2026-02,30.777178359082807,Moderate,negative_margin_share,reduce subsidy exposure
+S01163,2026-02,31.937081956813742,Moderate,negative_margin_share,reduce subsidy exposure
+S01164,2026-02,42.775665443914725,Moderate,negative_margin_share,reduce subsidy exposure
+S01165,2026-02,20.747844965255343,Low,refund_value_risk,monitor only
+S01166,2026-02,51.0014387258652,Moderate,negative_margin_share,reduce subsidy exposure
+S01167,2026-02,45.887877094189086,Moderate,negative_margin_share,reduce subsidy exposure
+S01168,2026-02,41.84933469463576,Moderate,negative_margin_share,reduce subsidy exposure
+S01169,2026-02,50.78838896483988,Moderate,refund_value_risk,reduce subsidy exposure
+S01170,2026-02,64.17464458870774,High,negative_margin_share,reduce subsidy exposure
+S01171,2026-02,24.634316219349703,Low,negative_margin_share,monitor only
+S01172,2026-02,29.675842413211587,Low,negative_margin_share,monitor only
+S01173,2026-02,52.53867130842037,Moderate,negative_margin_share,reduce subsidy exposure
+S01174,2026-02,29.28460386278358,Low,negative_margin_share,monitor only
+S01175,2026-02,36.53492710680311,Moderate,negative_margin_share,reduce subsidy exposure
+S01176,2026-02,30.911032161651825,Moderate,negative_margin_share,reduce subsidy exposure
+S01177,2026-02,37.161507797402905,Moderate,negative_margin_share,reduce subsidy exposure
+S01178,2026-02,49.48730641123634,Moderate,negative_margin_share,reduce subsidy exposure
+S01179,2026-02,88.44937866325695,Critical,negative_margin_share,reduce subsidy exposure
+S01180,2026-02,41.0483115580305,Moderate,negative_margin_share,reduce subsidy exposure
+S01181,2026-02,32.68400820232336,Moderate,negative_margin_share,reduce subsidy exposure
+S01182,2026-02,33.312196596996124,Moderate,negative_margin_share,reduce subsidy exposure
+S01183,2026-02,34.482942038905996,Moderate,negative_margin_share,reduce subsidy exposure
+S01184,2026-02,37.37048731727226,Moderate,negative_margin_share,reduce subsidy exposure
+S01185,2026-02,44.962596543744354,Moderate,negative_margin_share,reduce subsidy exposure
+S01186,2026-02,50.07246235062079,Moderate,negative_margin_share,reduce subsidy exposure
+S01187,2026-02,18.882575805081103,Low,negative_margin_share,monitor only
+S01188,2026-02,35.415175822602066,Moderate,negative_margin_share,reduce subsidy exposure
+S01189,2026-02,41.36127128161783,Moderate,negative_margin_share,reduce subsidy exposure
+S01190,2026-02,33.23329074366083,Moderate,negative_margin_share,reduce subsidy exposure
+S01191,2026-02,37.90834777851916,Moderate,negative_margin_share,reduce subsidy exposure
+S01192,2026-02,20.670421180190775,Low,negative_margin_share,monitor only
+S01193,2026-02,37.63135760706421,Moderate,dispute_value_risk,reduce subsidy exposure
+S01194,2026-02,45.746857587841134,Moderate,refund_value_risk,reduce subsidy exposure
+S01195,2026-02,17.713122859695876,Low,refund_value_risk,monitor only
+S01196,2026-02,52.26159625863388,Moderate,negative_margin_share,reduce subsidy exposure
+S01197,2026-02,59.277694350565845,High,negative_margin_share,reduce subsidy exposure
+S01198,2026-02,40.11956304344375,Moderate,negative_margin_share,reduce subsidy exposure
+S01199,2026-02,35.074807769861515,Moderate,refund_value_risk,reduce subsidy exposure
+S01200,2026-02,26.914047333445748,Low,negative_margin_share,monitor only

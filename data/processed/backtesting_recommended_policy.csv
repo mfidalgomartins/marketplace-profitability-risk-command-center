@@ -1,0 +1,2 @@
+recommended_threshold,review_rate,precision,recall,expected_avoided_loss,review_cost,conversion_friction_cost,net_benefit,policy_guidance
+60,0.2532074480691259,0.418001062457312,0.31300789907370574,1140666.6775,47437.2,17495.43876,1075734.03874,Escalate orders above threshold to manual review; calibrate monthly with realized outcomes.

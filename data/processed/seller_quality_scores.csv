@@ -1,0 +1,1201 @@
+seller_id,current_period,seller_quality_score,seller_quality_tier,main_risk_driver,recommended_action
+S00001,2026-02,71.16666666666667,High,refund_risk,seller coaching required
+S00002,2026-02,55.287356321839084,High,dispute_risk,investigate dispute cluster
+S00003,2026-02,66.63768115942028,High,delay_risk,improve fulfillment SLA enforcement
+S00004,2026-02,55.769230769230774,High,refund_risk,seller coaching required
+S00005,2026-02,47.368421052631575,Moderate,on_time_risk,seller coaching required
+S00006,2026-02,78.89583333333334,Critical,refund_risk,audit seller operations
+S00007,2026-02,34.410256410256416,Moderate,on_time_risk,seller coaching required
+S00008,2026-02,72.0,High,dispute_risk,investigate dispute cluster
+S00009,2026-02,41.827160493827165,Moderate,on_time_risk,seller coaching required
+S00010,2026-02,51.604938271604944,Moderate,on_time_risk,seller coaching required
+S00011,2026-02,60.25000000000001,High,dispute_risk,investigate dispute cluster
+S00012,2026-02,58.78787878787879,High,on_time_risk,improve fulfillment SLA enforcement
+S00013,2026-02,55.66666666666667,High,dispute_risk,investigate dispute cluster
+S00014,2026-02,96.00000000000001,Critical,refund_risk,audit seller operations
+S00015,2026-02,72.88888888888889,High,refund_risk,seller coaching required
+S00016,2026-02,77.98412698412699,Critical,refund_risk,audit seller operations
+S00017,2026-02,37.42028985507247,Moderate,refund_risk,monitor only
+S00018,2026-02,40.03703703703704,Moderate,chargeback_risk,monitor only
+S00019,2026-02,55.142857142857146,High,refund_risk,seller coaching required
+S00020,2026-02,61.09090909090909,High,refund_risk,seller coaching required
+S00021,2026-02,60.91787439613527,High,refund_risk,seller coaching required
+S00022,2026-02,52.765151515151516,Moderate,on_time_risk,seller coaching required
+S00023,2026-02,51.45833333333333,Moderate,on_time_risk,seller coaching required
+S00024,2026-02,65.0,High,dispute_risk,investigate dispute cluster
+S00025,2026-02,76.0,Critical,chargeback_risk,hold payouts
+S00026,2026-02,43.51851851851852,Moderate,on_time_risk,seller coaching required
+S00027,2026-02,52.81385281385281,Moderate,on_time_risk,seller coaching required
+S00028,2026-02,59.08496732026144,High,on_time_risk,improve fulfillment SLA enforcement
+S00029,2026-02,58.57142857142857,High,refund_risk,seller coaching required
+S00030,2026-02,61.22222222222223,High,on_time_risk,improve fulfillment SLA enforcement
+S00031,2026-02,50.60606060606061,Moderate,refund_risk,monitor only
+S00032,2026-02,56.75,High,chargeback_risk,investigate dispute cluster
+S00033,2026-02,77.66666666666666,Critical,refund_risk,audit seller operations
+S00034,2026-02,14.666666666666668,Low,repeat_buyer_risk,monitor only
+S00035,2026-02,52.0,Moderate,delay_risk,seller coaching required
+S00036,2026-02,77.39393939393939,Critical,chargeback_risk,hold payouts
+S00037,2026-02,83.91304347826087,Critical,refund_risk,audit seller operations
+S00038,2026-02,48.0,Moderate,chargeback_risk,monitor only
+S00039,2026-02,39.523809523809526,Moderate,on_time_risk,seller coaching required
+S00040,2026-02,52.13333333333333,Moderate,on_time_risk,seller coaching required
+S00041,2026-02,59.73737373737374,High,chargeback_risk,investigate dispute cluster
+S00042,2026-02,38.869565217391305,Moderate,refund_risk,monitor only
+S00043,2026-02,69.42028985507247,High,refund_risk,seller coaching required
+S00044,2026-02,67.63888888888889,High,refund_risk,seller coaching required
+S00045,2026-02,49.115646258503396,Moderate,on_time_risk,seller coaching required
+S00046,2026-02,68.92307692307693,High,dispute_risk,investigate dispute cluster
+S00047,2026-02,54.09090909090909,Moderate,dispute_risk,monitor only
+S00048,2026-02,66.81818181818183,High,refund_risk,seller coaching required
+S00049,2026-02,26.666666666666668,Low,on_time_risk,monitor only
+S00050,2026-02,32.66666666666667,Moderate,on_time_risk,seller coaching required
+S00051,2026-02,62.33918128654971,High,on_time_risk,improve fulfillment SLA enforcement
+S00052,2026-02,64.77777777777779,High,refund_risk,seller coaching required
+S00053,2026-02,44.72222222222223,Moderate,on_time_risk,seller coaching required
+S00054,2026-02,49.61748633879782,Moderate,on_time_risk,seller coaching required
+S00055,2026-02,80.18018018018019,Critical,refund_risk,audit seller operations
+S00056,2026-02,79.63157894736842,Critical,refund_risk,audit seller operations
+S00057,2026-02,63.75,High,refund_risk,seller coaching required
+S00058,2026-02,71.66666666666667,High,refund_risk,seller coaching required
+S00059,2026-02,71.61194029850746,High,refund_risk,seller coaching required
+S00060,2026-02,64.57716049382717,High,refund_risk,seller coaching required
+S00061,2026-02,40.857142857142854,Moderate,refund_risk,monitor only
+S00062,2026-02,31.48148148148148,Moderate,on_time_risk,seller coaching required
+S00063,2026-02,55.65134099616859,High,refund_risk,seller coaching required
+S00064,2026-02,56.666666666666664,High,dispute_risk,investigate dispute cluster
+S00065,2026-02,52.0,Moderate,refund_risk,monitor only
+S00066,2026-02,61.666666666666664,High,refund_risk,seller coaching required
+S00067,2026-02,60.344827586206904,High,refund_risk,seller coaching required
+S00068,2026-02,53.65079365079365,Moderate,refund_risk,monitor only
+S00069,2026-02,75.79908675799088,Critical,refund_risk,audit seller operations
+S00070,2026-02,67.27777777777777,High,delay_risk,improve fulfillment SLA enforcement
+S00071,2026-02,47.111111111111114,Moderate,chargeback_risk,monitor only
+S00072,2026-02,31.403508771929822,Moderate,on_time_risk,seller coaching required
+S00073,2026-02,61.111111111111114,High,dispute_risk,investigate dispute cluster
+S00074,2026-02,56.23456790123457,High,dispute_risk,investigate dispute cluster
+S00075,2026-02,50.82125603864735,Moderate,dispute_risk,monitor only
+S00076,2026-02,59.61538461538461,High,refund_risk,seller coaching required
+S00077,2026-02,58.03030303030303,High,dispute_risk,investigate dispute cluster
+S00078,2026-02,41.94444444444445,Moderate,on_time_risk,seller coaching required
+S00079,2026-02,56.666666666666664,High,on_time_risk,improve fulfillment SLA enforcement
+S00080,2026-02,77.43565147881695,Critical,dispute_risk,hold payouts
+S00081,2026-02,59.18518518518519,High,refund_risk,seller coaching required
+S00082,2026-02,47.22222222222222,Moderate,on_time_risk,seller coaching required
+S00083,2026-02,47.81273408239701,Moderate,refund_risk,monitor only
+S00084,2026-02,64.23076923076924,High,refund_risk,seller coaching required
+S00085,2026-02,50.76923076923077,Moderate,on_time_risk,seller coaching required
+S00086,2026-02,65.77777777777777,High,refund_risk,seller coaching required
+S00087,2026-02,60.68627450980392,High,dispute_risk,investigate dispute cluster
+S00088,2026-02,42.34848484848485,Moderate,on_time_risk,seller coaching required
+S00089,2026-02,52.53411306042886,Moderate,refund_risk,monitor only
+S00090,2026-02,52.142857142857146,Moderate,on_time_risk,seller coaching required
+S00091,2026-02,48.11006289308177,Moderate,refund_risk,monitor only
+S00092,2026-02,77.55555555555557,Critical,refund_risk,audit seller operations
+S00093,2026-02,74.996632996633,High,refund_risk,seller coaching required
+S00094,2026-02,61.754385964912274,High,refund_risk,seller coaching required
+S00095,2026-02,70.31746031746032,High,refund_risk,seller coaching required
+S00096,2026-02,54.820512820512825,Moderate,delay_risk,seller coaching required
+S00097,2026-02,59.714759535655055,High,chargeback_risk,investigate dispute cluster
+S00098,2026-02,48.484848484848484,Moderate,refund_risk,monitor only
+S00099,2026-02,66.11111111111111,High,refund_risk,seller coaching required
+S00100,2026-02,82.0,Critical,refund_risk,audit seller operations
+S00101,2026-02,62.62626262626263,High,refund_risk,seller coaching required
+S00102,2026-02,43.079365079365076,Moderate,on_time_risk,seller coaching required
+S00103,2026-02,24.444444444444443,Low,on_time_risk,monitor only
+S00104,2026-02,57.64705882352941,High,on_time_risk,improve fulfillment SLA enforcement
+S00105,2026-02,58.01058201058202,High,on_time_risk,improve fulfillment SLA enforcement
+S00106,2026-02,60.714285714285715,High,on_time_risk,improve fulfillment SLA enforcement
+S00107,2026-02,55.05747126436782,High,refund_risk,seller coaching required
+S00108,2026-02,77.87654320987654,Critical,refund_risk,audit seller operations
+S00109,2026-02,50.8130081300813,Moderate,on_time_risk,seller coaching required
+S00110,2026-02,56.358974358974365,High,delay_risk,improve fulfillment SLA enforcement
+S00111,2026-02,69.2280701754386,High,chargeback_risk,investigate dispute cluster
+S00112,2026-02,50.75757575757576,Moderate,dispute_risk,monitor only
+S00113,2026-02,48.583333333333336,Moderate,refund_risk,monitor only
+S00114,2026-02,77.77777777777777,Critical,refund_risk,audit seller operations
+S00115,2026-02,66.47368421052632,High,refund_risk,seller coaching required
+S00116,2026-02,66.85185185185186,High,refund_risk,seller coaching required
+S00117,2026-02,68.52631578947368,High,chargeback_risk,investigate dispute cluster
+S00118,2026-02,57.10144927536232,High,refund_risk,seller coaching required
+S00119,2026-02,81.81995884773663,Critical,refund_risk,audit seller operations
+S00120,2026-02,75.33333333333334,Critical,refund_risk,audit seller operations
+S00121,2026-02,65.42592592592594,High,dispute_risk,investigate dispute cluster
+S00122,2026-02,72.25850340136054,High,chargeback_risk,investigate dispute cluster
+S00123,2026-02,56.394557823129254,High,on_time_risk,improve fulfillment SLA enforcement
+S00124,2026-02,77.68115942028986,Critical,refund_risk,audit seller operations
+S00125,2026-02,43.17460317460318,Moderate,on_time_risk,seller coaching required
+S00126,2026-02,66.10538373424971,High,refund_risk,seller coaching required
+S00127,2026-02,51.1140350877193,Moderate,refund_risk,monitor only
+S00128,2026-02,54.234234234234236,Moderate,on_time_risk,seller coaching required
+S00129,2026-02,50.476190476190474,Moderate,refund_risk,monitor only
+S00130,2026-02,65.92592592592592,High,dispute_risk,investigate dispute cluster
+S00131,2026-02,64.14965986394557,High,refund_risk,seller coaching required
+S00132,2026-02,44.53703703703704,Moderate,on_time_risk,seller coaching required
+S00133,2026-02,59.696969696969695,High,dispute_risk,investigate dispute cluster
+S00134,2026-02,63.48148148148148,High,delay_risk,improve fulfillment SLA enforcement
+S00135,2026-02,61.33333333333334,High,refund_risk,seller coaching required
+S00136,2026-02,71.6779388083736,High,refund_risk,seller coaching required
+S00137,2026-02,78.0,Critical,refund_risk,audit seller operations
+S00138,2026-02,62.88065843621398,High,chargeback_risk,investigate dispute cluster
+S00139,2026-02,88.0,Critical,refund_risk,audit seller operations
+S00140,2026-02,67.92592592592592,High,refund_risk,seller coaching required
+S00141,2026-02,50.952380952380956,Moderate,on_time_risk,seller coaching required
+S00142,2026-02,42.56140350877193,Moderate,dispute_risk,monitor only
+S00143,2026-02,73.2929292929293,High,refund_risk,seller coaching required
+S00144,2026-02,56.42857142857143,High,refund_risk,seller coaching required
+S00145,2026-02,46.913580246913575,Moderate,on_time_risk,seller coaching required
+S00146,2026-02,68.87363834422658,High,refund_risk,seller coaching required
+S00147,2026-02,74.27450980392157,High,chargeback_risk,investigate dispute cluster
+S00148,2026-02,43.18181818181819,Moderate,on_time_risk,seller coaching required
+S00149,2026-02,65.38461538461539,High,refund_risk,seller coaching required
+S00150,2026-02,67.33333333333334,High,refund_risk,seller coaching required
+S00151,2026-02,70.47362514029182,High,refund_risk,seller coaching required
+S00152,2026-02,70.10256410256412,High,dispute_risk,investigate dispute cluster
+S00153,2026-02,71.66666666666666,High,refund_risk,seller coaching required
+S00154,2026-02,70.0,High,refund_risk,seller coaching required
+S00155,2026-02,54.0,Moderate,chargeback_risk,monitor only
+S00156,2026-02,48.431372549019606,Moderate,on_time_risk,seller coaching required
+S00157,2026-02,65.72463768115942,High,refund_risk,seller coaching required
+S00158,2026-02,71.3939393939394,High,refund_risk,seller coaching required
+S00159,2026-02,45.450980392156865,Moderate,on_time_risk,seller coaching required
+S00160,2026-02,56.77248677248677,High,refund_risk,seller coaching required
+S00161,2026-02,94.54901960784315,Critical,refund_risk,audit seller operations
+S00162,2026-02,75.21146953405018,Critical,refund_risk,audit seller operations
+S00163,2026-02,87.3639846743295,Critical,refund_risk,audit seller operations
+S00164,2026-02,47.158040027605246,Moderate,refund_risk,monitor only
+S00165,2026-02,56.083333333333336,High,refund_risk,seller coaching required
+S00166,2026-02,55.17460317460317,High,delay_risk,improve fulfillment SLA enforcement
+S00167,2026-02,52.17460317460318,Moderate,refund_risk,monitor only
+S00168,2026-02,42.5,Moderate,chargeback_risk,monitor only
+S00169,2026-02,56.3768115942029,High,chargeback_risk,investigate dispute cluster
+S00170,2026-02,65.11111111111111,High,refund_risk,seller coaching required
+S00171,2026-02,70.60606060606061,High,refund_risk,seller coaching required
+S00172,2026-02,47.81481481481482,Moderate,refund_risk,monitor only
+S00173,2026-02,47.84313725490196,Moderate,on_time_risk,seller coaching required
+S00174,2026-02,71.33333333333334,High,refund_risk,seller coaching required
+S00175,2026-02,52.01550387596899,Moderate,on_time_risk,seller coaching required
+S00176,2026-02,40.74074074074074,Moderate,on_time_risk,seller coaching required
+S00177,2026-02,78.81481481481481,Critical,refund_risk,audit seller operations
+S00178,2026-02,63.39325842696629,High,dispute_risk,investigate dispute cluster
+S00179,2026-02,66.70588235294117,High,refund_risk,seller coaching required
+S00180,2026-02,61.35416666666668,High,refund_risk,seller coaching required
+S00181,2026-02,49.80392156862745,Moderate,on_time_risk,seller coaching required
+S00182,2026-02,71.01960784313725,High,dispute_risk,investigate dispute cluster
+S00183,2026-02,42.266666666666666,Moderate,on_time_risk,seller coaching required
+S00184,2026-02,76.43969610636279,Critical,refund_risk,audit seller operations
+S00185,2026-02,60.526315789473685,High,refund_risk,seller coaching required
+S00186,2026-02,72.88183421516754,High,refund_risk,seller coaching required
+S00187,2026-02,57.58620689655172,High,on_time_risk,improve fulfillment SLA enforcement
+S00188,2026-02,49.598765432098766,Moderate,refund_risk,monitor only
+S00189,2026-02,46.45528455284553,Moderate,on_time_risk,seller coaching required
+S00190,2026-02,60.50000000000001,High,refund_risk,seller coaching required
+S00191,2026-02,67.06944444444444,High,refund_risk,seller coaching required
+S00192,2026-02,55.670859538784065,High,on_time_risk,improve fulfillment SLA enforcement
+S00193,2026-02,77.64363143631437,Critical,refund_risk,audit seller operations
+S00194,2026-02,74.39153439153439,High,dispute_risk,investigate dispute cluster
+S00195,2026-02,56.515151515151516,High,on_time_risk,improve fulfillment SLA enforcement
+S00196,2026-02,54.807692307692314,Moderate,dispute_risk,monitor only
+S00197,2026-02,55.083333333333336,High,refund_risk,seller coaching required
+S00198,2026-02,75.15429173249079,Critical,chargeback_risk,hold payouts
+S00199,2026-02,54.75,Moderate,chargeback_risk,monitor only
+S00200,2026-02,39.21794871794872,Moderate,refund_risk,monitor only
+S00201,2026-02,69.36383442265796,High,delay_risk,improve fulfillment SLA enforcement
+S00202,2026-02,58.48148148148148,High,refund_risk,seller coaching required
+S00203,2026-02,72.72072072072072,High,refund_risk,seller coaching required
+S00204,2026-02,52.82051282051282,Moderate,on_time_risk,seller coaching required
+S00205,2026-02,52.72727272727273,Moderate,refund_risk,monitor only
+S00206,2026-02,75.02564102564102,Critical,refund_risk,audit seller operations
+S00207,2026-02,54.16666666666667,Moderate,refund_risk,monitor only
+S00208,2026-02,70.84099616858238,High,refund_risk,seller coaching required
+S00209,2026-02,57.55555555555556,High,refund_risk,seller coaching required
+S00210,2026-02,81.6923076923077,Critical,refund_risk,audit seller operations
+S00211,2026-02,79.33333333333334,Critical,refund_risk,audit seller operations
+S00212,2026-02,58.641975308641975,High,refund_risk,seller coaching required
+S00213,2026-02,73.94444444444446,High,refund_risk,seller coaching required
+S00214,2026-02,52.111111111111114,Moderate,on_time_risk,seller coaching required
+S00215,2026-02,82.45833333333333,Critical,refund_risk,audit seller operations
+S00216,2026-02,73.77414471692401,High,refund_risk,seller coaching required
+S00217,2026-02,56.55555555555556,High,chargeback_risk,investigate dispute cluster
+S00218,2026-02,66.03703703703704,High,refund_risk,seller coaching required
+S00219,2026-02,89.27777777777779,Critical,dispute_risk,hold payouts
+S00220,2026-02,60.970017636684304,High,refund_risk,seller coaching required
+S00221,2026-02,55.769980506822606,High,refund_risk,seller coaching required
+S00222,2026-02,35.45454545454545,Moderate,on_time_risk,seller coaching required
+S00223,2026-02,55.36231884057971,High,on_time_risk,improve fulfillment SLA enforcement
+S00224,2026-02,76.5,Critical,chargeback_risk,hold payouts
+S00225,2026-02,43.07692307692308,Moderate,on_time_risk,seller coaching required
+S00226,2026-02,74.02298850574712,High,refund_risk,seller coaching required
+S00227,2026-02,59.68518518518519,High,delay_risk,improve fulfillment SLA enforcement
+S00228,2026-02,58.954248366013076,High,on_time_risk,improve fulfillment SLA enforcement
+S00229,2026-02,67.18518518518519,High,refund_risk,seller coaching required
+S00230,2026-02,46.98635477582845,Moderate,refund_risk,monitor only
+S00231,2026-02,78.00267737617135,Critical,refund_risk,audit seller operations
+S00232,2026-02,70.23633156966491,High,refund_risk,seller coaching required
+S00233,2026-02,66.47058823529412,High,chargeback_risk,investigate dispute cluster
+S00234,2026-02,70.88888888888889,High,refund_risk,seller coaching required
+S00235,2026-02,57.52380952380952,High,refund_risk,seller coaching required
+S00236,2026-02,53.416666666666664,Moderate,dispute_risk,monitor only
+S00237,2026-02,66.3963963963964,High,refund_risk,seller coaching required
+S00238,2026-02,59.48936170212766,High,chargeback_risk,investigate dispute cluster
+S00239,2026-02,43.924731182795696,Moderate,on_time_risk,seller coaching required
+S00240,2026-02,63.730158730158735,High,refund_risk,seller coaching required
+S00241,2026-02,66.90338164251207,High,refund_risk,seller coaching required
+S00242,2026-02,65.28395061728395,High,dispute_risk,investigate dispute cluster
+S00243,2026-02,59.00462962962963,High,refund_risk,seller coaching required
+S00244,2026-02,58.410256410256416,High,delay_risk,improve fulfillment SLA enforcement
+S00245,2026-02,42.333333333333336,Moderate,refund_risk,monitor only
+S00246,2026-02,45.71428571428571,Moderate,refund_risk,monitor only
+S00247,2026-02,59.16666666666667,High,refund_risk,seller coaching required
+S00248,2026-02,33.868945868945865,Moderate,dispute_risk,monitor only
+S00249,2026-02,61.22222222222223,High,refund_risk,seller coaching required
+S00250,2026-02,50.625,Moderate,on_time_risk,seller coaching required
+S00251,2026-02,77.25170068027212,Critical,refund_risk,audit seller operations
+S00252,2026-02,59.66666666666667,High,dispute_risk,investigate dispute cluster
+S00253,2026-02,77.67970204841714,Critical,refund_risk,audit seller operations
+S00254,2026-02,62.74074074074075,High,dispute_risk,investigate dispute cluster
+S00255,2026-02,77.11111111111111,Critical,dispute_risk,hold payouts
+S00256,2026-02,54.15873015873016,Moderate,on_time_risk,seller coaching required
+S00257,2026-02,61.48717948717949,High,delay_risk,improve fulfillment SLA enforcement
+S00258,2026-02,54.285714285714285,Moderate,on_time_risk,seller coaching required
+S00259,2026-02,56.93333333333334,High,refund_risk,seller coaching required
+S00260,2026-02,50.95238095238095,Moderate,on_time_risk,seller coaching required
+S00261,2026-02,58.432098765432094,High,dispute_risk,investigate dispute cluster
+S00262,2026-02,50.9056712962963,Moderate,refund_risk,monitor only
+S00263,2026-02,55.83333333333333,High,on_time_risk,improve fulfillment SLA enforcement
+S00264,2026-02,82.16666666666667,Critical,refund_risk,audit seller operations
+S00265,2026-02,69.12820512820514,High,refund_risk,seller coaching required
+S00266,2026-02,47.833333333333336,Moderate,delay_risk,seller coaching required
+S00267,2026-02,48.98245614035088,Moderate,on_time_risk,seller coaching required
+S00268,2026-02,49.61290322580645,Moderate,dispute_risk,monitor only
+S00269,2026-02,57.3224043715847,High,refund_risk,seller coaching required
+S00270,2026-02,75.00366300366301,Critical,refund_risk,audit seller operations
+S00271,2026-02,64.10256410256412,High,dispute_risk,investigate dispute cluster
+S00272,2026-02,69.54761904761905,High,refund_risk,seller coaching required
+S00273,2026-02,56.19047619047619,High,dispute_risk,investigate dispute cluster
+S00274,2026-02,76.74747474747475,Critical,refund_risk,audit seller operations
+S00275,2026-02,60.39426523297491,High,dispute_risk,investigate dispute cluster
+S00276,2026-02,49.47916666666667,Moderate,on_time_risk,seller coaching required
+S00277,2026-02,61.33333333333334,High,refund_risk,seller coaching required
+S00278,2026-02,64.18518518518519,High,refund_risk,seller coaching required
+S00279,2026-02,62.3728813559322,High,dispute_risk,investigate dispute cluster
+S00280,2026-02,48.44444444444445,Moderate,on_time_risk,seller coaching required
+S00281,2026-02,37.14285714285714,Moderate,on_time_risk,seller coaching required
+S00282,2026-02,81.55555555555557,Critical,dispute_risk,hold payouts
+S00283,2026-02,77.55555555555556,Critical,refund_risk,audit seller operations
+S00284,2026-02,57.333333333333336,High,refund_risk,seller coaching required
+S00285,2026-02,55.666666666666664,High,dispute_risk,investigate dispute cluster
+S00286,2026-02,60.75585789871504,High,refund_risk,seller coaching required
+S00287,2026-02,93.04166666666667,Critical,dispute_risk,hold payouts
+S00288,2026-02,65.55555555555557,High,chargeback_risk,investigate dispute cluster
+S00289,2026-02,38.57142857142857,Moderate,on_time_risk,seller coaching required
+S00290,2026-02,50.383597883597886,Moderate,refund_risk,monitor only
+S00291,2026-02,60.84577114427861,High,on_time_risk,improve fulfillment SLA enforcement
+S00292,2026-02,47.053872053872055,Moderate,on_time_risk,seller coaching required
+S00293,2026-02,50.13333333333333,Moderate,dispute_risk,monitor only
+S00294,2026-02,58.18181818181819,High,dispute_risk,investigate dispute cluster
+S00295,2026-02,82.58823529411765,Critical,refund_risk,audit seller operations
+S00296,2026-02,62.22222222222222,High,refund_risk,seller coaching required
+S00297,2026-02,49.47649572649573,Moderate,refund_risk,monitor only
+S00298,2026-02,58.733333333333334,High,chargeback_risk,investigate dispute cluster
+S00299,2026-02,68.00189933523266,High,refund_risk,seller coaching required
+S00300,2026-02,59.407407407407405,High,refund_risk,seller coaching required
+S00301,2026-02,56.95286195286195,High,refund_risk,seller coaching required
+S00302,2026-02,42.285714285714285,Moderate,dispute_risk,monitor only
+S00303,2026-02,50.45614035087719,Moderate,refund_risk,monitor only
+S00304,2026-02,70.06844819503047,High,refund_risk,seller coaching required
+S00305,2026-02,67.11111111111111,High,dispute_risk,investigate dispute cluster
+S00306,2026-02,52.22222222222223,Moderate,refund_risk,monitor only
+S00307,2026-02,57.41414141414142,High,chargeback_risk,investigate dispute cluster
+S00308,2026-02,59.333333333333336,High,chargeback_risk,investigate dispute cluster
+S00309,2026-02,52.361111111111114,Moderate,refund_risk,monitor only
+S00310,2026-02,66.88888888888889,High,refund_risk,seller coaching required
+S00311,2026-02,63.35858585858586,High,refund_risk,seller coaching required
+S00312,2026-02,82.0,Critical,refund_risk,audit seller operations
+S00313,2026-02,62.910798122065735,High,refund_risk,seller coaching required
+S00314,2026-02,73.61403508771929,High,chargeback_risk,investigate dispute cluster
+S00315,2026-02,62.29166666666667,High,chargeback_risk,investigate dispute cluster
+S00316,2026-02,66.91228070175438,High,chargeback_risk,investigate dispute cluster
+S00317,2026-02,65.77777777777777,High,dispute_risk,investigate dispute cluster
+S00318,2026-02,57.97979797979798,High,refund_risk,seller coaching required
+S00319,2026-02,54.66666666666667,Moderate,on_time_risk,seller coaching required
+S00320,2026-02,87.8888888888889,Critical,refund_risk,audit seller operations
+S00321,2026-02,53.94383394383395,Moderate,on_time_risk,seller coaching required
+S00322,2026-02,61.81481481481482,High,chargeback_risk,investigate dispute cluster
+S00323,2026-02,45.18518518518518,Moderate,on_time_risk,seller coaching required
+S00324,2026-02,52.474747474747474,Moderate,on_time_risk,seller coaching required
+S00325,2026-02,44.304300371098016,Moderate,refund_risk,monitor only
+S00326,2026-02,68.15384615384616,High,refund_risk,seller coaching required
+S00327,2026-02,46.22222222222223,Moderate,dispute_risk,monitor only
+S00328,2026-02,61.66666666666667,High,refund_risk,seller coaching required
+S00329,2026-02,55.22222222222223,High,refund_risk,seller coaching required
+S00330,2026-02,67.41496598639455,High,chargeback_risk,investigate dispute cluster
+S00331,2026-02,77.0,Critical,refund_risk,audit seller operations
+S00332,2026-02,57.333333333333336,High,refund_risk,seller coaching required
+S00333,2026-02,53.66666666666667,Moderate,on_time_risk,seller coaching required
+S00334,2026-02,49.10165484633569,Moderate,on_time_risk,seller coaching required
+S00335,2026-02,67.47008547008548,High,refund_risk,seller coaching required
+S00336,2026-02,68.8100358422939,High,delay_risk,improve fulfillment SLA enforcement
+S00337,2026-02,53.333333333333336,Moderate,on_time_risk,seller coaching required
+S00338,2026-02,59.211469534050174,High,refund_risk,seller coaching required
+S00339,2026-02,43.758865248226954,Moderate,refund_risk,monitor only
+S00340,2026-02,71.86666666666667,High,refund_risk,seller coaching required
+S00341,2026-02,51.23809523809524,Moderate,chargeback_risk,monitor only
+S00342,2026-02,76.5,Critical,refund_risk,audit seller operations
+S00343,2026-02,52.16666666666667,Moderate,dispute_risk,monitor only
+S00344,2026-02,70.2051282051282,High,refund_risk,seller coaching required
+S00345,2026-02,60.26515151515152,High,chargeback_risk,investigate dispute cluster
+S00346,2026-02,78.08802708525701,Critical,refund_risk,audit seller operations
+S00347,2026-02,87.43602693602693,Critical,refund_risk,audit seller operations
+S00348,2026-02,54.333333333333336,Moderate,dispute_risk,monitor only
+S00349,2026-02,65.64912280701753,High,chargeback_risk,investigate dispute cluster
+S00350,2026-02,58.484848484848484,High,dispute_risk,investigate dispute cluster
+S00351,2026-02,59.13978494623656,High,on_time_risk,improve fulfillment SLA enforcement
+S00352,2026-02,55.757575757575765,High,on_time_risk,improve fulfillment SLA enforcement
+S00353,2026-02,58.66666666666667,High,refund_risk,seller coaching required
+S00354,2026-02,52.82828282828283,Moderate,on_time_risk,seller coaching required
+S00355,2026-02,51.54761904761905,Moderate,on_time_risk,seller coaching required
+S00356,2026-02,65.11111111111111,High,refund_risk,seller coaching required
+S00357,2026-02,67.77777777777779,High,delay_risk,improve fulfillment SLA enforcement
+S00358,2026-02,56.623655913978496,High,delay_risk,improve fulfillment SLA enforcement
+S00359,2026-02,68.7719298245614,High,refund_risk,seller coaching required
+S00360,2026-02,55.72727272727272,High,refund_risk,seller coaching required
+S00361,2026-02,52.272727272727266,Moderate,dispute_risk,monitor only
+S00362,2026-02,74.0952380952381,High,refund_risk,seller coaching required
+S00363,2026-02,50.25641025641026,Moderate,dispute_risk,monitor only
+S00364,2026-02,72.62836624775582,High,refund_risk,seller coaching required
+S00365,2026-02,71.40538194444444,High,refund_risk,seller coaching required
+S00366,2026-02,43.333333333333336,Moderate,dispute_risk,monitor only
+S00367,2026-02,73.8095238095238,High,refund_risk,seller coaching required
+S00368,2026-02,62.03065134099618,High,refund_risk,seller coaching required
+S00369,2026-02,90.98989898989899,Critical,refund_risk,audit seller operations
+S00370,2026-02,85.76811594202898,Critical,dispute_risk,hold payouts
+S00371,2026-02,43.333333333333336,Moderate,dispute_risk,monitor only
+S00372,2026-02,51.38888888888889,Moderate,refund_risk,monitor only
+S00373,2026-02,54.365591397849464,Moderate,delay_risk,seller coaching required
+S00374,2026-02,73.29501915708812,High,refund_risk,seller coaching required
+S00375,2026-02,67.40404040404042,High,refund_risk,seller coaching required
+S00376,2026-02,64.96296296296296,High,refund_risk,seller coaching required
+S00377,2026-02,62.485681557846505,High,on_time_risk,improve fulfillment SLA enforcement
+S00378,2026-02,62.38095238095238,High,chargeback_risk,investigate dispute cluster
+S00379,2026-02,68.59807956104252,High,refund_risk,seller coaching required
+S00380,2026-02,53.77556661138751,Moderate,refund_risk,monitor only
+S00381,2026-02,42.72868217054263,Moderate,refund_risk,monitor only
+S00382,2026-02,54.13793103448276,Moderate,chargeback_risk,monitor only
+S00383,2026-02,62.833333333333336,High,refund_risk,seller coaching required
+S00384,2026-02,51.62393162393163,Moderate,dispute_risk,monitor only
+S00385,2026-02,52.13114754098361,Moderate,on_time_risk,seller coaching required
+S00386,2026-02,73.4959349593496,High,dispute_risk,investigate dispute cluster
+S00387,2026-02,55.72463768115942,High,dispute_risk,investigate dispute cluster
+S00388,2026-02,65.77777777777777,High,refund_risk,seller coaching required
+S00389,2026-02,58.98550724637681,High,refund_risk,seller coaching required
+S00390,2026-02,46.4336917562724,Moderate,on_time_risk,seller coaching required
+S00391,2026-02,73.21212121212122,High,refund_risk,seller coaching required
+S00392,2026-02,59.788797061524335,High,refund_risk,seller coaching required
+S00393,2026-02,68.22222222222223,High,refund_risk,seller coaching required
+S00394,2026-02,41.358024691358025,Moderate,on_time_risk,seller coaching required
+S00395,2026-02,82.19047619047619,Critical,refund_risk,audit seller operations
+S00396,2026-02,65.4871794871795,High,refund_risk,seller coaching required
+S00397,2026-02,55.71785268414482,High,on_time_risk,improve fulfillment SLA enforcement
+S00398,2026-02,32.76190476190476,Moderate,on_time_risk,seller coaching required
+S00399,2026-02,50.0,Moderate,on_time_risk,seller coaching required
+S00400,2026-02,55.75757575757576,High,refund_risk,seller coaching required
+S00401,2026-02,58.76543209876544,High,refund_risk,seller coaching required
+S00402,2026-02,57.948717948717956,High,refund_risk,seller coaching required
+S00403,2026-02,68.2280701754386,High,refund_risk,seller coaching required
+S00404,2026-02,72.23391812865498,High,refund_risk,seller coaching required
+S00405,2026-02,58.173258003766485,High,dispute_risk,investigate dispute cluster
+S00406,2026-02,58.08278867102397,High,on_time_risk,improve fulfillment SLA enforcement
+S00407,2026-02,44.66666666666667,Moderate,refund_risk,monitor only
+S00408,2026-02,44.651162790697676,Moderate,refund_risk,monitor only
+S00409,2026-02,55.23809523809524,High,refund_risk,seller coaching required
+S00410,2026-02,83.0909090909091,Critical,refund_risk,audit seller operations
+S00411,2026-02,54.81203007518797,Moderate,refund_risk,monitor only
+S00412,2026-02,52.1505376344086,Moderate,on_time_risk,seller coaching required
+S00413,2026-02,62.622950819672134,High,dispute_risk,investigate dispute cluster
+S00414,2026-02,68.0,High,chargeback_risk,investigate dispute cluster
+S00415,2026-02,71.62698412698413,High,refund_risk,seller coaching required
+S00416,2026-02,58.779599271402546,High,on_time_risk,improve fulfillment SLA enforcement
+S00417,2026-02,68.94736842105263,High,refund_risk,seller coaching required
+S00418,2026-02,57.40112994350283,High,on_time_risk,improve fulfillment SLA enforcement
+S00419,2026-02,65.11111111111111,High,refund_risk,seller coaching required
+S00420,2026-02,66.70498084291188,High,refund_risk,seller coaching required
+S00421,2026-02,50.175438596491226,Moderate,refund_risk,monitor only
+S00422,2026-02,40.625,Moderate,on_time_risk,seller coaching required
+S00423,2026-02,74.66666666666667,High,chargeback_risk,investigate dispute cluster
+S00424,2026-02,49.26553672316384,Moderate,on_time_risk,seller coaching required
+S00425,2026-02,55.74193548387097,High,refund_risk,seller coaching required
+S00426,2026-02,56.14035087719298,High,on_time_risk,improve fulfillment SLA enforcement
+S00427,2026-02,48.333333333333336,Moderate,refund_risk,monitor only
+S00428,2026-02,49.12280701754386,Moderate,on_time_risk,seller coaching required
+S00429,2026-02,67.1111111111111,High,dispute_risk,investigate dispute cluster
+S00430,2026-02,43.74712643678161,Moderate,refund_risk,monitor only
+S00431,2026-02,67.6648451730419,High,refund_risk,seller coaching required
+S00432,2026-02,77.97701149425288,Critical,refund_risk,audit seller operations
+S00433,2026-02,56.94252873563218,High,refund_risk,seller coaching required
+S00434,2026-02,40.839506172839506,Moderate,refund_risk,monitor only
+S00435,2026-02,66.08888888888889,High,refund_risk,seller coaching required
+S00436,2026-02,66.98397435897435,High,refund_risk,seller coaching required
+S00437,2026-02,60.666666666666664,High,refund_risk,seller coaching required
+S00438,2026-02,37.333333333333336,Moderate,on_time_risk,seller coaching required
+S00439,2026-02,59.733333333333334,High,refund_risk,seller coaching required
+S00440,2026-02,55.333333333333336,High,dispute_risk,investigate dispute cluster
+S00441,2026-02,71.33333333333334,High,chargeback_risk,investigate dispute cluster
+S00442,2026-02,79.33333333333334,Critical,refund_risk,audit seller operations
+S00443,2026-02,47.87878787878788,Moderate,dispute_risk,monitor only
+S00444,2026-02,73.59514687100894,High,refund_risk,seller coaching required
+S00445,2026-02,62.0,High,delay_risk,improve fulfillment SLA enforcement
+S00446,2026-02,77.81981981981983,Critical,chargeback_risk,hold payouts
+S00447,2026-02,59.074074074074076,High,on_time_risk,improve fulfillment SLA enforcement
+S00448,2026-02,62.222222222222214,High,refund_risk,seller coaching required
+S00449,2026-02,50.22222222222223,Moderate,refund_risk,monitor only
+S00450,2026-02,79.14611872146119,Critical,refund_risk,audit seller operations
+S00451,2026-02,75.0,Critical,dispute_risk,hold payouts
+S00452,2026-02,68.20155038759691,High,delay_risk,improve fulfillment SLA enforcement
+S00453,2026-02,70.77777777777779,High,chargeback_risk,investigate dispute cluster
+S00454,2026-02,59.887005649717516,High,refund_risk,seller coaching required
+S00455,2026-02,42.94047619047619,Moderate,refund_risk,monitor only
+S00456,2026-02,66.7479674796748,High,refund_risk,seller coaching required
+S00457,2026-02,69.33333333333334,High,dispute_risk,investigate dispute cluster
+S00458,2026-02,54.66666666666667,Moderate,refund_risk,monitor only
+S00459,2026-02,57.079365079365076,High,refund_risk,seller coaching required
+S00460,2026-02,76.54545454545455,Critical,refund_risk,audit seller operations
+S00461,2026-02,84.41414141414141,Critical,chargeback_risk,hold payouts
+S00462,2026-02,68.85057471264369,High,refund_risk,seller coaching required
+S00463,2026-02,51.338383838383834,Moderate,refund_risk,monitor only
+S00464,2026-02,57.90643274853801,High,delay_risk,improve fulfillment SLA enforcement
+S00465,2026-02,67.53623188405797,High,dispute_risk,investigate dispute cluster
+S00466,2026-02,35.625,Moderate,on_time_risk,seller coaching required
+S00467,2026-02,53.0727969348659,Moderate,dispute_risk,monitor only
+S00468,2026-02,61.764705882352935,High,dispute_risk,investigate dispute cluster
+S00469,2026-02,54.166666666666664,Moderate,refund_risk,monitor only
+S00470,2026-02,69.73646723646723,High,on_time_risk,improve fulfillment SLA enforcement
+S00471,2026-02,47.266666666666666,Moderate,chargeback_risk,monitor only
+S00472,2026-02,69.05426356589147,High,refund_risk,seller coaching required
+S00473,2026-02,41.16104868913858,Moderate,on_time_risk,seller coaching required
+S00474,2026-02,49.84375000000001,Moderate,dispute_risk,monitor only
+S00475,2026-02,52.8310502283105,Moderate,refund_risk,monitor only
+S00476,2026-02,52.52645502645503,Moderate,on_time_risk,seller coaching required
+S00477,2026-02,32.0,Moderate,delay_risk,seller coaching required
+S00478,2026-02,55.111111111111114,High,dispute_risk,investigate dispute cluster
+S00479,2026-02,71.24882629107981,High,refund_risk,seller coaching required
+S00480,2026-02,83.11111111111111,Critical,refund_risk,audit seller operations
+S00481,2026-02,68.33333333333334,High,dispute_risk,investigate dispute cluster
+S00482,2026-02,55.142857142857146,High,refund_risk,seller coaching required
+S00483,2026-02,44.01449275362319,Moderate,refund_risk,monitor only
+S00484,2026-02,87.46666666666667,Critical,refund_risk,audit seller operations
+S00485,2026-02,50.257341810475324,Moderate,on_time_risk,seller coaching required
+S00486,2026-02,54.0,Moderate,dispute_risk,monitor only
+S00487,2026-02,50.47619047619048,Moderate,dispute_risk,monitor only
+S00488,2026-02,58.592592592592595,High,chargeback_risk,investigate dispute cluster
+S00489,2026-02,58.01587301587302,High,refund_risk,seller coaching required
+S00490,2026-02,82.18018018018019,Critical,dispute_risk,hold payouts
+S00491,2026-02,55.2,High,delay_risk,improve fulfillment SLA enforcement
+S00492,2026-02,68.88888888888889,High,refund_risk,seller coaching required
+S00493,2026-02,74.94444444444444,High,chargeback_risk,investigate dispute cluster
+S00494,2026-02,66.11111111111111,High,refund_risk,seller coaching required
+S00495,2026-02,80.79012345679013,Critical,refund_risk,audit seller operations
+S00496,2026-02,74.91753291753292,High,refund_risk,seller coaching required
+S00497,2026-02,76.12121212121212,Critical,refund_risk,audit seller operations
+S00498,2026-02,59.5,High,delay_risk,improve fulfillment SLA enforcement
+S00499,2026-02,72.0,High,refund_risk,seller coaching required
+S00500,2026-02,40.631578947368425,Moderate,on_time_risk,seller coaching required
+S00501,2026-02,38.125,Moderate,on_time_risk,seller coaching required
+S00502,2026-02,45.169082125603865,Moderate,on_time_risk,seller coaching required
+S00503,2026-02,55.86206896551724,High,dispute_risk,investigate dispute cluster
+S00504,2026-02,39.66666666666667,Moderate,on_time_risk,seller coaching required
+S00505,2026-02,47.5,Moderate,refund_risk,monitor only
+S00506,2026-02,43.333333333333336,Moderate,dispute_risk,monitor only
+S00507,2026-02,42.90196078431373,Moderate,refund_risk,monitor only
+S00508,2026-02,49.5,Moderate,on_time_risk,seller coaching required
+S00509,2026-02,54.63414634146342,Moderate,on_time_risk,seller coaching required
+S00510,2026-02,80.99782135076254,Critical,refund_risk,audit seller operations
+S00511,2026-02,68.62585034013605,High,refund_risk,seller coaching required
+S00512,2026-02,54.74747474747475,Moderate,on_time_risk,seller coaching required
+S00513,2026-02,59.52380952380952,High,refund_risk,seller coaching required
+S00514,2026-02,78.95652173913044,Critical,refund_risk,audit seller operations
+S00515,2026-02,81.33333333333334,Critical,dispute_risk,hold payouts
+S00516,2026-02,64.73809523809524,High,refund_risk,seller coaching required
+S00517,2026-02,55.57142857142857,High,delay_risk,improve fulfillment SLA enforcement
+S00518,2026-02,45.58823529411765,Moderate,refund_risk,monitor only
+S00519,2026-02,41.06382978723404,Moderate,on_time_risk,seller coaching required
+S00520,2026-02,43.170731707317074,Moderate,on_time_risk,seller coaching required
+S00521,2026-02,66.58333333333334,High,dispute_risk,investigate dispute cluster
+S00522,2026-02,45.95959595959596,Moderate,on_time_risk,seller coaching required
+S00523,2026-02,65.63636363636364,High,refund_risk,seller coaching required
+S00524,2026-02,70.65800865800867,High,refund_risk,seller coaching required
+S00525,2026-02,46.57276995305165,Moderate,on_time_risk,seller coaching required
+S00526,2026-02,67.16666666666667,High,refund_risk,seller coaching required
+S00527,2026-02,52.5,Moderate,dispute_risk,monitor only
+S00528,2026-02,53.24786324786325,Moderate,refund_risk,monitor only
+S00529,2026-02,57.10526315789473,High,dispute_risk,investigate dispute cluster
+S00530,2026-02,63.77777777777778,High,refund_risk,seller coaching required
+S00531,2026-02,63.333333333333336,High,dispute_risk,investigate dispute cluster
+S00532,2026-02,65.71428571428572,High,chargeback_risk,investigate dispute cluster
+S00533,2026-02,63.02564102564103,High,refund_risk,seller coaching required
+S00534,2026-02,61.48148148148148,High,on_time_risk,improve fulfillment SLA enforcement
+S00535,2026-02,43.333333333333336,Moderate,on_time_risk,seller coaching required
+S00536,2026-02,65.78703703703704,High,dispute_risk,investigate dispute cluster
+S00537,2026-02,79.55555555555556,Critical,refund_risk,audit seller operations
+S00538,2026-02,69.09433962264151,High,refund_risk,seller coaching required
+S00539,2026-02,40.83333333333333,Moderate,on_time_risk,seller coaching required
+S00540,2026-02,39.287749287749286,Moderate,on_time_risk,seller coaching required
+S00541,2026-02,68.45161290322581,High,refund_risk,seller coaching required
+S00542,2026-02,51.79012345679013,Moderate,refund_risk,monitor only
+S00543,2026-02,86.0,Critical,refund_risk,audit seller operations
+S00544,2026-02,84.44444444444446,Critical,refund_risk,audit seller operations
+S00545,2026-02,71.94871794871796,High,refund_risk,seller coaching required
+S00546,2026-02,35.0,Moderate,on_time_risk,seller coaching required
+S00547,2026-02,50.400000000000006,Moderate,dispute_risk,monitor only
+S00548,2026-02,45.61904761904762,Moderate,chargeback_risk,monitor only
+S00549,2026-02,49.44444444444444,Moderate,refund_risk,monitor only
+S00550,2026-02,50.04830917874396,Moderate,on_time_risk,seller coaching required
+S00551,2026-02,58.249619482496186,High,refund_risk,seller coaching required
+S00552,2026-02,53.84126984126984,Moderate,on_time_risk,seller coaching required
+S00553,2026-02,56.66666666666667,High,refund_risk,seller coaching required
+S00554,2026-02,44.72222222222222,Moderate,refund_risk,monitor only
+S00555,2026-02,52.307692307692314,Moderate,refund_risk,monitor only
+S00556,2026-02,73.76068376068376,High,refund_risk,seller coaching required
+S00557,2026-02,51.333333333333336,Moderate,chargeback_risk,monitor only
+S00558,2026-02,72.02777777777777,High,chargeback_risk,investigate dispute cluster
+S00559,2026-02,58.03703703703704,High,chargeback_risk,investigate dispute cluster
+S00560,2026-02,40.66666666666667,Moderate,on_time_risk,seller coaching required
+S00561,2026-02,39.14285714285714,Moderate,delay_risk,seller coaching required
+S00562,2026-02,66.14434947768281,High,refund_risk,seller coaching required
+S00563,2026-02,61.17647058823529,High,on_time_risk,improve fulfillment SLA enforcement
+S00564,2026-02,56.611111111111114,High,chargeback_risk,investigate dispute cluster
+S00565,2026-02,47.27272727272728,Moderate,on_time_risk,seller coaching required
+S00566,2026-02,60.5,High,chargeback_risk,investigate dispute cluster
+S00567,2026-02,74.96153846153847,High,refund_risk,seller coaching required
+S00568,2026-02,68.25,High,chargeback_risk,investigate dispute cluster
+S00569,2026-02,60.03921568627452,High,refund_risk,seller coaching required
+S00570,2026-02,58.385416666666664,High,refund_risk,seller coaching required
+S00571,2026-02,50.77777777777778,Moderate,on_time_risk,seller coaching required
+S00572,2026-02,49.61744022503517,Moderate,refund_risk,monitor only
+S00573,2026-02,55.614035087719294,High,chargeback_risk,investigate dispute cluster
+S00574,2026-02,55.12626262626263,High,refund_risk,seller coaching required
+S00575,2026-02,79.21285140562249,Critical,chargeback_risk,hold payouts
+S00576,2026-02,64.50617283950618,High,refund_risk,seller coaching required
+S00577,2026-02,61.94444444444445,High,refund_risk,seller coaching required
+S00578,2026-02,75.46153846153847,Critical,refund_risk,audit seller operations
+S00579,2026-02,60.804597701149426,High,refund_risk,seller coaching required
+S00580,2026-02,68.38888888888889,High,dispute_risk,investigate dispute cluster
+S00581,2026-02,57.12121212121212,High,refund_risk,seller coaching required
+S00582,2026-02,51.78861788617886,Moderate,on_time_risk,seller coaching required
+S00583,2026-02,55.11111111111111,High,refund_risk,seller coaching required
+S00584,2026-02,55.25925925925926,High,on_time_risk,improve fulfillment SLA enforcement
+S00585,2026-02,39.375,Moderate,on_time_risk,seller coaching required
+S00586,2026-02,65.18840579710145,High,refund_risk,seller coaching required
+S00587,2026-02,56.36363636363636,High,dispute_risk,investigate dispute cluster
+S00588,2026-02,61.71497584541063,High,on_time_risk,improve fulfillment SLA enforcement
+S00589,2026-02,56.77477477477478,High,delay_risk,improve fulfillment SLA enforcement
+S00590,2026-02,56.16666666666667,High,delay_risk,improve fulfillment SLA enforcement
+S00591,2026-02,44.871794871794876,Moderate,on_time_risk,seller coaching required
+S00592,2026-02,54.0,Moderate,refund_risk,monitor only
+S00593,2026-02,93.8974358974359,Critical,refund_risk,audit seller operations
+S00594,2026-02,61.24242424242424,High,refund_risk,seller coaching required
+S00595,2026-02,75.08641975308642,Critical,refund_risk,audit seller operations
+S00596,2026-02,73.85185185185185,High,dispute_risk,investigate dispute cluster
+S00597,2026-02,34.583333333333336,Moderate,on_time_risk,seller coaching required
+S00598,2026-02,58.71794871794872,High,on_time_risk,improve fulfillment SLA enforcement
+S00599,2026-02,61.80293501048218,High,refund_risk,seller coaching required
+S00600,2026-02,50.592592592592595,Moderate,delay_risk,seller coaching required
+S00601,2026-02,48.44444444444444,Moderate,refund_risk,monitor only
+S00602,2026-02,78.00694444444446,Critical,refund_risk,audit seller operations
+S00603,2026-02,52.7891156462585,Moderate,on_time_risk,seller coaching required
+S00604,2026-02,60.958333333333336,High,dispute_risk,investigate dispute cluster
+S00605,2026-02,68.61691542288557,High,refund_risk,seller coaching required
+S00606,2026-02,53.6036036036036,Moderate,on_time_risk,seller coaching required
+S00607,2026-02,76.01737242128121,Critical,dispute_risk,hold payouts
+S00608,2026-02,41.691756272401435,Moderate,refund_risk,monitor only
+S00609,2026-02,60.76023391812865,High,refund_risk,seller coaching required
+S00610,2026-02,59.333333333333336,High,refund_risk,seller coaching required
+S00611,2026-02,83.71296296296298,Critical,refund_risk,audit seller operations
+S00612,2026-02,56.81481481481482,High,refund_risk,seller coaching required
+S00613,2026-02,67.2043010752688,High,chargeback_risk,investigate dispute cluster
+S00614,2026-02,28.0,Low,on_time_risk,monitor only
+S00615,2026-02,49.82456140350877,Moderate,on_time_risk,seller coaching required
+S00616,2026-02,66.48484848484848,High,refund_risk,seller coaching required
+S00617,2026-02,38.25252525252525,Moderate,refund_risk,monitor only
+S00618,2026-02,65.7719298245614,High,refund_risk,seller coaching required
+S00619,2026-02,45.294117647058826,Moderate,refund_risk,monitor only
+S00620,2026-02,60.27777777777778,High,on_time_risk,improve fulfillment SLA enforcement
+S00621,2026-02,61.41176470588235,High,refund_risk,seller coaching required
+S00622,2026-02,48.74074074074074,Moderate,refund_risk,monitor only
+S00623,2026-02,40.49382716049383,Moderate,on_time_risk,seller coaching required
+S00624,2026-02,43.131313131313135,Moderate,on_time_risk,seller coaching required
+S00625,2026-02,69.28070175438596,High,refund_risk,seller coaching required
+S00626,2026-02,48.892857142857146,Moderate,dispute_risk,monitor only
+S00627,2026-02,62.289855072463766,High,refund_risk,seller coaching required
+S00628,2026-02,50.32258064516129,Moderate,refund_risk,monitor only
+S00629,2026-02,60.6,High,on_time_risk,improve fulfillment SLA enforcement
+S00630,2026-02,57.407407407407405,High,refund_risk,seller coaching required
+S00631,2026-02,43.91111111111111,Moderate,on_time_risk,seller coaching required
+S00632,2026-02,44.48717948717949,Moderate,on_time_risk,seller coaching required
+S00633,2026-02,54.04301075268817,Moderate,delay_risk,seller coaching required
+S00634,2026-02,51.80555555555556,Moderate,dispute_risk,monitor only
+S00635,2026-02,57.45454545454545,High,refund_risk,seller coaching required
+S00636,2026-02,50.769230769230774,Moderate,dispute_risk,monitor only
+S00637,2026-02,59.914529914529915,High,dispute_risk,investigate dispute cluster
+S00638,2026-02,61.296296296296305,High,chargeback_risk,investigate dispute cluster
+S00639,2026-02,81.45945945945947,Critical,dispute_risk,hold payouts
+S00640,2026-02,54.50292397660819,Moderate,on_time_risk,seller coaching required
+S00641,2026-02,55.625,High,on_time_risk,improve fulfillment SLA enforcement
+S00642,2026-02,76.54545454545455,Critical,refund_risk,audit seller operations
+S00643,2026-02,65.92156862745098,High,delay_risk,improve fulfillment SLA enforcement
+S00644,2026-02,69.625,High,refund_risk,seller coaching required
+S00645,2026-02,52.5,Moderate,refund_risk,monitor only
+S00646,2026-02,59.878787878787875,High,refund_risk,seller coaching required
+S00647,2026-02,53.57142857142857,Moderate,chargeback_risk,monitor only
+S00648,2026-02,77.18518518518519,Critical,refund_risk,audit seller operations
+S00649,2026-02,64.0,High,refund_risk,seller coaching required
+S00650,2026-02,53.38888888888889,Moderate,delay_risk,seller coaching required
+S00651,2026-02,65.66666666666667,High,chargeback_risk,investigate dispute cluster
+S00652,2026-02,47.51851851851852,Moderate,refund_risk,monitor only
+S00653,2026-02,57.63888888888889,High,dispute_risk,investigate dispute cluster
+S00654,2026-02,58.27225130890053,High,refund_risk,seller coaching required
+S00655,2026-02,68.39660493827161,High,refund_risk,seller coaching required
+S00656,2026-02,45.301587301587304,Moderate,dispute_risk,monitor only
+S00657,2026-02,70.33333333333334,High,refund_risk,seller coaching required
+S00658,2026-02,50.0,Moderate,refund_risk,monitor only
+S00659,2026-02,69.33333333333334,High,refund_risk,seller coaching required
+S00660,2026-02,40.95238095238095,Moderate,on_time_risk,seller coaching required
+S00661,2026-02,56.25,High,refund_risk,seller coaching required
+S00662,2026-02,40.12121212121212,Moderate,dispute_risk,monitor only
+S00663,2026-02,58.686868686868685,High,refund_risk,seller coaching required
+S00664,2026-02,75.54048964218457,Critical,refund_risk,audit seller operations
+S00665,2026-02,49.41269841269842,Moderate,on_time_risk,seller coaching required
+S00666,2026-02,65.6060606060606,High,refund_risk,seller coaching required
+S00667,2026-02,43.07520621057739,Moderate,refund_risk,monitor only
+S00668,2026-02,58.33333333333334,High,refund_risk,seller coaching required
+S00669,2026-02,54.411764705882355,Moderate,on_time_risk,seller coaching required
+S00670,2026-02,63.22807017543859,High,refund_risk,seller coaching required
+S00671,2026-02,56.0,High,chargeback_risk,investigate dispute cluster
+S00672,2026-02,63.53846153846155,High,delay_risk,improve fulfillment SLA enforcement
+S00673,2026-02,54.72727272727273,Moderate,on_time_risk,seller coaching required
+S00674,2026-02,30.77777777777778,Moderate,on_time_risk,seller coaching required
+S00675,2026-02,74.44444444444446,High,dispute_risk,investigate dispute cluster
+S00676,2026-02,51.02564102564102,Moderate,on_time_risk,seller coaching required
+S00677,2026-02,41.17647058823529,Moderate,on_time_risk,seller coaching required
+S00678,2026-02,41.67816091954023,Moderate,refund_risk,monitor only
+S00679,2026-02,67.30158730158729,High,refund_risk,seller coaching required
+S00680,2026-02,47.280701754385966,Moderate,on_time_risk,seller coaching required
+S00681,2026-02,44.66666666666667,Moderate,dispute_risk,monitor only
+S00682,2026-02,34.853801169590646,Moderate,on_time_risk,seller coaching required
+S00683,2026-02,49.710144927536234,Moderate,dispute_risk,monitor only
+S00684,2026-02,78.0493827160494,Critical,refund_risk,audit seller operations
+S00685,2026-02,65.36530775379697,High,refund_risk,seller coaching required
+S00686,2026-02,43.364632237871675,Moderate,on_time_risk,seller coaching required
+S00687,2026-02,39.42857142857143,Moderate,refund_risk,monitor only
+S00688,2026-02,41.14814814814815,Moderate,dispute_risk,monitor only
+S00689,2026-02,81.33333333333334,Critical,refund_risk,audit seller operations
+S00690,2026-02,71.12912912912913,High,refund_risk,seller coaching required
+S00691,2026-02,56.74074074074074,High,chargeback_risk,investigate dispute cluster
+S00692,2026-02,35.14285714285714,Moderate,on_time_risk,seller coaching required
+S00693,2026-02,87.22522522522523,Critical,refund_risk,audit seller operations
+S00694,2026-02,60.821596244131456,High,refund_risk,seller coaching required
+S00695,2026-02,61.93076162215628,High,refund_risk,seller coaching required
+S00696,2026-02,67.75757575757575,High,refund_risk,seller coaching required
+S00697,2026-02,56.15468409586057,High,refund_risk,seller coaching required
+S00698,2026-02,75.71428571428571,Critical,dispute_risk,hold payouts
+S00699,2026-02,75.3763440860215,Critical,refund_risk,audit seller operations
+S00700,2026-02,44.09929078014184,Moderate,on_time_risk,seller coaching required
+S00701,2026-02,37.407407407407405,Moderate,on_time_risk,seller coaching required
+S00702,2026-02,57.70833333333334,High,on_time_risk,improve fulfillment SLA enforcement
+S00703,2026-02,63.39345927280114,High,refund_risk,seller coaching required
+S00704,2026-02,66.2280701754386,High,dispute_risk,investigate dispute cluster
+S00705,2026-02,50.41666666666667,Moderate,on_time_risk,seller coaching required
+S00706,2026-02,72.24024024024024,High,refund_risk,seller coaching required
+S00707,2026-02,45.70175438596491,Moderate,on_time_risk,seller coaching required
+S00708,2026-02,48.60317460317461,Moderate,refund_risk,monitor only
+S00709,2026-02,42.910447761194035,Moderate,on_time_risk,seller coaching required
+S00710,2026-02,45.65573770491803,Moderate,on_time_risk,seller coaching required
+S00711,2026-02,50.50228310502283,Moderate,on_time_risk,seller coaching required
+S00712,2026-02,51.97530864197531,Moderate,on_time_risk,seller coaching required
+S00713,2026-02,62.505050505050505,High,on_time_risk,improve fulfillment SLA enforcement
+S00714,2026-02,53.57487922705314,Moderate,on_time_risk,seller coaching required
+S00715,2026-02,35.35353535353536,Moderate,on_time_risk,seller coaching required
+S00716,2026-02,56.90476190476191,High,dispute_risk,investigate dispute cluster
+S00717,2026-02,63.22222222222223,High,refund_risk,seller coaching required
+S00718,2026-02,64.70833333333334,High,refund_risk,seller coaching required
+S00719,2026-02,51.48148148148148,Moderate,on_time_risk,seller coaching required
+S00720,2026-02,53.22222222222223,Moderate,chargeback_risk,monitor only
+S00721,2026-02,56.43678160919541,High,refund_risk,seller coaching required
+S00722,2026-02,66.9480122324159,High,chargeback_risk,investigate dispute cluster
+S00723,2026-02,55.617283950617285,High,refund_risk,seller coaching required
+S00724,2026-02,36.2962962962963,Moderate,on_time_risk,seller coaching required
+S00725,2026-02,60.00000000000001,High,dispute_risk,investigate dispute cluster
+S00726,2026-02,72.18018018018019,High,dispute_risk,investigate dispute cluster
+S00727,2026-02,46.58392434988179,Moderate,on_time_risk,seller coaching required
+S00728,2026-02,61.66666666666667,High,dispute_risk,investigate dispute cluster
+S00729,2026-02,36.507936507936506,Moderate,on_time_risk,seller coaching required
+S00730,2026-02,78.84848484848484,Critical,refund_risk,audit seller operations
+S00731,2026-02,76.93333333333334,Critical,dispute_risk,hold payouts
+S00732,2026-02,52.48756218905473,Moderate,on_time_risk,seller coaching required
+S00733,2026-02,79.46031746031746,Critical,dispute_risk,hold payouts
+S00734,2026-02,56.66666666666667,High,dispute_risk,investigate dispute cluster
+S00735,2026-02,66.4,High,dispute_risk,investigate dispute cluster
+S00736,2026-02,34.66666666666667,Moderate,dispute_risk,monitor only
+S00737,2026-02,80.36065573770492,Critical,refund_risk,audit seller operations
+S00738,2026-02,56.2962962962963,High,on_time_risk,improve fulfillment SLA enforcement
+S00739,2026-02,72.79365079365078,High,refund_risk,seller coaching required
+S00740,2026-02,46.333333333333336,Moderate,delay_risk,seller coaching required
+S00741,2026-02,80.66666666666667,Critical,dispute_risk,hold payouts
+S00742,2026-02,52.22222222222222,Moderate,refund_risk,monitor only
+S00743,2026-02,38.28322440087146,Moderate,refund_risk,monitor only
+S00744,2026-02,73.33333333333334,High,refund_risk,seller coaching required
+S00745,2026-02,58.19444444444445,High,dispute_risk,investigate dispute cluster
+S00746,2026-02,65.92592592592592,High,dispute_risk,investigate dispute cluster
+S00747,2026-02,84.0,Critical,refund_risk,audit seller operations
+S00748,2026-02,54.79166666666667,Moderate,dispute_risk,monitor only
+S00749,2026-02,64.14965986394557,High,on_time_risk,improve fulfillment SLA enforcement
+S00750,2026-02,41.33691756272402,Moderate,delay_risk,seller coaching required
+S00751,2026-02,70.94771241830065,High,refund_risk,seller coaching required
+S00752,2026-02,55.13725490196079,High,refund_risk,seller coaching required
+S00753,2026-02,72.55555555555557,High,refund_risk,seller coaching required
+S00754,2026-02,44.13333333333333,Moderate,dispute_risk,monitor only
+S00755,2026-02,75.42857142857143,Critical,refund_risk,audit seller operations
+S00756,2026-02,57.5,High,dispute_risk,investigate dispute cluster
+S00757,2026-02,72.66666666666667,High,refund_risk,seller coaching required
+S00758,2026-02,45.8974358974359,Moderate,on_time_risk,seller coaching required
+S00759,2026-02,54.50980392156863,Moderate,refund_risk,monitor only
+S00760,2026-02,80.87550200803213,Critical,dispute_risk,hold payouts
+S00761,2026-02,63.72222222222223,High,refund_risk,seller coaching required
+S00762,2026-02,50.78431372549019,Moderate,refund_risk,monitor only
+S00763,2026-02,62.925925925925924,High,refund_risk,seller coaching required
+S00764,2026-02,28.88888888888889,Low,on_time_risk,monitor only
+S00765,2026-02,55.435897435897445,High,chargeback_risk,investigate dispute cluster
+S00766,2026-02,44.63768115942029,Moderate,refund_risk,monitor only
+S00767,2026-02,60.70175438596492,High,dispute_risk,investigate dispute cluster
+S00768,2026-02,70.0,High,refund_risk,seller coaching required
+S00769,2026-02,83.4308943089431,Critical,refund_risk,audit seller operations
+S00770,2026-02,90.66666666666667,Critical,refund_risk,audit seller operations
+S00771,2026-02,77.41666666666667,Critical,refund_risk,audit seller operations
+S00772,2026-02,78.2962962962963,Critical,dispute_risk,hold payouts
+S00773,2026-02,52.47747747747748,Moderate,on_time_risk,seller coaching required
+S00774,2026-02,56.141414141414145,High,refund_risk,seller coaching required
+S00775,2026-02,37.333333333333336,Moderate,refund_risk,monitor only
+S00776,2026-02,54.19047619047619,Moderate,dispute_risk,monitor only
+S00777,2026-02,69.95454545454545,High,refund_risk,seller coaching required
+S00778,2026-02,44.16666666666667,Moderate,on_time_risk,seller coaching required
+S00779,2026-02,58.00000000000001,High,dispute_risk,investigate dispute cluster
+S00780,2026-02,62.654320987654316,High,on_time_risk,improve fulfillment SLA enforcement
+S00781,2026-02,44.0,Moderate,on_time_risk,seller coaching required
+S00782,2026-02,60.39506172839506,High,delay_risk,improve fulfillment SLA enforcement
+S00783,2026-02,54.76190476190476,Moderate,on_time_risk,seller coaching required
+S00784,2026-02,69.66666666666667,High,refund_risk,seller coaching required
+S00785,2026-02,79.5528455284553,Critical,chargeback_risk,hold payouts
+S00786,2026-02,61.06280193236715,High,chargeback_risk,investigate dispute cluster
+S00787,2026-02,37.46236559139785,Moderate,on_time_risk,seller coaching required
+S00788,2026-02,64.61988304093568,High,on_time_risk,improve fulfillment SLA enforcement
+S00789,2026-02,56.666666666666664,High,refund_risk,seller coaching required
+S00790,2026-02,45.84313725490196,Moderate,dispute_risk,monitor only
+S00791,2026-02,55.333333333333336,High,refund_risk,seller coaching required
+S00792,2026-02,48.263888888888886,Moderate,refund_risk,monitor only
+S00793,2026-02,65.01075268817203,High,dispute_risk,investigate dispute cluster
+S00794,2026-02,33.714285714285715,Moderate,refund_risk,monitor only
+S00795,2026-02,57.64646464646465,High,refund_risk,seller coaching required
+S00796,2026-02,50.76923076923077,Moderate,refund_risk,monitor only
+S00797,2026-02,51.560846560846564,Moderate,dispute_risk,monitor only
+S00798,2026-02,23.897435897435898,Low,refund_risk,monitor only
+S00799,2026-02,68.0,High,dispute_risk,investigate dispute cluster
+S00800,2026-02,82.90643274853801,Critical,refund_risk,audit seller operations
+S00801,2026-02,55.85858585858586,High,on_time_risk,improve fulfillment SLA enforcement
+S00802,2026-02,35.61904761904762,Moderate,chargeback_risk,monitor only
+S00803,2026-02,35.948717948717956,Moderate,refund_risk,monitor only
+S00804,2026-02,76.7852233676976,Critical,refund_risk,audit seller operations
+S00805,2026-02,65.76923076923077,High,chargeback_risk,investigate dispute cluster
+S00806,2026-02,56.333333333333336,High,chargeback_risk,investigate dispute cluster
+S00807,2026-02,44.833333333333336,Moderate,on_time_risk,seller coaching required
+S00808,2026-02,63.274853801169584,High,on_time_risk,improve fulfillment SLA enforcement
+S00809,2026-02,71.46666666666667,High,dispute_risk,investigate dispute cluster
+S00810,2026-02,73.33333333333333,High,dispute_risk,investigate dispute cluster
+S00811,2026-02,77.0,Critical,refund_risk,audit seller operations
+S00812,2026-02,74.31372549019608,High,dispute_risk,investigate dispute cluster
+S00813,2026-02,64.0,High,refund_risk,seller coaching required
+S00814,2026-02,66.39344262295083,High,dispute_risk,investigate dispute cluster
+S00815,2026-02,58.66666666666667,High,refund_risk,seller coaching required
+S00816,2026-02,75.11111111111111,Critical,refund_risk,audit seller operations
+S00817,2026-02,55.44444444444444,High,refund_risk,seller coaching required
+S00818,2026-02,50.35087719298245,Moderate,on_time_risk,seller coaching required
+S00819,2026-02,72.39048633297834,High,refund_risk,seller coaching required
+S00820,2026-02,56.640522875817,High,refund_risk,seller coaching required
+S00821,2026-02,52.574074074074076,Moderate,dispute_risk,monitor only
+S00822,2026-02,59.122807017543856,High,on_time_risk,improve fulfillment SLA enforcement
+S00823,2026-02,69.35185185185185,High,dispute_risk,investigate dispute cluster
+S00824,2026-02,59.5959595959596,High,refund_risk,seller coaching required
+S00825,2026-02,63.9047619047619,High,dispute_risk,investigate dispute cluster
+S00826,2026-02,64.60606060606061,High,refund_risk,seller coaching required
+S00827,2026-02,48.484848484848484,Moderate,dispute_risk,monitor only
+S00828,2026-02,66.0,High,chargeback_risk,investigate dispute cluster
+S00829,2026-02,59.22979797979798,High,refund_risk,seller coaching required
+S00830,2026-02,70.58823529411765,High,chargeback_risk,investigate dispute cluster
+S00831,2026-02,46.410256410256416,Moderate,on_time_risk,seller coaching required
+S00832,2026-02,62.22222222222223,High,refund_risk,seller coaching required
+S00833,2026-02,28.205128205128208,Low,on_time_risk,monitor only
+S00834,2026-02,43.95310907237513,Moderate,dispute_risk,monitor only
+S00835,2026-02,37.764309764309765,Moderate,on_time_risk,seller coaching required
+S00836,2026-02,81.6923076923077,Critical,refund_risk,audit seller operations
+S00837,2026-02,65.55555555555556,High,refund_risk,seller coaching required
+S00838,2026-02,49.375,Moderate,refund_risk,monitor only
+S00839,2026-02,54.91666666666667,Moderate,refund_risk,monitor only
+S00840,2026-02,63.611111111111114,High,refund_risk,seller coaching required
+S00841,2026-02,60.32679738562092,High,on_time_risk,improve fulfillment SLA enforcement
+S00842,2026-02,58.736111111111114,High,refund_risk,seller coaching required
+S00843,2026-02,62.857142857142854,High,chargeback_risk,investigate dispute cluster
+S00844,2026-02,44.25,Moderate,dispute_risk,monitor only
+S00845,2026-02,46.979166666666664,Moderate,on_time_risk,seller coaching required
+S00846,2026-02,51.55555555555556,Moderate,chargeback_risk,monitor only
+S00847,2026-02,58.00000000000001,High,dispute_risk,investigate dispute cluster
+S00848,2026-02,59.888888888888886,High,chargeback_risk,investigate dispute cluster
+S00849,2026-02,73.48148148148148,High,refund_risk,seller coaching required
+S00850,2026-02,54.75308641975309,Moderate,refund_risk,monitor only
+S00851,2026-02,71.13255360623782,High,refund_risk,seller coaching required
+S00852,2026-02,30.0,Moderate,on_time_risk,seller coaching required
+S00853,2026-02,35.22222222222223,Moderate,refund_risk,monitor only
+S00854,2026-02,58.410256410256416,High,delay_risk,improve fulfillment SLA enforcement
+S00855,2026-02,66.46783625730995,High,chargeback_risk,investigate dispute cluster
+S00856,2026-02,68.88888888888889,High,refund_risk,seller coaching required
+S00857,2026-02,68.58333333333334,High,refund_risk,seller coaching required
+S00858,2026-02,83.27777777777777,Critical,refund_risk,audit seller operations
+S00859,2026-02,55.64102564102565,High,on_time_risk,improve fulfillment SLA enforcement
+S00860,2026-02,42.02298850574712,Moderate,on_time_risk,seller coaching required
+S00861,2026-02,65.80952380952381,High,refund_risk,seller coaching required
+S00862,2026-02,60.22222222222222,High,chargeback_risk,investigate dispute cluster
+S00863,2026-02,71.15216421240518,High,refund_risk,seller coaching required
+S00864,2026-02,74.17948717948718,High,refund_risk,seller coaching required
+S00865,2026-02,86.72357723577235,Critical,refund_risk,audit seller operations
+S00866,2026-02,43.111111111111114,Moderate,delay_risk,seller coaching required
+S00867,2026-02,67.33333333333334,High,refund_risk,seller coaching required
+S00868,2026-02,51.41025641025641,Moderate,refund_risk,monitor only
+S00869,2026-02,59.777777777777786,High,refund_risk,seller coaching required
+S00870,2026-02,69.02380952380952,High,refund_risk,seller coaching required
+S00871,2026-02,45.36752136752137,Moderate,refund_risk,monitor only
+S00872,2026-02,82.17204301075269,Critical,refund_risk,audit seller operations
+S00873,2026-02,59.77777777777778,High,refund_risk,seller coaching required
+S00874,2026-02,58.66666666666667,High,refund_risk,seller coaching required
+S00875,2026-02,56.1904761904762,High,dispute_risk,investigate dispute cluster
+S00876,2026-02,74.78260869565217,High,chargeback_risk,investigate dispute cluster
+S00877,2026-02,57.64705882352941,High,refund_risk,seller coaching required
+S00878,2026-02,73.57894736842105,High,refund_risk,seller coaching required
+S00879,2026-02,49.6875,Moderate,refund_risk,monitor only
+S00880,2026-02,42.77513227513227,Moderate,on_time_risk,seller coaching required
+S00881,2026-02,55.60452839788845,High,on_time_risk,improve fulfillment SLA enforcement
+S00882,2026-02,72.66666666666667,High,dispute_risk,investigate dispute cluster
+S00883,2026-02,56.48648648648649,High,refund_risk,seller coaching required
+S00884,2026-02,45.83735909822866,Moderate,on_time_risk,seller coaching required
+S00885,2026-02,64.88888888888889,High,dispute_risk,investigate dispute cluster
+S00886,2026-02,60.780141843971634,High,dispute_risk,investigate dispute cluster
+S00887,2026-02,50.960451977401135,Moderate,on_time_risk,seller coaching required
+S00888,2026-02,66.0,High,chargeback_risk,investigate dispute cluster
+S00889,2026-02,69.26356589147287,High,chargeback_risk,investigate dispute cluster
+S00890,2026-02,65.61757105943153,High,refund_risk,seller coaching required
+S00891,2026-02,81.11111111111111,Critical,refund_risk,audit seller operations
+S00892,2026-02,57.29166666666667,High,refund_risk,seller coaching required
+S00893,2026-02,48.00000000000001,Moderate,refund_risk,monitor only
+S00894,2026-02,48.76543209876544,Moderate,on_time_risk,seller coaching required
+S00895,2026-02,74.06349206349206,High,dispute_risk,investigate dispute cluster
+S00896,2026-02,57.43369175627241,High,on_time_risk,improve fulfillment SLA enforcement
+S00897,2026-02,70.47281323877068,High,refund_risk,seller coaching required
+S00898,2026-02,46.66666666666667,Moderate,dispute_risk,monitor only
+S00899,2026-02,80.78306878306879,Critical,refund_risk,audit seller operations
+S00900,2026-02,73.95931142410016,High,refund_risk,seller coaching required
+S00901,2026-02,59.64705882352941,High,refund_risk,seller coaching required
+S00902,2026-02,44.239766081871345,Moderate,on_time_risk,seller coaching required
+S00903,2026-02,72.0,High,refund_risk,seller coaching required
+S00904,2026-02,74.09356725146199,High,refund_risk,seller coaching required
+S00905,2026-02,82.95238095238096,Critical,refund_risk,audit seller operations
+S00906,2026-02,56.16666666666667,High,refund_risk,seller coaching required
+S00907,2026-02,58.25,High,refund_risk,seller coaching required
+S00908,2026-02,72.8512241054614,High,refund_risk,seller coaching required
+S00909,2026-02,43.80952380952381,Moderate,on_time_risk,seller coaching required
+S00910,2026-02,51.699346405228766,Moderate,on_time_risk,seller coaching required
+S00911,2026-02,64.14492753623188,High,refund_risk,seller coaching required
+S00912,2026-02,68.66666666666667,High,refund_risk,seller coaching required
+S00913,2026-02,48.82352941176471,Moderate,on_time_risk,seller coaching required
+S00914,2026-02,52.0,Moderate,dispute_risk,monitor only
+S00915,2026-02,44.61538461538462,Moderate,on_time_risk,seller coaching required
+S00916,2026-02,75.61111111111111,Critical,refund_risk,audit seller operations
+S00917,2026-02,44.00000000000001,Moderate,on_time_risk,seller coaching required
+S00918,2026-02,49.269841269841265,Moderate,dispute_risk,monitor only
+S00919,2026-02,64.53703703703704,High,on_time_risk,improve fulfillment SLA enforcement
+S00920,2026-02,43.101010101010104,Moderate,refund_risk,monitor only
+S00921,2026-02,59.52380952380952,High,chargeback_risk,investigate dispute cluster
+S00922,2026-02,82.84010840108402,Critical,refund_risk,audit seller operations
+S00923,2026-02,56.03773584905661,High,on_time_risk,improve fulfillment SLA enforcement
+S00924,2026-02,52.22222222222223,Moderate,refund_risk,monitor only
+S00925,2026-02,71.83333333333334,High,dispute_risk,investigate dispute cluster
+S00926,2026-02,64.34567901234567,High,delay_risk,improve fulfillment SLA enforcement
+S00927,2026-02,69.50819672131148,High,refund_risk,seller coaching required
+S00928,2026-02,40.83333333333333,Moderate,on_time_risk,seller coaching required
+S00929,2026-02,54.767676767676775,Moderate,refund_risk,monitor only
+S00930,2026-02,56.87830687830688,High,on_time_risk,improve fulfillment SLA enforcement
+S00931,2026-02,62.333333333333336,High,delay_risk,improve fulfillment SLA enforcement
+S00932,2026-02,60.317460317460316,High,refund_risk,seller coaching required
+S00933,2026-02,45.05882352941177,Moderate,refund_risk,monitor only
+S00934,2026-02,53.125,Moderate,refund_risk,monitor only
+S00935,2026-02,63.96396396396396,High,dispute_risk,investigate dispute cluster
+S00936,2026-02,70.76923076923077,High,dispute_risk,investigate dispute cluster
+S00937,2026-02,63.92857142857144,High,refund_risk,seller coaching required
+S00938,2026-02,44.96296296296296,Moderate,delay_risk,seller coaching required
+S00939,2026-02,79.58201058201058,Critical,refund_risk,audit seller operations
+S00940,2026-02,84.36800630417652,Critical,refund_risk,audit seller operations
+S00941,2026-02,32.81481481481482,Moderate,on_time_risk,seller coaching required
+S00942,2026-02,61.75757575757576,High,refund_risk,seller coaching required
+S00943,2026-02,39.111111111111114,Moderate,on_time_risk,seller coaching required
+S00944,2026-02,56.2962962962963,High,refund_risk,seller coaching required
+S00945,2026-02,63.70370370370371,High,refund_risk,seller coaching required
+S00946,2026-02,77.97701149425288,Critical,refund_risk,audit seller operations
+S00947,2026-02,49.23076923076923,Moderate,dispute_risk,monitor only
+S00948,2026-02,84.66817838246412,Critical,refund_risk,audit seller operations
+S00949,2026-02,66.06060606060606,High,dispute_risk,investigate dispute cluster
+S00950,2026-02,54.17171717171718,Moderate,refund_risk,monitor only
+S00951,2026-02,51.64102564102564,Moderate,chargeback_risk,monitor only
+S00952,2026-02,58.93617021276596,High,refund_risk,seller coaching required
+S00953,2026-02,64.22222222222223,High,refund_risk,seller coaching required
+S00954,2026-02,69.06349206349206,High,refund_risk,seller coaching required
+S00955,2026-02,56.705882352941174,High,refund_risk,seller coaching required
+S00956,2026-02,47.64705882352941,Moderate,dispute_risk,monitor only
+S00957,2026-02,53.18840579710145,Moderate,refund_risk,monitor only
+S00958,2026-02,68.44444444444444,High,refund_risk,seller coaching required
+S00959,2026-02,35.8974358974359,Moderate,on_time_risk,seller coaching required
+S00960,2026-02,33.0,Moderate,on_time_risk,seller coaching required
+S00961,2026-02,79.27891156462584,Critical,chargeback_risk,hold payouts
+S00962,2026-02,32.76190476190476,Moderate,refund_risk,monitor only
+S00963,2026-02,58.29059829059829,High,refund_risk,seller coaching required
+S00964,2026-02,79.06172839506173,Critical,refund_risk,audit seller operations
+S00965,2026-02,83.75308641975309,Critical,refund_risk,audit seller operations
+S00966,2026-02,55.111111111111114,High,delay_risk,improve fulfillment SLA enforcement
+S00967,2026-02,42.0,Moderate,delay_risk,seller coaching required
+S00968,2026-02,90.66666666666667,Critical,dispute_risk,hold payouts
+S00969,2026-02,57.55555555555556,High,refund_risk,seller coaching required
+S00970,2026-02,62.514619883040936,High,refund_risk,seller coaching required
+S00971,2026-02,52.51238499646143,Moderate,on_time_risk,seller coaching required
+S00972,2026-02,52.95238095238096,Moderate,dispute_risk,monitor only
+S00973,2026-02,57.878787878787875,High,dispute_risk,investigate dispute cluster
+S00974,2026-02,48.87021475256769,Moderate,on_time_risk,seller coaching required
+S00975,2026-02,78.47916666666667,Critical,refund_risk,audit seller operations
+S00976,2026-02,73.27272727272728,High,chargeback_risk,investigate dispute cluster
+S00977,2026-02,55.297619047619044,High,on_time_risk,improve fulfillment SLA enforcement
+S00978,2026-02,67.11111111111111,High,dispute_risk,investigate dispute cluster
+S00979,2026-02,57.18518518518519,High,refund_risk,seller coaching required
+S00980,2026-02,66.3921568627451,High,chargeback_risk,investigate dispute cluster
+S00981,2026-02,55.5,High,on_time_risk,improve fulfillment SLA enforcement
+S00982,2026-02,58.22916666666667,High,on_time_risk,improve fulfillment SLA enforcement
+S00983,2026-02,63.33333333333334,High,dispute_risk,investigate dispute cluster
+S00984,2026-02,59.333333333333336,High,refund_risk,seller coaching required
+S00985,2026-02,74.60683760683762,High,refund_risk,seller coaching required
+S00986,2026-02,40.88888888888889,Moderate,on_time_risk,seller coaching required
+S00987,2026-02,76.20327304048234,Critical,refund_risk,audit seller operations
+S00988,2026-02,83.31791097090782,Critical,dispute_risk,hold payouts
+S00989,2026-02,38.64814814814815,Moderate,on_time_risk,seller coaching required
+S00990,2026-02,70.43137254901961,High,dispute_risk,investigate dispute cluster
+S00991,2026-02,75.33333333333334,Critical,refund_risk,audit seller operations
+S00992,2026-02,50.86252354048964,Moderate,on_time_risk,seller coaching required
+S00993,2026-02,41.01994301994302,Moderate,refund_risk,monitor only
+S00994,2026-02,66.19753086419753,High,refund_risk,seller coaching required
+S00995,2026-02,52.22222222222223,Moderate,on_time_risk,seller coaching required
+S00996,2026-02,61.85185185185186,High,on_time_risk,improve fulfillment SLA enforcement
+S00997,2026-02,59.13318616629875,High,chargeback_risk,investigate dispute cluster
+S00998,2026-02,32.77777777777778,Moderate,on_time_risk,seller coaching required
+S00999,2026-02,57.06666666666667,High,dispute_risk,investigate dispute cluster
+S01000,2026-02,34.91919191919192,Moderate,refund_risk,monitor only
+S01001,2026-02,62.58823529411765,High,chargeback_risk,investigate dispute cluster
+S01002,2026-02,49.19047619047619,Moderate,dispute_risk,monitor only
+S01003,2026-02,53.78109452736319,Moderate,refund_risk,monitor only
+S01004,2026-02,56.3768115942029,High,refund_risk,seller coaching required
+S01005,2026-02,57.26315789473684,High,delay_risk,improve fulfillment SLA enforcement
+S01006,2026-02,76.47619047619047,Critical,dispute_risk,hold payouts
+S01007,2026-02,57.878787878787875,High,refund_risk,seller coaching required
+S01008,2026-02,52.05228758169936,Moderate,refund_risk,monitor only
+S01009,2026-02,55.21739130434783,High,dispute_risk,investigate dispute cluster
+S01010,2026-02,68.55555555555556,High,chargeback_risk,investigate dispute cluster
+S01011,2026-02,55.06666666666667,High,on_time_risk,improve fulfillment SLA enforcement
+S01012,2026-02,58.205128205128204,High,refund_risk,seller coaching required
+S01013,2026-02,77.55555555555556,Critical,refund_risk,audit seller operations
+S01014,2026-02,67.27777777777777,High,refund_risk,seller coaching required
+S01015,2026-02,58.22222222222222,High,refund_risk,seller coaching required
+S01016,2026-02,57.38562091503268,High,refund_risk,seller coaching required
+S01017,2026-02,40.0,Moderate,refund_risk,monitor only
+S01018,2026-02,82.5,Critical,refund_risk,audit seller operations
+S01019,2026-02,57.560128029263836,High,refund_risk,seller coaching required
+S01020,2026-02,77.16666666666667,Critical,refund_risk,audit seller operations
+S01021,2026-02,47.43589743589744,Moderate,on_time_risk,seller coaching required
+S01022,2026-02,48.73015873015873,Moderate,refund_risk,monitor only
+S01023,2026-02,51.80555555555556,Moderate,refund_risk,monitor only
+S01024,2026-02,65.13725490196079,High,refund_risk,seller coaching required
+S01025,2026-02,49.521072796934874,Moderate,on_time_risk,seller coaching required
+S01026,2026-02,44.848484848484844,Moderate,on_time_risk,seller coaching required
+S01027,2026-02,65.51111111111112,High,refund_risk,seller coaching required
+S01028,2026-02,65.65656565656566,High,refund_risk,seller coaching required
+S01029,2026-02,62.98039215686275,High,refund_risk,seller coaching required
+S01030,2026-02,64.58333333333334,High,refund_risk,seller coaching required
+S01031,2026-02,70.45977011494253,High,refund_risk,seller coaching required
+S01032,2026-02,64.02985074626866,High,refund_risk,seller coaching required
+S01033,2026-02,26.395061728395063,Low,repeat_buyer_risk,monitor only
+S01034,2026-02,75.54166666666666,Critical,refund_risk,audit seller operations
+S01035,2026-02,53.333333333333336,Moderate,chargeback_risk,monitor only
+S01036,2026-02,59.77291159772913,High,on_time_risk,improve fulfillment SLA enforcement
+S01037,2026-02,50.625,Moderate,on_time_risk,seller coaching required
+S01038,2026-02,70.38548752834467,High,refund_risk,seller coaching required
+S01039,2026-02,57.05882352941177,High,refund_risk,seller coaching required
+S01040,2026-02,68.31372549019608,High,refund_risk,seller coaching required
+S01041,2026-02,59.25925925925927,High,refund_risk,seller coaching required
+S01042,2026-02,47.17948717948718,Moderate,refund_risk,monitor only
+S01043,2026-02,60.88888888888889,High,refund_risk,seller coaching required
+S01044,2026-02,54.2962962962963,Moderate,dispute_risk,monitor only
+S01045,2026-02,58.484848484848484,High,dispute_risk,investigate dispute cluster
+S01046,2026-02,60.21637426900585,High,delay_risk,improve fulfillment SLA enforcement
+S01047,2026-02,63.211755233494365,High,refund_risk,seller coaching required
+S01048,2026-02,45.04761904761905,Moderate,refund_risk,monitor only
+S01049,2026-02,65.88235294117646,High,refund_risk,seller coaching required
+S01050,2026-02,61.7843137254902,High,chargeback_risk,investigate dispute cluster
+S01051,2026-02,87.94871794871796,Critical,refund_risk,audit seller operations
+S01052,2026-02,49.87080103359173,Moderate,on_time_risk,seller coaching required
+S01053,2026-02,54.400000000000006,Moderate,on_time_risk,seller coaching required
+S01054,2026-02,90.03030303030303,Critical,dispute_risk,hold payouts
+S01055,2026-02,50.205128205128204,Moderate,delay_risk,seller coaching required
+S01056,2026-02,81.53586497890296,Critical,refund_risk,audit seller operations
+S01057,2026-02,66.7283950617284,High,refund_risk,seller coaching required
+S01058,2026-02,56.23655913978495,High,dispute_risk,investigate dispute cluster
+S01059,2026-02,49.86666666666667,Moderate,refund_risk,monitor only
+S01060,2026-02,57.313131313131315,High,refund_risk,seller coaching required
+S01061,2026-02,68.66666666666666,High,refund_risk,seller coaching required
+S01062,2026-02,54.44444444444444,Moderate,on_time_risk,seller coaching required
+S01063,2026-02,42.0,Moderate,delay_risk,seller coaching required
+S01064,2026-02,65.49019607843138,High,refund_risk,seller coaching required
+S01065,2026-02,42.0,Moderate,delay_risk,seller coaching required
+S01066,2026-02,65.90196078431373,High,chargeback_risk,investigate dispute cluster
+S01067,2026-02,62.3186077643909,High,refund_risk,seller coaching required
+S01068,2026-02,41.81944444444444,Moderate,on_time_risk,seller coaching required
+S01069,2026-02,45.71111111111111,Moderate,on_time_risk,seller coaching required
+S01070,2026-02,84.25806451612905,Critical,refund_risk,audit seller operations
+S01071,2026-02,38.67901234567901,Moderate,on_time_risk,seller coaching required
+S01072,2026-02,56.52380952380952,High,refund_risk,seller coaching required
+S01073,2026-02,57.361111111111114,High,dispute_risk,investigate dispute cluster
+S01074,2026-02,74.53472222222223,High,refund_risk,seller coaching required
+S01075,2026-02,50.54644808743169,Moderate,dispute_risk,monitor only
+S01076,2026-02,58.72727272727273,High,chargeback_risk,investigate dispute cluster
+S01077,2026-02,48.22222222222223,Moderate,dispute_risk,monitor only
+S01078,2026-02,73.72939068100358,High,refund_risk,seller coaching required
+S01079,2026-02,41.851851851851855,Moderate,on_time_risk,seller coaching required
+S01080,2026-02,47.03703703703704,Moderate,on_time_risk,seller coaching required
+S01081,2026-02,81.40350877192982,Critical,refund_risk,audit seller operations
+S01082,2026-02,78.9298245614035,Critical,refund_risk,audit seller operations
+S01083,2026-02,46.44444444444444,Moderate,refund_risk,monitor only
+S01084,2026-02,49.44444444444444,Moderate,on_time_risk,seller coaching required
+S01085,2026-02,62.0,High,refund_risk,seller coaching required
+S01086,2026-02,78.54320987654322,Critical,refund_risk,audit seller operations
+S01087,2026-02,55.0,High,on_time_risk,improve fulfillment SLA enforcement
+S01088,2026-02,51.583333333333336,Moderate,delay_risk,seller coaching required
+S01089,2026-02,49.24242424242424,Moderate,refund_risk,monitor only
+S01090,2026-02,59.61904761904762,High,delay_risk,improve fulfillment SLA enforcement
+S01091,2026-02,54.0,Moderate,refund_risk,monitor only
+S01092,2026-02,58.75000000000001,High,dispute_risk,investigate dispute cluster
+S01093,2026-02,62.35294117647059,High,chargeback_risk,investigate dispute cluster
+S01094,2026-02,76.11347517730496,Critical,refund_risk,audit seller operations
+S01095,2026-02,67.86206896551724,High,refund_risk,seller coaching required
+S01096,2026-02,58.73015873015873,High,refund_risk,seller coaching required
+S01097,2026-02,67.66666666666667,High,refund_risk,seller coaching required
+S01098,2026-02,58.641975308641975,High,refund_risk,seller coaching required
+S01099,2026-02,51.32075471698113,Moderate,refund_risk,monitor only
+S01100,2026-02,63.01449275362319,High,refund_risk,seller coaching required
+S01101,2026-02,60.66666666666667,High,refund_risk,seller coaching required
+S01102,2026-02,50.64393939393939,Moderate,refund_risk,monitor only
+S01103,2026-02,50.277777777777786,Moderate,on_time_risk,seller coaching required
+S01104,2026-02,73.9298245614035,High,dispute_risk,investigate dispute cluster
+S01105,2026-02,80.11111111111111,Critical,refund_risk,audit seller operations
+S01106,2026-02,76.74358974358975,Critical,refund_risk,audit seller operations
+S01107,2026-02,52.703321878579615,Moderate,on_time_risk,seller coaching required
+S01108,2026-02,61.182795698924735,High,dispute_risk,investigate dispute cluster
+S01109,2026-02,58.29457364341086,High,dispute_risk,investigate dispute cluster
+S01110,2026-02,62.66666666666667,High,chargeback_risk,investigate dispute cluster
+S01111,2026-02,61.09090909090909,High,refund_risk,seller coaching required
+S01112,2026-02,81.27536231884059,Critical,dispute_risk,hold payouts
+S01113,2026-02,43.09803921568628,Moderate,on_time_risk,seller coaching required
+S01114,2026-02,58.145833333333336,High,refund_risk,seller coaching required
+S01115,2026-02,57.59051186017478,High,dispute_risk,investigate dispute cluster
+S01116,2026-02,43.1063829787234,Moderate,on_time_risk,seller coaching required
+S01117,2026-02,35.47126436781609,Moderate,on_time_risk,seller coaching required
+S01118,2026-02,41.33333333333333,Moderate,dispute_risk,monitor only
+S01119,2026-02,68.2051282051282,High,refund_risk,seller coaching required
+S01120,2026-02,53.333333333333336,Moderate,refund_risk,monitor only
+S01121,2026-02,66.10062893081762,High,refund_risk,seller coaching required
+S01122,2026-02,61.833333333333336,High,chargeback_risk,investigate dispute cluster
+S01123,2026-02,57.948717948717956,High,on_time_risk,improve fulfillment SLA enforcement
+S01124,2026-02,72.0,High,refund_risk,seller coaching required
+S01125,2026-02,42.592592592592595,Moderate,on_time_risk,seller coaching required
+S01126,2026-02,69.35323383084577,High,refund_risk,seller coaching required
+S01127,2026-02,47.142857142857146,Moderate,refund_risk,monitor only
+S01128,2026-02,47.17211328976035,Moderate,dispute_risk,monitor only
+S01129,2026-02,45.5,Moderate,dispute_risk,monitor only
+S01130,2026-02,60.57142857142857,High,refund_risk,seller coaching required
+S01131,2026-02,55.9080459770115,High,delay_risk,improve fulfillment SLA enforcement
+S01132,2026-02,63.333333333333336,High,on_time_risk,improve fulfillment SLA enforcement
+S01133,2026-02,49.55555555555556,Moderate,dispute_risk,monitor only
+S01134,2026-02,55.617283950617285,High,on_time_risk,improve fulfillment SLA enforcement
+S01135,2026-02,59.53216374269007,High,on_time_risk,improve fulfillment SLA enforcement
+S01136,2026-02,61.00709219858156,High,dispute_risk,investigate dispute cluster
+S01137,2026-02,50.925925925925924,Moderate,dispute_risk,monitor only
+S01138,2026-02,47.26190476190476,Moderate,refund_risk,monitor only
+S01139,2026-02,49.342403628117914,Moderate,on_time_risk,seller coaching required
+S01140,2026-02,51.72043010752688,Moderate,on_time_risk,seller coaching required
+S01141,2026-02,63.596491228070164,High,refund_risk,seller coaching required
+S01142,2026-02,55.333333333333336,High,dispute_risk,investigate dispute cluster
+S01143,2026-02,76.89795918367348,Critical,refund_risk,audit seller operations
+S01144,2026-02,89.22222222222223,Critical,dispute_risk,hold payouts
+S01145,2026-02,72.06146572104018,High,refund_risk,seller coaching required
+S01146,2026-02,48.65384615384615,Moderate,refund_risk,monitor only
+S01147,2026-02,49.42528735632184,Moderate,on_time_risk,seller coaching required
+S01148,2026-02,51.37777777777778,Moderate,on_time_risk,seller coaching required
+S01149,2026-02,87.87654320987653,Critical,refund_risk,audit seller operations
+S01150,2026-02,59.733333333333334,High,refund_risk,seller coaching required
+S01151,2026-02,58.0,High,refund_risk,seller coaching required
+S01152,2026-02,35.45454545454545,Moderate,on_time_risk,seller coaching required
+S01153,2026-02,56.0,High,refund_risk,seller coaching required
+S01154,2026-02,67.88888888888889,High,refund_risk,seller coaching required
+S01155,2026-02,62.51977401129944,High,refund_risk,seller coaching required
+S01156,2026-02,74.25641025641026,High,refund_risk,seller coaching required
+S01157,2026-02,62.0436507936508,High,refund_risk,seller coaching required
+S01158,2026-02,51.21212121212121,Moderate,refund_risk,monitor only
+S01159,2026-02,52.945736434108525,Moderate,refund_risk,monitor only
+S01160,2026-02,52.671296296296305,Moderate,refund_risk,monitor only
+S01161,2026-02,58.541666666666664,High,on_time_risk,improve fulfillment SLA enforcement
+S01162,2026-02,47.634408602150536,Moderate,on_time_risk,seller coaching required
+S01163,2026-02,57.30612244897959,High,delay_risk,improve fulfillment SLA enforcement
+S01164,2026-02,59.578960067559414,High,refund_risk,seller coaching required
+S01165,2026-02,72.47619047619048,High,refund_risk,seller coaching required
+S01166,2026-02,68.38888888888889,High,refund_risk,seller coaching required
+S01167,2026-02,71.53846153846155,High,dispute_risk,investigate dispute cluster
+S01168,2026-02,43.33333333333333,Moderate,on_time_risk,seller coaching required
+S01169,2026-02,81.86163522012578,Critical,refund_risk,audit seller operations
+S01170,2026-02,60.909090909090914,High,dispute_risk,investigate dispute cluster
+S01171,2026-02,32.0,Moderate,delay_risk,seller coaching required
+S01172,2026-02,61.46666666666667,High,on_time_risk,improve fulfillment SLA enforcement
+S01173,2026-02,40.51282051282052,Moderate,on_time_risk,seller coaching required
+S01174,2026-02,50.88235294117647,Moderate,refund_risk,monitor only
+S01175,2026-02,60.79545454545455,High,refund_risk,seller coaching required
+S01176,2026-02,52.64705882352941,Moderate,on_time_risk,seller coaching required
+S01177,2026-02,69.09732988802756,High,refund_risk,seller coaching required
+S01178,2026-02,56.64529914529915,High,refund_risk,seller coaching required
+S01179,2026-02,64.28571428571428,High,dispute_risk,investigate dispute cluster
+S01180,2026-02,54.62962962962963,Moderate,refund_risk,monitor only
+S01181,2026-02,51.72377985462097,Moderate,on_time_risk,seller coaching required
+S01182,2026-02,60.392156862745104,High,refund_risk,seller coaching required
+S01183,2026-02,69.23885562208916,High,refund_risk,seller coaching required
+S01184,2026-02,66.76923076923077,High,chargeback_risk,investigate dispute cluster
+S01185,2026-02,46.44932844932845,Moderate,refund_risk,monitor only
+S01186,2026-02,54.04761904761905,Moderate,refund_risk,monitor only
+S01187,2026-02,56.333333333333336,High,delay_risk,improve fulfillment SLA enforcement
+S01188,2026-02,63.8018018018018,High,refund_risk,seller coaching required
+S01189,2026-02,37.72972972972973,Moderate,dispute_risk,monitor only
+S01190,2026-02,40.704607046070464,Moderate,on_time_risk,seller coaching required
+S01191,2026-02,58.8,High,on_time_risk,improve fulfillment SLA enforcement
+S01192,2026-02,67.88235294117646,High,chargeback_risk,investigate dispute cluster
+S01193,2026-02,81.84313725490196,Critical,refund_risk,audit seller operations
+S01194,2026-02,59.27536231884058,High,refund_risk,seller coaching required
+S01195,2026-02,64.88888888888889,High,refund_risk,seller coaching required
+S01196,2026-02,54.2962962962963,Moderate,refund_risk,monitor only
+S01197,2026-02,60.17460317460318,High,delay_risk,improve fulfillment SLA enforcement
+S01198,2026-02,85.70370370370371,Critical,dispute_risk,hold payouts
+S01199,2026-02,62.06944444444444,High,delay_risk,improve fulfillment SLA enforcement
+S01200,2026-02,52.46376811594203,Moderate,refund_risk,monitor only

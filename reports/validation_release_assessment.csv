@@ -1,0 +1,2 @@
+release_state,technical_gate_passed,analytical_gate_passed,technically_valid,analytically_acceptable,decision_support_only,screening_grade_only,not_committee_grade,publish_blocked,committee_grade_ready,critical_issues,high_issues,medium_issues,low_issues,blocker_count,warning_count,min_module_confidence,rationale
+technically valid,True,True,True,False,False,False,False,False,True,0,0,0,0,0,0,98.0,No detected validation issues across configured checks.

@@ -1,0 +1,13 @@
+metric,value,display
+gmv,27151764.1,"$27,151,764.10"
+net_value,25129872.61,"$25,129,872.61"
+risk_adjusted_value,24311449.98838447,"$24,311,449.99"
+take_rate,0.11043816891440948,11.04%
+subsidy_share,0.034004818493543115,3.40%
+realized_contribution_margin_proxy,-4540026.08,"$-4,540,026.08"
+expected_margin_after_risk,676254.2283844689,"$676,254.23"
+refund_rate,0.17829119721241857,17.83%
+dispute_rate,0.14185151260880982,14.19%
+chargeback_rate,0.050364781163328445,5.04%
+top10_seller_gmv_share,0.1682255478199297,16.82%
+critical_sellers,0.0,0

@@ -1,0 +1,1201 @@
+seller_id,onboarding_date,seller_region,seller_type,category_focus,seller_tier,commission_plan,fulfillment_model
+S00001,2026-02-07,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00002,2025-08-28,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00003,2023-06-10,West,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00004,2025-07-25,Central,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00005,2025-01-07,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00006,2023-02-23,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00007,2023-06-29,South,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00008,2025-04-10,West,brand,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00009,2026-01-26,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00010,2023-02-17,South,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00011,2025-12-17,West,individual,Toys,Silver,standard_12_15,platform_fulfilled
+S00012,2024-03-22,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00013,2025-11-04,Northeast,smb,Home,Bronze,standard_12_15,platform_fulfilled
+S00014,2024-04-10,Central,smb,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00015,2023-08-27,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00016,2024-01-18,Northeast,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00017,2024-05-29,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00018,2023-11-03,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00019,2023-08-10,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00020,2024-04-12,Central,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00021,2023-09-10,South,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00022,2023-08-19,Midwest,smb,Sports,Gold,preferred_10_12,seller_fulfilled
+S00023,2023-10-19,Northeast,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00024,2025-06-13,Northeast,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00025,2024-09-04,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00026,2025-07-16,South,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00027,2023-11-24,Midwest,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00028,2025-05-25,West,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00029,2026-01-21,West,enterprise,Electronics,Silver,standard_12_15,seller_fulfilled
+S00030,2022-08-26,Midwest,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00031,2025-01-16,South,brand,Toys,Bronze,standard_12_15,seller_fulfilled
+S00032,2025-11-23,South,individual,Sports,Bronze,standard_12_15,platform_fulfilled
+S00033,2025-08-21,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00034,2024-01-10,South,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00035,2024-02-26,Midwest,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00036,2023-09-18,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00037,2023-07-15,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00038,2025-06-18,Northeast,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00039,2022-11-28,Northeast,brand,Home,Bronze,standard_12_15,seller_fulfilled
+S00040,2024-03-01,Central,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00041,2025-07-07,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00042,2025-02-08,Central,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00043,2025-02-03,South,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00044,2024-04-22,Northeast,individual,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00045,2025-07-12,Midwest,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00046,2023-12-10,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00047,2025-01-10,Central,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00048,2022-09-28,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00049,2022-10-06,South,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00050,2023-08-08,South,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00051,2024-02-17,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00052,2023-09-19,Midwest,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00053,2023-10-20,Northeast,enterprise,Toys,Silver,standard_12_15,seller_fulfilled
+S00054,2022-12-13,Midwest,enterprise,Electronics,Silver,standard_12_15,platform_fulfilled
+S00055,2024-02-28,South,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00056,2022-12-20,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00057,2024-12-27,Midwest,brand,Toys,Silver,standard_12_15,seller_fulfilled
+S00058,2025-06-03,Central,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00059,2024-08-17,Northeast,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00060,2023-10-09,West,smb,Electronics,Gold,preferred_10_12,platform_fulfilled
+S00061,2024-11-15,Midwest,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00062,2025-08-30,Northeast,brand,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00063,2023-05-17,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00064,2023-05-04,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00065,2024-05-19,South,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00066,2024-02-21,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00067,2023-06-18,West,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00068,2023-10-05,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00069,2024-06-07,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00070,2025-11-29,Northeast,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00071,2023-09-03,South,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00072,2023-03-03,Central,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00073,2023-05-25,West,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00074,2024-09-22,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00075,2025-12-13,South,brand,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00076,2025-11-11,West,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00077,2023-07-30,West,brand,Beauty,Silver,standard_12_15,platform_fulfilled
+S00078,2023-09-14,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00079,2024-11-02,Central,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00080,2023-06-15,Central,brand,Grocery,Gold,preferred_10_12,platform_fulfilled
+S00081,2024-11-03,South,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00082,2025-09-28,Central,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00083,2024-08-31,Midwest,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00084,2025-03-26,Central,enterprise,Electronics,Silver,standard_12_15,platform_fulfilled
+S00085,2025-03-02,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00086,2023-03-26,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00087,2024-10-11,Midwest,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00088,2023-07-06,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00089,2025-08-18,Midwest,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00090,2025-03-12,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00091,2022-09-20,South,smb,Fashion,Platinum,negotiated_8_10,platform_fulfilled
+S00092,2023-08-18,Central,smb,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S00093,2022-11-22,Northeast,smb,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00094,2024-01-03,Central,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00095,2024-08-02,Midwest,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00096,2025-12-22,Midwest,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S00097,2024-01-16,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00098,2024-04-02,South,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00099,2023-05-19,South,smb,Sports,Bronze,standard_12_15,platform_fulfilled
+S00100,2024-09-14,Northeast,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00101,2023-11-16,West,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00102,2025-03-03,West,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00103,2024-12-03,Midwest,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00104,2023-01-10,South,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00105,2025-08-22,Central,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00106,2023-09-19,Midwest,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00107,2023-04-10,Midwest,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00108,2024-11-23,West,individual,Home,Gold,preferred_10_12,seller_fulfilled
+S00109,2023-08-30,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00110,2024-05-27,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00111,2023-02-15,South,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00112,2025-06-22,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00113,2026-02-23,South,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00114,2023-11-13,Central,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00115,2022-09-13,West,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00116,2025-03-04,South,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00117,2023-03-10,Northeast,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00118,2024-05-06,Northeast,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00119,2023-12-27,South,smb,Fashion,Platinum,negotiated_8_10,seller_fulfilled
+S00120,2023-01-25,Midwest,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00121,2023-05-02,Midwest,enterprise,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00122,2025-09-06,Northeast,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00123,2025-01-11,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00124,2023-09-12,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00125,2022-09-17,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00126,2023-03-17,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00127,2024-06-12,Midwest,individual,Sports,Gold,preferred_10_12,platform_fulfilled
+S00128,2025-03-21,West,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00129,2023-04-29,West,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00130,2025-02-01,Central,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00131,2024-11-10,Midwest,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00132,2022-11-15,West,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00133,2023-01-17,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00134,2023-03-17,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00135,2023-04-30,Northeast,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00136,2025-07-23,Midwest,smb,Toys,Gold,preferred_10_12,seller_fulfilled
+S00137,2025-08-29,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00138,2025-10-22,Midwest,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00139,2025-09-26,Northeast,brand,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00140,2023-11-27,South,enterprise,Home,Silver,standard_12_15,seller_fulfilled
+S00141,2024-01-01,South,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00142,2024-09-14,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00143,2025-11-30,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00144,2025-01-05,Northeast,brand,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00145,2024-10-04,South,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00146,2025-04-25,Midwest,brand,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00147,2025-08-31,Central,smb,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S00148,2024-07-09,Central,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00149,2025-05-05,South,individual,Electronics,Bronze,standard_12_15,platform_fulfilled
+S00150,2024-09-02,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00151,2025-04-10,Central,individual,Grocery,Gold,preferred_10_12,platform_fulfilled
+S00152,2025-05-25,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00153,2025-02-27,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00154,2024-07-23,Midwest,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00155,2025-10-06,West,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00156,2024-07-12,West,brand,Toys,Bronze,standard_12_15,seller_fulfilled
+S00157,2023-11-12,West,brand,Electronics,Gold,preferred_10_12,platform_fulfilled
+S00158,2023-08-18,West,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00159,2023-10-16,Midwest,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00160,2025-08-03,Central,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00161,2026-01-02,Central,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00162,2023-09-14,South,individual,Toys,Gold,preferred_10_12,seller_fulfilled
+S00163,2024-07-31,Central,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00164,2023-12-19,South,brand,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00165,2024-11-11,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00166,2022-10-25,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00167,2024-07-15,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00168,2023-05-22,South,individual,Home,Bronze,standard_12_15,platform_fulfilled
+S00169,2024-03-11,Central,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00170,2024-10-21,South,brand,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00171,2024-05-05,Central,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00172,2026-01-02,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00173,2022-12-25,Northeast,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00174,2024-01-14,Northeast,brand,Toys,Silver,standard_12_15,seller_fulfilled
+S00175,2025-07-13,Midwest,individual,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00176,2023-10-27,Central,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00177,2022-12-01,South,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00178,2024-10-09,South,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00179,2026-02-11,West,smb,Electronics,Bronze,standard_12_15,platform_fulfilled
+S00180,2025-11-15,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00181,2026-01-20,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00182,2024-01-24,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00183,2025-09-29,West,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00184,2022-08-26,South,brand,Electronics,Platinum,negotiated_8_10,seller_fulfilled
+S00185,2022-11-25,Midwest,enterprise,Grocery,Silver,standard_12_15,seller_fulfilled
+S00186,2025-04-16,West,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00187,2022-09-21,Northeast,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00188,2024-09-30,West,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00189,2024-10-22,Central,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00190,2023-04-27,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00191,2023-03-22,Northeast,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00192,2025-12-13,Midwest,smb,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S00193,2023-05-15,Midwest,individual,Grocery,Platinum,negotiated_8_10,seller_fulfilled
+S00194,2024-12-13,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00195,2025-08-27,Central,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00196,2025-08-30,Northeast,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00197,2023-08-10,Northeast,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00198,2026-02-20,Northeast,individual,Toys,Gold,preferred_10_12,seller_fulfilled
+S00199,2023-11-26,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00200,2025-12-10,Northeast,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00201,2023-08-10,Midwest,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00202,2023-01-01,Central,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00203,2024-08-29,Northeast,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00204,2026-02-05,Northeast,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00205,2025-02-28,Central,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00206,2022-11-17,South,brand,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00207,2025-06-28,South,enterprise,Electronics,Silver,standard_12_15,seller_fulfilled
+S00208,2025-05-18,Midwest,enterprise,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00209,2025-12-31,West,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00210,2025-04-10,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00211,2024-01-31,Central,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00212,2023-05-20,West,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00213,2026-01-04,Northeast,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00214,2023-12-24,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00215,2024-07-23,West,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00216,2024-11-08,South,brand,Digital Goods,Platinum,negotiated_8_10,platform_fulfilled
+S00217,2026-02-12,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00218,2024-05-21,South,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00219,2025-09-19,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00220,2025-02-11,Northeast,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00221,2023-04-28,South,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00222,2023-02-03,West,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00223,2024-11-14,Central,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00224,2024-01-25,South,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00225,2022-10-07,Midwest,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00226,2025-02-28,Northeast,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00227,2025-12-11,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00228,2022-08-29,Northeast,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00229,2025-12-06,West,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00230,2024-12-04,South,individual,Toys,Gold,preferred_10_12,platform_fulfilled
+S00231,2026-01-05,Central,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00232,2024-07-16,Northeast,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00233,2023-11-27,West,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00234,2025-11-23,Midwest,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00235,2024-09-15,West,individual,Toys,Bronze,standard_12_15,seller_fulfilled
+S00236,2026-01-10,Central,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00237,2023-07-19,Central,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00238,2025-01-23,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00239,2024-09-26,South,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00240,2024-07-13,West,smb,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00241,2025-07-27,Central,enterprise,Beauty,Silver,standard_12_15,platform_fulfilled
+S00242,2024-07-02,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00243,2025-06-29,South,smb,Home,Gold,preferred_10_12,seller_fulfilled
+S00244,2024-03-14,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00245,2023-03-25,West,brand,Toys,Bronze,standard_12_15,platform_fulfilled
+S00246,2025-05-18,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00247,2024-11-24,Northeast,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00248,2023-10-23,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00249,2022-08-30,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00250,2023-06-27,Northeast,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00251,2024-02-15,Central,smb,Electronics,Platinum,negotiated_8_10,platform_fulfilled
+S00252,2024-03-10,Midwest,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00253,2025-03-24,Northeast,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00254,2023-10-21,West,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00255,2022-11-29,South,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00256,2025-07-03,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00257,2023-11-12,Central,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00258,2023-08-08,Midwest,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00259,2025-04-15,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00260,2024-01-19,South,brand,Sports,Bronze,standard_12_15,seller_fulfilled
+S00261,2024-05-20,Midwest,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00262,2023-08-02,South,brand,Home,Platinum,negotiated_8_10,platform_fulfilled
+S00263,2025-10-05,West,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00264,2024-07-12,South,smb,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00265,2023-09-26,West,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00266,2023-09-17,South,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00267,2024-02-26,Midwest,individual,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00268,2024-11-03,Northeast,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00269,2023-06-30,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00270,2025-06-23,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00271,2023-11-11,West,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00272,2025-04-11,Central,individual,Home,Gold,preferred_10_12,seller_fulfilled
+S00273,2025-11-13,Northeast,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00274,2023-09-11,Central,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00275,2024-06-03,South,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00276,2024-08-16,Central,enterprise,Beauty,Silver,standard_12_15,platform_fulfilled
+S00277,2025-04-09,Northeast,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00278,2023-12-25,Midwest,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00279,2025-03-20,West,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00280,2024-12-04,South,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00281,2023-10-18,Central,individual,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00282,2025-09-15,Central,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00283,2022-10-07,South,smb,Sports,Bronze,standard_12_15,platform_fulfilled
+S00284,2025-08-06,Northeast,smb,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S00285,2023-11-22,Northeast,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00286,2025-10-05,Northeast,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00287,2023-06-30,Midwest,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00288,2024-01-20,Northeast,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00289,2022-12-31,South,brand,Home,Bronze,standard_12_15,seller_fulfilled
+S00290,2025-06-29,South,individual,Beauty,Gold,preferred_10_12,platform_fulfilled
+S00291,2025-02-09,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00292,2023-12-17,South,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00293,2024-09-30,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00294,2022-12-27,Midwest,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00295,2024-11-19,South,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00296,2024-09-15,West,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00297,2025-09-13,Northeast,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00298,2024-09-25,West,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00299,2025-04-25,Northeast,individual,Toys,Gold,preferred_10_12,platform_fulfilled
+S00300,2025-04-16,Northeast,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00301,2025-08-06,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00302,2024-12-16,Northeast,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00303,2025-10-15,South,smb,Toys,Silver,standard_12_15,platform_fulfilled
+S00304,2025-02-09,Northeast,smb,Grocery,Platinum,negotiated_8_10,seller_fulfilled
+S00305,2025-11-25,Midwest,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00306,2024-11-03,West,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00307,2024-09-21,Northeast,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00308,2022-09-08,Midwest,brand,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00309,2023-06-12,West,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00310,2023-01-12,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00311,2023-09-02,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00312,2023-02-15,Northeast,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00313,2024-10-27,South,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00314,2023-07-19,Midwest,individual,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00315,2023-06-21,Midwest,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00316,2025-10-13,West,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00317,2024-03-03,Central,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00318,2025-03-11,West,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00319,2022-11-03,Midwest,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00320,2024-11-12,Midwest,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00321,2025-09-27,Northeast,smb,Toys,Gold,preferred_10_12,seller_fulfilled
+S00322,2023-01-26,South,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00323,2023-04-06,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00324,2024-12-10,West,brand,Electronics,Silver,standard_12_15,platform_fulfilled
+S00325,2024-10-26,West,smb,Electronics,Platinum,negotiated_8_10,platform_fulfilled
+S00326,2025-03-17,Central,brand,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00327,2023-07-16,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00328,2023-09-19,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00329,2022-11-24,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00330,2023-06-29,Central,enterprise,Home,Silver,standard_12_15,platform_fulfilled
+S00331,2024-11-23,South,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00332,2025-01-19,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00333,2024-08-13,Northeast,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00334,2023-01-21,West,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00335,2025-09-05,South,individual,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00336,2024-09-06,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00337,2022-10-03,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00338,2026-01-27,Midwest,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00339,2024-09-11,Midwest,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00340,2022-09-19,Northeast,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00341,2024-01-24,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00342,2023-04-11,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00343,2022-08-26,Central,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00344,2024-07-02,South,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00345,2022-09-15,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00346,2022-11-18,South,smb,Sports,Platinum,negotiated_8_10,platform_fulfilled
+S00347,2024-05-18,South,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00348,2025-02-16,Northeast,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00349,2023-11-25,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00350,2022-12-01,Central,enterprise,Sports,Bronze,standard_12_15,platform_fulfilled
+S00351,2025-02-23,Midwest,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00352,2023-04-22,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00353,2023-06-26,Northeast,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00354,2024-07-24,South,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00355,2025-07-05,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00356,2025-06-14,South,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00357,2023-12-04,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00358,2025-03-21,Midwest,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00359,2022-10-30,West,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00360,2025-07-15,Central,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00361,2023-11-10,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00362,2025-12-31,West,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00363,2022-11-21,West,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00364,2023-05-10,South,smb,Home,Platinum,negotiated_8_10,platform_fulfilled
+S00365,2023-04-18,Midwest,brand,Home,Platinum,negotiated_8_10,seller_fulfilled
+S00366,2024-10-26,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00367,2024-04-13,Northeast,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00368,2022-09-29,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00369,2025-09-27,Midwest,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00370,2023-11-07,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00371,2025-10-13,Central,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00372,2023-11-22,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00373,2025-02-11,Central,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00374,2026-01-11,Midwest,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00375,2025-08-08,Northeast,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00376,2025-01-24,South,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00377,2024-07-08,West,individual,Beauty,Gold,preferred_10_12,platform_fulfilled
+S00378,2025-06-29,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00379,2026-01-01,Northeast,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00380,2024-05-24,Midwest,individual,Home,Gold,preferred_10_12,seller_fulfilled
+S00381,2025-07-29,Central,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00382,2022-08-27,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00383,2024-12-12,South,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00384,2026-01-03,West,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00385,2023-06-16,Midwest,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00386,2025-06-24,South,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00387,2025-04-26,Midwest,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00388,2023-03-01,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00389,2025-09-19,Northeast,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00390,2024-10-04,Northeast,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00391,2024-04-26,Midwest,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00392,2023-08-08,Northeast,smb,Electronics,Gold,preferred_10_12,platform_fulfilled
+S00393,2023-11-30,West,brand,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00394,2024-05-13,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00395,2023-12-02,Northeast,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00396,2024-03-13,Central,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00397,2025-04-14,West,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00398,2023-05-07,Midwest,smb,Home,Bronze,standard_12_15,platform_fulfilled
+S00399,2025-12-25,West,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00400,2023-11-12,Midwest,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00401,2024-01-17,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00402,2024-02-11,Midwest,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00403,2023-01-03,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00404,2024-07-11,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00405,2022-10-12,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00406,2025-07-06,West,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00407,2025-07-25,Northeast,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00408,2023-10-03,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00409,2023-09-23,Northeast,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00410,2023-07-07,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00411,2025-07-14,Midwest,brand,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00412,2026-01-28,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00413,2023-01-15,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00414,2023-02-10,Northeast,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00415,2022-10-08,Midwest,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00416,2024-02-29,Northeast,smb,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S00417,2023-09-22,West,brand,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00418,2024-01-14,Midwest,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00419,2023-09-29,West,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00420,2024-07-28,Central,enterprise,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00421,2026-02-24,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00422,2026-01-25,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00423,2023-06-22,Midwest,brand,Home,Bronze,standard_12_15,seller_fulfilled
+S00424,2025-08-08,Midwest,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00425,2025-03-31,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00426,2025-11-03,Central,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00427,2025-11-18,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00428,2022-12-27,West,enterprise,Sports,Silver,standard_12_15,platform_fulfilled
+S00429,2025-05-23,Midwest,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00430,2025-04-23,West,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00431,2026-01-25,South,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00432,2025-04-16,South,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00433,2023-03-22,Central,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00434,2023-10-24,West,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00435,2025-01-16,Midwest,smb,Sports,Gold,preferred_10_12,seller_fulfilled
+S00436,2023-10-08,South,brand,Toys,Platinum,negotiated_8_10,platform_fulfilled
+S00437,2024-06-21,South,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00438,2024-10-03,South,individual,Toys,Bronze,standard_12_15,seller_fulfilled
+S00439,2025-09-13,South,individual,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00440,2023-02-17,Central,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00441,2025-04-02,South,individual,Toys,Bronze,standard_12_15,seller_fulfilled
+S00442,2025-11-20,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00443,2025-05-19,West,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00444,2022-08-20,Midwest,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00445,2023-12-29,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00446,2024-07-06,South,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00447,2025-01-07,South,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00448,2025-06-13,Midwest,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00449,2025-09-27,Midwest,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00450,2025-07-06,Central,individual,Toys,Gold,preferred_10_12,platform_fulfilled
+S00451,2023-04-30,Midwest,brand,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00452,2024-12-21,West,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00453,2022-09-28,Central,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00454,2023-02-06,Northeast,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00455,2023-09-24,South,brand,Toys,Silver,standard_12_15,platform_fulfilled
+S00456,2024-11-11,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00457,2025-09-04,Central,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00458,2024-04-09,South,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00459,2022-12-12,Midwest,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00460,2023-07-16,Midwest,smb,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00461,2024-12-05,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00462,2025-11-04,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00463,2023-01-19,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00464,2022-10-12,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00465,2024-06-17,South,enterprise,Grocery,Silver,standard_12_15,seller_fulfilled
+S00466,2025-06-23,South,enterprise,Toys,Silver,standard_12_15,seller_fulfilled
+S00467,2023-05-27,South,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00468,2025-06-14,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00469,2026-02-21,Northeast,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00470,2024-06-18,Central,brand,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S00471,2025-02-06,Northeast,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00472,2023-07-25,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00473,2025-02-08,Northeast,individual,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00474,2024-03-01,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00475,2025-06-16,Midwest,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00476,2023-11-18,Central,smb,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00477,2024-08-26,South,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00478,2023-02-17,West,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S00479,2024-12-17,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00480,2024-09-24,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00481,2023-12-01,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00482,2023-04-28,South,brand,Toys,Silver,standard_12_15,seller_fulfilled
+S00483,2025-12-27,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00484,2026-02-22,South,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00485,2024-05-23,Midwest,brand,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S00486,2024-08-28,South,individual,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00487,2024-11-16,Central,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00488,2023-01-16,Northeast,individual,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00489,2023-07-05,Central,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00490,2024-10-19,South,smb,Toys,Silver,standard_12_15,platform_fulfilled
+S00491,2024-10-26,West,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00492,2023-12-21,South,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00493,2024-05-29,Midwest,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00494,2023-04-15,West,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00495,2025-03-16,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00496,2023-09-06,Central,individual,Fashion,Platinum,negotiated_8_10,platform_fulfilled
+S00497,2026-02-16,Midwest,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00498,2023-07-14,Northeast,brand,Sports,Bronze,standard_12_15,seller_fulfilled
+S00499,2022-10-12,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00500,2024-09-08,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00501,2023-03-06,Midwest,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00502,2023-08-09,South,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00503,2024-06-24,West,brand,Beauty,Silver,standard_12_15,platform_fulfilled
+S00504,2022-10-19,West,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00505,2023-06-07,Central,individual,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00506,2025-07-08,South,brand,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00507,2023-07-25,South,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00508,2023-08-21,Midwest,brand,Toys,Silver,standard_12_15,seller_fulfilled
+S00509,2024-03-07,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00510,2023-09-15,Midwest,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00511,2025-12-23,West,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00512,2024-02-28,Central,smb,Home,Gold,preferred_10_12,platform_fulfilled
+S00513,2023-05-28,Central,smb,Toys,Bronze,standard_12_15,platform_fulfilled
+S00514,2025-06-06,Northeast,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00515,2022-09-14,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00516,2024-10-19,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00517,2024-05-02,Central,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00518,2022-12-10,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00519,2023-06-28,Northeast,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00520,2024-04-02,South,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00521,2022-09-24,Central,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00522,2025-04-20,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00523,2025-06-25,Midwest,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00524,2022-10-10,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00525,2023-12-26,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00526,2022-10-10,South,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00527,2023-03-18,Central,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00528,2025-02-08,Northeast,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00529,2023-10-05,Midwest,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00530,2024-05-26,Central,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00531,2023-07-28,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00532,2023-03-18,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00533,2025-08-19,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00534,2024-12-29,South,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00535,2025-09-06,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00536,2022-12-02,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00537,2023-05-17,Central,individual,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00538,2024-03-14,West,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00539,2026-02-24,Northeast,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00540,2025-07-10,South,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00541,2024-06-15,Central,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00542,2023-04-04,West,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00543,2026-01-04,South,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00544,2024-09-17,West,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00545,2025-05-21,Northeast,brand,Home,Bronze,standard_12_15,seller_fulfilled
+S00546,2023-12-09,Northeast,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00547,2025-04-24,Central,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00548,2025-10-13,Midwest,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00549,2024-02-15,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00550,2024-11-29,Midwest,enterprise,Sports,Silver,standard_12_15,platform_fulfilled
+S00551,2025-05-20,South,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00552,2023-11-24,Central,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00553,2024-12-08,Northeast,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00554,2024-05-10,West,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00555,2024-08-13,West,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00556,2024-06-27,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00557,2023-06-04,West,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00558,2026-02-07,West,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00559,2023-09-29,South,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00560,2025-04-05,Northeast,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00561,2025-05-18,Central,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00562,2025-02-24,South,individual,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00563,2023-05-13,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00564,2024-10-27,Northeast,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00565,2023-03-04,South,enterprise,Sports,Silver,standard_12_15,platform_fulfilled
+S00566,2024-10-10,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00567,2024-04-12,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00568,2025-01-26,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00569,2026-01-09,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00570,2023-07-11,Central,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00571,2025-08-21,Midwest,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00572,2025-08-17,Central,smb,Toys,Silver,standard_12_15,platform_fulfilled
+S00573,2023-05-10,Northeast,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00574,2023-09-04,South,smb,Fashion,Gold,preferred_10_12,platform_fulfilled
+S00575,2024-02-13,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00576,2023-08-24,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00577,2023-04-18,Central,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00578,2025-03-21,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00579,2025-02-07,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00580,2025-04-08,West,enterprise,Toys,Bronze,standard_12_15,platform_fulfilled
+S00581,2024-10-22,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00582,2023-04-17,South,individual,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00583,2024-09-06,Northeast,individual,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00584,2024-07-10,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00585,2025-10-26,West,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00586,2025-09-23,South,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00587,2022-12-26,Central,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00588,2024-07-19,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00589,2025-12-13,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00590,2025-02-17,South,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S00591,2024-05-04,Midwest,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00592,2025-01-04,Midwest,brand,Toys,Bronze,standard_12_15,platform_fulfilled
+S00593,2022-09-22,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00594,2024-05-21,South,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S00595,2025-11-10,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00596,2024-03-18,Northeast,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00597,2025-12-01,Midwest,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00598,2025-06-13,Northeast,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00599,2025-12-17,Midwest,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00600,2023-02-22,South,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00601,2025-07-30,Northeast,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00602,2023-05-20,Northeast,smb,Beauty,Platinum,negotiated_8_10,platform_fulfilled
+S00603,2023-08-12,Central,smb,Home,Gold,preferred_10_12,seller_fulfilled
+S00604,2023-02-05,Northeast,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00605,2023-08-23,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00606,2024-11-26,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00607,2023-10-15,Northeast,smb,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S00608,2022-09-19,Central,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00609,2023-06-05,Northeast,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00610,2023-02-02,Central,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00611,2025-11-01,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00612,2025-04-16,South,brand,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00613,2024-07-08,West,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00614,2025-08-20,Northeast,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00615,2023-07-28,West,enterprise,Electronics,Silver,standard_12_15,seller_fulfilled
+S00616,2025-10-31,South,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00617,2025-05-10,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00618,2023-07-09,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00619,2024-11-05,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00620,2026-01-06,West,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S00621,2023-12-20,Northeast,enterprise,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00622,2023-05-24,South,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S00623,2025-11-09,South,brand,Toys,Silver,standard_12_15,seller_fulfilled
+S00624,2023-09-29,South,brand,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00625,2024-08-04,South,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00626,2022-12-21,Northeast,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00627,2024-11-05,Northeast,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00628,2026-02-17,Midwest,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00629,2022-09-30,Midwest,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00630,2023-08-19,Central,brand,Home,Gold,preferred_10_12,platform_fulfilled
+S00631,2024-09-24,Midwest,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00632,2024-02-02,South,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00633,2023-09-29,Northeast,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00634,2025-04-09,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00635,2024-05-07,South,smb,Home,Bronze,standard_12_15,platform_fulfilled
+S00636,2022-10-14,West,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00637,2023-02-16,South,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00638,2023-12-29,Midwest,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00639,2024-11-28,West,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00640,2022-11-11,South,enterprise,Sports,Gold,preferred_10_12,platform_fulfilled
+S00641,2026-02-24,South,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00642,2025-12-01,Northeast,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00643,2022-11-15,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00644,2024-02-11,Northeast,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00645,2023-12-09,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00646,2023-02-14,Northeast,brand,Grocery,Gold,preferred_10_12,platform_fulfilled
+S00647,2024-06-13,West,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00648,2025-04-03,West,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00649,2024-07-06,West,smb,Toys,Bronze,standard_12_15,seller_fulfilled
+S00650,2025-09-28,Central,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00651,2024-11-22,Midwest,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00652,2025-05-14,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00653,2025-08-13,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00654,2025-08-19,West,individual,Electronics,Gold,preferred_10_12,platform_fulfilled
+S00655,2024-08-22,Midwest,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00656,2025-08-14,West,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00657,2023-12-20,South,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00658,2026-02-14,West,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S00659,2024-12-16,Midwest,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00660,2023-11-30,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00661,2022-11-03,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00662,2023-11-11,South,smb,Electronics,Bronze,standard_12_15,platform_fulfilled
+S00663,2024-05-01,Midwest,smb,Fashion,Platinum,negotiated_8_10,platform_fulfilled
+S00664,2023-01-09,Midwest,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00665,2024-08-18,Midwest,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00666,2025-08-28,West,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00667,2023-09-29,South,individual,Home,Platinum,negotiated_8_10,platform_fulfilled
+S00668,2025-11-30,Midwest,enterprise,Beauty,Silver,standard_12_15,platform_fulfilled
+S00669,2024-01-28,Central,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00670,2023-08-17,Northeast,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00671,2025-08-01,West,smb,Electronics,Bronze,standard_12_15,platform_fulfilled
+S00672,2024-10-19,Northeast,brand,Beauty,Silver,standard_12_15,platform_fulfilled
+S00673,2024-10-30,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00674,2023-06-30,Northeast,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00675,2024-09-29,West,individual,Toys,Bronze,standard_12_15,seller_fulfilled
+S00676,2025-09-03,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00677,2023-04-27,West,smb,Toys,Silver,standard_12_15,platform_fulfilled
+S00678,2022-08-27,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00679,2025-05-02,South,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00680,2025-01-30,Central,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00681,2023-05-08,South,smb,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S00682,2024-07-18,South,individual,Toys,Silver,standard_12_15,platform_fulfilled
+S00683,2023-01-22,South,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00684,2023-08-22,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00685,2023-04-09,West,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00686,2025-11-20,Northeast,brand,Toys,Silver,standard_12_15,platform_fulfilled
+S00687,2023-11-24,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00688,2024-04-28,South,individual,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00689,2023-06-24,West,brand,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00690,2024-06-25,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00691,2024-08-05,Northeast,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00692,2022-12-04,West,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00693,2024-01-31,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00694,2024-04-12,South,enterprise,Electronics,Gold,preferred_10_12,platform_fulfilled
+S00695,2023-03-11,West,smb,Sports,Platinum,negotiated_8_10,platform_fulfilled
+S00696,2022-11-11,Central,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00697,2024-08-02,South,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00698,2022-09-23,West,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00699,2024-09-02,West,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00700,2025-04-30,Central,brand,Sports,Gold,preferred_10_12,seller_fulfilled
+S00701,2023-06-29,West,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00702,2023-08-22,Northeast,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00703,2025-12-17,Central,smb,Home,Platinum,negotiated_8_10,platform_fulfilled
+S00704,2024-03-30,Northeast,enterprise,Sports,Silver,standard_12_15,platform_fulfilled
+S00705,2023-09-13,South,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00706,2025-10-04,South,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00707,2024-12-09,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00708,2024-09-27,South,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00709,2026-02-01,Northeast,smb,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00710,2024-10-06,West,enterprise,Sports,Gold,preferred_10_12,platform_fulfilled
+S00711,2025-06-19,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00712,2025-02-09,South,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00713,2025-04-06,West,enterprise,Grocery,Gold,preferred_10_12,platform_fulfilled
+S00714,2025-01-16,Central,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00715,2022-11-03,South,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00716,2023-04-12,South,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00717,2024-06-24,Central,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00718,2025-02-17,Midwest,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00719,2025-04-16,South,brand,Home,Bronze,standard_12_15,platform_fulfilled
+S00720,2025-06-23,Northeast,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00721,2024-12-17,Central,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S00722,2022-10-13,Midwest,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00723,2024-08-19,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00724,2025-02-19,Midwest,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00725,2025-11-18,South,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00726,2024-10-14,West,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00727,2024-08-09,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00728,2023-03-09,West,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00729,2025-08-02,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00730,2024-01-25,Central,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00731,2025-10-03,Midwest,enterprise,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00732,2023-04-04,South,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00733,2025-05-28,West,individual,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00734,2023-09-08,West,brand,Beauty,Silver,standard_12_15,platform_fulfilled
+S00735,2023-02-28,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00736,2025-11-10,South,brand,Sports,Bronze,standard_12_15,seller_fulfilled
+S00737,2025-05-14,South,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00738,2025-09-06,Northeast,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00739,2025-05-29,Northeast,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00740,2024-09-10,Central,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00741,2025-01-03,West,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00742,2022-10-22,Midwest,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00743,2023-12-10,Midwest,brand,Grocery,Gold,preferred_10_12,platform_fulfilled
+S00744,2023-10-14,Northeast,enterprise,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00745,2023-08-26,South,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S00746,2023-11-19,Central,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00747,2024-12-04,South,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00748,2024-10-27,Midwest,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00749,2025-03-16,South,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00750,2024-02-23,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00751,2025-11-16,South,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00752,2024-06-09,Northeast,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00753,2023-11-02,Midwest,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00754,2025-10-09,Central,brand,Sports,Silver,standard_12_15,platform_fulfilled
+S00755,2023-08-26,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00756,2025-07-19,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00757,2025-03-31,Northeast,brand,Beauty,Silver,standard_12_15,platform_fulfilled
+S00758,2025-12-28,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00759,2026-01-31,Midwest,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00760,2023-02-12,South,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00761,2023-08-28,Northeast,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00762,2024-05-22,South,individual,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00763,2023-08-07,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00764,2023-03-07,Central,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00765,2025-10-13,Northeast,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00766,2022-08-23,Northeast,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00767,2023-07-26,West,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00768,2025-09-01,South,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00769,2023-07-31,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00770,2026-02-17,South,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00771,2024-12-27,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00772,2025-06-16,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00773,2023-11-21,Central,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00774,2023-07-07,South,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00775,2024-02-26,South,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00776,2025-12-28,West,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00777,2024-09-22,West,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00778,2025-08-10,South,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00779,2025-12-19,Midwest,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00780,2026-01-25,South,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00781,2025-12-12,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00782,2024-01-20,South,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00783,2025-12-23,Central,smb,Sports,Bronze,standard_12_15,platform_fulfilled
+S00784,2024-12-26,West,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00785,2025-10-30,Northeast,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00786,2023-12-24,South,smb,Toys,Silver,standard_12_15,platform_fulfilled
+S00787,2022-08-30,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00788,2024-03-10,South,enterprise,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00789,2023-09-09,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00790,2024-12-31,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00791,2024-10-25,Central,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00792,2024-02-04,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00793,2024-12-28,Central,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00794,2024-02-10,West,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00795,2025-03-25,West,brand,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00796,2024-07-17,West,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S00797,2023-08-16,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00798,2023-01-04,Northeast,individual,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00799,2022-12-26,Northeast,smb,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00800,2026-02-09,Midwest,brand,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00801,2025-05-28,West,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00802,2025-07-19,Northeast,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00803,2024-11-18,Midwest,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00804,2024-05-01,Central,individual,Electronics,Platinum,negotiated_8_10,platform_fulfilled
+S00805,2025-07-19,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00806,2025-04-19,South,brand,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00807,2023-07-15,Central,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00808,2026-02-24,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00809,2023-01-13,Northeast,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00810,2024-06-14,West,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00811,2023-01-11,Central,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00812,2025-03-08,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00813,2023-12-23,South,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00814,2022-12-06,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00815,2025-06-17,Midwest,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S00816,2026-01-02,West,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00817,2023-11-13,Central,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00818,2023-03-20,West,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00819,2023-09-15,South,smb,Electronics,Platinum,negotiated_8_10,platform_fulfilled
+S00820,2025-06-16,West,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00821,2025-08-25,Midwest,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00822,2024-05-08,Midwest,individual,Grocery,Bronze,standard_12_15,platform_fulfilled
+S00823,2024-07-21,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00824,2024-11-26,South,smb,Home,Silver,standard_12_15,platform_fulfilled
+S00825,2023-12-04,Midwest,enterprise,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00826,2024-09-25,West,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00827,2022-11-03,Northeast,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00828,2024-02-05,Midwest,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00829,2025-03-12,Northeast,smb,Toys,Gold,preferred_10_12,seller_fulfilled
+S00830,2025-12-28,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00831,2025-10-15,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00832,2023-09-22,Central,enterprise,Toys,Silver,standard_12_15,platform_fulfilled
+S00833,2023-05-12,South,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00834,2023-06-12,West,individual,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00835,2023-05-26,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00836,2025-10-14,South,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00837,2022-09-27,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00838,2023-09-02,Northeast,enterprise,Beauty,Bronze,standard_12_15,platform_fulfilled
+S00839,2024-11-21,West,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00840,2023-01-04,Midwest,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00841,2023-12-26,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00842,2023-03-08,West,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00843,2023-08-24,South,brand,Home,Bronze,standard_12_15,platform_fulfilled
+S00844,2023-11-22,South,smb,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00845,2024-12-25,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00846,2025-09-24,West,brand,Toys,Bronze,standard_12_15,seller_fulfilled
+S00847,2026-02-08,West,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00848,2024-12-21,Midwest,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00849,2025-03-26,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00850,2023-01-29,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00851,2024-11-08,Midwest,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00852,2024-07-08,South,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00853,2026-01-30,South,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00854,2024-10-29,Midwest,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00855,2025-06-11,West,individual,Home,Gold,preferred_10_12,platform_fulfilled
+S00856,2025-06-25,West,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00857,2023-01-20,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00858,2024-08-14,West,smb,Digital Goods,Gold,preferred_10_12,platform_fulfilled
+S00859,2025-10-13,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00860,2023-11-04,Northeast,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00861,2025-05-30,Northeast,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00862,2026-02-22,South,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00863,2026-01-28,West,brand,Toys,Platinum,negotiated_8_10,platform_fulfilled
+S00864,2023-07-19,Northeast,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00865,2023-10-14,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00866,2026-01-13,Northeast,enterprise,Home,Bronze,standard_12_15,platform_fulfilled
+S00867,2024-01-10,West,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00868,2023-05-15,West,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00869,2024-10-20,Northeast,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00870,2024-06-16,West,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00871,2022-08-19,West,individual,Sports,Gold,preferred_10_12,platform_fulfilled
+S00872,2023-01-08,Northeast,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00873,2024-10-28,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S00874,2025-10-13,West,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00875,2024-12-05,Central,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S00876,2024-05-10,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00877,2026-02-25,Northeast,individual,Electronics,Silver,standard_12_15,platform_fulfilled
+S00878,2025-10-01,South,brand,Home,Silver,standard_12_15,platform_fulfilled
+S00879,2023-12-17,South,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00880,2025-07-17,Midwest,smb,Home,Gold,preferred_10_12,seller_fulfilled
+S00881,2025-10-27,West,individual,Fashion,Platinum,negotiated_8_10,seller_fulfilled
+S00882,2023-04-20,Midwest,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00883,2024-11-01,Central,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S00884,2022-11-02,Northeast,smb,Toys,Gold,preferred_10_12,platform_fulfilled
+S00885,2024-08-08,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S00886,2025-11-12,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00887,2025-10-20,West,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00888,2024-08-12,West,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S00889,2024-09-14,Central,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00890,2025-08-21,South,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00891,2025-01-24,West,enterprise,Home,Silver,standard_12_15,platform_fulfilled
+S00892,2023-09-30,Midwest,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00893,2025-05-07,Northeast,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00894,2023-01-15,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00895,2024-05-02,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00896,2025-04-23,West,smb,Beauty,Gold,preferred_10_12,seller_fulfilled
+S00897,2025-03-21,Midwest,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S00898,2025-03-27,Midwest,smb,Toys,Bronze,standard_12_15,seller_fulfilled
+S00899,2025-11-15,Midwest,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S00900,2023-11-27,Central,individual,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S00901,2025-02-18,Midwest,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00902,2025-06-29,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00903,2025-12-02,Central,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00904,2023-05-30,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00905,2023-06-26,South,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00906,2024-03-03,West,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00907,2025-06-18,Northeast,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S00908,2025-09-25,South,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00909,2024-07-01,Central,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00910,2025-03-12,Northeast,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00911,2022-11-05,Midwest,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00912,2025-04-16,South,enterprise,Beauty,Silver,standard_12_15,seller_fulfilled
+S00913,2024-11-27,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00914,2023-10-18,West,smb,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00915,2024-11-04,Central,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00916,2025-12-22,Midwest,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00917,2026-02-16,South,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S00918,2024-11-23,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00919,2024-12-03,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00920,2024-12-11,West,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00921,2023-02-03,West,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S00922,2023-11-07,South,brand,Electronics,Platinum,negotiated_8_10,platform_fulfilled
+S00923,2026-02-16,Northeast,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S00924,2022-11-09,Midwest,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00925,2023-09-28,West,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00926,2025-10-24,Midwest,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00927,2025-02-02,Midwest,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00928,2024-01-08,West,enterprise,Sports,Bronze,standard_12_15,platform_fulfilled
+S00929,2024-09-28,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00930,2025-04-23,Midwest,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00931,2023-11-20,Northeast,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S00932,2025-11-26,Northeast,smb,Home,Silver,standard_12_15,seller_fulfilled
+S00933,2024-01-25,Northeast,individual,Toys,Bronze,standard_12_15,platform_fulfilled
+S00934,2025-09-29,Midwest,individual,Home,Silver,standard_12_15,platform_fulfilled
+S00935,2024-12-07,Central,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S00936,2022-10-18,Northeast,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00937,2025-09-15,South,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00938,2023-01-15,Central,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00939,2025-12-21,West,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S00940,2022-09-06,South,smb,Toys,Platinum,negotiated_8_10,platform_fulfilled
+S00941,2026-02-16,West,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00942,2024-04-16,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S00943,2023-01-16,West,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00944,2023-04-18,West,brand,Electronics,Silver,standard_12_15,platform_fulfilled
+S00945,2024-07-13,Midwest,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00946,2023-05-11,Northeast,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00947,2025-06-09,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00948,2026-01-24,Northeast,individual,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00949,2022-12-22,Northeast,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00950,2022-10-24,Central,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00951,2025-02-02,South,brand,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S00952,2025-04-18,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00953,2026-01-04,West,brand,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00954,2023-02-11,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00955,2024-08-29,South,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00956,2023-04-28,Northeast,smb,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S00957,2022-08-29,Central,enterprise,Home,Silver,standard_12_15,platform_fulfilled
+S00958,2024-02-22,Central,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00959,2022-11-11,South,enterprise,Sports,Silver,standard_12_15,platform_fulfilled
+S00960,2023-03-11,South,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00961,2025-02-18,West,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00962,2023-05-21,West,individual,Fashion,Bronze,standard_12_15,platform_fulfilled
+S00963,2024-01-14,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00964,2025-12-29,Midwest,enterprise,Electronics,Silver,standard_12_15,platform_fulfilled
+S00965,2024-05-31,South,enterprise,Home,Silver,standard_12_15,platform_fulfilled
+S00966,2023-02-12,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00967,2022-10-16,Midwest,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00968,2024-01-20,South,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S00969,2025-10-19,South,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S00970,2022-10-06,South,smb,Digital Goods,Platinum,negotiated_8_10,platform_fulfilled
+S00971,2025-10-29,Northeast,brand,Toys,Gold,preferred_10_12,seller_fulfilled
+S00972,2024-04-23,Northeast,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00973,2024-10-03,South,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S00974,2024-07-23,Midwest,smb,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S00975,2024-04-23,South,smb,Electronics,Silver,standard_12_15,platform_fulfilled
+S00976,2023-09-24,Midwest,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00977,2025-03-16,West,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S00978,2023-05-01,Central,brand,Grocery,Bronze,standard_12_15,seller_fulfilled
+S00979,2025-06-11,Central,enterprise,Beauty,Silver,standard_12_15,seller_fulfilled
+S00980,2025-12-12,South,smb,Sports,Bronze,standard_12_15,seller_fulfilled
+S00981,2024-05-27,Central,individual,Home,Silver,standard_12_15,seller_fulfilled
+S00982,2024-05-10,Central,brand,Home,Silver,standard_12_15,seller_fulfilled
+S00983,2025-06-23,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S00984,2023-01-05,South,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S00985,2025-05-17,Northeast,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S00986,2025-06-05,West,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00987,2023-11-04,Midwest,brand,Grocery,Gold,preferred_10_12,seller_fulfilled
+S00988,2026-01-22,South,individual,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S00989,2024-05-20,West,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S00990,2023-08-18,West,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S00991,2023-07-13,Midwest,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S00992,2025-01-20,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S00993,2025-11-23,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S00994,2026-02-23,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S00995,2025-10-23,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S00996,2023-01-14,Midwest,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S00997,2025-03-05,West,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S00998,2025-07-01,South,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S00999,2023-05-28,Midwest,enterprise,Grocery,Silver,standard_12_15,seller_fulfilled
+S01000,2024-05-22,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01001,2022-10-25,Central,individual,Electronics,Bronze,standard_12_15,platform_fulfilled
+S01002,2024-12-28,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01003,2024-09-29,South,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S01004,2023-04-08,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01005,2023-04-03,Central,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S01006,2023-05-26,Central,smb,Toys,Bronze,standard_12_15,seller_fulfilled
+S01007,2024-11-09,West,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S01008,2024-08-04,Midwest,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01009,2024-06-14,Midwest,individual,Toys,Silver,standard_12_15,platform_fulfilled
+S01010,2023-07-07,West,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S01011,2025-06-02,Northeast,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S01012,2024-09-26,Northeast,enterprise,Beauty,Silver,standard_12_15,seller_fulfilled
+S01013,2023-09-16,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01014,2022-12-10,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01015,2025-08-25,South,individual,Fashion,Bronze,standard_12_15,platform_fulfilled
+S01016,2025-05-22,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01017,2023-09-12,Midwest,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S01018,2023-08-07,West,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S01019,2026-01-22,Central,smb,Home,Platinum,negotiated_8_10,platform_fulfilled
+S01020,2025-03-25,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01021,2023-02-21,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S01022,2023-03-17,Northeast,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01023,2024-07-05,Midwest,enterprise,Fashion,Silver,standard_12_15,seller_fulfilled
+S01024,2025-06-14,Northeast,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S01025,2022-10-26,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01026,2022-09-05,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01027,2024-10-09,Midwest,smb,Electronics,Silver,standard_12_15,seller_fulfilled
+S01028,2023-03-27,South,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S01029,2024-08-05,Northeast,brand,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S01030,2023-10-28,West,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S01031,2025-08-14,South,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S01032,2025-05-20,South,enterprise,Fashion,Silver,standard_12_15,seller_fulfilled
+S01033,2023-02-11,West,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S01034,2022-09-28,South,individual,Fashion,Bronze,standard_12_15,platform_fulfilled
+S01035,2024-02-20,Midwest,brand,Toys,Bronze,standard_12_15,seller_fulfilled
+S01036,2025-03-30,West,smb,Fashion,Gold,preferred_10_12,seller_fulfilled
+S01037,2024-05-09,Central,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S01038,2023-06-18,West,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01039,2022-10-16,Northeast,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01040,2026-02-23,Midwest,smb,Home,Silver,standard_12_15,platform_fulfilled
+S01041,2025-10-06,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01042,2023-08-23,Northeast,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S01043,2024-05-12,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01044,2023-02-22,South,individual,Electronics,Gold,preferred_10_12,platform_fulfilled
+S01045,2024-01-05,Midwest,smb,Grocery,Bronze,standard_12_15,platform_fulfilled
+S01046,2025-01-15,South,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S01047,2024-11-07,Northeast,individual,Sports,Platinum,negotiated_8_10,seller_fulfilled
+S01048,2023-08-10,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01049,2023-11-13,South,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01050,2024-07-15,Central,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01051,2024-06-25,West,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S01052,2025-05-10,Northeast,smb,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S01053,2024-05-11,South,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S01054,2025-06-15,Central,individual,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01055,2023-07-24,Midwest,individual,Grocery,Bronze,standard_12_15,platform_fulfilled
+S01056,2023-05-30,Midwest,enterprise,Home,Gold,preferred_10_12,platform_fulfilled
+S01057,2025-12-29,Midwest,individual,Home,Silver,standard_12_15,seller_fulfilled
+S01058,2023-05-16,South,brand,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01059,2025-07-12,South,individual,Home,Silver,standard_12_15,seller_fulfilled
+S01060,2023-08-03,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S01061,2022-12-30,West,smb,Electronics,Bronze,standard_12_15,seller_fulfilled
+S01062,2024-01-09,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01063,2022-12-25,South,smb,Fashion,Bronze,standard_12_15,seller_fulfilled
+S01064,2025-04-07,Central,brand,Electronics,Silver,standard_12_15,seller_fulfilled
+S01065,2026-02-17,South,smb,Home,Bronze,standard_12_15,seller_fulfilled
+S01066,2024-07-17,South,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S01067,2026-01-28,South,enterprise,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S01068,2025-09-26,South,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S01069,2025-12-27,West,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01070,2025-02-04,Midwest,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S01071,2023-10-28,South,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S01072,2024-10-17,South,individual,Electronics,Bronze,standard_12_15,platform_fulfilled
+S01073,2023-07-20,Midwest,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S01074,2024-06-20,West,individual,Home,Gold,preferred_10_12,seller_fulfilled
+S01075,2025-04-27,South,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S01076,2024-02-01,Midwest,smb,Electronics,Bronze,standard_12_15,platform_fulfilled
+S01077,2024-05-01,Central,smb,Fashion,Bronze,standard_12_15,platform_fulfilled
+S01078,2023-11-07,South,smb,Electronics,Gold,preferred_10_12,seller_fulfilled
+S01079,2022-11-17,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S01080,2023-04-01,Midwest,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01081,2023-03-21,Northeast,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S01082,2023-08-02,Central,individual,Beauty,Silver,standard_12_15,platform_fulfilled
+S01083,2022-11-08,West,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S01084,2025-10-23,South,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S01085,2025-05-29,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01086,2025-07-23,South,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01087,2024-07-27,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01088,2022-08-24,Central,brand,Fashion,Silver,standard_12_15,seller_fulfilled
+S01089,2023-03-15,Midwest,smb,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S01090,2023-06-03,South,individual,Beauty,Bronze,standard_12_15,seller_fulfilled
+S01091,2025-03-23,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S01092,2025-06-24,South,brand,Home,Bronze,standard_12_15,platform_fulfilled
+S01093,2024-09-11,South,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01094,2023-12-03,Northeast,individual,Grocery,Platinum,negotiated_8_10,platform_fulfilled
+S01095,2022-11-18,Central,enterprise,Fashion,Silver,standard_12_15,platform_fulfilled
+S01096,2023-06-15,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01097,2025-06-24,South,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S01098,2024-10-15,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01099,2025-04-16,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01100,2025-11-06,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01101,2023-08-16,Central,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S01102,2024-10-04,South,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S01103,2025-04-03,Northeast,individual,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S01104,2025-04-30,Central,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S01105,2025-10-04,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S01106,2025-11-26,Central,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S01107,2024-11-30,West,individual,Grocery,Gold,preferred_10_12,seller_fulfilled
+S01108,2025-08-14,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01109,2025-04-03,Northeast,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S01110,2023-09-17,Northeast,brand,Toys,Bronze,standard_12_15,seller_fulfilled
+S01111,2022-10-21,Northeast,smb,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S01112,2025-11-03,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S01113,2024-08-16,West,smb,Digital Goods,Gold,preferred_10_12,seller_fulfilled
+S01114,2024-07-20,South,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S01115,2025-04-16,Northeast,individual,Fashion,Gold,preferred_10_12,platform_fulfilled
+S01116,2023-02-03,Northeast,brand,Digital Goods,Silver,standard_12_15,platform_fulfilled
+S01117,2024-04-06,South,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01118,2025-03-23,Northeast,enterprise,Grocery,Silver,standard_12_15,platform_fulfilled
+S01119,2024-01-22,West,smb,Beauty,Bronze,standard_12_15,platform_fulfilled
+S01120,2025-01-23,South,brand,Beauty,Bronze,standard_12_15,platform_fulfilled
+S01121,2024-08-13,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01122,2023-12-04,West,smb,Digital Goods,Silver,standard_12_15,seller_fulfilled
+S01123,2025-01-04,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01124,2024-03-26,Central,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S01125,2025-07-06,West,smb,Toys,Silver,standard_12_15,seller_fulfilled
+S01126,2022-11-04,Northeast,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S01127,2025-07-06,Northeast,brand,Home,Silver,standard_12_15,seller_fulfilled
+S01128,2025-05-01,West,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S01129,2025-02-10,Midwest,smb,Grocery,Bronze,standard_12_15,seller_fulfilled
+S01130,2023-07-24,Central,brand,Beauty,Silver,standard_12_15,seller_fulfilled
+S01131,2026-02-06,Northeast,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S01132,2024-12-07,Central,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S01133,2024-07-12,Central,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S01134,2023-06-19,South,smb,Grocery,Silver,standard_12_15,platform_fulfilled
+S01135,2024-03-12,Northeast,individual,Fashion,Gold,preferred_10_12,seller_fulfilled
+S01136,2024-03-19,South,brand,Grocery,Silver,standard_12_15,platform_fulfilled
+S01137,2023-10-19,South,enterprise,Home,Silver,standard_12_15,platform_fulfilled
+S01138,2023-09-26,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01139,2023-01-26,Northeast,brand,Home,Gold,preferred_10_12,seller_fulfilled
+S01140,2025-03-07,West,brand,Sports,Silver,standard_12_15,seller_fulfilled
+S01141,2023-06-01,South,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01142,2024-04-18,Central,smb,Sports,Bronze,standard_12_15,platform_fulfilled
+S01143,2023-09-17,South,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S01144,2026-02-01,West,individual,Sports,Bronze,standard_12_15,seller_fulfilled
+S01145,2024-06-01,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01146,2023-08-25,Northeast,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01147,2026-02-25,West,smb,Sports,Silver,standard_12_15,seller_fulfilled
+S01148,2025-07-19,South,smb,Beauty,Gold,preferred_10_12,seller_fulfilled
+S01149,2025-05-14,South,individual,Electronics,Gold,preferred_10_12,platform_fulfilled
+S01150,2023-02-18,South,individual,Sports,Silver,standard_12_15,seller_fulfilled
+S01151,2025-10-06,Midwest,smb,Fashion,Silver,standard_12_15,seller_fulfilled
+S01152,2023-03-29,Midwest,smb,Home,Silver,standard_12_15,seller_fulfilled
+S01153,2023-04-09,Northeast,brand,Grocery,Silver,standard_12_15,seller_fulfilled
+S01154,2023-11-24,Central,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S01155,2022-09-19,Northeast,smb,Home,Silver,standard_12_15,platform_fulfilled
+S01156,2022-09-25,West,individual,Electronics,Bronze,standard_12_15,seller_fulfilled
+S01157,2022-08-22,West,enterprise,Home,Gold,preferred_10_12,platform_fulfilled
+S01158,2023-09-29,South,enterprise,Digital Goods,Bronze,standard_12_15,platform_fulfilled
+S01159,2024-05-27,Midwest,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S01160,2022-12-30,Midwest,individual,Grocery,Silver,standard_12_15,platform_fulfilled
+S01161,2023-01-17,Midwest,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S01162,2024-06-15,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01163,2023-04-20,Midwest,smb,Beauty,Silver,standard_12_15,platform_fulfilled
+S01164,2024-05-03,West,individual,Fashion,Platinum,negotiated_8_10,platform_fulfilled
+S01165,2023-04-05,South,individual,Home,Bronze,standard_12_15,seller_fulfilled
+S01166,2025-03-14,West,smb,Fashion,Silver,standard_12_15,platform_fulfilled
+S01167,2025-02-24,South,brand,Electronics,Bronze,standard_12_15,platform_fulfilled
+S01168,2025-12-01,Central,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01169,2025-12-29,West,individual,Home,Silver,standard_12_15,seller_fulfilled
+S01170,2025-03-20,Northeast,individual,Grocery,Bronze,standard_12_15,seller_fulfilled
+S01171,2023-01-22,West,individual,Toys,Bronze,standard_12_15,seller_fulfilled
+S01172,2024-07-19,Midwest,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01173,2023-01-03,West,brand,Grocery,Bronze,standard_12_15,seller_fulfilled
+S01174,2025-01-06,South,enterprise,Electronics,Silver,standard_12_15,platform_fulfilled
+S01175,2023-10-17,West,individual,Electronics,Silver,standard_12_15,seller_fulfilled
+S01176,2024-05-03,Northeast,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S01177,2024-11-17,Central,individual,Home,Gold,preferred_10_12,platform_fulfilled
+S01178,2024-01-22,South,individual,Fashion,Silver,standard_12_15,seller_fulfilled
+S01179,2023-12-08,Northeast,brand,Home,Bronze,standard_12_15,seller_fulfilled
+S01180,2024-03-16,West,smb,Beauty,Bronze,standard_12_15,seller_fulfilled
+S01181,2023-08-12,South,individual,Sports,Gold,preferred_10_12,seller_fulfilled
+S01182,2023-06-06,South,individual,Sports,Silver,standard_12_15,platform_fulfilled
+S01183,2023-01-14,Midwest,individual,Electronics,Gold,preferred_10_12,platform_fulfilled
+S01184,2022-11-04,South,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S01185,2024-03-31,South,smb,Home,Gold,preferred_10_12,platform_fulfilled
+S01186,2024-12-03,Midwest,smb,Grocery,Silver,standard_12_15,seller_fulfilled
+S01187,2022-10-03,South,individual,Toys,Silver,standard_12_15,seller_fulfilled
+S01188,2024-04-29,Northeast,individual,Fashion,Silver,standard_12_15,platform_fulfilled
+S01189,2024-11-05,South,brand,Fashion,Silver,standard_12_15,platform_fulfilled
+S01190,2025-08-27,South,smb,Home,Silver,standard_12_15,seller_fulfilled
+S01191,2025-07-15,Midwest,individual,Grocery,Silver,standard_12_15,seller_fulfilled
+S01192,2024-07-23,Midwest,smb,Digital Goods,Bronze,standard_12_15,seller_fulfilled
+S01193,2026-01-18,Central,brand,Electronics,Silver,standard_12_15,platform_fulfilled
+S01194,2025-10-06,South,individual,Beauty,Silver,standard_12_15,seller_fulfilled
+S01195,2023-10-08,West,brand,Home,Silver,standard_12_15,seller_fulfilled
+S01196,2024-03-16,South,brand,Fashion,Bronze,standard_12_15,seller_fulfilled
+S01197,2025-07-17,West,smb,Beauty,Silver,standard_12_15,seller_fulfilled
+S01198,2025-02-22,Midwest,enterprise,Toys,Bronze,standard_12_15,platform_fulfilled
+S01199,2024-06-02,Northeast,smb,Sports,Silver,standard_12_15,platform_fulfilled
+S01200,2024-05-16,South,individual,Home,Silver,standard_12_15,seller_fulfilled

@@ -1,0 +1,6 @@
+scenario,scenario_type,decision_priority_score,gmv_change_vs_baseline_pct,quality_ratio_change_pp_vs_baseline,contribution_margin_change_vs_baseline,leakage_avoided_vs_baseline,growth_quality_tradeoff,recommended_decision
+fraud_control_improvement,risk_upside,21.712921420634792,-1.0000000000000009,0.907473857613672,646332.4050750746,658976.7118750745,discipline_over_growth,tighten fraud controls and expand manual review for critical orders
+seller_quality_improvement,quality_upside,15.626731711447137,-1.5000000000000013,0.45373692880684713,464817.44205620885,483783.90225620894,discipline_over_growth,prioritize seller coaching and SLA enforcement in high-risk tiers
+subsidy_tightening,policy_upside,9.971225600072122,-4.5000000000000036,0.1620489031452954,298407.8114003523,355307.1920003523,discipline_over_growth,tighten promo eligibility with staged rollout by category
+baseline,reference,0.0,0.0,0.0,0.0,0.0,double_deterioration,maintain baseline monitoring
+downside_high_risk_deterioration,downside,-28.304535352474346,3.499999999999992,-1.13434232201709,-839482.4645955514,-883737.5383955515,growth_at_risk,pre-emptively cap high-risk cohort growth and hold payouts for critical sellers
