@@ -796,13 +796,11 @@ def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
         .merge(seller_base[["seller_id", "orders", "gmv", "net_value"]], on="seller_id", how="left")
     )
 
-    order_scorecard = order_scores.copy()
-
     top_high_priority_sellers = seller_scorecard.sort_values(
         ["governance_priority_score", "gmv"], ascending=[False, False]
     ).head(100)
 
-    top_high_risk_orders = order_scorecard.sort_values(
+    top_high_risk_orders = order_scores.sort_values(
         ["order_risk_score", "order_date"], ascending=[False, False]
     ).head(250)
 
@@ -826,7 +824,6 @@ def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
         "margin_fragility_scores": margin_fragility,
         "governance_priority_scores": governance,
         "seller_scorecard": seller_scorecard,
-        "order_scorecard": order_scorecard,
         "top_high_priority_sellers": top_high_priority_sellers,
         "top_high_risk_orders": top_high_risk_orders,
         "scoring_sensitivity_summary": sensitivity,

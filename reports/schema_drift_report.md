@@ -1,6 +1,12 @@
 # Schema Drift Report
 
-- Current schema: `schemas/v1/schema_contracts.json`
-- Previous schema: `schemas/history/schema_contract_20260402_042735.json`
+- Current schema: `config/contracts/v1/schema_contracts.json`
+- Previous schema: `config/contracts/history/schema_contract_20260402_042735.json`
 
-No schema drift detected between compared contract versions.
+## Drift Summary
+- `High`: 1
+- `Medium`: 0
+- `Low`: 0
+
+## Changes
+- `High` | `table_removed` | table=`order_scorecard`

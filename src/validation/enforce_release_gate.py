@@ -7,6 +7,7 @@ import sys
 import pandas as pd
 
 
+# Ordem de maturidade (mais alto = mais pronto para decisão).
 STATE_ORDER = {
     "publish-blocked": 0,
     "screening-grade only": 1,

@@ -1,1 +1,2 @@
-
+change_type,table_name,column_name,previous_value,current_value,severity
+table_removed,order_scorecard,,present,,High

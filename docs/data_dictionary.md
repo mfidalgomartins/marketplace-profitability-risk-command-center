@@ -164,13 +164,6 @@ Processed joins:
 - Key columns: governance + quality + fraud + fragility scores/tiers, `orders`, `gmv`, `net_value`
 - Major metrics: consolidated seller governance lens
 
-## `order_scorecard.csv`
-- Grain: one row per order
-- Primary key: `order_id`
-- Main joins: risk dashboard panels
-- Key columns: order risk score and action fields
-- Major metrics: top-risk order queue
-
 ## `top_high_priority_sellers.csv`
 - Grain: one row per prioritized seller subset
 - Primary key: `seller_id` (subset)

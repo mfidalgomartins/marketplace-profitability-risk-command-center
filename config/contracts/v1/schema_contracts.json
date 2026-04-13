@@ -588,40 +588,6 @@
     },
     {
       "column_types": {
-        "buyer_id": "string",
-        "category": "string",
-        "order_channel": "string",
-        "order_date": "string",
-        "order_id": "string",
-        "order_risk_main_driver": "string",
-        "order_risk_score": "number",
-        "order_risk_tier": "string",
-        "payment_method": "string",
-        "recommended_action": "string",
-        "seller_id": "string"
-      },
-      "columns": [
-        "order_id",
-        "order_date",
-        "buyer_id",
-        "seller_id",
-        "category",
-        "order_channel",
-        "payment_method",
-        "order_risk_score",
-        "order_risk_tier",
-        "order_risk_main_driver",
-        "recommended_action"
-      ],
-      "enforcement": "exact_columns",
-      "path": "data/processed/order_scorecard.csv",
-      "primary_key_candidate": [
-        "order_id"
-      ],
-      "table_name": "order_scorecard"
-    },
-    {
-      "column_types": {
         "current_period": "string",
         "fraud_exposure_score": "number",
         "fraud_exposure_tier": "string",

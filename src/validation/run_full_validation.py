@@ -1167,9 +1167,7 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
     lines.append("")
 
     lines.append("## Release Readiness Classification")
-    lines.append(
-        "Validation now enforces explicit release states to prevent false confidence between technical validity and committee-grade readiness."
-    )
+    lines.append("Release states are governance labels for this project and do not imply external certification.")
     lines.append(f"- `technical_gate_passed`: `{bool(release['technical_gate_passed'])}`")
     lines.append(f"- `analytical_gate_passed`: `{bool(release['analytical_gate_passed'])}`")
     lines.append(f"- `technically valid`: `{bool(release['technically_valid'])}`")
@@ -1183,7 +1181,7 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
 
     lines.append("## Issues Ranked by Severity")
     if issues.empty:
-        lines.append("- No issues detected by the configured validation checks.")
+        lines.append("- No issues detected within the configured validation checks in this run.")
     else:
         for _, r in issues.iterrows():
             lines.append(
@@ -1192,16 +1190,6 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
             )
             lines.append(f"  detail: {r['detail']}")
             lines.append(f"  action: {r['fix_or_action']}")
-    lines.append("")
-
-    lines.append("## Fixes Applied During This QA Cycle")
-    lines.append(
-        "- Patched synthetic generator to enforce `promised_days >= processing_days + 1`, preventing shipped-after-delivered artifacts in future regenerations."
-    )
-    lines.append(
-        "- Constrained refund/dispute/chargeback overlap in synthetic post-order events to reduce artificial leakage double-counting."
-    )
-    lines.append("- Added reproducible full-validation runner and structured issue log output.")
     lines.append("")
 
     lines.append("## Unresolved Caveats")

@@ -32,7 +32,6 @@ PROCESSED_TABLES = [
     "margin_fragility_scores",
     "governance_priority_scores",
     "seller_scorecard",
-    "order_scorecard",
     "top_high_priority_sellers",
     "top_high_risk_orders",
     "scoring_sensitivity_summary",
@@ -68,7 +67,6 @@ PRIMARY_KEYS = {
     "margin_fragility_scores": ["seller_id"],
     "governance_priority_scores": ["seller_id"],
     "seller_scorecard": ["seller_id"],
-    "order_scorecard": ["order_id"],
     "governance_action_register": ["entity_type", "entity_id"],
 }
 

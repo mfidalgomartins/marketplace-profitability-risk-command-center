@@ -52,4 +52,4 @@ Formal checks before conclusions:
 - scenario arithmetic consistency
 - narrative overclaiming scan
 
-Artifacts are generated during pipeline execution and kept out of GitHub for cleanliness.
+Core governed artifacts (processed tables, dashboard, validation outputs) são versionados no GitHub para auditabilidade e revisão externa; ficheiros temporários/caches ficam excluídos por `.gitignore`.

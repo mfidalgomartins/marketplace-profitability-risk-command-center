@@ -12,7 +12,7 @@ Skeptical validation pass focused on reconciliation, coherence, leakage controls
 - Release gates: `publish_blocked=False`, `committee_grade_ready=True`, `min_module_confidence=98.0`
 
 ## Release Readiness Classification
-Validation now enforces explicit release states to prevent false confidence between technical validity and committee-grade readiness.
+Release states are governance labels for this project and do not imply external certification.
 - `technical_gate_passed`: `True`
 - `analytical_gate_passed`: `True`
 - `technically valid`: `True`
@@ -24,12 +24,7 @@ Validation now enforces explicit release states to prevent false confidence betw
 - Rationale: No detected validation issues across configured checks.
 
 ## Issues Ranked by Severity
-- No issues detected by the configured validation checks.
-
-## Fixes Applied During This QA Cycle
-- Patched synthetic generator to enforce `promised_days >= processing_days + 1`, preventing shipped-after-delivered artifacts in future regenerations.
-- Constrained refund/dispute/chargeback overlap in synthetic post-order events to reduce artificial leakage double-counting.
-- Added reproducible full-validation runner and structured issue log output.
+- No issues detected within the configured validation checks in this run.
 
 ## Unresolved Caveats
 - None.

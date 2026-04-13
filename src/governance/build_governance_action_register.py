@@ -194,12 +194,12 @@ def build_action_register(cfg: GovernanceConfig) -> pd.DataFrame:
     )
 
     register = pd.concat([seller_actions, order_actions], ignore_index=True)
-    register["priority_rank"] = (
-        register.sort_values(["priority_score", "estimated_leakage_proxy"], ascending=[False, False])
-        .reset_index(drop=True)
-        .index
-        + 1
-    )
+    ordered_idx = register.sort_values(
+        ["priority_score", "estimated_leakage_proxy"],
+        ascending=[False, False],
+    ).index
+    rank_map = {idx: rank for rank, idx in enumerate(ordered_idx, start=1)}
+    register["priority_rank"] = register.index.map(rank_map).astype(int)
     register["status"] = "open"
     register["next_review_step"] = (
         "assign owner and execute recommended action within SLA"

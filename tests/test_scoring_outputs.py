@@ -21,7 +21,6 @@ def test_scoring_tables_exist() -> None:
         "margin_fragility_scores",
         "governance_priority_scores",
         "seller_scorecard",
-        "order_scorecard",
         "top_high_priority_sellers",
         "top_high_risk_orders",
         "scoring_sensitivity_summary",
