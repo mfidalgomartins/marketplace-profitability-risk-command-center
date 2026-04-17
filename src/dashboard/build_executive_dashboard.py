@@ -314,55 +314,61 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   <title>Marketplace Profitability, Fraud & Seller Quality Command Center</title>
   <style>
     :root {
-      --bg-start: #ecf2fb;
-      --bg-end: #f7f9fc;
-      --top-shell-bg: rgba(247, 249, 252, 0.93);
-      --panel: #ffffff;
-      --panel-soft: #f8fbff;
-      --ink: #0f172a;
-      --muted: #52607a;
-      --brand: #0b5ed7;
-      --brand-soft: #e7f0ff;
-      --brand-ink: #0b4db2;
-      --good: #1a7f37;
-      --warn: #b85e00;
+      --bg-start: #edf4fb;
+      --bg-end: #f7f8fb;
+      --bg-accent: rgba(33, 94, 190, 0.08);
+      --top-shell-bg: rgba(246, 249, 253, 0.9);
+      --panel: rgba(255, 255, 255, 0.94);
+      --panel-soft: #f5f8fc;
+      --panel-strong: #ffffff;
+      --ink: #0e1726;
+      --muted: #56657d;
+      --brand: #0a5bd3;
+      --brand-soft: #e6f0ff;
+      --brand-ink: #0d4dad;
+      --accent: #10345c;
+      --good: #177245;
+      --warn: #a65a00;
       --bad: #b42318;
-      --line: #d7deea;
-      --line-soft: #eaf0f8;
-      --table-head: #f4f7fc;
-      --table-row-hover: #f6faff;
-      --narrative-bg: #f7faff;
-      --narrative-line: #d7e3fa;
-      --badge-good-bg: #eaf8ef;
-      --badge-good-line: #bde3cb;
-      --badge-warn-bg: #fff5e9;
-      --badge-warn-line: #f0cf9f;
-      --badge-bad-bg: #fff0f0;
-      --badge-bad-line: #f5c2c2;
+      --line: #d5deea;
+      --line-soft: #e9eef6;
+      --table-head: #f3f6fb;
+      --table-row-hover: #f5f9ff;
+      --narrative-bg: #f5f9ff;
+      --narrative-line: #d4e2fb;
+      --badge-good-bg: #e9f8ef;
+      --badge-good-line: #bde2cb;
+      --badge-warn-bg: #fff4e8;
+      --badge-warn-line: #efcf9f;
+      --badge-bad-bg: #fff1f0;
+      --badge-bad-line: #f2c5c3;
       --alert-warn-bg: #fff8ea;
-      --alert-warn-line: #f5d29c;
-      --alert-bad-bg: #fff0f0;
-      --alert-bad-line: #f5c2c2;
+      --alert-warn-line: #efd4a5;
+      --alert-bad-bg: #fff1f0;
+      --alert-bad-line: #f1c7c5;
       --alert-info-bg: #edf5ff;
-      --alert-info-line: #c6ddff;
-      --shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-      --radius: 14px;
-      --axis: #51617a;
-      --grid: #d9e1ee;
-      --hover-bg: #12274a;
+      --alert-info-line: #c6dcff;
+      --shadow: 0 18px 40px rgba(12, 23, 39, 0.08);
+      --shadow-soft: 0 8px 22px rgba(12, 23, 39, 0.05);
+      --radius: 18px;
+      --axis: #51627e;
+      --grid: #d6e0ec;
+      --hover-bg: #12284c;
       --hover-ink: #ffffff;
     }
     body[data-theme="dark"] {
       --bg-start: #0f1722;
       --bg-end: #0b1119;
       --top-shell-bg: rgba(12, 18, 28, 0.92);
-      --panel: #121b29;
-      --panel-soft: #162233;
+      --panel: rgba(18, 27, 41, 0.94);
+      --panel-soft: #162333;
+      --panel-strong: #1a2638;
       --ink: #e5edf8;
       --muted: #9db0cb;
       --brand: #5aa0ff;
       --brand-soft: #182942;
       --brand-ink: #8cbaff;
+      --accent: #d7e6ff;
       --line: #2a3a51;
       --line-soft: #223248;
       --table-head: #162233;
@@ -381,7 +387,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       --alert-bad-line: #6d2f3b;
       --alert-info-bg: #182942;
       --alert-info-line: #2f4f79;
-      --shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+      --shadow: 0 16px 34px rgba(0, 0, 0, 0.3);
+      --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.2);
       --axis: #b6c7de;
       --grid: #2f425d;
       --hover-bg: #0d1522;
@@ -390,7 +397,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      background:
+        radial-gradient(circle at top left, var(--bg-accent), transparent 32%),
+        radial-gradient(circle at top right, rgba(16, 52, 92, 0.06), transparent 24%),
+        linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
       color: var(--ink);
       font-family: "IBM Plex Sans", "Source Sans 3", "Avenir Next", "Segoe UI", Arial, sans-serif;
       line-height: 1.45;
@@ -400,34 +410,49 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       top: 0;
       z-index: 50;
       background: var(--top-shell-bg);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(213, 222, 234, 0.72);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
     }
     .header {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 16px 22px 12px 22px;
+      padding: 20px 24px 12px 24px;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 12px;
+      gap: 18px;
       align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .title h1 {
       margin: 0;
-      font-size: 28px;
-      letter-spacing: 0.1px;
-      line-height: 1.2;
+      font-size: 32px;
+      letter-spacing: -0.4px;
+      line-height: 1.1;
     }
     .title p {
-      margin: 4px 0 0 0;
+      margin: 8px 0 0 0;
       color: var(--muted);
-      font-size: 13px;
-      max-width: 980px;
+      font-size: 14px;
+      max-width: 900px;
     }
     .header-meta {
       display: grid;
       justify-items: end;
-      gap: 6px;
+      gap: 10px;
       color: var(--muted);
       font-size: 12px;
     }
@@ -439,13 +464,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     button, .btn {
       border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--panel);
+      border-radius: 12px;
+      background: var(--panel-strong);
       color: var(--ink);
-      padding: 8px 12px;
+      padding: 9px 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.12s ease-in-out;
+      box-shadow: var(--shadow-soft);
     }
     button.primary {
       background: var(--brand);
@@ -459,7 +485,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .filter-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 0 22px 16px 22px;
+      padding: 0 24px 14px 24px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
       gap: 10px;
@@ -468,6 +494,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .filter {
       display: grid;
       gap: 4px;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
     }
     .filter label {
       font-size: 11px;
@@ -485,6 +516,30 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font-size: 13px;
       min-height: 40px;
     }
+    .scope-bar {
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 0 24px 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .scope-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .scope-chip strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
     .filter-actions {
       grid-column: 1 / -1;
       display: flex;
@@ -494,8 +549,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .container {
       max-width: 1680px;
-      margin: 18px auto 30px auto;
-      padding: 0 22px 30px 22px;
+      margin: 22px auto 34px auto;
+      padding: 0 24px 34px 24px;
     }
     .tabs {
       display: flex;
@@ -521,18 +576,92 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .hero-strip {
       margin: 0 0 12px 0;
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 10px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.9fr);
+      gap: 12px;
     }
     .hero-message {
-      background: linear-gradient(135deg, var(--panel) 0%, var(--panel-soft) 100%);
+      background: linear-gradient(135deg, var(--panel-strong) 0%, var(--panel-soft) 100%);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 14px 16px;
+      padding: 18px 20px;
       font-size: 14px;
-      line-height: 1.55;
+      line-height: 1.58;
       color: var(--ink);
+    }
+    .hero-message h2 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.14;
+      letter-spacing: -0.35px;
+      max-width: 920px;
+    }
+    .hero-message p {
+      margin: 10px 0 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 880px;
+    }
+    .hero-side {
+      display: grid;
+      gap: 10px;
+    }
+    .decision-points {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .decision-point {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--line);
+    }
+    .decision-point .name {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+    }
+    .decision-point .main {
+      margin-top: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .decision-board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .decision-stat {
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+    .decision-stat .name {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+    }
+    .decision-stat .value {
+      margin-top: 6px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .decision-stat .hint {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
     }
     .signal-grid {
       display: grid;
@@ -567,22 +696,37 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .signal-card.bad .state { color: var(--bad); }
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 14px;
     }
     .kpi {
+      grid-column: span 3;
       background: var(--panel);
       border: 1px solid var(--line);
       border-top: 4px solid var(--brand);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 13px;
-      min-height: 96px;
+      padding: 14px;
+      min-height: 112px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+    .kpi.feature {
+      grid-column: span 4;
+      padding: 18px;
+      min-height: 138px;
     }
     .kpi.good { border-top-color: var(--good); }
     .kpi.warn { border-top-color: var(--warn); }
     .kpi.bad { border-top-color: var(--bad); }
+    .kpi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
     .kpi .label {
       color: var(--muted);
       font-size: 11px;
@@ -591,16 +735,32 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       letter-spacing: 0.4px;
     }
     .kpi .value {
-      margin-top: 8px;
       font-size: 25px;
       font-weight: 700;
       letter-spacing: -0.2px;
     }
+    .kpi.feature .value { font-size: 31px; }
     .kpi .delta {
-      margin-top: 4px;
       font-size: 12px;
       color: var(--muted);
     }
+    .kpi .context {
+      font-size: 12px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .tone-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      flex: 0 0 auto;
+      margin-top: 3px;
+      box-shadow: 0 0 0 4px rgba(10, 91, 211, 0.08);
+      background: var(--brand);
+    }
+    .kpi.good .tone-dot { background: var(--good); box-shadow: 0 0 0 4px rgba(23, 114, 69, 0.1); }
+    .kpi.warn .tone-dot { background: var(--warn); box-shadow: 0 0 0 4px rgba(166, 90, 0, 0.1); }
+    .kpi.bad .tone-dot { background: var(--bad); box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.1); }
     .row {
       display: grid;
       gap: 12px;
@@ -613,21 +773,23 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 14px;
+      padding: 16px;
     }
     .panel h3 {
       margin: 0 0 8px 0;
-      font-size: 17px;
-      line-height: 1.3;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -0.2px;
     }
     .panel .sub {
       margin: 0 0 10px 0;
       color: var(--muted);
       font-size: 12px;
+      max-width: 680px;
     }
     .plot {
       width: 100%;
-      min-height: 340px;
+      min-height: 360px;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -692,8 +854,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .table-tools input, .table-tools select {
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 7px 10px;
+      border-radius: 10px;
+      padding: 8px 10px;
       font-size: 13px;
       background: var(--panel);
       color: var(--ink);
@@ -717,8 +879,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     tbody td {
       border-bottom: 1px solid var(--line-soft);
-      padding: 8px;
+      padding: 9px 8px;
       color: var(--ink);
+      vertical-align: top;
     }
     tbody tr:hover { background: var(--table-row-hover); }
     .table-wrap {
@@ -726,6 +889,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       overflow: auto;
       border: 1px solid var(--line);
       border-radius: 10px;
+    }
+    .table-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+    .table-pill.good { color: var(--good); background: var(--badge-good-bg); border-color: var(--badge-good-line); }
+    .table-pill.warn { color: var(--warn); background: var(--badge-warn-bg); border-color: var(--badge-warn-line); }
+    .table-pill.bad { color: var(--bad); background: var(--badge-bad-bg); border-color: var(--badge-bad-line); }
+    .action-text {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--muted);
+      max-width: 250px;
     }
     .pager {
       display: flex;
@@ -795,14 +977,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     @media (max-width: 1280px) {
       .hero-strip { grid-template-columns: 1fr; }
+      .decision-points,
+      .decision-board { grid-template-columns: 1fr; }
       .signal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .kpi-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .kpi, .kpi.feature { grid-column: span 2; }
       .row-3 { grid-template-columns: 1fr; }
       .row-2 { grid-template-columns: 1fr; }
       .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 860px) {
+      .title h1 { font-size: 28px; }
       .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .kpi, .kpi.feature { grid-column: span 1; }
       .filter-bar { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
       .signal-grid { grid-template-columns: 1fr; }
       .bench-grid { grid-template-columns: 1fr; }
@@ -886,6 +1073,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   <div class="top-shell">
     <div class="header">
       <div class="title">
+        <div class="eyebrow">Executive Decision System</div>
         <h1>Marketplace Profitability, Fraud & Seller Quality Command Center</h1>
         <p>Executive control tower for marketplace health, margin protection, fraud exposure, and seller governance actions.</p>
       </div>
@@ -914,6 +1102,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         <button id="resetFilters">Reset</button>
       </div>
     </div>
+    <div class="scope-bar" id="scopeBar"></div>
   </div>
 
   <main class="container">
@@ -927,8 +1116,16 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       <button class="tab-btn" data-tab="methodology">Methodology & Definitions</button>
     </div>
     <div class="hero-strip">
-      <div class="hero-message" id="heroMessage"></div>
-      <div class="signal-grid" id="signalCards"></div>
+      <div class="hero-message">
+        <div class="eyebrow">Current Executive Signal</div>
+        <h2 id="heroHeadline"></h2>
+        <p id="heroMessage"></p>
+        <div class="decision-points" id="decisionPoints"></div>
+      </div>
+      <div class="hero-side">
+        <div class="signal-grid" id="signalCards"></div>
+        <div class="decision-board" id="decisionBoard"></div>
+      </div>
     </div>
 
     <section id="tab-overview" class="tab-panel active">
@@ -1225,11 +1422,29 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   function themeTokens() {
     return {
       panel: cssVar('--panel'),
+      panelStrong: cssVar('--panel-strong'),
       ink: cssVar('--ink'),
+      muted: cssVar('--muted'),
       axis: cssVar('--axis'),
       grid: cssVar('--grid'),
       hoverBg: cssVar('--hover-bg'),
       hoverInk: cssVar('--hover-ink'),
+    };
+  }
+
+  function chartPalette() {
+    return {
+      blue: '#0a5bd3',
+      blueSoft: '#5f97ea',
+      navy: '#143b66',
+      green: '#177245',
+      teal: '#1f7a8c',
+      orange: '#c77011',
+      gold: '#a0700f',
+      red: '#c2403d',
+      rose: '#d66a6a',
+      neutral: '#90a3be',
+      neutralDark: '#64748b',
     };
   }
 
@@ -1250,9 +1465,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     return {
       paper_bgcolor: t.panel,
       plot_bgcolor: t.panel,
-      margin: { l: 56, r: 22, t: 60, b: 74 },
+      margin: { l: 58, r: 22, t: 68, b: 88 },
       font: { family: 'IBM Plex Sans, Source Sans 3, Segoe UI, Arial, sans-serif', size: 13, color: t.ink },
-      legend: { orientation: 'h', y: -0.32, x: 0, xanchor: 'left', font: { color: t.axis, size: 12 } },
+      legend: {
+        orientation: 'h',
+        y: -0.28,
+        x: 0,
+        xanchor: 'left',
+        font: { color: t.axis, size: 12 },
+        bgcolor: 'rgba(0,0,0,0)',
+      },
+      title: { x: 0, xanchor: 'left', font: { size: 15, color: t.ink } },
       hoverlabel: { bgcolor: t.hoverBg, font: { color: t.hoverInk } }
     };
   }
@@ -1328,6 +1551,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     if (s === 'bad') return 'bad';
     return 'warn';
   }
+  function tierClassFromRiskTier(tier) {
+    if (tier === 'Low') return 'good';
+    if (tier === 'Moderate') return 'warn';
+    return 'bad';
+  }
 
   function sortByMonth(arr, key = 'm') {
     return arr.sort((a, b) => String(a[key]).localeCompare(String(b[key])));
@@ -1346,6 +1574,28 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       o.textContent = opt;
       el.appendChild(o);
     }
+  }
+
+  function scopeSummaryChips(filters, state) {
+    const chips = [];
+    chips.push(`<span class="scope-chip"><strong>Coverage</strong> ${filters.dateFrom} to ${filters.dateTo}</span>`);
+
+    const dimensions = [
+      ['Region', filters.region],
+      ['Category', filters.category],
+      ['Seller tier', filters.sellerTier],
+      ['Seller type', filters.sellerType],
+      ['Acquisition', filters.acquisition],
+      ['Buyer type', filters.buyerType],
+      ['Risk tier', filters.riskTier],
+    ];
+    for (const [label, value] of dimensions) {
+      if (value !== '__ALL__') chips.push(`<span class="scope-chip"><strong>${label}</strong> ${value}</span>`);
+    }
+
+    chips.push(`<span class="scope-chip"><strong>Orders</strong> ${state.kpi.orders.toLocaleString()}</span>`);
+    chips.push(`<span class="scope-chip"><strong>Sellers</strong> ${state.sellerArr.length.toLocaleString()}</span>`);
+    return chips.join('');
   }
 
   function initializeFilters() {
@@ -1672,19 +1922,52 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       riskAdj: governedMetric('risk_adjusted_value', b.riskAdj),
       criticalSellers: governedMetric('critical_sellers', b.criticalSellers),
     };
+    const protectedShare = official.net ? official.riskAdj / official.net : 0;
+    const sliceProtectedShare = k.net ? k.riskAdj / k.net : 0;
     const cards = [
-      { label: 'GMV', value: money(official.gmv), delta: `Filtered scope ${money(k.gmv)} (${pct(k.gmv / (official.gmv || 1))} of official)`, tone: 'good' },
-      { label: 'Net Value', value: money(official.net), delta: `Filtered scope ${money(k.net)} (${pct(k.net / (official.net || 1))} of official)`, tone: 'good' },
-      { label: 'Take Rate', value: pct(official.takeRate), delta: `Filtered scope ${pct(k.takeRate)} (${((k.takeRate - official.takeRate) * 100).toFixed(2)}pp delta)`, tone: 'good' },
-      { label: 'Contribution Margin Proxy', value: money(official.margin), delta: `Filtered scope ${money(k.margin)} (${money(k.margin - official.margin)} delta)`, tone: official.margin >= 0 ? 'good' : 'bad' },
-      { label: 'Refund Rate', value: pct(official.refundRate), delta: `Filtered scope ${pct(k.refundRate)} (${((k.refundRate - official.refundRate) * 100).toFixed(2)}pp delta)`, tone: official.refundRate <= 0.12 ? 'good' : official.refundRate <= 0.17 ? 'warn' : 'bad' },
-      { label: 'Dispute Rate', value: pct(official.disputeRate), delta: `Filtered scope ${pct(k.disputeRate)} (${((k.disputeRate - official.disputeRate) * 100).toFixed(2)}pp delta)`, tone: official.disputeRate <= 0.015 ? 'good' : official.disputeRate <= 0.03 ? 'warn' : 'bad' },
-      { label: 'Subsidy Share', value: pct(official.subsidyShare), delta: `Filtered scope ${pct(k.subsidyShare)} (${((k.subsidyShare - official.subsidyShare) * 100).toFixed(2)}pp delta)`, tone: official.subsidyShare <= 0.03 ? 'good' : official.subsidyShare <= 0.05 ? 'warn' : 'bad' },
-      { label: 'Risk-Adjusted GMV', value: money(official.riskAdj), delta: `Filtered scope ${money(k.riskAdj)} (${pct(k.riskAdj / (official.riskAdj || 1))} of official)`, tone: 'good' },
-      { label: 'Critical Sellers', value: String(Math.round(official.criticalSellers)), delta: `${k.criticalSellers} critical sellers in active slice`, tone: official.criticalSellers <= 20 ? 'good' : official.criticalSellers <= 40 ? 'warn' : 'bad' },
+      {
+        label: 'Official GMV',
+        value: money(official.gmv),
+        context: `Selected slice ${money(k.gmv)}`,
+        delta: `${pct(k.gmv / (official.gmv || 1))} of governed portfolio GMV`,
+        tone: 'good',
+        featured: true,
+      },
+      {
+        label: 'Protected Value',
+        value: money(official.riskAdj),
+        context: `Selected slice ${money(k.riskAdj)}`,
+        delta: `${pct(sliceProtectedShare)} of slice net value | official ${pct(protectedShare)}`,
+        tone: sliceProtectedShare >= protectedShare ? 'good' : sliceProtectedShare >= protectedShare - 0.01 ? 'warn' : 'bad',
+        featured: true,
+      },
+      {
+        label: 'Contribution Margin Proxy',
+        value: money(official.margin),
+        context: `Selected slice ${money(k.margin)}`,
+        delta: `${money(k.margin - official.margin)} vs governed portfolio CM`,
+        tone: official.margin >= 0 ? 'good' : 'bad',
+        featured: true,
+      },
+      { label: 'Net Value', value: money(official.net), context: `Selected slice ${money(k.net)}`, delta: `${pct(k.net / (official.net || 1))} of governed portfolio`, tone: 'good' },
+      { label: 'Take Rate', value: pct(official.takeRate), context: `Selected slice ${pct(k.takeRate)}`, delta: `${((k.takeRate - official.takeRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: 'good' },
+      { label: 'Refund Rate', value: pct(official.refundRate), context: `Selected slice ${pct(k.refundRate)}`, delta: `${((k.refundRate - official.refundRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.refundRate <= 0.12 ? 'good' : official.refundRate <= 0.17 ? 'warn' : 'bad' },
+      { label: 'Dispute Rate', value: pct(official.disputeRate), context: `Selected slice ${pct(k.disputeRate)}`, delta: `${((k.disputeRate - official.disputeRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.disputeRate <= 0.015 ? 'good' : official.disputeRate <= 0.03 ? 'warn' : 'bad' },
+      { label: 'Subsidy Share', value: pct(official.subsidyShare), context: `Selected slice ${pct(k.subsidyShare)}`, delta: `${((k.subsidyShare - official.subsidyShare) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.subsidyShare <= 0.03 ? 'good' : official.subsidyShare <= 0.05 ? 'warn' : 'bad' },
+      { label: 'Critical Sellers', value: String(Math.round(official.criticalSellers)), context: `${k.criticalSellers} critical sellers in slice`, delta: official.criticalSellers <= 20 ? 'Contained governance queue' : official.criticalSellers <= 40 ? 'Escalation burden rising' : 'Governance load requires active intervention', tone: official.criticalSellers <= 20 ? 'good' : official.criticalSellers <= 40 ? 'warn' : 'bad' },
     ];
     const grid = document.getElementById('kpiGrid');
-    grid.innerHTML = cards.map(c => `<div class="kpi ${c.tone}"><div class="label">${c.label}</div><div class="value">${c.value}</div><div class="delta">${c.delta}</div></div>`).join('');
+    grid.innerHTML = cards.map(c => `
+      <div class="kpi ${c.tone} ${c.featured ? 'feature' : ''}">
+        <div class="kpi-head">
+          <div class="label">${c.label}</div>
+          <span class="tone-dot"></span>
+        </div>
+        <div class="value">${c.value}</div>
+        <div class="context">${c.context}</div>
+        <div class="delta">${c.delta}</div>
+      </div>
+    `).join('');
   }
 
   function renderHero(state, baseline) {
@@ -1695,9 +1978,32 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const growthHealth = qualityDelta >= 1 ? 'good' : qualityDelta >= -0.3 ? 'warn' : 'bad';
     const marginHealth = k.margin >= 0 ? 'good' : 'bad';
     const riskHealth = k.disputeRate <= 0.015 ? 'good' : k.disputeRate <= 0.03 ? 'warn' : 'bad';
+    const worstIssue = marginHealth === 'bad' ? 'margin leakage' : riskHealth === 'bad' ? 'fraud and dispute pressure' : growthHealth === 'bad' ? 'fragile growth quality' : 'disciplined growth quality';
+    const headline = `This slice is ${growthHealth === 'good' ? 'expanding with stronger economic quality' : growthHealth === 'warn' ? 'growing with mixed quality signals' : 'growing with deteriorating quality protection'}.`;
+    const message = `Quality-adjusted value moved ${qualityDelta.toFixed(2)}pp versus the portfolio baseline. Leadership should treat ${worstIssue} as the immediate decision lens for this view, not topline GMV alone.`;
+    document.getElementById('heroHeadline').textContent = headline;
+    document.getElementById('heroMessage').textContent = message;
 
-    const headline = `Decision signal: selected scope shows ${qualityDelta >= 0 ? 'improving' : 'deteriorating'} quality-adjusted growth (${qualityDelta.toFixed(2)}pp vs baseline). Prioritize ${marginHealth === 'bad' ? 'margin containment' : 'risk control'} and ${riskHealth === 'bad' ? 'dispute/chargeback actions' : 'operational discipline'} in current slice.`;
-    document.getElementById('heroMessage').textContent = headline;
+    const decisionPoints = [
+      {
+        name: 'Primary action',
+        main: marginHealth === 'bad' ? 'Contain leakage before funding more volume.' : riskHealth === 'bad' ? 'Tighten fraud and dispute controls in this slice.' : 'Protect current quality while scaling volume.',
+      },
+      {
+        name: 'Main exposure',
+        main: `Realized leakage stands at ${money(state.leakage.total)} across subsidy, refund, dispute, and chargeback loss.`,
+      },
+      {
+        name: 'Operational read',
+        main: `On-time performance is ${pct(state.rates.onTimeRate)} with average delay at ${fixed(state.rates.avgDelay, 1)} days.`,
+      },
+    ];
+    document.getElementById('decisionPoints').innerHTML = decisionPoints.map(d => `
+      <div class="decision-point">
+        <div class="name">${d.name}</div>
+        <div class="main">${d.main}</div>
+      </div>
+    `).join('');
 
     const signals = [
       { name: 'Growth Quality', state: growthHealth === 'good' ? 'Healthy' : growthHealth === 'warn' ? 'Watchlist' : 'Fragile', hint: `${qualityDelta.toFixed(2)}pp vs baseline`, cls: growthHealth },
@@ -1711,6 +2017,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         <div class="hint">${s.hint}</div>
       </div>
     `).join('');
+
+    const board = [
+      { name: 'Protected GMV share', value: pct(qualRatio), hint: 'Risk-adjusted value divided by selected-slice net value.' },
+      { name: 'Leakage load', value: money(state.leakage.total), hint: 'Subsidy, refund, dispute, and chargeback erosion combined.' },
+      { name: 'Critical seller count', value: String(k.criticalSellers), hint: 'Sellers already sitting in the highest governance tier.' },
+    ];
+    document.getElementById('decisionBoard').innerHTML = board.map(d => `
+      <div class="decision-stat">
+        <div class="name">${d.name}</div>
+        <div class="value">${d.value}</div>
+        <div class="hint">${d.hint}</div>
+      </div>
+    `).join('');
   }
 
   function renderNarrativeAndAlerts(state, baseline) {
@@ -1719,7 +2038,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const baseQual = baseline.kpi.net ? baseline.kpi.riskAdj / baseline.kpi.net : 0;
     const qualityDelta = (qualRatio - baseQual) * 100;
     const cmStatus = k.margin >= 0 ? 'positive' : 'negative';
-    const narrative = `Selected scope includes ${k.orders.toLocaleString()} orders. GMV is ${money(k.gmv)} and risk-adjusted value is ${money(k.riskAdj)} (${pct(qualRatio)} of net value). Realized contribution margin proxy is ${cmStatus} at ${money(k.margin)}. Refund and dispute rates are ${pct(k.refundRate)} and ${pct(k.disputeRate)} respectively, while subsidy share is ${pct(k.subsidyShare)}. Quality-adjusted ratio moved ${qualityDelta.toFixed(2)}pp versus baseline scope, indicating ${qualityDelta >= 0 ? 'improving' : 'deteriorating'} growth quality.`;
+    const narrative = `The selected slice contains ${k.orders.toLocaleString()} orders and contributes ${money(k.gmv)} of GMV. Protected value stands at ${money(k.riskAdj)}, or ${pct(qualRatio)} of slice net value. Realized contribution margin proxy is ${cmStatus} at ${money(k.margin)}, while refunds, disputes, and subsidy dependence remain the main drag. Versus the portfolio baseline, quality protection shifted ${qualityDelta.toFixed(2)}pp, which means this slice is ${qualityDelta >= 0 ? 'holding or improving' : 'losing'} economic discipline.`;
     document.getElementById('executiveNarrative').textContent = narrative;
 
     const badges = [];
@@ -1743,10 +2062,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     document.getElementById('alertsPanel').innerHTML = alerts.map(a => `<div class="alert ${a.cls}">${a.txt}</div>`).join('');
 
     const bench = [
-      { name: 'CM Rate Benchmark', num: `${((k.margin / (k.net || 1) - baseline.kpi.margin / (baseline.kpi.net || 1)) * 100).toFixed(2)}pp` },
-      { name: 'Expected vs Realized CM Gap', num: money(k.expectedMargin - k.margin) },
-      { name: 'Refund Rate Benchmark', num: `${((k.refundRate - baseline.kpi.refundRate) * 100).toFixed(2)}pp` },
-      { name: 'Quality Ratio Benchmark', num: `${qualityDelta.toFixed(2)}pp` },
+      { name: 'CM rate vs baseline', num: `${((k.margin / (k.net || 1) - baseline.kpi.margin / (baseline.kpi.net || 1)) * 100).toFixed(2)}pp` },
+      { name: 'Expected vs realized CM gap', num: money(k.expectedMargin - k.margin) },
+      { name: 'Refund rate vs baseline', num: `${((k.refundRate - baseline.kpi.refundRate) * 100).toFixed(2)}pp` },
+      { name: 'Quality ratio vs baseline', num: `${qualityDelta.toFixed(2)}pp` },
     ];
     document.getElementById('benchmarkCards').innerHTML = bench.map(b => `<div class="bench"><div class="name">${b.name}</div><div class="num">${b.num}</div></div>`).join('');
   }
@@ -1761,9 +2080,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderGrowth(state, divId) {
     const m = state.monthArr;
+    const c = chartPalette();
     plotOrEmpty(divId, [
-      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines+markers', name: 'GMV', line: { color: '#1f77b4', width: 3 } },
-      { x: m.map(x => x.m), y: m.map(x => x.riskAdj), mode: 'lines+markers', name: 'Risk-Adjusted GMV', line: { color: '#d62728', width: 3 } }
+      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines+markers', name: 'GMV', line: { color: c.blue, width: 3 } },
+      { x: m.map(x => x.m), y: m.map(x => x.riskAdj), mode: 'lines+markers', name: 'Risk-Adjusted GMV', line: { color: c.red, width: 3 } }
     ], {
       yaxis: { title: 'Value ($)' },
       xaxis: { title: 'Month', tickangle: -35 },
@@ -1773,6 +2093,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderWaterfall(state, divId) {
     const l = state.leakage;
+    const c = chartPalette();
     const measures = ['relative', 'relative', 'relative', 'relative', 'relative', 'total'];
     const x = ['Commission', 'Subsidy', 'Refunds', 'Disputes', 'Chargeback Loss', 'Contribution Margin'];
     const y = [l.commission, -l.subsidy, -l.refund, -l.dispute, -l.chargebackLoss, 0];
@@ -1781,10 +2102,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       measure: measures,
       x,
       y,
-      connector: { line: { color: '#95a4bf' } },
-      increasing: { marker: { color: '#1a7f37' } },
-      decreasing: { marker: { color: '#b42318' } },
-      totals: { marker: { color: '#0b5ed7' } }
+      connector: { line: { color: c.neutral } },
+      increasing: { marker: { color: c.green } },
+      decreasing: { marker: { color: c.red } },
+      totals: { marker: { color: c.blue } }
     }], {
       yaxis: { title: 'Value ($)' },
       title: { text: 'Leakage Components Explain Contribution Margin Outcome', font: { size: 15 } }
@@ -1793,9 +2114,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderNetSubsidy(state) {
     const m = state.monthArr;
+    const c = chartPalette();
     plotOrEmpty('plotNetSubsidy', [
-      { x: m.map(x => x.m), y: m.map(x => x.net), type: 'bar', name: 'Net Value', marker: { color: '#4878d0' } },
-      { x: m.map(x => x.m), y: m.map(x => (x.gmv ? x.subsidy / x.gmv : 0) * 100), type: 'scatter', mode: 'lines+markers', name: 'Subsidy Share (%)', yaxis: 'y2', line: { color: '#b42318', width: 2.5 } }
+      { x: m.map(x => x.m), y: m.map(x => x.net), type: 'bar', name: 'Net Value', marker: { color: c.blueSoft } },
+      { x: m.map(x => x.m), y: m.map(x => (x.gmv ? x.subsidy / x.gmv : 0) * 100), type: 'scatter', mode: 'lines+markers', name: 'Subsidy Share (%)', yaxis: 'y2', line: { color: c.orange, width: 2.5 } }
     ], {
       yaxis: { title: 'Net Value ($)' },
       yaxis2: { title: 'Subsidy Share (%)', overlaying: 'y', side: 'right' },
@@ -1830,9 +2152,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderRiskTrend(state) {
     const m = state.monthArr;
+    const c = chartPalette();
     plotOrEmpty('plotRiskTrend', [
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.disputesCount / x.orders : 0), mode: 'lines+markers', name: 'Dispute Rate', line: { width: 3, color: '#d62728' } },
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.chargebacksCount / x.orders : 0), mode: 'lines+markers', name: 'Chargeback Rate', line: { width: 3, color: '#ff7f0e' } }
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.disputesCount / x.orders : 0), mode: 'lines+markers', name: 'Dispute Rate', line: { width: 3, color: c.red } },
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.chargebacksCount / x.orders : 0), mode: 'lines+markers', name: 'Chargeback Rate', line: { width: 3, color: c.orange } }
     ], {
       title: { text: 'Dispute and Chargeback Rates Co-Move in Risk Bursts', font: { size: 15 } },
       yaxis: { title: 'Rate' },
@@ -1842,19 +2165,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderDisputeChargebackScatter(state) {
     const arr = state.paySignalArr;
+    const c = chartPalette();
     plotOrEmpty('plotDisputeChargeback', [{
       x: arr.map(x => x.chargebackRate),
       y: arr.map(x => x.disputeRate),
       text: arr.map(x => `${x.signal}<br>Orders: ${x.orders.toLocaleString()}`),
-      mode: 'markers+text',
-      textposition: 'top center',
+      mode: 'markers',
       marker: {
         size: arr.map(x => 8 + Math.sqrt(x.orders) * 0.35),
         color: arr.map(x => x.orders),
-        colorscale: 'YlOrRd',
+        colorscale: [[0, c.blueSoft], [0.55, c.orange], [1, c.red]],
         showscale: true,
         colorbar: { title: 'Orders' },
-        line: { color: '#fff', width: 0.8 }
+        line: { color: '#ffffff', width: 0.8 }
       },
       hovertemplate: '%{text}<br>Chargeback: %{x:.2%}<br>Dispute: %{y:.2%}<extra></extra>'
     }], {
@@ -1904,11 +2227,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderSellerQuality(state) {
     const sellers = state.sellerArr;
+    const c = chartPalette();
     plotOrEmpty('plotSellerQualityDist', [{
       type: 'histogram',
       x: sellers.map(s => s.sqs),
       nbinsx: 30,
-      marker: { color: '#4878d0' },
+      marker: { color: c.blueSoft },
       name: 'Seller Quality Score'
     }], {
       title: { text: 'Seller Quality Score Tail Drives Governance Workload', font: { size: 15 } },
@@ -1920,7 +2244,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       type: 'histogram',
       x: sellers.map(s => s.mfs),
       nbinsx: 30,
-      marker: { color: '#f58518' },
+      marker: { color: c.orange },
       name: 'Margin Fragility'
     }], {
       title: { text: 'Margin Fragility Concentration Indicates Structural Economic Risk', font: { size: 15 } },
@@ -1930,12 +2254,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   }
 
   function renderSellerCohort(state) {
-    const c = state.sellerCohorts.sort((a, b) => b.disputeRate - a.disputeRate);
+    const order = ['Top 10% GMV Sellers', 'Mid 40% GMV Sellers', 'Long-Tail 50% Sellers'];
+    const c = [...state.sellerCohorts].sort((a, b) => order.indexOf(a.cohort) - order.indexOf(b.cohort));
     plotOrEmpty('plotSellerCohort', [{
       type: 'bar',
       x: c.map(x => x.cohort),
       y: c.map(x => x.disputeRate),
-      marker: { color: '#da7c30' },
+      marker: { color: chartPalette().orange },
       hovertemplate: '%{x}<br>Dispute rate: %{y:.2%}<extra></extra>'
     }], {
       title: { text: 'Dispute Burden Persists Across Seller Volume Cohorts', font: { size: 15 } },
@@ -1946,7 +2271,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   function renderSellerMatrix(state) {
     const s = state.sellerArr;
     const tiers = ['Low', 'Moderate', 'High', 'Critical'];
-    const colors = { Low: '#9ecae1', Moderate: '#6baed6', High: '#3182bd', Critical: '#08519c' };
+    const colors = { Low: '#bfd9fb', Moderate: '#7eaceb', High: '#2f6fc7', Critical: '#143b66' };
     const traces = tiers.map(t => {
       const d = s.filter(x => x.gvt === t);
       return {
@@ -1975,7 +2300,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       orientation: 'h',
       y: top.map(x => x.sid),
       x: top.map(x => x.gvs),
-      marker: { color: top.map(x => x.gvt === 'Critical' ? '#08519c' : x.gvt === 'High' ? '#3182bd' : x.gvt === 'Moderate' ? '#6baed6' : '#9ecae1') },
+      marker: { color: top.map(x => x.gvt === 'Critical' ? '#143b66' : x.gvt === 'High' ? '#2f6fc7' : x.gvt === 'Moderate' ? '#7eaceb' : '#bfd9fb') },
       text: top.map(x => fixed(x.gvs, 1)),
       textposition: 'outside',
       cliponaxis: false,
@@ -1989,11 +2314,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderOpsCharts(state) {
     const delay = state.delayBucketArr;
+    const c = chartPalette();
     plotOrEmpty('plotRefundDelay', [{
       x: delay.map(x => x.bucket),
       y: delay.map(x => x.refundRate),
       mode: 'lines+markers',
-      line: { color: '#c44e52', width: 3 },
+      line: { color: c.red, width: 3 },
       hovertemplate: 'Delay %{x} days<br>Refund rate: %{y:.2%}<extra></extra>'
     }], {
       title: { text: 'Refund Rates Increase as Delay Days Rise', font: { size: 15 } },
@@ -2003,9 +2329,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
     const m = state.monthArr;
     plotOrEmpty('plotOpsTrend', [
-      { x: m.map(x => x.m), y: m.map(x => x.delayEligible ? x.delaySum / x.delayEligible : 0), mode: 'lines+markers', name: 'Avg Delay Days', yaxis: 'y1', line: { color: '#f58518', width: 2.6 } },
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.cancels / x.orders : 0), mode: 'lines+markers', name: 'Cancellation Rate', yaxis: 'y2', line: { color: '#e45756', width: 2.6 } },
-      { x: m.map(x => x.m), y: m.map(x => x.onTimeEligible ? x.onTimeCount / x.onTimeEligible : 0), mode: 'lines+markers', name: 'On-Time Rate', yaxis: 'y2', line: { color: '#54a24b', width: 2.6 } }
+      { x: m.map(x => x.m), y: m.map(x => x.delayEligible ? x.delaySum / x.delayEligible : 0), mode: 'lines+markers', name: 'Avg Delay Days', yaxis: 'y1', line: { color: c.orange, width: 2.6 } },
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.cancels / x.orders : 0), mode: 'lines+markers', name: 'Cancellation Rate', yaxis: 'y2', line: { color: c.red, width: 2.6 } },
+      { x: m.map(x => x.m), y: m.map(x => x.onTimeEligible ? x.onTimeCount / x.onTimeEligible : 0), mode: 'lines+markers', name: 'On-Time Rate', yaxis: 'y2', line: { color: c.green, width: 2.6 } }
     ], {
       title: { text: 'Operational Reliability Volatility Maps to Economic and CX Risk', font: { size: 15 } },
       xaxis: { tickangle: -35 },
@@ -2017,7 +2343,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       x: delay.map(x => x.bucket),
       y: delay.map(x => x.disputeRate),
       mode: 'lines+markers',
-      line: { color: '#d62728', width: 3 },
+      line: { color: c.red, width: 3 },
       hovertemplate: 'Delay %{x} days<br>Dispute rate: %{y:.2%}<extra></extra>'
     }], {
       title: { text: 'Dispute Risk Escalates with Higher Delay Buckets', font: { size: 15 } },
@@ -2025,13 +2351,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       yaxis: { title: 'Dispute Rate', tickformat: '.1%' }
     }, delay.length > 0);
 
-    const cat = [...state.categoryArr].sort((a, b) => b.subsidyShare - a.subsidyShare);
+    const cat = [...state.categoryArr].sort((a, b) => b.subsidyShare - a.subsidyShare).slice(0, 12);
     plotOrEmpty('plotPromoCategory', [{
       type: 'bar',
       orientation: 'h',
       y: cat.map(x => x.category),
       x: cat.map(x => x.subsidyShare),
-      marker: { color: '#4c9f70' },
+      marker: { color: c.green },
       hovertemplate: '%{y}<br>Promo dependency: %{x:.2%}<extra></extra>'
     }], {
       title: { text: 'Promo Dependency by Category Shows Margin Sensitivity Exposure', font: { size: 15 } },
@@ -2041,9 +2367,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderSellerConcentration(state) {
     const c = state.concentration;
+    const p = chartPalette();
     plotOrEmpty('plotSellerConcentration', [
-      { x: c.map(x => x.sellerShare), y: c.map(x => x.gmvShare), mode: 'lines', name: 'Observed', line: { color: '#1f77b4', width: 3 } },
-      { x: [0, 1], y: [0, 1], mode: 'lines', name: 'Equality', line: { color: '#8fa3c3', dash: 'dash' } }
+      { x: c.map(x => x.sellerShare), y: c.map(x => x.gmvShare), mode: 'lines', name: 'Observed', line: { color: p.blue, width: 3 }, fill: 'tozeroy', fillcolor: 'rgba(10,91,211,0.12)' },
+      { x: [0, 1], y: [0, 1], mode: 'lines', name: 'Equality', line: { color: p.neutral, dash: 'dash' } }
     ], {
       title: { text: 'Seller Concentration Curve Indicates Top-Seller Dependency Risk', font: { size: 15 } },
       xaxis: { title: 'Share of Sellers', tickformat: '.0%' },
@@ -2144,7 +2471,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       tbody.innerHTML = pageRows.map(r => `
         <tr>
           <td>${r.sid}</td>
-          <td>${r.gvt}</td>
+          <td><span class="table-pill ${tierClassFromRiskTier(r.gvt)}">${r.gvt}</span></td>
           <td>${fixed(r.gvs, 1)}</td>
           <td>${fixed(r.sqs, 1)}</td>
           <td>${money(r.gmv)}</td>
@@ -2152,7 +2479,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
           <td>${pct(r.refund_rate)}</td>
           <td>${pct(r.dispute_rate)}</td>
           <td>${pct(r.delay_rate)}</td>
-          <td>${r.ract}</td>
+          <td><div class="action-text">${r.ract}</div></td>
         </tr>
       `).join('');
     }
@@ -2160,13 +2487,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   }
 
   function renderRiskAndProfitabilityMandatoryCharts(state) {
-    const cat = [...state.categoryArr].sort((a, b) => b.refundRate - a.refundRate);
+    const cat = [...state.categoryArr].sort((a, b) => b.refundRate - a.refundRate).slice(0, 12);
     plotOrEmpty('plotRefundByCategory', [{
       type: 'bar',
       orientation: 'h',
       y: cat.map(x => x.category),
       x: cat.map(x => x.refundRate),
-      marker: { color: '#d66a6a' },
+      marker: { color: chartPalette().rose },
       hovertemplate: '%{y}<br>Refund rate: %{x:.2%}<extra></extra>'
     }], {
       title: { text: 'Refund Rate by Category Is Concentrated in High-Defect Segments', font: { size: 15 } },
@@ -2202,6 +2529,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     APP.currentFiltered = rows;
     const state = computeState(rows);
     APP.currentState = state;
+    document.getElementById('scopeBar').innerHTML = scopeSummaryChips(filters, state);
     buildKpiCards(state, APP.baselineState);
     renderHero(state, APP.baselineState);
     renderNarrativeAndAlerts(state, APP.baselineState);

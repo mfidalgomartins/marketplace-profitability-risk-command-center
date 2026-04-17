@@ -13,40 +13,73 @@ def _build_index_html(target_filename: str) -> str:
   <title>Marketplace Command Center</title>
   <meta http-equiv="refresh" content="0; url={target_filename}">
   <style>
+    :root {{
+      --bg-start: #edf4fb;
+      --bg-end: #f7f8fb;
+      --panel: rgba(255, 255, 255, 0.94);
+      --ink: #0e1726;
+      --muted: #56657d;
+      --line: #d5deea;
+      --brand: #0a5bd3;
+      --brand-soft: #e6f0ff;
+      --brand-ink: #0d4dad;
+      --shadow: 0 18px 40px rgba(12, 23, 39, 0.08);
+    }}
     body {{
       margin: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
       font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
-      background: #f4f7fc;
-      color: #0f172a;
-      padding: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(33, 94, 190, 0.08), transparent 34%),
+        linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: var(--ink);
+      padding: 24px;
     }}
     .card {{
-      max-width: 620px;
+      max-width: 680px;
       width: 100%;
-      background: #ffffff;
-      border: 1px solid #d8e1ee;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
     }}
-    h1 {{ margin: 0 0 8px 0; font-size: 24px; }}
-    p {{ margin: 0 0 14px 0; color: #46546e; }}
+    .eyebrow {{
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }}
+    h1 {{ margin: 0 0 10px 0; font-size: 30px; line-height: 1.08; letter-spacing: -0.3px; }}
+    p {{ margin: 0 0 16px 0; color: var(--muted); font-size: 15px; line-height: 1.55; }}
     a {{
-      color: #0b5ed7;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: var(--brand);
+      color: #ffffff;
       font-weight: 600;
       text-decoration: none;
     }}
-    a:hover {{ text-decoration: underline; }}
+    a:hover {{ filter: brightness(0.98); }}
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Marketplace Command Center</h1>
-    <p>Redirecting to the live executive dashboard.</p>
-    <a href="{target_filename}">Open dashboard</a>
+    <div class="eyebrow">Live Dashboard</div>
+    <h1>Marketplace Profitability, Fraud & Seller Quality Command Center</h1>
+    <p>Redirecting to the live executive dashboard. If the redirect does not trigger automatically, use the link below.</p>
+    <a href="{target_filename}">Open the live dashboard</a>
   </div>
 </body>
 </html>
