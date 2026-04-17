@@ -429,21 +429,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: rgba(23, 114, 69, 0.08);
     }
     .top-shell {
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      position: relative;
+      z-index: 10;
       background: var(--top-shell-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(213, 222, 234, 0.72);
-      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(213, 222, 234, 0.56);
     }
     .header {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 20px 24px 12px 24px;
+      padding: 18px 24px 8px 24px;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 18px;
+      gap: 14px;
       align-items: center;
     }
     .eyebrow {
@@ -507,6 +505,23 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: var(--panel-soft);
     }
     button:hover { filter: brightness(0.98); }
+    .filter-shell {
+      max-width: 1680px;
+      margin: 0 auto;
+      overflow: hidden;
+      transition: max-height 0.25s ease, opacity 0.22s ease, transform 0.22s ease, margin-bottom 0.22s ease;
+      max-height: 560px;
+      opacity: 1;
+      transform: translateY(0);
+      margin-bottom: 0;
+    }
+    .filter-shell.collapsed {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      margin-bottom: -2px;
+      pointer-events: none;
+    }
     .filter-bar {
       max-width: 1680px;
       margin: 0 auto;
@@ -548,7 +563,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .scope-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 10px 6px 16px 6px;
+      padding: 10px 6px 14px 6px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -578,12 +593,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .container {
       max-width: 1680px;
-      margin: 22px auto 34px auto;
+      margin: 16px auto 34px auto;
       padding: 0 24px 34px 24px;
     }
     .tabs {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 8px;
       margin-bottom: 14px;
       padding: 8px;
@@ -591,10 +606,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: rgba(255, 255, 255, 0.55);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
-      width: fit-content;
+      width: 100%;
       max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .tabs::-webkit-scrollbar { display: none; }
     .tab-btn {
+      flex: 0 0 auto;
       border-radius: 999px;
       padding: 9px 15px;
       background: transparent;
@@ -615,7 +634,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin: 0 0 12px 0;
       display: grid;
       grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.9fr);
-      gap: 12px;
+      gap: 14px;
     }
     .hero-message {
       background: linear-gradient(135deg, var(--panel-strong) 0%, var(--panel-soft) 100%);
@@ -756,8 +775,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 16px;
     }
     .kpi {
       grid-column: span 3;
@@ -822,8 +841,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .kpi.bad .tone-dot { background: var(--bad); box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.1); }
     .row {
       display: grid;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 14px;
+      margin-bottom: 14px;
     }
     .row-2 { grid-template-columns: 1fr 1fr; }
     .row-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -832,7 +851,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 16px;
+      padding: 18px;
     }
     .panel h3 {
       margin: 0 0 8px 0;
@@ -848,13 +867,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .plot {
       width: 100%;
-      min-height: 360px;
+      min-height: 338px;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--line-soft);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(245, 248, 252, 0.4) 100%);
     }
-    .plot.short { min-height: 280px; }
+    .plot.short { min-height: 270px; }
     .narrative {
       line-height: 1.6;
       color: var(--ink);
@@ -987,8 +1006,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .scenario-cards {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      margin-bottom: 10px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
     .scenario-card {
       padding: 12px;
@@ -1060,6 +1079,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .kpi, .kpi.feature { grid-column: span 1; }
       .filter-bar { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      .header { grid-template-columns: 1fr; }
+      .header-meta { justify-items: start; }
+      .actions { justify-content: flex-start; }
       .signal-grid { grid-template-columns: 1fr; }
       .bench-grid { grid-template-columns: 1fr; }
       .drawer { width: 100vw; right: -100vw; }
@@ -1098,6 +1120,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       .filter-bar {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         padding-bottom: 8px;
+      }
+      .filter-shell {
+        max-height: none !important;
+        opacity: 1 !important;
+        transform: none !important;
       }
       .filter input, .filter select {
         border: none;
@@ -1148,6 +1175,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       </div>
       <div class="header-meta">
         <div class="actions">
+          <button id="filtersToggle" class="subtle">Hide Filters</button>
           <button id="themeToggle" class="subtle">Dark Mode</button>
           <button id="printDashboard" class="subtle">Print</button>
           <button id="methodologyOpen">Methodology</button>
@@ -1156,19 +1184,21 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       </div>
     </div>
 
-    <div class="filter-bar">
-      <div class="filter"><label for="fDateFrom">Date From</label><input id="fDateFrom" type="date"></div>
-      <div class="filter"><label for="fDateTo">Date To</label><input id="fDateTo" type="date"></div>
-      <div class="filter"><label for="fRegion">Region</label><select id="fRegion"></select></div>
-      <div class="filter"><label for="fCategory">Category</label><select id="fCategory"></select></div>
-      <div class="filter"><label for="fSellerTier">Seller Tier</label><select id="fSellerTier"></select></div>
-      <div class="filter"><label for="fSellerType">Seller Type</label><select id="fSellerType"></select></div>
-      <div class="filter"><label for="fAcquisition">Acquisition Channel</label><select id="fAcquisition"></select></div>
-      <div class="filter"><label for="fBuyerType">Buyer Type</label><select id="fBuyerType"></select></div>
-      <div class="filter"><label for="fRiskTier">Risk Tier</label><select id="fRiskTier"></select></div>
-      <div class="filter-actions">
-        <button id="applyFilters" class="primary">Apply Filters</button>
-        <button id="resetFilters">Reset</button>
+    <div class="filter-shell" id="filterShell">
+      <div class="filter-bar">
+        <div class="filter"><label for="fDateFrom">Date From</label><input id="fDateFrom" type="date"></div>
+        <div class="filter"><label for="fDateTo">Date To</label><input id="fDateTo" type="date"></div>
+        <div class="filter"><label for="fRegion">Region</label><select id="fRegion"></select></div>
+        <div class="filter"><label for="fCategory">Category</label><select id="fCategory"></select></div>
+        <div class="filter"><label for="fSellerTier">Seller Tier</label><select id="fSellerTier"></select></div>
+        <div class="filter"><label for="fSellerType">Seller Type</label><select id="fSellerType"></select></div>
+        <div class="filter"><label for="fAcquisition">Acquisition Channel</label><select id="fAcquisition"></select></div>
+        <div class="filter"><label for="fBuyerType">Buyer Type</label><select id="fBuyerType"></select></div>
+        <div class="filter"><label for="fRiskTier">Risk Tier</label><select id="fRiskTier"></select></div>
+        <div class="filter-actions">
+          <button id="applyFilters" class="primary">Apply Filters</button>
+          <button id="resetFilters">Reset</button>
+        </div>
       </div>
     </div>
     <div class="scope-bar" id="scopeBar"></div>
@@ -1472,6 +1502,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     sellerMetaMap: new Map(EMBEDDED.seller_meta.map(s => [String(s.sid), s])),
     officialKpis: EMBEDDED.official_kpis || {},
     theme: 'light',
+    filtersOpen: false,
     scenarioRows: EMBEDDED.scenarios,
     scenarioDecision: EMBEDDED.scenario_decision,
     currentFiltered: [],
@@ -1606,6 +1637,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       renderAllCharts(APP.currentState);
       renderSellerConcentration(APP.currentState);
       renderScenarioCenter();
+    }
+  }
+
+  function setFiltersOpen(open) {
+    APP.filtersOpen = !!open;
+    const shell = document.getElementById('filterShell');
+    const button = document.getElementById('filtersToggle');
+    if (shell) shell.classList.toggle('collapsed', !APP.filtersOpen);
+    if (button) {
+      button.textContent = APP.filtersOpen ? 'Hide Filters' : 'Show Filters';
+      button.setAttribute('aria-expanded', APP.filtersOpen ? 'true' : 'false');
     }
   }
 
@@ -2625,6 +2667,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     document.getElementById('applyFilters').addEventListener('click', () => { APP.sellerPage = 1; renderDashboard(); });
     document.getElementById('resetFilters').addEventListener('click', resetFilters);
     document.getElementById('resetFiltersTop').addEventListener('click', resetFilters);
+    document.getElementById('filtersToggle').addEventListener('click', () => {
+      setFiltersOpen(!APP.filtersOpen);
+    });
     document.getElementById('themeToggle').addEventListener('click', () => {
       applyTheme(APP.theme === 'dark' ? 'light' : 'dark', true);
     });
@@ -2712,6 +2757,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function init() {
     applyTheme(preferredTheme(), false);
+    setFiltersOpen(false);
     setHeaderMeta();
     initializeFilters();
     bindEvents();
