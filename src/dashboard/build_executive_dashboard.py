@@ -402,8 +402,31 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         radial-gradient(circle at top right, rgba(16, 52, 92, 0.06), transparent 24%),
         linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
       color: var(--ink);
-      font-family: "IBM Plex Sans", "Source Sans 3", "Avenir Next", "Segoe UI", Arial, sans-serif;
+      font-family: "Avenir Next", "IBM Plex Sans", "Source Sans 3", "Segoe UI", Arial, sans-serif;
       line-height: 1.45;
+    }
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: 0;
+      width: 340px;
+      height: 340px;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: 0.3;
+    }
+    body::before {
+      top: -120px;
+      right: -80px;
+      background: rgba(10, 91, 211, 0.14);
+    }
+    body::after {
+      bottom: -140px;
+      left: -100px;
+      background: rgba(23, 114, 69, 0.08);
     }
     .top-shell {
       position: sticky;
@@ -412,7 +435,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: var(--top-shell-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(213, 222, 234, 0.72);
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
     }
     .header {
       max-width: 1680px;
@@ -442,6 +465,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font-size: 32px;
       letter-spacing: -0.4px;
       line-height: 1.1;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-weight: 700;
     }
     .title p {
       margin: 8px 0 0 0;
@@ -485,20 +510,24 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .filter-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 0 24px 14px 24px;
+      padding: 14px 16px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
       gap: 10px;
       align-items: end;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow-soft);
     }
     .filter {
       display: grid;
       gap: 4px;
-      padding: 12px;
-      border-radius: 14px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
     .filter label {
       font-size: 11px;
@@ -509,17 +538,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .filter input, .filter select {
       border: 1px solid var(--line);
-      background: var(--panel);
+      background: var(--panel-strong);
       color: var(--ink);
       border-radius: 10px;
-      padding: 8px 10px;
+      padding: 9px 11px;
       font-size: 13px;
       min-height: 40px;
     }
     .scope-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 0 24px 16px 24px;
+      padding: 10px 6px 16px 6px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -557,19 +586,28 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 14px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      width: fit-content;
+      max-width: 100%;
     }
     .tab-btn {
       border-radius: 999px;
-      padding: 8px 14px;
-      background: var(--panel);
+      padding: 9px 15px;
+      background: transparent;
       border: 1px solid var(--line);
       font-size: 13px;
       color: var(--ink);
+      box-shadow: none;
     }
     .tab-btn.active {
-      background: var(--brand-soft);
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-ink) 100%);
       border-color: var(--brand);
-      color: var(--brand-ink);
+      color: #ffffff;
+      box-shadow: 0 10px 18px rgba(10, 91, 211, 0.2);
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
@@ -588,6 +626,18 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font-size: 14px;
       line-height: 1.58;
       color: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-message::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -90px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(10, 91, 211, 0.12), transparent 68%);
+      pointer-events: none;
     }
     .hero-message h2 {
       margin: 0;
@@ -595,12 +645,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       line-height: 1.14;
       letter-spacing: -0.35px;
       max-width: 920px;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      position: relative;
+      z-index: 1;
     }
     .hero-message p {
       margin: 10px 0 0 0;
       color: var(--muted);
       font-size: 14px;
       max-width: 880px;
+      position: relative;
+      z-index: 1;
     }
     .hero-side {
       display: grid;
@@ -611,12 +666,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
+      position: relative;
+      z-index: 1;
     }
     .decision-point {
-      padding: 12px;
+      padding: 13px 14px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.62);
       border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
     }
     .decision-point .name {
       font-size: 11px;
@@ -671,8 +729,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .signal-card {
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: var(--panel);
-      padding: 10px;
+      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      padding: 12px;
+      box-shadow: var(--shadow-soft);
     }
     .signal-card .name {
       font-size: 11px;
@@ -702,7 +761,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .kpi {
       grid-column: span 3;
-      background: var(--panel);
+      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
       border: 1px solid var(--line);
       border-top: 4px solid var(--brand);
       border-radius: var(--radius);
@@ -769,7 +828,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .row-2 { grid-template-columns: 1fr 1fr; }
     .row-3 { grid-template-columns: 1fr 1fr 1fr; }
     .panel {
-      background: var(--panel);
+      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -792,6 +851,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       min-height: 360px;
       border-radius: 10px;
       overflow: hidden;
+      border: 1px solid var(--line-soft);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(245, 248, 252, 0.4) 100%);
     }
     .plot.short { min-height: 280px; }
     .narrative {
@@ -876,6 +937,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       position: sticky;
       top: 0;
       z-index: 1;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.35px;
     }
     tbody td {
       border-bottom: 1px solid var(--line-soft);
@@ -883,12 +947,16 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       color: var(--ink);
       vertical-align: top;
     }
+    tbody tr:nth-child(even) {
+      background: rgba(245, 248, 252, 0.5);
+    }
     tbody tr:hover { background: var(--table-row-hover); }
     .table-wrap {
       max-height: 420px;
       overflow: auto;
       border: 1px solid var(--line);
       border-radius: 10px;
+      background: var(--panel-strong);
     }
     .table-pill {
       display: inline-flex;
@@ -923,10 +991,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin-bottom: 10px;
     }
     .scenario-card {
-      padding: 10px;
+      padding: 12px;
       border-radius: 12px;
       border: 1px solid var(--line);
-      background: var(--panel);
+      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      box-shadow: var(--shadow-soft);
     }
     .scenario-card .name { font-size: 12px; color: var(--muted); }
     .scenario-card .main { margin-top: 4px; font-size: 21px; font-weight: 700; }
@@ -942,7 +1011,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       top: 0;
       height: 100vh;
       width: 520px;
-      background: var(--panel);
+      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
       border-left: 1px solid var(--line);
       box-shadow: -16px 0 32px rgba(0, 0, 0, 0.12);
       z-index: 80;
@@ -1469,13 +1538,21 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font: { family: 'IBM Plex Sans, Source Sans 3, Segoe UI, Arial, sans-serif', size: 13, color: t.ink },
       legend: {
         orientation: 'h',
-        y: -0.28,
+        y: -0.24,
         x: 0,
         xanchor: 'left',
         font: { color: t.axis, size: 12 },
         bgcolor: 'rgba(0,0,0,0)',
       },
-      title: { x: 0, xanchor: 'left', font: { size: 15, color: t.ink } },
+      title: {
+        x: 0,
+        xanchor: 'left',
+        font: {
+          size: 15,
+          color: t.ink,
+          family: '"Iowan Old Style", "Palatino Linotype", Georgia, serif'
+        }
+      },
       hoverlabel: { bgcolor: t.hoverBg, font: { color: t.hoverInk } }
     };
   }

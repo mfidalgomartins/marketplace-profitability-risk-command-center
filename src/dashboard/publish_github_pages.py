@@ -30,7 +30,7 @@ def _build_index_html(target_filename: str) -> str:
       min-height: 100vh;
       display: grid;
       place-items: center;
-      font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+      font-family: "Avenir Next", "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
       background:
         radial-gradient(circle at top left, rgba(33, 94, 190, 0.08), transparent 34%),
         linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
@@ -58,7 +58,13 @@ def _build_index_html(target_filename: str) -> str:
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }}
-    h1 {{ margin: 0 0 10px 0; font-size: 30px; line-height: 1.08; letter-spacing: -0.3px; }}
+    h1 {{
+      margin: 0 0 10px 0;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.3px;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    }}
     p {{ margin: 0 0 16px 0; color: var(--muted); font-size: 15px; line-height: 1.55; }}
     a {{
       display: inline-flex;
