@@ -243,7 +243,7 @@ def generate_sellers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[p
     very_high_risk_flag = rng.random(cfg.n_sellers) < 0.025
     weak_quality_flag = quality_score < np.quantile(quality_score, 0.24)
 
-    # Force a subset of high-volume weak-quality sellers to create realistic leadership risk cases.
+    # Force a subset of high-volume weak-quality sellers to create governance stress cases.
     high_volume_idx = np.where(volume_weight >= np.quantile(volume_weight, 0.95))[0]
     weak_high_volume = high_volume_idx[rng.random(len(high_volume_idx)) < 0.36]
     if weak_high_volume.size > 0:

@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import argparse
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List
 
+_matplotlib_cache = Path(".tmp/matplotlib").resolve()
+_matplotlib_cache.mkdir(parents=True, exist_ok=True)
+os.environ.setdefault("MPLCONFIGDIR", str(_matplotlib_cache))
+os.environ.setdefault("MPLBACKEND", "Agg")
+
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -16,12 +21,27 @@ class BacktestConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     output_dir: Path = Path("data/processed")
-    charts_dir: Path = Path("outputs/charts")
+    charts_dir: Path = Path(".tmp/charts")
     thresholds: tuple[int, ...] = tuple(range(30, 96, 5))
     manual_review_cost: float = 1.20
     friction_rate: float = 0.003
     base_efficacy: float = 0.35
     efficacy_scenarios: tuple[float, ...] = (0.20, 0.35, 0.50)
+
+
+def _validate_config(cfg: BacktestConfig) -> None:
+    if not cfg.thresholds:
+        raise ValueError("At least one review threshold is required.")
+    if any(threshold < 0 or threshold > 100 for threshold in cfg.thresholds):
+        raise ValueError("Review thresholds must be between 0 and 100.")
+    if cfg.manual_review_cost < 0:
+        raise ValueError("manual_review_cost must be non-negative.")
+    if not 0 <= cfg.friction_rate <= 1:
+        raise ValueError("friction_rate must be between 0 and 1.")
+    if not 0 <= cfg.base_efficacy <= 1:
+        raise ValueError("base_efficacy must be between 0 and 1.")
+    if any(not 0 <= efficacy <= 1 for efficacy in cfg.efficacy_scenarios):
+        raise ValueError("All efficacy scenarios must be between 0 and 1.")
 
 
 def _load(cfg: BacktestConfig) -> dict[str, pd.DataFrame]:
@@ -145,7 +165,9 @@ def _build_recommended_policy(curve: pd.DataFrame) -> pd.DataFrame:
                 "review_cost": float(best["review_cost"]),
                 "conversion_friction_cost": float(best["conversion_friction_cost"]),
                 "net_benefit": float(best["net_benefit"]),
-                "policy_guidance": "Escalate orders above threshold to manual review; calibrate monthly with realized outcomes.",
+                "evaluation_scope": "retrospective in-sample policy simulation",
+                "deployment_status": "requires holdout validation before operational use",
+                "policy_guidance": "Use as a review-capacity starting point; validate on a later holdout period before deployment.",
             }
         ]
     )
@@ -184,6 +206,7 @@ def _plot(curve: pd.DataFrame, output_path: Path) -> None:
 
 
 def run_backtest(cfg: BacktestConfig) -> dict[str, pd.DataFrame]:
+    _validate_config(cfg)
     tables = _load(cfg)
     base = _build_base(tables)
 
@@ -231,7 +254,7 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path("outputs/charts"))
+    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
     parser.add_argument("--manual-review-cost", type=float, default=1.20)
     parser.add_argument("--friction-rate", type=float, default=0.003)
     parser.add_argument("--base-efficacy", type=float, default=0.35)

@@ -1,4 +1,6 @@
 # Keep generated deliverables in repo, but exclude them from language stats
 outputs/dashboard/*.html linguist-generated=true
-outputs/charts/* linguist-generated=true
+outputs/graphs/*.png linguist-generated=true
+outputs/reports/*.pdf linguist-generated=true
 reports/* linguist-generated=true
+*.pdf binary

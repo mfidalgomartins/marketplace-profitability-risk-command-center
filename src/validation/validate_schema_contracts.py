@@ -17,6 +17,9 @@ class ContractIssue:
     detail: str
 
 
+ISSUE_COLUMNS = ["table_name", "path", "issue_type", "detail"]
+
+
 def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
     if not schema_file.exists():
         raise FileNotFoundError(f"Schema file not found: {schema_file}")
@@ -102,7 +105,9 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
                         )
                     )
 
-    return pd.DataFrame([i.__dict__ for i in issues])
+    if issues:
+        return pd.DataFrame([i.__dict__ for i in issues])
+    return pd.DataFrame(columns=ISSUE_COLUMNS)
 
 
 def main() -> None:

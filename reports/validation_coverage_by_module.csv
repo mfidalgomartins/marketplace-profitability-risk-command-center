@@ -1,0 +1,10 @@
+module,checks_configured,open_issues,blocker_issues,validation_status
+synthetic_data,8,0,0,passed
+processed_features,6,0,0,passed
+metrics_logic,6,0,0,passed
+metric_governance,5,0,0,passed
+scoring,3,0,0,passed
+scenarios,4,0,0,passed
+schema_contracts,1,0,0,passed
+dashboard_feeds,3,0,0,passed
+narrative,1,0,0,passed

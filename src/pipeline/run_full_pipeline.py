@@ -15,7 +15,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run full marketplace analytics pipeline end-to-end.")
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path("outputs/charts"))
+    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
     parser.add_argument(
         "--dashboard-file",
         type=Path,
@@ -141,19 +141,6 @@ def main() -> None:
         ],
     )
     _run(
-        "build chart pack",
-        [
-            py,
-            "src/visualization/build_marketplace_visualizations.py",
-            "--raw-dir",
-            str(args.raw_dir),
-            "--processed-dir",
-            str(args.processed_dir),
-            "--output-dir",
-            str(args.charts_dir),
-        ],
-    )
-    _run(
         "generate executive snapshot",
         [
             py,
@@ -164,34 +151,6 @@ def main() -> None:
             str(args.processed_dir),
             "--reports-dir",
             str(args.reports_dir),
-        ],
-    )
-    _run(
-        "build executive dashboard",
-        [
-            py,
-            "src/dashboard/build_executive_dashboard.py",
-            "--raw-dir",
-            str(args.raw_dir),
-            "--processed-dir",
-            str(args.processed_dir),
-            "--reports-dir",
-            str(args.reports_dir),
-            "--output-file",
-            str(args.dashboard_file),
-        ],
-    )
-    _run(
-        "publish GitHub Pages dashboard entrypoint",
-        [
-            py,
-            "src/dashboard/publish_github_pages.py",
-            "--source-html",
-            str(args.dashboard_file),
-            "--destination-html",
-            str(args.pages_dashboard_file),
-            "--index-html",
-            str(args.pages_index_file),
         ],
     )
     _run(
@@ -231,7 +190,6 @@ def main() -> None:
             str(args.reports_dir / "schema_drift_changes.csv"),
             "--output-report",
             str(args.reports_dir / "schema_drift_report.md"),
-            "--snapshot-current",
         ],
     )
     _run(
@@ -252,6 +210,21 @@ def main() -> None:
         ],
     )
     _run(
+        "build executive dashboard",
+        [
+            py,
+            "src/dashboard/build_executive_dashboard.py",
+            "--raw-dir",
+            str(args.raw_dir),
+            "--processed-dir",
+            str(args.processed_dir),
+            "--reports-dir",
+            str(args.reports_dir),
+            "--output-file",
+            str(args.dashboard_file),
+        ],
+    )
+    _run(
         "enforce release gate",
         [
             py,
@@ -261,6 +234,21 @@ def main() -> None:
             "--required-state",
             args.required_release_state,
             *(["--require-committee-grade"] if args.require_committee_grade else []),
+        ],
+    )
+    _run("build publication chart pack", [py, "src/visualization/build_report_graphs.py"])
+    _run("build publication PDF report", [py, "src/visualization/build_report_pdf.py"])
+    _run(
+        "publish GitHub Pages dashboard entrypoint",
+        [
+            py,
+            "src/dashboard/publish_github_pages.py",
+            "--source-html",
+            str(args.dashboard_file),
+            "--destination-html",
+            str(args.pages_dashboard_file),
+            "--index-html",
+            str(args.pages_index_file),
         ],
     )
 

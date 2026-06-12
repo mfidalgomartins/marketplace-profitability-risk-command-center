@@ -40,6 +40,10 @@ def test_backtesting_tables_exist_and_are_coherent() -> None:
     assert len(policy) == 1
     threshold = int(policy.iloc[0]["recommended_threshold"])
     assert threshold in set(curve["threshold"].tolist())
+    assert policy.iloc[0]["evaluation_scope"] == "retrospective in-sample policy simulation"
+    assert policy.iloc[0]["deployment_status"] == "requires holdout validation before operational use"
+    assert float(policy.iloc[0]["net_benefit"]) > 0
+    assert float(curve["precision"].max()) >= float(curve.iloc[0]["precision"]) + 0.15
 
 
 def test_monte_carlo_tables_exist_and_capture_uncertainty() -> None:

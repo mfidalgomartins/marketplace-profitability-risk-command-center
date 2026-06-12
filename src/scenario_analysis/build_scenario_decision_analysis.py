@@ -286,8 +286,6 @@ def _evaluate_scenarios(
 ) -> pd.DataFrame:
     rows = []
 
-    baseline_row = assumptions[assumptions["scenario"] == "baseline"].iloc[0]
-
     for r in assumptions.itertuples(index=False):
         gmv = baseline["gmv"] * r.gmv_factor
         net = gmv * baseline["net_to_gmv"] * r.net_to_gmv_factor
@@ -424,6 +422,8 @@ def _decision_matrix(results: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_scenarios(cfg: ScenarioConfig) -> Dict[str, pd.DataFrame]:
+    if cfg.baseline_months <= 0 or cfg.horizon_months <= 0:
+        raise ValueError("baseline_months and horizon_months must be greater than zero.")
     raw = _load_raw(cfg.raw_dir)
     processed = _load_processed(cfg.processed_dir)
 

@@ -22,7 +22,37 @@ class DashboardConfig:
     sample_seed: int = 42
 
 
-DASHBOARD_VERSION = "2026.04.02-governed-kpi"
+DASHBOARD_VERSION = "2026.06.06-public-release"
+
+
+def _as_bool(value: object, default: bool = False) -> bool:
+    if value is None or pd.isna(value):
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    return str(value).strip().lower() in {"true", "1", "yes", "y"}
+
+
+def _json_safe(value: object) -> object:
+    if isinstance(value, dict):
+        return {str(k): _json_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, tuple):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, (np.floating, float)):
+        return float(value) if np.isfinite(value) else None
+    if isinstance(value, (np.integer,)):
+        return int(value)
+    if isinstance(value, (np.bool_, bool)):
+        return bool(value)
+    if value is None:
+        return None
+    if pd.isna(value):
+        return None
+    return value
 
 
 def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
@@ -50,6 +80,7 @@ def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
         "scenario_results": pd.read_csv(processed_dir / "scenario_results_summary.csv"),
         "scenario_assumptions": pd.read_csv(processed_dir / "scenario_assumptions.csv"),
         "scenario_decision": pd.read_csv(processed_dir / "scenario_decision_matrix.csv"),
+        "recommended_policy": pd.read_csv(processed_dir / "backtesting_recommended_policy.csv"),
     }
 
 
@@ -64,6 +95,54 @@ def _load_official_kpis(reports_dir: Path) -> Dict[str, object]:
 
     metrics = {str(r["metric"]): float(r["value"]) for _, r in snap.iterrows() if pd.notna(r["value"])}
     return {"source": str(snap_path), "metrics": metrics}
+
+
+def _load_validation_summary(reports_dir: Path) -> Dict[str, object]:
+    summary_path = reports_dir / "validation_summary.csv"
+    release_path = reports_dir / "validation_release_assessment.csv"
+
+    out: Dict[str, object] = {
+        "source": str(summary_path),
+        "release_source": str(release_path),
+        "release_state": "unknown",
+        "publish_blocked": True,
+        "critical_issues": None,
+        "high_issues": None,
+        "medium_issues": None,
+        "low_issues": None,
+        "committee_grade_ready": False,
+        "public_release_ready": False,
+        "rationale": "Validation summary not available.",
+    }
+
+    if summary_path.exists():
+        summary = pd.read_csv(summary_path)
+        if not summary.empty:
+            row = summary.iloc[0].to_dict()
+            out.update(
+                {
+                    "release_state": str(row.get("release_state", "unknown")),
+                    "publish_blocked": _as_bool(row.get("publish_blocked", True), default=True),
+                    "critical_issues": int(row.get("critical_issues", 0)),
+                    "high_issues": int(row.get("high_issues", 0)),
+                    "medium_issues": int(row.get("medium_issues", 0)),
+                    "low_issues": int(row.get("low_issues", 0)),
+                    "committee_grade_ready": _as_bool(row.get("committee_grade_ready", False), default=False),
+                    "public_release_ready": _as_bool(row.get("public_release_ready", False), default=False),
+                }
+            )
+
+    if release_path.exists():
+        release = pd.read_csv(release_path)
+        if not release.empty:
+            row = release.iloc[0].to_dict()
+            out.update(
+                {
+                    "rationale": str(row.get("rationale", out["rationale"])),
+                    "public_release_ready": _as_bool(row.get("public_release_ready", False), default=False),
+                }
+            )
+    return out
 
 
 def _build_order_facts(raw: Dict[str, pd.DataFrame], proc: Dict[str, pd.DataFrame]) -> pd.DataFrame:
@@ -261,6 +340,7 @@ def _build_payload(cfg: DashboardConfig) -> Dict[str, object]:
     raw = _load_raw(cfg.raw_dir)
     proc = _load_processed(cfg.processed_dir)
     official = _load_official_kpis(cfg.reports_dir)
+    validation = _load_validation_summary(cfg.reports_dir)
 
     fact_all = _build_order_facts(raw, proc)
     fact = _sample_fact_rows(fact_all, max_orders=cfg.max_orders, sample_seed=cfg.sample_seed)
@@ -298,6 +378,8 @@ def _build_payload(cfg: DashboardConfig) -> Dict[str, object]:
         "orders": fact.to_dict(orient="records"),
         "seller_meta": seller_meta.to_dict(orient="records"),
         "official_kpis": official["metrics"],
+        "validation": validation,
+        "recommended_policy": proc["recommended_policy"].to_dict(orient="records"),
         "scenarios": scenario_results.to_dict(orient="records"),
         "scenario_assumptions": scenario_assumptions.to_dict(orient="records"),
         "scenario_decision": scenario_decision.to_dict(orient="records"),
@@ -312,164 +394,189 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Marketplace Profitability, Fraud & Seller Quality Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #edf4fb;
-      --bg-end: #f7f8fb;
-      --bg-accent: rgba(33, 94, 190, 0.08);
-      --top-shell-bg: rgba(246, 249, 253, 0.9);
-      --panel: rgba(255, 255, 255, 0.94);
-      --panel-soft: #f5f8fc;
+      --bg-start: #f6f8fa;
+      --bg-end: #f6f8fa;
+      --top-shell-bg: #ffffff;
+      --panel: #ffffff;
+      --panel-soft: #f3f5f8;
       --panel-strong: #ffffff;
-      --ink: #0e1726;
-      --muted: #56657d;
-      --brand: #0a5bd3;
-      --brand-soft: #e6f0ff;
-      --brand-ink: #0d4dad;
-      --accent: #10345c;
-      --good: #177245;
-      --warn: #a65a00;
-      --bad: #b42318;
-      --line: #d5deea;
-      --line-soft: #e9eef6;
-      --table-head: #f3f6fb;
-      --table-row-hover: #f5f9ff;
-      --narrative-bg: #f5f9ff;
-      --narrative-line: #d4e2fb;
-      --badge-good-bg: #e9f8ef;
-      --badge-good-line: #bde2cb;
-      --badge-warn-bg: #fff4e8;
-      --badge-warn-line: #efcf9f;
-      --badge-bad-bg: #fff1f0;
-      --badge-bad-line: #f2c5c3;
-      --alert-warn-bg: #fff8ea;
-      --alert-warn-line: #efd4a5;
-      --alert-bad-bg: #fff1f0;
-      --alert-bad-line: #f1c7c5;
-      --alert-info-bg: #edf5ff;
-      --alert-info-line: #c6dcff;
-      --shadow: 0 18px 40px rgba(12, 23, 39, 0.08);
-      --shadow-soft: 0 8px 22px rgba(12, 23, 39, 0.05);
-      --radius: 18px;
-      --axis: #51627e;
-      --grid: #d6e0ec;
-      --hover-bg: #12284c;
+      --ink: #0a1628;
+      --ink-2: #1d2b3e;
+      --muted: #5c6b80;
+      --muted-2: #8593a5;
+      --brand: #5b54e0;
+      --brand-soft: #eeedfd;
+      --brand-ink: #4a43c9;
+      --accent: #5b54e0;
+      --good: #1f8a55;
+      --warn: #b07407;
+      --bad: #c5453b;
+      --line: #e6e9ef;
+      --line-strong: #d4dae3;
+      --line-soft: #eef1f5;
+      --table-head: #f6f8fa;
+      --table-row-hover: #f6f6fe;
+      --narrative-bg: #f8f9fb;
+      --narrative-line: #e6e9ef;
+      --badge-good-bg: #ecf6f0;
+      --badge-good-line: #cbe6d6;
+      --badge-warn-bg: #fbf3e4;
+      --badge-warn-line: #ecd9b4;
+      --badge-bad-bg: #fbecea;
+      --badge-bad-line: #f0cfcb;
+      --alert-warn-bg: #fbf3e4;
+      --alert-warn-line: #ecd9b4;
+      --alert-bad-bg: #fbecea;
+      --alert-bad-line: #f0cfcb;
+      --alert-info-bg: #f1f0fd;
+      --alert-info-line: #ddd9f7;
+      --shadow: 0 1px 2px rgba(10, 22, 40, 0.04), 0 1px 1px rgba(10, 22, 40, 0.03);
+      --shadow-soft: 0 1px 2px rgba(10, 22, 40, 0.03);
+      --radius: 10px;
+      --axis: #6b7888;
+      --grid: #eaedf2;
+      --hover-bg: #0a1628;
       --hover-ink: #ffffff;
     }
     body[data-theme="dark"] {
-      --bg-start: #0f1722;
-      --bg-end: #0b1119;
-      --top-shell-bg: rgba(12, 18, 28, 0.92);
-      --panel: rgba(18, 27, 41, 0.94);
-      --panel-soft: #162333;
-      --panel-strong: #1a2638;
-      --ink: #e5edf8;
-      --muted: #9db0cb;
-      --brand: #5aa0ff;
-      --brand-soft: #182942;
-      --brand-ink: #8cbaff;
-      --accent: #d7e6ff;
-      --line: #2a3a51;
-      --line-soft: #223248;
-      --table-head: #162233;
-      --table-row-hover: #1a2a3f;
-      --narrative-bg: #13233a;
-      --narrative-line: #284666;
-      --badge-good-bg: #183628;
-      --badge-good-line: #24543a;
-      --badge-warn-bg: #3b2b12;
-      --badge-warn-line: #6d501f;
-      --badge-bad-bg: #3b1f25;
-      --badge-bad-line: #6a2c39;
-      --alert-warn-bg: #332611;
-      --alert-warn-line: #6d4f1d;
-      --alert-bad-bg: #371d23;
-      --alert-bad-line: #6d2f3b;
-      --alert-info-bg: #182942;
-      --alert-info-line: #2f4f79;
-      --shadow: 0 16px 34px rgba(0, 0, 0, 0.3);
-      --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.2);
-      --axis: #b6c7de;
-      --grid: #2f425d;
-      --hover-bg: #0d1522;
-      --hover-ink: #e8eef7;
+      --bg-start: #0a0c10;
+      --bg-end: #0a0c10;
+      --top-shell-bg: #0e1117;
+      --panel: #12151c;
+      --panel-soft: #171b24;
+      --panel-strong: #12151c;
+      --ink: #edf0f5;
+      --ink-2: #d6dbe4;
+      --muted: #98a3b3;
+      --muted-2: #6b7686;
+      --brand: #8e88ff;
+      --brand-soft: #1c1d2e;
+      --brand-ink: #aaa4ff;
+      --accent: #8e88ff;
+      --good: #45c08a;
+      --warn: #e0a544;
+      --bad: #f0726b;
+      --line: #222732;
+      --line-strong: #2e374a;
+      --line-soft: #1b2029;
+      --table-head: #141821;
+      --table-row-hover: #181a28;
+      --narrative-bg: #141821;
+      --narrative-line: #222732;
+      --badge-good-bg: #102019;
+      --badge-good-line: #1e3a2c;
+      --badge-warn-bg: #221a0e;
+      --badge-warn-line: #41331a;
+      --badge-bad-bg: #241416;
+      --badge-bad-line: #43262a;
+      --alert-warn-bg: #221a0e;
+      --alert-warn-line: #41331a;
+      --alert-bad-bg: #241416;
+      --alert-bad-line: #43262a;
+      --alert-info-bg: #1a1b2b;
+      --alert-info-line: #2c2d44;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --axis: #8693a4;
+      --grid: #20252f;
+      --hover-bg: #20242e;
+      --hover-ink: #edf0f5;
     }
     * { box-sizing: border-box; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at top left, var(--bg-accent), transparent 32%),
-        radial-gradient(circle at top right, rgba(16, 52, 92, 0.06), transparent 24%),
-        linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      background: var(--bg-start);
       color: var(--ink);
-      font-family: "Avenir Next", "IBM Plex Sans", "Source Sans 3", "Segoe UI", Arial, sans-serif;
-      line-height: 1.45;
+      font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "cv01", "ss01";
     }
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto;
-      pointer-events: none;
-      z-index: 0;
-      width: 340px;
-      height: 340px;
-      border-radius: 999px;
-      filter: blur(60px);
-      opacity: 0.3;
+    .mono, .value, .kpi .value, .decision-stat .value, .scenario-card .main, .bench .num {
+      font-family: "Geist Mono", "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+      font-feature-settings: "tnum" 1;
+      font-variant-numeric: tabular-nums;
     }
-    body::before {
-      top: -120px;
-      right: -80px;
-      background: rgba(10, 91, 211, 0.14);
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 100;
+      background: var(--ink);
+      color: var(--panel-strong);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-weight: 700;
     }
-    body::after {
-      bottom: -140px;
-      left: -100px;
-      background: rgba(23, 114, 69, 0.08);
-    }
+    .skip-link:focus { top: 12px; }
     .top-shell {
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 30;
       background: var(--top-shell-bg);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(213, 222, 234, 0.56);
+      border-bottom: 1px solid var(--line);
     }
     .header {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 18px 24px 8px 24px;
+      padding: 16px 24px 14px 24px;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 14px;
+      gap: 18px;
       align-items: center;
     }
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--brand-soft);
-      color: var(--brand-ink);
-      font-size: 11px;
-      font-weight: 700;
+      gap: 7px;
+      margin-bottom: 9px;
+      font-size: 10.5px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1.4px;
+      color: var(--muted-2);
     }
     .title h1 {
       margin: 0;
-      font-size: 32px;
-      letter-spacing: -0.4px;
-      line-height: 1.1;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+    .title h1::before {
+      content: "";
+      width: 4px;
+      height: 19px;
+      border-radius: 3px;
+      background: var(--accent);
+      flex: 0 0 auto;
+      margin-top: 2px;
     }
     .title p {
-      margin: 8px 0 0 0;
+      margin: 6px 0 0 21px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       max-width: 900px;
     }
     .header-meta {
@@ -487,24 +594,38 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     button, .btn {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 8px;
       background: var(--panel-strong);
-      color: var(--ink);
-      padding: 9px 13px;
-      font-weight: 600;
+      color: var(--ink-2);
+      padding: 8px 13px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.12s ease-in-out;
-      box-shadow: var(--shadow-soft);
+      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+      box-shadow: none;
     }
     button.primary {
-      background: var(--brand);
-      color: #f8fbff;
-      border-color: var(--brand);
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 600;
     }
+    button.primary:hover { background: var(--brand-ink); border-color: var(--brand-ink); }
     button.subtle {
-      background: var(--panel-soft);
+      background: transparent;
+      color: var(--muted);
     }
-    button:hover { filter: brightness(0.98); }
+    button:hover { background: var(--panel-soft); border-color: var(--line-strong, var(--line)); color: var(--ink); }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    .tab-btn:focus-visible,
+    .sort-button:focus-visible,
+    .skip-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
     .filter-shell {
       max-width: 1680px;
       margin: 0 auto;
@@ -532,7 +653,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       align-items: end;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 8px;
       box-shadow: var(--shadow-soft);
     }
     .filter {
@@ -555,7 +676,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       background: var(--panel-strong);
       color: var(--ink);
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 9px 11px;
       font-size: 13px;
       min-height: 40px;
@@ -572,17 +693,20 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: var(--panel);
+      padding: 5px 10px;
+      border-radius: 7px;
+      background: var(--panel-soft);
       border: 1px solid var(--line);
       color: var(--muted);
-      font-size: 12px;
-      box-shadow: var(--shadow-soft);
+      font-size: 11.5px;
+      box-shadow: none;
     }
     .scope-chip strong {
-      color: var(--ink);
-      font-weight: 700;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 10px;
     }
     .filter-actions {
       grid-column: 1 / -1;
@@ -599,13 +723,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .tabs {
       display: flex;
       flex-wrap: nowrap;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
+      gap: 2px;
+      margin-bottom: 18px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      box-shadow: none;
       width: 100%;
       max-width: 100%;
       overflow-x: auto;
@@ -614,274 +739,348 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .tabs::-webkit-scrollbar { display: none; }
     .tab-btn {
       flex: 0 0 auto;
-      border-radius: 999px;
-      padding: 9px 15px;
+      border-radius: 0;
+      padding: 11px 14px;
       background: transparent;
-      border: 1px solid var(--line);
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
       font-size: 13px;
-      color: var(--ink);
+      font-weight: 500;
+      color: var(--muted);
       box-shadow: none;
     }
+    .tab-btn:hover {
+      background: transparent;
+      color: var(--ink);
+      border-bottom-color: var(--line-strong, var(--line));
+    }
     .tab-btn.active {
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-ink) 100%);
-      border-color: var(--brand);
-      color: #ffffff;
-      box-shadow: 0 10px 18px rgba(10, 91, 211, 0.2);
+      background: transparent;
+      border-bottom: 2px solid var(--accent);
+      color: var(--ink);
+      font-weight: 600;
+      box-shadow: none;
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
     .hero-strip {
-      margin: 0 0 12px 0;
+      margin: 22px 0 18px 0;
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.9fr);
-      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
     }
     .hero-message {
-      background: linear-gradient(135deg, var(--panel-strong) 0%, var(--panel-soft) 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 20px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       font-size: 14px;
-      line-height: 1.58;
+      line-height: 1.55;
       color: var(--ink);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-message::after {
-      content: "";
-      position: absolute;
-      inset: auto -60px -90px auto;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(10, 91, 211, 0.12), transparent 68%);
-      pointer-events: none;
     }
     .hero-message h2 {
-      margin: 0;
-      font-size: 26px;
-      line-height: 1.14;
-      letter-spacing: -0.35px;
-      max-width: 920px;
-      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-      position: relative;
-      z-index: 1;
+      margin: 7px 0 0 0;
+      font-size: 23px;
+      line-height: 1.22;
+      letter-spacing: -0.5px;
+      font-weight: 600;
+      max-width: 820px;
+      color: var(--ink);
     }
     .hero-message p {
-      margin: 10px 0 0 0;
+      margin: 8px 0 0 0;
       color: var(--muted);
-      font-size: 14px;
-      max-width: 880px;
-      position: relative;
-      z-index: 1;
+      font-size: 13.5px;
+      max-width: 780px;
     }
     .hero-side {
       display: grid;
       gap: 10px;
     }
     .decision-points {
-      margin-top: 16px;
+      margin-top: 0;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      position: relative;
-      z-index: 1;
+      gap: 12px;
     }
     .decision-point {
-      padding: 13px 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.62);
+      padding: 14px 16px;
+      border-radius: 9px;
+      background: var(--panel-soft);
       border: 1px solid var(--line);
-      backdrop-filter: blur(10px);
     }
     .decision-point .name {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.45px;
+      letter-spacing: 0.7px;
     }
     .decision-point .main {
-      margin-top: 6px;
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.3;
+      margin-top: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
       color: var(--ink);
     }
     .decision-board {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
     .decision-stat {
-      padding: 12px;
-      border-radius: 14px;
+      padding: 14px 16px;
+      border-radius: 9px;
       background: var(--panel);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
     .decision-stat .name {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.45px;
+      letter-spacing: 0.7px;
     }
     .decision-stat .value {
-      margin-top: 6px;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: var(--ink);
     }
+    .decision-stat.good .value { color: var(--good); }
+    .decision-stat.bad .value { color: var(--bad); }
     .decision-stat .hint {
-      margin-top: 5px;
-      color: var(--muted);
+      margin-top: 6px;
+      color: var(--muted-2);
       font-size: 12px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .signal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
     .signal-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
-      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
-      padding: 12px;
+      border-radius: 9px;
+      background: var(--panel-strong);
+      padding: 10px 13px;
       box-shadow: var(--shadow-soft);
+      min-width: 132px;
+      position: relative;
     }
+    .signal-card::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--muted-2);
+    }
+    .signal-card.good::before { background: var(--good); }
+    .signal-card.warn::before { background: var(--warn); }
+    .signal-card.bad::before { background: var(--bad); }
     .signal-card .name {
-      font-size: 11px;
+      font-size: 10.5px;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.6px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 600;
+      padding-left: 14px;
     }
     .signal-card .state {
-      margin-top: 4px;
+      margin-top: 3px;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
+      letter-spacing: -0.2px;
     }
     .signal-card .hint {
-      margin-top: 3px;
+      margin-top: 2px;
       font-size: 11px;
-      color: var(--muted);
+      color: var(--muted-2);
     }
     .signal-card.good .state { color: var(--good); }
     .signal-card.warn .state { color: var(--warn); }
     .signal-card.bad .state { color: var(--bad); }
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 0;
     }
     .kpi {
-      grid-column: span 3;
-      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      grid-column: auto;
+      background: var(--panel-strong);
       border: 1px solid var(--line);
-      border-top: 4px solid var(--brand);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 14px;
-      min-height: 112px;
+      padding: 16px 16px 15px 16px;
+      min-height: 116px;
       display: grid;
       align-content: start;
-      gap: 8px;
+      gap: 7px;
     }
     .kpi.feature {
-      grid-column: span 4;
-      padding: 18px;
-      min-height: 138px;
+      grid-column: span 3;
     }
-    .kpi.good { border-top-color: var(--good); }
-    .kpi.warn { border-top-color: var(--warn); }
-    .kpi.bad { border-top-color: var(--bad); }
     .kpi-head {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 10px;
     }
     .kpi .label {
       color: var(--muted);
       font-size: 11px;
       text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.4px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      min-height: 26px;
+      line-height: 1.2;
     }
     .kpi .value {
-      font-size: 25px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.8px;
+      line-height: 1.05;
+      color: var(--ink);
     }
-    .kpi.feature .value { font-size: 31px; }
+    .kpi.feature .value { font-size: 34px; }
     .kpi .delta {
       font-size: 12px;
       color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+    .kpi .delta .dir { font-weight: 600; }
+    .kpi.good .delta .dir { color: var(--good); }
+    .kpi.warn .delta .dir { color: var(--warn); }
+    .kpi.bad .delta .dir { color: var(--bad); }
+    .kpi .interpretation { display: none; }
     .kpi .context {
       font-size: 12px;
-      color: var(--ink);
-      font-weight: 600;
+      color: var(--muted-2);
+      font-weight: 400;
     }
     .tone-dot {
-      width: 11px;
-      height: 11px;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       flex: 0 0 auto;
-      margin-top: 3px;
-      box-shadow: 0 0 0 4px rgba(10, 91, 211, 0.08);
-      background: var(--brand);
+      background: var(--muted-2);
     }
-    .kpi.good .tone-dot { background: var(--good); box-shadow: 0 0 0 4px rgba(23, 114, 69, 0.1); }
-    .kpi.warn .tone-dot { background: var(--warn); box-shadow: 0 0 0 4px rgba(166, 90, 0, 0.1); }
-    .kpi.bad .tone-dot { background: var(--bad); box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.1); }
+    .kpi.good .tone-dot { background: var(--good); }
+    .kpi.warn .tone-dot { background: var(--warn); }
+    .kpi.bad .tone-dot { background: var(--bad); }
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .action-card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel-strong);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+    .action-card .name {
+      font-size: 10.5px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .action-card .name::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--muted-2);
+      flex: 0 0 auto;
+    }
+    .action-card.bad .name::before { background: var(--bad); }
+    .action-card.warn .name::before { background: var(--warn); }
+    .action-card.good .name::before { background: var(--good); }
+    .action-card .main {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    .action-card .hint {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted-2);
+      line-height: 1.45;
+    }
+    .kpi-band {
+      margin: 0 0 22px 0;
+    }
     .row {
       display: grid;
       gap: 14px;
       margin-bottom: 14px;
+      align-items: start;
     }
     .row-2 { grid-template-columns: 1fr 1fr; }
     .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .overview-decisions { grid-template-columns: 1.7fr 1fr; }
+    .overview-decisions .action-grid { margin-top: 12px; }
+    .overview-decisions .decision-board { grid-template-columns: 1fr; }
     .panel {
-      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      background: var(--panel-strong);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 18px;
+      padding: 20px;
     }
     .panel h3 {
-      margin: 0 0 8px 0;
-      font-size: 18px;
-      line-height: 1.25;
+      margin: 0 0 6px 0;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
       letter-spacing: -0.2px;
+      color: var(--ink);
     }
     .panel .sub {
-      margin: 0 0 10px 0;
+      margin: 0 0 14px 0;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 12.5px;
+      line-height: 1.45;
       max-width: 680px;
     }
     .plot {
       width: 100%;
       min-height: 338px;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--line-soft);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(245, 248, 252, 0.4) 100%);
+      background: var(--panel-strong);
     }
     .plot.short { min-height: 270px; }
     .narrative {
       line-height: 1.6;
-      color: var(--ink);
-      font-size: 14px;
+      color: var(--ink-2);
+      font-size: 13.5px;
       background: var(--narrative-bg);
       border: 1px solid var(--narrative-line);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 9px;
+      padding: 14px 16px;
     }
     .badges {
       display: flex;
@@ -891,7 +1090,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .badge {
       padding: 8px 10px;
-      border-radius: 999px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       border: 1px solid;
@@ -904,7 +1103,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       gap: 8px;
     }
     .alert {
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 10px;
       font-size: 13px;
       border: 1px solid;
@@ -912,6 +1111,45 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .alert.warn { background: var(--alert-warn-bg); border-color: var(--alert-warn-line); }
     .alert.bad { background: var(--alert-bad-bg); border-color: var(--alert-bad-line); }
     .alert.info { background: var(--alert-info-bg); border-color: var(--alert-info-line); }
+    .alert-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .alert-head::before {
+      content: "";
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--muted-2);
+    }
+    .alert-head.good::before { background: var(--good); }
+    .alert-head.bad::before { background: var(--bad); }
+    .guard {
+      display: grid;
+      grid-template-columns: 1fr auto auto 56px;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .guard:last-child { border-bottom: 0; }
+    .guard-label { font-size: 13px; color: var(--ink); }
+    .guard-val { font-size: 13px; color: var(--ink); font-weight: 500; }
+    .guard-limit { font-size: 12px; color: var(--muted-2); }
+    .guard-state {
+      justify-self: end;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--good);
+    }
+    .guard.warn .guard-state, .guard.warn .guard-val { color: var(--warn); }
+    .guard.bad .guard-state, .guard.bad .guard-val { color: var(--bad); }
     .bench-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -919,13 +1157,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin-top: 10px;
     }
     .bench {
-      padding: 10px;
-      border: 1px dashed var(--line);
-      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
       background: var(--panel-soft);
     }
-    .bench .name { font-size: 12px; color: var(--muted); }
-    .bench .num { margin-top: 5px; font-size: 20px; font-weight: 700; }
+    .bench .name { font-size: 11.5px; color: var(--muted); }
+    .bench .num { margin-top: 6px; font-size: 19px; font-weight: 500; letter-spacing: -0.3px; color: var(--ink); }
+    .bench-hint { margin-top: 3px; font-size: 11px; color: var(--muted-2); }
     .table-tools {
       display: flex;
       flex-wrap: wrap;
@@ -934,7 +1173,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .table-tools input, .table-tools select {
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 8px 10px;
       font-size: 13px;
       background: var(--panel);
@@ -950,7 +1189,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border-bottom: 1px solid var(--line);
       padding: 9px 8px;
       color: var(--ink);
-      cursor: pointer;
+      cursor: default;
       user-select: none;
       background: var(--table-head);
       position: sticky;
@@ -959,6 +1198,18 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.35px;
+    }
+    .sort-button {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      min-height: 24px;
+      font: inherit;
+      font-weight: inherit;
+      text-transform: inherit;
+      letter-spacing: inherit;
+      cursor: pointer;
     }
     tbody td {
       border-bottom: 1px solid var(--line-soft);
@@ -981,7 +1232,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       display: inline-flex;
       align-items: center;
       padding: 5px 8px;
-      border-radius: 999px;
+      border-radius: 8px;
       font-size: 11px;
       font-weight: 700;
       border: 1px solid;
@@ -1011,14 +1262,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .scenario-card {
       padding: 12px;
-      border-radius: 12px;
+      border-radius: 8px;
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      background: var(--panel-strong);
       box-shadow: var(--shadow-soft);
     }
-    .scenario-card .name { font-size: 12px; color: var(--muted); }
-    .scenario-card .main { margin-top: 4px; font-size: 21px; font-weight: 700; }
-    .scenario-card .hint { margin-top: 4px; font-size: 12px; color: var(--muted); }
+    .scenario-card .name { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    .scenario-card .main { margin-top: 6px; font-size: 22px; font-weight: 500; letter-spacing: -0.4px; color: var(--ink); }
+    .scenario-card .hint { margin-top: 5px; font-size: 12px; color: var(--muted-2); }
     .method-tab h4 {
       margin: 14px 0 6px 0;
     }
@@ -1030,7 +1281,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       top: 0;
       height: 100vh;
       width: 520px;
-      background: linear-gradient(180deg, var(--panel-strong) 0%, var(--panel) 100%);
+      background: var(--panel-strong);
       border-left: 1px solid var(--line);
       box-shadow: -16px 0 32px rgba(0, 0, 0, 0.12);
       z-index: 80;
@@ -1060,14 +1311,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       color: var(--muted);
       font-size: 13px;
       border: 1px dashed var(--line);
-      border-radius: 12px;
+      border-radius: 8px;
       background: var(--panel-soft);
     }
     @media (max-width: 1280px) {
       .hero-strip { grid-template-columns: 1fr; }
       .decision-points,
-      .decision-board { grid-template-columns: 1fr; }
-      .signal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .decision-board,
+      .action-grid { grid-template-columns: 1fr; }
+      .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
       .kpi-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
       .kpi, .kpi.feature { grid-column: span 2; }
       .row-3 { grid-template-columns: 1fr; }
@@ -1082,8 +1334,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       .header { grid-template-columns: 1fr; }
       .header-meta { justify-items: start; }
       .actions { justify-content: flex-start; }
-      .signal-grid { grid-template-columns: 1fr; }
+      .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
       .bench-grid { grid-template-columns: 1fr; }
+      .action-grid { grid-template-columns: 1fr; }
       .drawer { width: 100vw; right: -100vw; }
     }
     @media print {
@@ -1166,20 +1419,21 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   </style>
 </head>
 <body data-theme="light">
+  <a class="skip-link" href="#mainContent">Skip to dashboard content</a>
   <div class="top-shell">
     <div class="header">
       <div class="title">
-        <div class="eyebrow">Executive Decision System</div>
-        <h1>Marketplace Profitability, Fraud & Seller Quality Command Center</h1>
-        <p>Executive control tower for marketplace health, margin protection, fraud exposure, and seller governance actions.</p>
+        <div class="eyebrow">Synthetic marketplace · decision support</div>
+        <h1>Profitability, Fraud &amp; Seller Quality</h1>
+        <p>Is GMV growth converting into protected, profitable value — and where should leadership intervene next?</p>
       </div>
       <div class="header-meta">
         <div class="actions">
-          <button id="filtersToggle" class="subtle">Hide Filters</button>
-          <button id="themeToggle" class="subtle">Dark Mode</button>
-          <button id="printDashboard" class="subtle">Print</button>
-          <button id="methodologyOpen">Methodology</button>
-          <button class="primary" id="resetFiltersTop">Reset Filters</button>
+          <button type="button" id="filtersToggle" class="subtle">Filters</button>
+          <button type="button" id="themeToggle" class="subtle">Dark</button>
+          <button type="button" id="printDashboard" class="subtle">Print</button>
+          <button type="button" id="methodologyOpen" class="subtle">Methodology</button>
+          <button type="button" id="resetFiltersTop">Reset</button>
         </div>
       </div>
     </div>
@@ -1196,62 +1450,76 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         <div class="filter"><label for="fBuyerType">Buyer Type</label><select id="fBuyerType"></select></div>
         <div class="filter"><label for="fRiskTier">Risk Tier</label><select id="fRiskTier"></select></div>
         <div class="filter-actions">
-          <button id="applyFilters" class="primary">Apply Filters</button>
-          <button id="resetFilters">Reset</button>
+          <button type="button" id="applyFilters" class="primary">Apply Filters</button>
+          <button type="button" id="resetFilters">Reset</button>
         </div>
       </div>
     </div>
-    <div class="scope-bar" id="scopeBar"></div>
+    <div class="scope-bar" id="scopeBar" aria-live="polite"></div>
   </div>
 
-  <main class="container">
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="overview">Executive Overview</button>
-      <button class="tab-btn" data-tab="profitability">Profitability</button>
-      <button class="tab-btn" data-tab="risk">Risk & Fraud</button>
-      <button class="tab-btn" data-tab="seller">Seller Quality</button>
-      <button class="tab-btn" data-tab="ops">Operations & CX</button>
-      <button class="tab-btn" data-tab="scenario">Scenario Center</button>
-      <button class="tab-btn" data-tab="methodology">Methodology & Definitions</button>
-    </div>
+  <main class="container" id="mainContent">
     <div class="hero-strip">
       <div class="hero-message">
-        <div class="eyebrow">Current Executive Signal</div>
+        <div class="eyebrow">Executive read</div>
         <h2 id="heroHeadline"></h2>
         <p id="heroMessage"></p>
-        <div class="decision-points" id="decisionPoints"></div>
       </div>
       <div class="hero-side">
         <div class="signal-grid" id="signalCards"></div>
-        <div class="decision-board" id="decisionBoard"></div>
       </div>
     </div>
 
-    <section id="tab-overview" class="tab-panel active">
+    <section class="kpi-band" aria-label="Key performance indicators">
       <div class="kpi-grid" id="kpiGrid"></div>
+    </section>
+
+    <nav class="tabs" aria-label="Dashboard sections">
+      <button type="button" class="tab-btn active" data-tab="overview" aria-pressed="true">Overview</button>
+      <button type="button" class="tab-btn" data-tab="profitability" aria-pressed="false">Profitability</button>
+      <button type="button" class="tab-btn" data-tab="risk" aria-pressed="false">Risk &amp; Fraud</button>
+      <button type="button" class="tab-btn" data-tab="seller" aria-pressed="false">Seller Quality</button>
+      <button type="button" class="tab-btn" data-tab="ops" aria-pressed="false">Operations &amp; CX</button>
+      <button type="button" class="tab-btn" data-tab="scenario" aria-pressed="false">Scenarios</button>
+      <button type="button" class="tab-btn" data-tab="methodology" aria-pressed="false">Methodology</button>
+    </nav>
+
+    <section id="tab-overview" class="tab-panel active">
+      <div class="row row-2 overview-decisions">
+        <div class="panel">
+          <h3>What to do now</h3>
+          <p class="sub">The immediate decision lens for the current scope, ahead of topline GMV.</p>
+          <div class="decision-points" id="decisionPoints"></div>
+          <div class="action-grid" id="actionQueue"></div>
+        </div>
+        <div class="panel">
+          <h3>Trajectory</h3>
+          <p class="sub">Recent-period momentum — or standing against the portfolio when a scope is filtered.</p>
+          <div class="decision-board" id="decisionBoard"></div>
+        </div>
+      </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Executive Narrative: Growth Must Be Qualified by Risk and Economic Quality</h3>
-          <p class="sub">Narrative updates with filters and compares selected scope to baseline performance.</p>
+          <h3>Executive narrative</h3>
+          <p class="sub">Plain-language read of the current scope and what is driving margin.</p>
           <div class="narrative" id="executiveNarrative"></div>
-          <div class="badges" id="healthBadges"></div>
           <div class="bench-grid" id="benchmarkCards"></div>
         </div>
         <div class="panel">
-          <h3>Key Alerts: Immediate Leadership Attention Items</h3>
-          <p class="sub">Threshold-based alerts surface leakage, fraud, and operational deterioration risk.</p>
+          <h3>Alerts requiring attention</h3>
+          <p class="sub">Threshold breaches across leakage, fraud, and operational reliability.</p>
           <div class="alert-list" id="alertsPanel"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Topline vs Quality-Adjusted Marketplace Value</h3>
-          <p class="sub">GMV can expand while risk-adjusted value stagnates or deteriorates.</p>
+          <h3>Is topline growth converting into protected marketplace value?</h3>
+          <p class="sub">Use to detect when GMV expansion is not translating into risk-adjusted value.</p>
           <div id="plotGrowthOverview" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Risk Leakage Bridge Shows Where Commission Economics Are Lost</h3>
-          <p class="sub">Leakage decomposition helps leadership prioritize economic-control interventions.</p>
+          <h3>Where is commission economics being lost?</h3>
+          <p class="sub">Use to choose the largest controllable leakage pool first.</p>
           <div id="plotWaterfallOverview" class="plot"></div>
         </div>
       </div>
@@ -1260,25 +1528,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     <section id="tab-profitability" class="tab-panel">
       <div class="row row-2">
         <div class="panel">
-          <h3>Topline Growth vs Risk-Adjusted Growth Divergence</h3>
-          <p class="sub">When spread widens, apparent growth quality is deteriorating.</p>
+          <h3>When does apparent growth diverge from risk-adjusted growth?</h3>
+          <p class="sub">Use to pause growth pushes in months where the spread widens.</p>
           <div id="plotGrowth" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Net Value Depends on Subsidy Intensity in Key Periods</h3>
-          <p class="sub">Subsidy share trend highlights policy-driven growth dependence.</p>
+          <h3>How much net value depends on subsidy intensity?</h3>
+          <p class="sub">Use to tighten promo policy where subsidy share rises without protected value.</p>
           <div id="plotNetSubsidy" class="plot"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Category Profitability Heatmap Surfaces Structural Margin Weakness</h3>
-          <p class="sub">Persistent negative/weak zones indicate systemic economics issues.</p>
+          <h3>Which category-months show structural margin weakness?</h3>
+          <p class="sub">Use to identify persistent value-destructive category patterns.</p>
           <div id="plotCategoryHeatmap" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Leakage Bridge: Subsidy, Refund, Dispute, and Chargeback Erosion</h3>
-          <p class="sub">Contribution margin proxy must be interpreted with leakage decomposition.</p>
+          <h3>Which leakage component is eroding contribution margin?</h3>
+          <p class="sub">Use to separate price/promo leakage from fraud and service leakage.</p>
           <div id="plotWaterfall" class="plot"></div>
         </div>
       </div>
@@ -1287,25 +1555,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     <section id="tab-risk" class="tab-panel">
       <div class="row row-2">
         <div class="panel">
-          <h3>Dispute and Chargeback Trends Show Periodic Risk Pressure Bursts</h3>
-          <p class="sub">Monitoring trend co-movement helps separate fraud vs service-failure regimes.</p>
+          <h3>Are disputes and chargebacks entering a risk-pressure burst?</h3>
+          <p class="sub">Use to detect co-movement before fraud losses become structural.</p>
           <div id="plotRiskTrend" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Payment Risk Signals Correlate with Both Disputes and Chargebacks</h3>
-          <p class="sub">Signals in the top-right quadrant deserve tighter controls and review friction.</p>
+          <h3>Which payment-risk signals deserve tighter review friction?</h3>
+          <p class="sub">Use to prioritize top-right signal clusters for manual review or controls.</p>
           <div id="plotDisputeChargeback" class="plot"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Suspicious Pattern Matrix Identifies High-Risk Channel/Payment Combinations</h3>
-          <p class="sub">Hotspots reveal suspicious operational patterns hidden in aggregate rates.</p>
+          <h3>Which channel and payment combinations form suspicious hotspots?</h3>
+          <p class="sub">Use to route hotspot combinations to control policy experiments.</p>
           <div id="plotSuspiciousMatrix" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Buyer and Order Risk Distributions Show Critical Tail Exposure</h3>
-          <p class="sub">Critical tail management is central to fraud and dispute containment.</p>
+          <h3>How large is the buyer and order risk tail?</h3>
+          <p class="sub">Use to size the operational burden of critical risk containment.</p>
           <div id="plotRiskDistribution" class="plot"></div>
         </div>
       </div>
@@ -1314,39 +1582,41 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     <section id="tab-seller" class="tab-panel">
       <div class="row row-2">
         <div class="panel">
-          <h3>Seller Quality Risk Distribution Is Right-Tailed and Governance-Relevant</h3>
-          <p class="sub">High-quality concentration vs risky tail determines intervention burden.</p>
+          <h3>How heavy is the seller quality risk tail?</h3>
+          <p class="sub">Use to estimate coaching, audit, and enforcement workload.</p>
           <div id="plotSellerQualityDist" class="plot short"></div>
         </div>
         <div class="panel">
-          <h3>Margin Fragility Distribution Highlights Economic Vulnerability in the Seller Base</h3>
-          <p class="sub">Risk concentration in fragility scores points to margin governance priorities.</p>
+          <h3>Which sellers are economically fragile before growth is added?</h3>
+          <p class="sub">Use to avoid scaling sellers that need subsidy or leakage containment first.</p>
           <div id="plotMarginFragilityDist" class="plot short"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Dispute Rate by Seller Volume Cohort Exposes High-Impact Defect Zones</h3>
-          <p class="sub">Cohort benchmarking supports targeted account management interventions.</p>
+          <h3>Do high-volume sellers carry a disproportionate dispute burden?</h3>
+          <p class="sub">Use to decide whether account management should target top sellers or the long tail.</p>
           <div id="plotSellerCohort" class="plot short"></div>
         </div>
         <div class="panel">
-          <h3>Seller Portfolio Matrix (Volume vs Quality) Prioritizes Governance Escalation</h3>
-          <p class="sub">High-volume + weak quality sellers represent the most material downside risk.</p>
+          <h3>Which sellers sit in the high-volume, weak-quality quadrant?</h3>
+          <p class="sub">Use to prioritize escalations where operational impact is material.</p>
           <div id="plotSellerMatrix" class="plot"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Top Sellers by Governance Priority</h3>
-          <p class="sub">Priority queue based on governance risk concentration and expected impact.</p>
+          <h3>Who is at the top of the seller governance queue?</h3>
+          <p class="sub">Use to assign account-level actions by priority score and expected impact.</p>
           <div id="plotTopSellers" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Top Weak Sellers: Searchable, Sortable Drilldown Table</h3>
+          <h3>Which weak sellers require an owner and next action?</h3>
           <p class="sub">Use for execution tracking by risk, operations, and seller management teams.</p>
           <div class="table-tools">
+            <label class="sr-only" for="sellerSearch">Search sellers</label>
             <input id="sellerSearch" type="text" placeholder="Search seller id">
+            <label class="sr-only" for="sellerRowsPerPage">Seller rows per page</label>
             <select id="sellerRowsPerPage">
               <option value="20">20 rows</option>
               <option value="40">40 rows</option>
@@ -1357,25 +1627,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
             <table>
               <thead>
                 <tr>
-                  <th data-sort="sid">Seller</th>
-                  <th data-sort="gvt">Gov Tier</th>
-                  <th data-sort="gvs">Gov Score</th>
-                  <th data-sort="sqs">Quality Score</th>
-                  <th data-sort="gmv">GMV</th>
-                  <th data-sort="orders">Orders</th>
-                  <th data-sort="refund_rate">Refund Rate</th>
-                  <th data-sort="dispute_rate">Dispute Rate</th>
-                  <th data-sort="delay_rate">Delay Rate</th>
-                  <th data-sort="ract">Recommended Action</th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="sid">Seller</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="gvt">Gov Tier</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="gvs">Gov Score</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="sqs">Quality Score</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="gmv">GMV</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="orders">Orders</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="refund_rate">Refund Rate</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="dispute_rate">Dispute Rate</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="delay_rate">Delay Rate</button></th>
+                  <th scope="col" aria-sort="none"><button type="button" class="sort-button" data-sort="ract">Recommended Action</button></th>
                 </tr>
               </thead>
               <tbody id="sellerTableBody"></tbody>
             </table>
           </div>
           <div class="pager">
-            <button id="sellerPrev">Prev</button>
-            <span id="sellerPageInfo"></span>
-            <button id="sellerNext">Next</button>
+            <button type="button" id="sellerPrev">Prev</button>
+            <span id="sellerPageInfo" aria-live="polite"></span>
+            <button type="button" id="sellerNext">Next</button>
           </div>
         </div>
       </div>
@@ -1384,25 +1654,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     <section id="tab-ops" class="tab-panel">
       <div class="row row-2">
         <div class="panel">
-          <h3>Delivery Delay Increases Directly Elevate Refund Risk</h3>
-          <p class="sub">Operational reliability is a direct economic lever, not only a service metric.</p>
+          <h3>How does refund rate vary with delivery delay?</h3>
+          <p class="sub">Use to quantify the association between logistics reliability and margin leakage.</p>
           <div id="plotRefundDelay" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Operations Trend: Delay, Cancellation, and On-Time Performance</h3>
-          <p class="sub">CX outcomes and margin leakage move together in weak operational periods.</p>
+          <h3>Are delay, cancellation, and on-time performance deteriorating together?</h3>
+          <p class="sub">Use to identify periods where CX failure compounds margin leakage.</p>
           <div id="plotOpsTrend" class="plot"></div>
         </div>
       </div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Dispute Rate Escalates in High-Delay Buckets</h3>
-          <p class="sub">Dispute containment requires logistics enforcement in high-risk cohorts.</p>
+          <h3>Where does delay become a dispute-rate problem?</h3>
+          <p class="sub">Use to set operational SLA thresholds for dispute containment.</p>
           <div id="plotDisputeDelay" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Promo Dependency by Category Interacts with Operational Defects</h3>
-          <p class="sub">Subsidized categories with weak operations create compounded margin pressure.</p>
+          <h3>Which categories combine promo dependency with operational risk?</h3>
+          <p class="sub">Use to avoid funding demand in defect-heavy categories.</p>
           <div id="plotPromoCategory" class="plot"></div>
         </div>
       </div>
@@ -1412,13 +1682,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       <div class="scenario-cards" id="scenarioCards"></div>
       <div class="row row-2">
         <div class="panel">
-          <h3>Scenario Trade-off Map: Growth vs Quality Discipline</h3>
-          <p class="sub">Strategic choice should maximize protected margin and risk-adjusted value.</p>
+          <h3>Which scenario assumption produces the smallest growth trade-off?</h3>
+          <p class="sub">Use to compare GMV drag against quality-ratio lift.</p>
           <div id="plotScenarioComparison" class="plot"></div>
         </div>
         <div class="panel">
-          <h3>Contribution Margin Protection by Scenario</h3>
-          <p class="sub">Compares economic upside and downside risk exposure from intervention choices.</p>
+          <h3>Which scenario assumption produces the largest contribution-margin improvement?</h3>
+          <p class="sub">Use to rank interventions by expected CM improvement.</p>
           <div id="plotScenarioMargin" class="plot"></div>
         </div>
       </div>
@@ -1429,13 +1699,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
           <table>
             <thead>
               <tr>
-                <th>Scenario</th>
-                <th>Priority Score</th>
-                <th>GMV Delta</th>
-                <th>Quality Delta</th>
-                <th>CM Delta</th>
-                <th>Leakage Avoided</th>
-                <th>Recommended Action</th>
+                <th scope="col">Scenario</th>
+                <th scope="col">Priority Score</th>
+                <th scope="col">GMV Delta</th>
+                <th scope="col">Quality Delta</th>
+                <th scope="col">CM Delta</th>
+                <th scope="col">Leakage Avoided</th>
+                <th scope="col">Recommended Action</th>
               </tr>
             </thead>
             <tbody id="scenarioDecisionBody"></tbody>
@@ -1446,7 +1716,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
     <section id="tab-methodology" class="tab-panel method-tab">
       <div class="panel">
-        <h3>Methodology & Definitions: Transparent, Reproducible, and Decision-Oriented</h3>
+        <h3>Methodology & Definitions</h3>
         <p class="sub">This project intentionally uses interpretable metrics and scoring logic rather than opaque models.</p>
         <h4>Core Metric Definitions</h4>
         <ul>
@@ -1467,27 +1737,28 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         </ul>
         <h4>Caveats and Validation</h4>
         <ul>
-          <li>Results are synthetic but behaviorally realistic for strategic decision simulation.</li>
+          <li>All results are synthetic and demonstrate the workflow, not real marketplace performance.</li>
           <li>Rates and thresholds are diagnostic, not causal proof of fraud or misconduct.</li>
           <li>Scenario center is strategic what-if support, not a probabilistic forecast model.</li>
+          <li>Threshold policy results are retrospective and in-sample; validate on a later holdout period before deployment.</li>
+          <li>Realized contribution margin and expected margin after risk are different proxies and should not be read as a calibrated forecast gap.</li>
           <li>Validation checks include reconciliation, referential integrity, leakage coherence, and no-leakage feature design.</li>
         </ul>
       </div>
     </section>
   </main>
 
-  <aside class="drawer" id="methodologyDrawer">
+  <aside class="drawer" id="methodologyDrawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="methodologyDrawerTitle" inert>
     <header>
-      <strong>Methodology Quick Reference</strong>
-      <button id="methodologyClose">Close</button>
+      <strong id="methodologyDrawerTitle">Methodology Quick Reference</strong>
+      <button type="button" id="methodologyClose">Close</button>
     </header>
     <div class="body">
-      <p><b>Purpose:</b> Provide a governance-grade operating view of marketplace growth quality, margin resilience, fraud exposure, and seller quality risk.</p>
+      <p><b>Purpose:</b> Demonstrate a reproducible decision-support workflow for marketplace growth quality, margin resilience, fraud exposure, and seller quality risk.</p>
       <p><b>Interpretation guardrail:</b> topline GMV is not sufficient; leadership decisions should use risk-adjusted value and leakage decomposition.</p>
-      <p><b>Alert philosophy:</b> thresholds are intentionally conservative to bias toward early risk intervention in high-impact cohorts.</p>
+      <p><b>Threshold policy:</b> the recommended review threshold is retrospective and in-sample; validate it on a later holdout period before deployment.</p>
       <p><b>Data coverage:</b> use filter scope indicators and empty states to avoid overgeneralizing narrow slices.</p>
       <p id="drawerCoverage"></p>
-      <p><b>Use with governance routines:</b> weekly for risk operations and monthly for finance/marketplace leadership reviews.</p>
     </div>
   </aside>
 
@@ -1501,6 +1772,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     rows: EMBEDDED.orders,
     sellerMetaMap: new Map(EMBEDDED.seller_meta.map(s => [String(s.sid), s])),
     officialKpis: EMBEDDED.official_kpis || {},
+    validation: EMBEDDED.validation || {},
+    policyRows: EMBEDDED.recommended_policy || [],
     theme: 'light',
     filtersOpen: false,
     scenarioRows: EMBEDDED.scenarios,
@@ -1514,6 +1787,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     baselineState: null,
     currentState: null,
   };
+  let methodologyReturnFocus = null;
 
   function cssVar(name) {
     return getComputedStyle(document.body).getPropertyValue(name).trim();
@@ -1533,19 +1807,44 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   }
 
   function chartPalette() {
+    const dark = APP.theme === 'dark';
+    const accent = dark ? '#8e88ff' : '#5b54e0';
+    const accentSoft = dark ? '#5b54e0' : '#b3afef';
+    const steel = dark ? '#8693a4' : '#94a0b3';
+    const ink = dark ? '#c6cdd9' : '#42506a';
+    const good = dark ? '#45c08a' : '#1f8a55';
+    const bad = dark ? '#f0726b' : '#c5453b';
+    const warn = dark ? '#e0a544' : '#b07407';
     return {
-      blue: '#0a5bd3',
-      blueSoft: '#5f97ea',
-      navy: '#143b66',
-      green: '#177245',
-      teal: '#1f7a8c',
-      orange: '#c77011',
-      gold: '#a0700f',
-      red: '#c2403d',
-      rose: '#d66a6a',
-      neutral: '#90a3be',
-      neutralDark: '#64748b',
+      // semantic aliases kept for backward compatibility across chart functions
+      blue: accent,
+      blueSoft: accentSoft,
+      navy: ink,
+      green: good,
+      teal: dark ? '#5fb0c4' : '#2f7d92',
+      orange: warn,
+      gold: warn,
+      red: bad,
+      rose: dark ? '#e08aa0' : '#c06478',
+      neutral: steel,
+      neutralDark: ink,
+      accent, accentSoft, steel, ink, good, bad, warn,
     };
+  }
+
+  // Muted diverging scale (loss -> neutral -> profit) for margin-style heatmaps.
+  function divergingScale() {
+    const dark = APP.theme === 'dark';
+    return dark
+      ? [[0, '#b5524c'], [0.5, '#2a2f3a'], [1, '#3f9e74']]
+      : [[0, '#c5453b'], [0.5, '#eef1f5'], [1, '#1f8a55']];
+  }
+  // Single-hue sequential (low -> high intensity) for risk hotspots.
+  function sequentialScale() {
+    const dark = APP.theme === 'dark';
+    return dark
+      ? [[0, '#1b2330'], [0.5, '#5b54e0'], [1, '#f0726b']]
+      : [[0, '#eef0fb'], [0.5, '#9a93e8'], [1, '#c5453b']];
   }
 
   function emptyLayout() {
@@ -1565,42 +1864,57 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     return {
       paper_bgcolor: t.panel,
       plot_bgcolor: t.panel,
-      margin: { l: 58, r: 22, t: 68, b: 88 },
-      font: { family: 'IBM Plex Sans, Source Sans 3, Segoe UI, Arial, sans-serif', size: 13, color: t.ink },
+      margin: { l: 56, r: 20, t: 48, b: 84 },
+      font: { family: 'Geist, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif', size: 12.5, color: t.ink },
+      colorway: [t.axis, cssVar('--accent')],
       legend: {
         orientation: 'h',
         y: -0.24,
         x: 0,
         xanchor: 'left',
-        font: { color: t.axis, size: 12 },
+        font: { color: t.muted, size: 12 },
         bgcolor: 'rgba(0,0,0,0)',
       },
-      title: {
-        x: 0,
-        xanchor: 'left',
-        font: {
-          size: 15,
-          color: t.ink,
-          family: '"Iowan Old Style", "Palatino Linotype", Georgia, serif'
-        }
-      },
-      hoverlabel: { bgcolor: t.hoverBg, font: { color: t.hoverInk } }
+      title: { text: '', x: 0, xanchor: 'left', font: { size: 1, color: t.panel } },
+      hoverlabel: {
+        bgcolor: t.hoverBg,
+        bordercolor: t.hoverBg,
+        font: { color: t.hoverInk, family: 'Geist Mono, SF Mono, ui-monospace, monospace', size: 12 }
+      }
     };
   }
 
   function themedLayout(layout) {
     const t = themeTokens();
     const merged = { ...baseLayout(), ...layout };
+    if (merged.title && (merged.title.text || merged.title.text === '')) {
+      const txt = merged.title.text;
+      merged.title = {
+        text: txt,
+        x: 0,
+        xanchor: 'left',
+        y: 0.98,
+        yanchor: 'top',
+        font: { size: 13, color: t.muted, family: 'Geist, -apple-system, Segoe UI, Arial, sans-serif' },
+        ...(typeof merged.title === 'object' ? {} : {}),
+      };
+      merged.title.text = txt;
+      merged.title.font = { size: 13, color: t.muted, family: 'Geist, -apple-system, Segoe UI, Arial, sans-serif' };
+    }
     const axisKeys = ['xaxis', 'xaxis2', 'xaxis3', 'yaxis', 'yaxis2', 'yaxis3'];
     for (const key of axisKeys) {
       if (!merged[key]) continue;
+      const isX = key.startsWith('x');
       merged[key] = {
         automargin: true,
-        tickfont: { color: t.axis },
-        titlefont: { color: t.axis },
+        tickfont: { color: t.axis, size: 11.5 },
+        titlefont: { color: t.muted, size: 12 },
         linecolor: t.grid,
         zerolinecolor: t.grid,
         gridcolor: t.grid,
+        showgrid: !isX,
+        showline: false,
+        ticks: '',
         ...merged[key],
       };
     }
@@ -1653,14 +1967,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function num(v) { return Number(v || 0); }
   function pct(v, d = 1) { return `${(num(v) * 100).toFixed(d)}%`; }
+  const MINUS = '−';
   function money(v) {
     const n = num(v);
-    if (Math.abs(n) >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
-    if (Math.abs(n) >= 1e6) return `$${(n / 1e6).toFixed(2)}M`;
-    if (Math.abs(n) >= 1e3) return `$${(n / 1e3).toFixed(1)}K`;
-    return `$${n.toFixed(0)}`;
+    const sign = n < 0 ? MINUS : '';
+    const a = Math.abs(n);
+    if (a >= 1e9) return `${sign}$${(a / 1e9).toFixed(2)}B`;
+    if (a >= 1e6) return `${sign}$${(a / 1e6).toFixed(2)}M`;
+    if (a >= 1e3) return `${sign}$${(a / 1e3).toFixed(1)}K`;
+    return `${sign}$${a.toFixed(0)}`;
   }
+  function _signed(v, d, unit) {
+    const r = Number(v.toFixed(d));
+    const sign = r > 0 ? '+' : r < 0 ? MINUS : '';
+    return `${sign}${Math.abs(r).toFixed(d)}${unit}`;
+  }
+  function ppSigned(v, d = 2) { return _signed(v, d, 'pp'); }
+  function pctSigned(v, d = 1) { return _signed(v, d, '%'); }
   function fixed(v, d = 1) { return Number(v || 0).toFixed(d); }
+  function cap(s) { const t = String(s || '').trim(); return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
   function governedMetric(key, fallback = 0) {
     const has = Object.prototype.hasOwnProperty.call(APP.officialKpis, key);
     return has ? num(APP.officialKpis[key]) : num(fallback);
@@ -1771,6 +2096,62 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     return true;
   }
 
+  function isScopeFiltered() {
+    const f = currentFilters();
+    if (f.region !== '__ALL__' || f.category !== '__ALL__' || f.sellerTier !== '__ALL__' ||
+        f.sellerType !== '__ALL__' || f.acquisition !== '__ALL__' || f.buyerType !== '__ALL__' ||
+        f.riskTier !== '__ALL__') return true;
+    if (f.dateFrom !== EMBEDDED.meta.coverage_start || f.dateTo !== EMBEDDED.meta.coverage_end) return true;
+    return false;
+  }
+
+  function windowStats(months) {
+    let gmv = 0, net = 0, riskAdj = 0, commission = 0, subsidy = 0, margin = 0, orders = 0, refundOrders = 0, disputesCount = 0;
+    for (const x of months) {
+      gmv += x.gmv; net += x.net; riskAdj += x.riskAdj; commission += x.commission;
+      subsidy += x.subsidy; margin += x.margin; orders += x.orders;
+      refundOrders += (x.refundOrders || 0); disputesCount += (x.disputesCount || 0);
+    }
+    return {
+      gmv, net, riskAdj, margin, orders,
+      takeRate: gmv ? commission / gmv : 0,
+      refundRate: orders ? refundOrders / orders : 0,
+      disputeRate: orders ? disputesCount / orders : 0,
+      subsidyShare: gmv ? subsidy / gmv : 0,
+      qualityRatio: net ? riskAdj / net : 0,
+      cmRate: net ? margin / net : 0,
+    };
+  }
+
+  // Period-over-period momentum within the current scope: most recent window vs the
+  // window before it. This is the always-meaningful comparison shown by default, so the
+  // dashboard never opens on dead "0.00pp vs baseline" values.
+  function periodTrend(state) {
+    const m = state.monthArr;
+    if (m.length < 2) return null;
+    const w = m.length >= 6 ? 3 : Math.max(1, Math.floor(m.length / 2));
+    const recent = m.slice(-w);
+    const prior = m.slice(-2 * w, -w);
+    if (!prior.length) return null;
+    const r = windowStats(recent), p = windowStats(prior);
+    const ppl = (a, b) => (a - b) * 100;
+    const chg = (a, b) => (b ? (a - b) / Math.abs(b) * 100 : 0);
+    return {
+      window: w,
+      label: `vs prior ${w} mo`,
+      takeRate: ppl(r.takeRate, p.takeRate),
+      refundRate: ppl(r.refundRate, p.refundRate),
+      disputeRate: ppl(r.disputeRate, p.disputeRate),
+      subsidyShare: ppl(r.subsidyShare, p.subsidyShare),
+      qualityRatio: ppl(r.qualityRatio, p.qualityRatio),
+      cmRate: ppl(r.cmRate, p.cmRate),
+      gmvPct: chg(r.gmv, p.gmv),
+      riskAdjPct: chg(r.riskAdj, p.riskAdj),
+      marginPct: chg(r.margin, p.margin),
+      recent: r, prior: p,
+    };
+  }
+
   function computeState(rows) {
     const month = new Map();
     const cat = new Map();
@@ -1803,7 +2184,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     for (const r of rows) {
       const m = r.m;
       if (!month.has(m)) {
-        month.set(m, { m, gmv: 0, net: 0, riskAdj: 0, commission: 0, subsidy: 0, refund: 0, dispute: 0, chargebackLoss: 0, margin: 0, orders: 0, disputesCount: 0, chargebacksCount: 0, cancels: 0, onTimeEligible: 0, onTimeCount: 0, delaySum: 0, delayEligible: 0 });
+        month.set(m, { m, gmv: 0, net: 0, riskAdj: 0, commission: 0, subsidy: 0, refund: 0, dispute: 0, chargebackLoss: 0, margin: 0, orders: 0, refundOrders: 0, disputesCount: 0, chargebacksCount: 0, cancels: 0, onTimeEligible: 0, onTimeCount: 0, delaySum: 0, delayEligible: 0 });
       }
       const mm = month.get(m);
       const cbLoss = r.cb ? num(r.nv) : 0;
@@ -1819,6 +2200,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       mm.chargebackLoss += cbLoss;
       mm.margin += num(r.rcm);
       mm.orders += 1;
+      mm.refundOrders += hasRef;
       mm.disputesCount += hasDsp;
       mm.chargebacksCount += num(r.cb);
       mm.cancels += num(r.can);
@@ -2035,71 +2417,121 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       net: governedMetric('net_value', b.net),
       takeRate: governedMetric('take_rate', b.takeRate),
       margin: governedMetric('realized_contribution_margin_proxy', b.margin),
+      expectedMargin: governedMetric('expected_margin_after_risk', b.expectedMargin),
       refundRate: governedMetric('refund_rate', b.refundRate),
       disputeRate: governedMetric('dispute_rate', b.disputeRate),
+      chargebackRate: governedMetric('chargeback_rate', 0),
       subsidyShare: governedMetric('subsidy_share', b.subsidyShare),
       riskAdj: governedMetric('risk_adjusted_value', b.riskAdj),
       criticalSellers: governedMetric('critical_sellers', b.criticalSellers),
     };
+    const filtered = APP.filtered;
+    const trend = APP.trend;
     const protectedShare = official.net ? official.riskAdj / official.net : 0;
     const sliceProtectedShare = k.net ? k.riskAdj / k.net : 0;
+    const dispShare = filtered ? sliceProtectedShare : protectedShare;
+    const dispCmRate = filtered ? (k.net ? k.margin / k.net : 0) : (official.net ? official.margin / official.net : 0);
+
+    // Rate metrics: when a scope is filtered, compare it to the governed portfolio;
+    // otherwise surface trailing-window momentum so the default view is never dead.
+    const rateDelta = (scopeVal, portfolioVal, trendVal, goodIsDown) => {
+      if (filtered) return `${ppSigned((scopeVal - portfolioVal) * 100)} vs portfolio`;
+      if (trend) return `${ppSigned(trendVal)} ${trend.label}`;
+      return goodIsDown ? 'Lower is better' : 'Higher is better';
+    };
+
     const cards = [
       {
-        label: 'Official GMV',
-        value: money(official.gmv),
-        context: `Selected slice ${money(k.gmv)}`,
-        delta: `${pct(k.gmv / (official.gmv || 1))} of governed portfolio GMV`,
-        tone: 'good',
-        featured: true,
+        label: 'GMV',
+        value: filtered ? money(k.gmv) : money(official.gmv),
+        delta: filtered
+          ? `${pct(official.gmv ? k.gmv / official.gmv : 0)} of portfolio`
+          : (trend ? `${pctSigned(trend.gmvPct)} ${trend.label}` : 'Full-period total'),
+        context: `Gross merchandise value`,
+        tone: 'flat',
       },
       {
         label: 'Protected Value',
-        value: money(official.riskAdj),
-        context: `Selected slice ${money(k.riskAdj)}`,
-        delta: `${pct(sliceProtectedShare)} of slice net value | official ${pct(protectedShare)}`,
-        tone: sliceProtectedShare >= protectedShare ? 'good' : sliceProtectedShare >= protectedShare - 0.01 ? 'warn' : 'bad',
-        featured: true,
+        value: filtered ? money(k.riskAdj) : money(official.riskAdj),
+        delta: `${pct(dispShare)} of net protected`,
+        context: `Risk-adjusted GMV retained`,
+        tone: dispShare >= 0.95 ? 'good' : dispShare >= 0.90 ? 'warn' : 'bad',
       },
       {
-        label: 'Contribution Margin Proxy',
-        value: money(official.margin),
-        context: `Selected slice ${money(k.margin)}`,
-        delta: `${money(k.margin - official.margin)} vs governed portfolio CM`,
-        tone: official.margin >= 0 ? 'good' : 'bad',
-        featured: true,
+        label: 'Contribution Margin',
+        value: filtered ? money(k.margin) : money(official.margin),
+        delta: `CM rate ${pct(dispCmRate)}`,
+        context: `Realized margin after risk`,
+        tone: (filtered ? k.margin : official.margin) >= 0 ? 'good' : 'bad',
       },
-      { label: 'Net Value', value: money(official.net), context: `Selected slice ${money(k.net)}`, delta: `${pct(k.net / (official.net || 1))} of governed portfolio`, tone: 'good' },
-      { label: 'Take Rate', value: pct(official.takeRate), context: `Selected slice ${pct(k.takeRate)}`, delta: `${((k.takeRate - official.takeRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: 'good' },
-      { label: 'Refund Rate', value: pct(official.refundRate), context: `Selected slice ${pct(k.refundRate)}`, delta: `${((k.refundRate - official.refundRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.refundRate <= 0.12 ? 'good' : official.refundRate <= 0.17 ? 'warn' : 'bad' },
-      { label: 'Dispute Rate', value: pct(official.disputeRate), context: `Selected slice ${pct(k.disputeRate)}`, delta: `${((k.disputeRate - official.disputeRate) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.disputeRate <= 0.015 ? 'good' : official.disputeRate <= 0.03 ? 'warn' : 'bad' },
-      { label: 'Subsidy Share', value: pct(official.subsidyShare), context: `Selected slice ${pct(k.subsidyShare)}`, delta: `${((k.subsidyShare - official.subsidyShare) * 100).toFixed(2)}pp vs governed portfolio`, tone: official.subsidyShare <= 0.03 ? 'good' : official.subsidyShare <= 0.05 ? 'warn' : 'bad' },
-      { label: 'Critical Sellers', value: String(Math.round(official.criticalSellers)), context: `${k.criticalSellers} critical sellers in slice`, delta: official.criticalSellers <= 20 ? 'Contained governance queue' : official.criticalSellers <= 40 ? 'Escalation burden rising' : 'Governance load requires active intervention', tone: official.criticalSellers <= 20 ? 'good' : official.criticalSellers <= 40 ? 'warn' : 'bad' },
+      {
+        label: 'Take Rate',
+        value: pct(filtered ? k.takeRate : official.takeRate),
+        delta: rateDelta(k.takeRate, official.takeRate, trend ? trend.takeRate : 0, false),
+        context: `Commission yield on GMV`,
+        tone: (filtered ? k.takeRate : official.takeRate) >= 0.10 ? 'good' : (filtered ? k.takeRate : official.takeRate) >= 0.08 ? 'warn' : 'bad',
+      },
+      {
+        label: 'Refund Rate',
+        value: pct(filtered ? k.refundRate : official.refundRate),
+        delta: rateDelta(k.refundRate, official.refundRate, trend ? trend.refundRate : 0, true),
+        context: `Orders refunded`,
+        tone: (filtered ? k.refundRate : official.refundRate) <= 0.12 ? 'good' : (filtered ? k.refundRate : official.refundRate) <= 0.18 ? 'warn' : 'bad',
+      },
+      {
+        label: 'Dispute Rate',
+        value: pct(filtered ? k.disputeRate : official.disputeRate),
+        delta: rateDelta(k.disputeRate, official.disputeRate, trend ? trend.disputeRate : 0, true),
+        context: `Orders disputed`,
+        tone: (filtered ? k.disputeRate : official.disputeRate) <= 0.10 ? 'good' : (filtered ? k.disputeRate : official.disputeRate) <= 0.15 ? 'warn' : 'bad',
+      },
+      {
+        label: 'Subsidy Share',
+        value: pct(filtered ? k.subsidyShare : official.subsidyShare),
+        delta: rateDelta(k.subsidyShare, official.subsidyShare, trend ? trend.subsidyShare : 0, true),
+        context: `GMV funded by promotions`,
+        tone: (filtered ? k.subsidyShare : official.subsidyShare) <= 0.03 ? 'good' : (filtered ? k.subsidyShare : official.subsidyShare) <= 0.05 ? 'warn' : 'bad',
+      },
     ];
     const grid = document.getElementById('kpiGrid');
     grid.innerHTML = cards.map(c => `
-      <div class="kpi ${c.tone} ${c.featured ? 'feature' : ''}">
+      <div class="kpi ${c.tone}">
         <div class="kpi-head">
           <div class="label">${c.label}</div>
           <span class="tone-dot"></span>
         </div>
         <div class="value">${c.value}</div>
+        <div class="delta"><span class="dir">${c.delta}</span></div>
         <div class="context">${c.context}</div>
-        <div class="delta">${c.delta}</div>
       </div>
     `).join('');
   }
 
   function renderHero(state, baseline) {
     const k = state.kpi;
+    const filtered = APP.filtered;
+    const trend = APP.trend;
     const qualRatio = k.net ? k.riskAdj / k.net : 0;
     const baseQual = baseline.kpi.net ? baseline.kpi.riskAdj / baseline.kpi.net : 0;
-    const qualityDelta = (qualRatio - baseQual) * 100;
+    // Quality movement: vs portfolio when a scope is filtered, otherwise trailing momentum.
+    const qualityDelta = filtered ? (qualRatio - baseQual) * 100 : (trend ? trend.qualityRatio : 0);
+    const cmpLabel = filtered ? 'vs the portfolio' : (trend ? `over the last ${trend.window} months` : 'across the full period');
     const growthHealth = qualityDelta >= 1 ? 'good' : qualityDelta >= -0.3 ? 'warn' : 'bad';
     const marginHealth = k.margin >= 0 ? 'good' : 'bad';
-    const riskHealth = k.disputeRate <= 0.015 ? 'good' : k.disputeRate <= 0.03 ? 'warn' : 'bad';
-    const worstIssue = marginHealth === 'bad' ? 'margin leakage' : riskHealth === 'bad' ? 'fraud and dispute pressure' : growthHealth === 'bad' ? 'fragile growth quality' : 'disciplined growth quality';
-    const headline = `This slice is ${growthHealth === 'good' ? 'expanding with stronger economic quality' : growthHealth === 'warn' ? 'growing with mixed quality signals' : 'growing with deteriorating quality protection'}.`;
-    const message = `Quality-adjusted value moved ${qualityDelta.toFixed(2)}pp versus the portfolio baseline. Leadership should treat ${worstIssue} as the immediate decision lens for this view, not topline GMV alone.`;
+    const disputeWarn = baseline.kpi.disputeRate + 0.01;
+    const disputeBad = baseline.kpi.disputeRate + 0.025;
+    const riskHealth = k.disputeRate <= disputeWarn ? 'good' : k.disputeRate <= disputeBad ? 'warn' : 'bad';
+    const opsGood = baseline.rates.onTimeRate + 0.02;
+    const opsWarn = Math.max(0.0, baseline.rates.onTimeRate - 0.015);
+    const opsHealth = state.rates.onTimeRate >= opsGood ? 'good' : state.rates.onTimeRate >= opsWarn ? 'warn' : 'bad';
+    const worstIssue = marginHealth === 'bad' ? 'margin leakage' : riskHealth === 'bad' ? 'fraud and dispute pressure' : growthHealth === 'bad' ? 'fragile growth quality' : 'protecting current quality while scaling';
+    const subject = filtered ? 'This scope is' : 'The marketplace is';
+    const headline = `${subject} ${growthHealth === 'good' ? 'expanding with stronger economic quality' : growthHealth === 'warn' ? 'growing with mixed quality signals' : 'growing with deteriorating quality protection'}.`;
+    const moveWord = qualityDelta >= 0.05 ? 'up' : qualityDelta <= -0.05 ? 'down' : 'flat';
+    const moveClause = moveWord === 'flat'
+      ? `Risk-adjusted value holds at ${pct(qualRatio)} of net ${cmpLabel}.`
+      : `Risk-adjusted value sits at ${pct(qualRatio)} of net, ${moveWord} ${Math.abs(qualityDelta).toFixed(1)}pp ${cmpLabel}.`;
+    const message = `${moveClause} The immediate lens is ${worstIssue}, not topline GMV alone.`;
     document.getElementById('heroHeadline').textContent = headline;
     document.getElementById('heroMessage').textContent = message;
 
@@ -2124,10 +2556,43 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       </div>
     `).join('');
 
+    const policy = APP.policyRows[0] || {};
+    const validation = APP.validation || {};
+    const scenario = [...APP.scenarioDecision].sort((a, b) => b.decision_priority_score - a.decision_priority_score)[0] || {};
+    const actionQueue = [
+      {
+        name: 'Decision 1',
+        main: cap(scenario.recommended_decision) || 'Prioritize the highest protected-margin scenario.',
+        hint: scenario.scenario ? `Top scenario: ${String(scenario.scenario).replaceAll('_', ' ')} | CM impact ${money(scenario.contribution_margin_change_vs_baseline)}` : 'Scenario decision matrix unavailable.',
+        cls: 'good',
+      },
+      {
+        name: 'Decision 2',
+        main: cap(policy.policy_guidance) || 'Escalate high-risk orders to manual review.',
+        hint: policy.recommended_threshold !== undefined ? `Retrospective threshold ${fixed(policy.recommended_threshold, 0)} | in-sample net benefit ${money(policy.net_benefit)}` : 'Policy simulation unavailable.',
+        cls: 'warn',
+      },
+      {
+        name: 'Validation scope',
+        main: validation.publish_blocked ? 'Do not publish until validation blockers are cleared.' : 'Configured checks pass for public decision-support demonstration.',
+        hint: `State: ${validation.release_state || 'unknown'} | critical ${validation.critical_issues ?? 'n/a'} | high ${validation.high_issues ?? 'n/a'}`,
+        cls: validation.publish_blocked ? 'bad' : 'good',
+      },
+    ];
+    document.getElementById('actionQueue').innerHTML = actionQueue.map(a => `
+      <div class="action-card ${a.cls}">
+        <div class="name">${a.name}</div>
+        <div class="main">${a.main}</div>
+        <div class="hint">${a.hint}</div>
+      </div>
+    `).join('');
+
+    const qualHint = filtered ? `${ppSigned(qualityDelta, 1)} vs portfolio` : (trend ? `${ppSigned(qualityDelta, 1)} ${trend.label}` : `${pct(qualRatio)} of net`);
     const signals = [
-      { name: 'Growth Quality', state: growthHealth === 'good' ? 'Healthy' : growthHealth === 'warn' ? 'Watchlist' : 'Fragile', hint: `${qualityDelta.toFixed(2)}pp vs baseline`, cls: growthHealth },
+      { name: 'Growth Quality', state: growthHealth === 'good' ? 'Healthy' : growthHealth === 'warn' ? 'Watchlist' : 'Fragile', hint: qualHint, cls: growthHealth },
       { name: 'Margin Discipline', state: marginHealth === 'good' ? 'Stable' : 'At Risk', hint: `Realized CM ${money(k.margin)}`, cls: marginHealth },
       { name: 'Fraud Pressure', state: riskHealth === 'good' ? 'Contained' : riskHealth === 'warn' ? 'Elevated' : 'Severe', hint: `Dispute rate ${pct(k.disputeRate)}`, cls: riskHealth },
+      { name: 'Fulfillment', state: opsHealth === 'good' ? 'Reliable' : opsHealth === 'warn' ? 'Unstable' : 'Weak', hint: `On-time ${pct(state.rates.onTimeRate)}`, cls: opsHealth },
     ];
     document.getElementById('signalCards').innerHTML = signals.map(s => `
       <div class="signal-card ${s.cls}">
@@ -2137,13 +2602,30 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       </div>
     `).join('');
 
-    const board = [
-      { name: 'Protected GMV share', value: pct(qualRatio), hint: 'Risk-adjusted value divided by selected-slice net value.' },
-      { name: 'Leakage load', value: money(state.leakage.total), hint: 'Subsidy, refund, dispute, and chargeback erosion combined.' },
-      { name: 'Critical seller count', value: String(k.criticalSellers), hint: 'Sellers already sitting in the highest governance tier.' },
-    ];
+    const signedVal = (v, kind) => kind === 'pct' ? pctSigned(v) : ppSigned(v, 1);
+    const toneOf = (v, goodIsUp) => (Math.abs(v) < 0.05 ? 'flat' : ((v >= 0) === goodIsUp ? 'good' : 'bad'));
+    let board;
+    if (filtered) {
+      board = [
+        { name: 'GMV vs portfolio', value: pct(baseline.kpi.gmv ? k.gmv / baseline.kpi.gmv : 0), hint: 'Share of marketplace GMV in this scope.', tone: 'flat' },
+        { name: 'Quality vs portfolio', value: ppSigned((qualRatio - baseQual) * 100, 1), hint: 'Protected-value ratio against the full portfolio.', tone: toneOf((qualRatio - baseQual) * 100, true) },
+        { name: 'CM rate vs portfolio', value: ppSigned(((k.net ? k.margin / k.net : 0) - (baseline.kpi.net ? baseline.kpi.margin / baseline.kpi.net : 0)) * 100, 1), hint: 'Contribution-margin rate against the portfolio.', tone: toneOf(((k.net ? k.margin / k.net : 0) - (baseline.kpi.net ? baseline.kpi.margin / baseline.kpi.net : 0)) * 100, true) },
+      ];
+    } else if (trend) {
+      board = [
+        { name: 'GMV momentum', value: signedVal(trend.gmvPct, 'pct'), hint: `Recent ${trend.window} months vs the prior ${trend.window}.`, tone: toneOf(trend.gmvPct, true) },
+        { name: 'Protected-value momentum', value: signedVal(trend.riskAdjPct, 'pct'), hint: 'Risk-adjusted GMV trajectory.', tone: toneOf(trend.riskAdjPct, true) },
+        { name: 'Quality-ratio shift', value: signedVal(trend.qualityRatio, 'pp'), hint: 'Protected share of net value, recent vs prior.', tone: toneOf(trend.qualityRatio, true) },
+      ];
+    } else {
+      board = [
+        { name: 'Protected share', value: pct(qualRatio), hint: 'Risk-adjusted value over net value.', tone: 'flat' },
+        { name: 'Leakage load', value: money(state.leakage.total), hint: 'Subsidy, refund, dispute and chargeback erosion.', tone: 'flat' },
+        { name: 'Realized CM', value: money(k.margin), hint: 'Contribution margin after risk.', tone: k.margin >= 0 ? 'good' : 'bad' },
+      ];
+    }
     document.getElementById('decisionBoard').innerHTML = board.map(d => `
-      <div class="decision-stat">
+      <div class="decision-stat ${d.tone || 'flat'}">
         <div class="name">${d.name}</div>
         <div class="value">${d.value}</div>
         <div class="hint">${d.hint}</div>
@@ -2153,40 +2635,56 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderNarrativeAndAlerts(state, baseline) {
     const k = state.kpi;
+    const filtered = APP.filtered;
+    const trend = APP.trend;
     const qualRatio = k.net ? k.riskAdj / k.net : 0;
     const baseQual = baseline.kpi.net ? baseline.kpi.riskAdj / baseline.kpi.net : 0;
-    const qualityDelta = (qualRatio - baseQual) * 100;
+    const qualityDelta = filtered ? (qualRatio - baseQual) * 100 : (trend ? trend.qualityRatio : 0);
     const cmStatus = k.margin >= 0 ? 'positive' : 'negative';
-    const narrative = `The selected slice contains ${k.orders.toLocaleString()} orders and contributes ${money(k.gmv)} of GMV. Protected value stands at ${money(k.riskAdj)}, or ${pct(qualRatio)} of slice net value. Realized contribution margin proxy is ${cmStatus} at ${money(k.margin)}, while refunds, disputes, and subsidy dependence remain the main drag. Versus the portfolio baseline, quality protection shifted ${qualityDelta.toFixed(2)}pp, which means this slice is ${qualityDelta >= 0 ? 'holding or improving' : 'losing'} economic discipline.`;
+    const scopeWord = filtered ? 'selected scope' : 'marketplace';
+    const flat = Math.abs(qualityDelta) < 0.05;
+    const movePhrase = filtered
+      ? (flat
+          ? `Against the full portfolio, quality protection is essentially in line.`
+          : `Against the full portfolio, quality protection is ${qualityDelta >= 0 ? 'ahead by' : 'behind by'} ${Math.abs(qualityDelta).toFixed(1)}pp.`)
+      : (trend
+          ? (flat
+              ? `Over the last ${trend.window} months, quality protection held steady.`
+              : `Over the last ${trend.window} months, quality protection ${qualityDelta > 0 ? 'improved by' : 'slipped by'} ${Math.abs(qualityDelta).toFixed(1)}pp.`)
+          : `Quality protection holds at ${pct(qualRatio)} of net value.`);
+    const narrative = `The ${scopeWord} covers ${k.orders.toLocaleString()} orders and ${money(k.gmv)} of GMV. Protected value stands at ${money(k.riskAdj)} — ${pct(qualRatio)} of net value — while realized contribution margin is ${cmStatus} at ${money(k.margin)}. Refunds, disputes and subsidy dependence remain the main drag. ${movePhrase}`;
     document.getElementById('executiveNarrative').textContent = narrative;
 
-    const badges = [];
-    badges.push({ text: `Growth Quality: ${qualRatio >= baseQual + 0.01 ? 'Healthy' : qualRatio >= baseQual - 0.005 ? 'Watch' : 'Fragile'}`, severity: qualRatio >= baseQual + 0.01 ? 'good' : qualRatio >= baseQual - 0.005 ? 'warn' : 'bad' });
-    badges.push({ text: `Margin Discipline: ${k.margin >= 0 ? 'Stable' : 'At Risk'}`, severity: k.margin >= 0 ? 'good' : 'bad' });
-    const fraudWarn = Math.max(0.16, baseline.kpi.disputeRate + 0.01);
-    const fraudBad = Math.max(0.20, baseline.kpi.disputeRate + 0.025);
-    badges.push({ text: `Fraud Pressure: ${k.disputeRate <= fraudWarn ? 'Contained' : k.disputeRate <= fraudBad ? 'Elevated' : 'Severe'}`, severity: k.disputeRate <= fraudWarn ? 'good' : k.disputeRate <= fraudBad ? 'warn' : 'bad' });
-    const opsGood = baseline.rates.onTimeRate + 0.02;
-    const opsWarn = Math.max(0.0, baseline.rates.onTimeRate - 0.015);
-    badges.push({ text: `Operational Reliability: ${state.rates.onTimeRate >= opsGood ? 'Strong' : state.rates.onTimeRate >= opsWarn ? 'Unstable' : 'Weak'}`, severity: state.rates.onTimeRate >= opsGood ? 'good' : state.rates.onTimeRate >= opsWarn ? 'warn' : 'bad' });
-    document.getElementById('healthBadges').innerHTML = badges.map(b => `<span class="badge ${tierClassFromSeverity(b.severity)}">${b.text}</span>`).join('');
-
-    const alerts = [];
-    if (k.disputeRate > fraudBad) alerts.push({ cls: 'bad', txt: `Dispute rate is elevated at ${pct(k.disputeRate)} and exceeds governance threshold.` });
-    if (k.refundRate > Math.max(0.17, baseline.kpi.refundRate + 0.015)) alerts.push({ cls: 'warn', txt: `Refund rate at ${pct(k.refundRate)} indicates potential quality and CX deterioration.` });
-    if (k.subsidyShare > Math.max(0.035, baseline.kpi.subsidyShare + 0.008)) alerts.push({ cls: 'warn', txt: `Subsidy share at ${pct(k.subsidyShare)} suggests margin dependence on promotions.` });
-    if (state.rates.onTimeRate < Math.max(0.0, baseline.rates.onTimeRate - 0.03)) alerts.push({ cls: 'bad', txt: `On-time fulfillment is ${pct(state.rates.onTimeRate)}; operations SLA risk likely contributes to leakage.` });
-    if (k.criticalSellers > 40) alerts.push({ cls: 'info', txt: `${k.criticalSellers} critical sellers in filtered scope require active governance routing.` });
-    if (!alerts.length) alerts.push({ cls: 'info', txt: 'No acute threshold breaches detected for current slice. Continue monitoring.' });
-    document.getElementById('alertsPanel').innerHTML = alerts.map(a => `<div class="alert ${a.cls}">${a.txt}</div>`).join('');
-
-    const bench = [
-      { name: 'CM rate vs baseline', num: `${((k.margin / (k.net || 1) - baseline.kpi.margin / (baseline.kpi.net || 1)) * 100).toFixed(2)}pp` },
-      { name: 'Expected vs realized CM gap', num: money(k.expectedMargin - k.margin) },
-      { name: 'Refund rate vs baseline', num: `${((k.refundRate - baseline.kpi.refundRate) * 100).toFixed(2)}pp` },
-      { name: 'Quality ratio vs baseline', num: `${qualityDelta.toFixed(2)}pp` },
+    const disputeLimit = Math.max(0.20, baseline.kpi.disputeRate + 0.025);
+    const refundLimit = Math.max(0.17, baseline.kpi.refundRate + 0.015);
+    const subsidyLimit = Math.max(0.035, baseline.kpi.subsidyShare + 0.008);
+    const onTimeFloor = Math.max(0.0, baseline.rates.onTimeRate - 0.03);
+    const guards = [
+      { label: 'Dispute rate', value: pct(k.disputeRate), limit: `≤ ${pct(disputeLimit)}`, breach: k.disputeRate > disputeLimit, sev: 'bad' },
+      { label: 'Refund rate', value: pct(k.refundRate), limit: `≤ ${pct(refundLimit)}`, breach: k.refundRate > refundLimit, sev: 'warn' },
+      { label: 'Subsidy share', value: pct(k.subsidyShare), limit: `≤ ${pct(subsidyLimit)}`, breach: k.subsidyShare > subsidyLimit, sev: 'warn' },
+      { label: 'On-time fulfillment', value: pct(state.rates.onTimeRate), limit: `≥ ${pct(onTimeFloor)}`, breach: state.rates.onTimeRate < onTimeFloor, sev: 'bad' },
     ];
-    document.getElementById('benchmarkCards').innerHTML = bench.map(b => `<div class="bench"><div class="name">${b.name}</div><div class="num">${b.num}</div></div>`).join('');
+    const breaches = guards.filter(g => g.breach).length;
+    const head = breaches
+      ? `<div class="alert-head bad">${breaches} of ${guards.length} guardrails breached</div>`
+      : `<div class="alert-head good">All ${guards.length} guardrails within range</div>`;
+    const rows = guards.map(g => `
+      <div class="guard ${g.breach ? g.sev : 'good'}">
+        <span class="guard-label">${g.label}</span>
+        <span class="guard-val mono">${g.value}</span>
+        <span class="guard-limit mono">${g.limit}</span>
+        <span class="guard-state">${g.breach ? 'Breach' : 'OK'}</span>
+      </div>`).join('');
+    document.getElementById('alertsPanel').innerHTML = head + rows;
+
+    const cmGap = k.expectedMargin - k.margin;
+    const bench = [
+      { name: 'Expected vs realized CM', num: money(cmGap), hint: 'Margin lost to realized risk' },
+      { name: 'Leakage / net value', num: pct(k.net ? state.leakage.total / k.net : 0), hint: 'Erosion as share of net' },
+      { name: 'Avg delivery delay', num: `${fixed(state.rates.avgDelay, 1)} d`, hint: 'Across delayed orders' },
+    ];
+    document.getElementById('benchmarkCards').innerHTML = bench.map(b => `<div class="bench"><div class="name">${b.name}</div><div class="num">${b.num}</div><div class="bench-hint">${b.hint}</div></div>`).join('');
   }
 
   function plotOrEmpty(divId, traces, layout, hasData = true) {
@@ -2201,33 +2699,43 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const m = state.monthArr;
     const c = chartPalette();
     plotOrEmpty(divId, [
-      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines+markers', name: 'GMV', line: { color: c.blue, width: 3 } },
-      { x: m.map(x => x.m), y: m.map(x => x.riskAdj), mode: 'lines+markers', name: 'Risk-Adjusted GMV', line: { color: c.red, width: 3 } }
+      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines+markers', name: 'GMV', line: { color: c.steel, width: 2.4 }, marker: { size: 5 } },
+      { x: m.map(x => x.m), y: m.map(x => x.riskAdj), mode: 'lines+markers', name: 'Risk-Adjusted GMV', line: { color: c.accent, width: 3 }, marker: { size: 5 } }
     ], {
+      margin: { l: 56, r: 20, t: 30, b: 84 },
       yaxis: { title: 'Value ($)' },
-      xaxis: { title: 'Month', tickangle: -35 },
-      title: { text: 'GMV Growth Outpaces Risk-Adjusted Value in Volatile Periods', font: { size: 15 } }
+      xaxis: { title: 'Month', tickangle: -35 }
     }, m.length > 0);
   }
 
   function renderWaterfall(state, divId) {
     const l = state.leakage;
     const c = chartPalette();
+    const t = themeTokens();
     const measures = ['relative', 'relative', 'relative', 'relative', 'relative', 'total'];
-    const x = ['Commission', 'Subsidy', 'Refunds', 'Disputes', 'Chargeback Loss', 'Contribution Margin'];
+    const x = ['Commission', 'Subsidy', 'Refunds', 'Disputes', 'Chargeback', 'Contribution<br>Margin'];
     const y = [l.commission, -l.subsidy, -l.refund, -l.dispute, -l.chargebackLoss, 0];
+    const cm = l.commission - l.subsidy - l.refund - l.dispute - l.chargebackLoss;
+    const labels = [l.commission, -l.subsidy, -l.refund, -l.dispute, -l.chargebackLoss, cm].map(money);
     plotOrEmpty(divId, [{
       type: 'waterfall',
       measure: measures,
       x,
       y,
-      connector: { line: { color: c.neutral } },
-      increasing: { marker: { color: c.green } },
-      decreasing: { marker: { color: c.red } },
-      totals: { marker: { color: c.blue } }
+      width: 0.62,
+      text: labels,
+      textposition: 'outside',
+      textfont: { family: 'Geist Mono, SF Mono, ui-monospace, monospace', size: 11, color: t.muted },
+      cliponaxis: false,
+      connector: { line: { color: t.axis, width: 1, dash: 'dot' } },
+      increasing: { marker: { color: c.steel } },
+      decreasing: { marker: { color: c.bad } },
+      totals: { marker: { color: cm >= 0 ? c.accent : c.bad } },
+      hovertemplate: '%{x}<br>%{text}<extra></extra>'
     }], {
-      yaxis: { title: 'Value ($)' },
-      title: { text: 'Leakage Components Explain Contribution Margin Outcome', font: { size: 15 } }
+      margin: { l: 56, r: 20, t: 30, b: 64 },
+      yaxis: { title: 'Value ($)', zeroline: true, zerolinewidth: 1.4 },
+      xaxis: { tickfont: { size: 11 } }
     }, state.kpi.orders > 0);
   }
 
@@ -2259,11 +2767,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       x: months,
       y: categories,
       z,
-      colorscale: 'RdYlGn',
+      colorscale: divergingScale(),
       zmid: 0,
-      colorbar: { title: 'Margin Rate' }
+      colorbar: { title: 'Margin Rate', outlinewidth: 0, thickness: 12 }
     }], {
-      title: { text: 'Category-Month Margin Quality Is Uneven and Persistent', font: { size: 15 } },
+      title: { text: 'Category-Month Margin Quality Is Uneven and Persistent' },
       xaxis: { tickangle: -35 },
       yaxis: { automargin: true }
     }, true);
@@ -2273,8 +2781,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const m = state.monthArr;
     const c = chartPalette();
     plotOrEmpty('plotRiskTrend', [
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.disputesCount / x.orders : 0), mode: 'lines+markers', name: 'Dispute Rate', line: { width: 3, color: c.red } },
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.chargebacksCount / x.orders : 0), mode: 'lines+markers', name: 'Chargeback Rate', line: { width: 3, color: c.orange } }
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.disputesCount / x.orders : 0), mode: 'lines+markers', name: 'Dispute Rate', line: { width: 3, color: c.red }, marker: { size: 5 } },
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.chargebacksCount / x.orders : 0), mode: 'lines+markers', name: 'Chargeback Rate', line: { width: 2.4, color: c.steel }, marker: { size: 5 } }
     ], {
       title: { text: 'Dispute and Chargeback Rates Co-Move in Risk Bursts', font: { size: 15 } },
       yaxis: { title: 'Rate' },
@@ -2293,14 +2801,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: {
         size: arr.map(x => 8 + Math.sqrt(x.orders) * 0.35),
         color: arr.map(x => x.orders),
-        colorscale: [[0, c.blueSoft], [0.55, c.orange], [1, c.red]],
+        colorscale: sequentialScale(),
         showscale: true,
-        colorbar: { title: 'Orders' },
-        line: { color: '#ffffff', width: 0.8 }
+        colorbar: { title: 'Orders', outlinewidth: 0, thickness: 12 },
+        line: { color: APP.theme === 'dark' ? '#12151c' : '#ffffff', width: 0.8 }
       },
       hovertemplate: '%{text}<br>Chargeback: %{x:.2%}<br>Dispute: %{y:.2%}<extra></extra>'
     }], {
-      title: { text: 'Higher Payment-Risk Signals Cluster in Elevated Dispute/Chargeback Zone', font: { size: 15 } },
+      title: { text: 'Higher Payment-Risk Signals Cluster in Elevated Dispute/Chargeback Zone' },
       xaxis: { title: 'Chargeback Rate', tickformat: '.1%' },
       yaxis: { title: 'Dispute Rate', tickformat: '.1%' }
     }, arr.length > 0);
@@ -2320,10 +2828,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       x: payments,
       y: channels,
       z,
-      colorscale: 'YlOrRd',
-      colorbar: { title: '(Disputes + Chargebacks) / Orders' }
+      colorscale: sequentialScale(),
+      colorbar: { title: '(Disputes + Chargebacks) / Orders', outlinewidth: 0, thickness: 12 }
     }], {
-      title: { text: 'Suspicious Pattern Hotspots by Channel and Payment Method', font: { size: 15 } },
+      title: { text: 'Suspicious Pattern Hotspots by Channel and Payment Method' },
       xaxis: { tickangle: -30 },
       yaxis: { automargin: true }
     }, true);
@@ -2334,9 +2842,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const bt = state.buyerTierCount;
     const orderTiers = ['Low', 'Moderate', 'High', 'Critical'];
     const buyerTiers = ['Low', 'Moderate', 'High', 'Critical'];
+    const cd = chartPalette();
     plotOrEmpty('plotRiskDistribution', [
-      { x: orderTiers, y: orderTiers.map(t => rt[t] || 0), type: 'bar', name: 'Order Risk Tier Count', marker: { color: '#4878d0' } },
-      { x: buyerTiers, y: buyerTiers.map(t => bt[t] || 0), type: 'bar', name: 'Buyer Risk Tier Count', marker: { color: '#54a24b' } }
+      { x: orderTiers, y: orderTiers.map(t => rt[t] || 0), type: 'bar', name: 'Order Risk Tier Count', marker: { color: cd.accent } },
+      { x: buyerTiers, y: buyerTiers.map(t => bt[t] || 0), type: 'bar', name: 'Buyer Risk Tier Count', marker: { color: cd.steel } }
     ], {
       barmode: 'group',
       title: { text: 'Critical Risk Tail Exists in Both Buyer and Order Distributions', font: { size: 15 } },
@@ -2354,7 +2863,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: c.blueSoft },
       name: 'Seller Quality Score'
     }], {
-      title: { text: 'Seller Quality Score Tail Drives Governance Workload', font: { size: 15 } },
+      title: { text: 'Seller Quality Score Tail Indicates Governance Workload', font: { size: 15 } },
       xaxis: { title: 'Seller Quality Score (Higher = Riskier)' },
       yaxis: { title: 'Seller Count' }
     }, sellers.length > 0);
@@ -2363,7 +2872,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       type: 'histogram',
       x: sellers.map(s => s.mfs),
       nbinsx: 30,
-      marker: { color: c.orange },
+      marker: { color: c.accent },
       name: 'Margin Fragility'
     }], {
       title: { text: 'Margin Fragility Concentration Indicates Structural Economic Risk', font: { size: 15 } },
@@ -2379,7 +2888,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       type: 'bar',
       x: c.map(x => x.cohort),
       y: c.map(x => x.disputeRate),
-      marker: { color: chartPalette().orange },
+      marker: { color: chartPalette().steel },
       hovertemplate: '%{x}<br>Dispute rate: %{y:.2%}<extra></extra>'
     }], {
       title: { text: 'Dispute Burden Persists Across Seller Volume Cohorts', font: { size: 15 } },
@@ -2389,8 +2898,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function renderSellerMatrix(state) {
     const s = state.sellerArr;
+    const dk = APP.theme === 'dark';
     const tiers = ['Low', 'Moderate', 'High', 'Critical'];
-    const colors = { Low: '#bfd9fb', Moderate: '#7eaceb', High: '#2f6fc7', Critical: '#143b66' };
+    const colors = dk
+      ? { Low: '#3a3f63', Moderate: '#6862c4', High: '#8e88ff', Critical: '#f0726b' }
+      : { Low: '#cdcaf2', Moderate: '#9a93e8', High: '#5b54e0', Critical: '#c5453b' };
+    const mLine = dk ? '#12151c' : '#ffffff';
     const traces = tiers.map(t => {
       const d = s.filter(x => x.gvt === t);
       return {
@@ -2400,32 +2913,36 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         type: 'scatter',
         name: t,
         text: d.map(x => `Seller ${x.sid}<br>GMV: ${money(x.gmv)}<br>Quality: ${fixed(x.sqs,1)}<br>Gov: ${fixed(x.gvs,1)}`),
-        marker: { size: d.map(x => 8 + Math.sqrt(x.orders) * 0.4), color: colors[t], opacity: 0.68, line: { color: '#fff', width: 0.7 } },
+        marker: { size: d.map(x => 8 + Math.sqrt(x.orders) * 0.4), color: colors[t], opacity: 0.72, line: { color: mLine, width: 0.7 } },
         hovertemplate: '%{text}<extra></extra>'
       };
     });
     plotOrEmpty('plotSellerMatrix', traces, {
-      title: { text: 'High-Volume, Weak-Quality Sellers Form the Primary Governance Risk Quadrant', font: { size: 15 } },
+      title: { text: 'High-Volume, Weak-Quality Sellers Form the Primary Governance Risk Quadrant' },
       xaxis: { title: 'Seller GMV ($)', type: 'log' },
       yaxis: { title: 'Seller Quality Score' },
-      shapes: [{ type: 'line', x0: 1, x1: Math.max(1, ...s.map(x => x.gmv)), y0: 55, y1: 55, line: { color: '#6b7d99', dash: 'dot' } }]
+      shapes: [{ type: 'line', x0: 1, x1: Math.max(1, ...s.map(x => x.gmv)), y0: 55, y1: 55, line: { color: chartPalette().steel, dash: 'dot' } }]
     }, s.length > 0);
   }
 
   function renderTopSellers(state) {
     const top = [...state.sellerArr].sort((a, b) => b.gvs - a.gvs).slice(0, 20).reverse();
+    const dk = APP.theme === 'dark';
+    const tierColor = (t) => dk
+      ? (t === 'Critical' ? '#f0726b' : t === 'High' ? '#8e88ff' : t === 'Moderate' ? '#6862c4' : '#3a3f63')
+      : (t === 'Critical' ? '#c5453b' : t === 'High' ? '#5b54e0' : t === 'Moderate' ? '#9a93e8' : '#cdcaf2');
     plotOrEmpty('plotTopSellers', [{
       type: 'bar',
       orientation: 'h',
       y: top.map(x => x.sid),
       x: top.map(x => x.gvs),
-      marker: { color: top.map(x => x.gvt === 'Critical' ? '#143b66' : x.gvt === 'High' ? '#2f6fc7' : x.gvt === 'Moderate' ? '#7eaceb' : '#bfd9fb') },
+      marker: { color: top.map(x => tierColor(x.gvt)) },
       text: top.map(x => fixed(x.gvs, 1)),
       textposition: 'outside',
       cliponaxis: false,
       hovertemplate: 'Seller %{y}<br>Governance score: %{x:.1f}<extra></extra>'
     }], {
-      title: { text: 'Top Governance Priority Sellers Concentrate Enterprise Risk', font: { size: 15 } },
+      title: { text: 'Top Governance Priority Sellers Concentrate Enterprise Risk' },
       xaxis: { title: 'Governance Priority Score' },
       yaxis: { title: 'Seller ID' }
     }, top.length > 0);
@@ -2476,7 +2993,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       orientation: 'h',
       y: cat.map(x => x.category),
       x: cat.map(x => x.subsidyShare),
-      marker: { color: c.green },
+      marker: { color: c.accent },
       hovertemplate: '%{y}<br>Promo dependency: %{x:.2%}<extra></extra>'
     }], {
       title: { text: 'Promo Dependency by Category Shows Margin Sensitivity Exposure', font: { size: 15 } },
@@ -2488,7 +3005,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const c = state.concentration;
     const p = chartPalette();
     plotOrEmpty('plotSellerConcentration', [
-      { x: c.map(x => x.sellerShare), y: c.map(x => x.gmvShare), mode: 'lines', name: 'Observed', line: { color: p.blue, width: 3 }, fill: 'tozeroy', fillcolor: 'rgba(10,91,211,0.12)' },
+      { x: c.map(x => x.sellerShare), y: c.map(x => x.gmvShare), mode: 'lines', name: 'Observed', line: { color: p.accent, width: 3 }, fill: 'tozeroy', fillcolor: APP.theme === 'dark' ? 'rgba(142,136,255,0.14)' : 'rgba(91,84,224,0.10)' },
       { x: [0, 1], y: [0, 1], mode: 'lines', name: 'Equality', line: { color: p.neutral, dash: 'dash' } }
     ], {
       title: { text: 'Seller Concentration Curve Indicates Top-Seller Dependency Risk', font: { size: 15 } },
@@ -2517,14 +3034,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: {
         size: s.map(r => 18 + Math.abs(r.top_risk_seller_downside_exposure) / 200000),
         color: s.map(r => r.contribution_margin_change_vs_baseline),
-        colorscale: 'RdYlGn',
+        colorscale: divergingScale(),
+        cmid: 0,
         showscale: true,
-        colorbar: { title: 'CM Delta' },
-        line: { color: '#fff', width: 1 }
+        colorbar: { title: 'CM Delta', outlinewidth: 0, thickness: 12 },
+        line: { color: APP.theme === 'dark' ? '#12151c' : '#ffffff', width: 1 }
       },
       hovertemplate: '%{text}<br>GMV delta: %{x:.2f}%<br>Quality delta: %{y:.2f}pp<extra></extra>'
     }], {
-      title: { text: 'Fraud and Quality Controls Improve Protected Economics with Limited GMV Drag', font: { size: 15 } },
+      title: { text: 'Scenario Assumptions Compare Protected Economics with GMV Trade-offs' },
       xaxis: { title: 'GMV Change vs Baseline (%)' },
       yaxis: { title: 'Quality Ratio Change (pp)' },
       shapes: [
@@ -2538,10 +3056,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       type: 'bar',
       x: sorted.map(r => r.scenario),
       y: sorted.map(r => r.contribution_margin_change_vs_baseline),
-      marker: { color: sorted.map(r => r.contribution_margin_change_vs_baseline >= 0 ? '#2ca02c' : '#d62728') },
+      marker: { color: sorted.map(r => r.contribution_margin_change_vs_baseline >= 0 ? chartPalette().good : chartPalette().bad) },
       hovertemplate: '%{x}<br>CM Delta: %{y:$,.0f}<extra></extra>'
     }], {
-      title: { text: 'Margin Protection Ranking Across Strategic Scenarios', font: { size: 15 } },
+      title: { text: 'Margin Protection Ranking Across Strategic Scenarios' },
       yaxis: { title: 'Contribution Margin Change vs Baseline ($)' },
       xaxis: { tickangle: -30 }
     }, sorted.length > 0);
@@ -2648,6 +3166,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     APP.currentFiltered = rows;
     const state = computeState(rows);
     APP.currentState = state;
+    APP.filtered = isScopeFiltered();
+    APP.trend = periodTrend(state);
     document.getElementById('scopeBar').innerHTML = scopeSummaryChips(filters, state);
     buildKpiCards(state, APP.baselineState);
     renderHero(state, APP.baselineState);
@@ -2661,6 +3181,49 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const sampleSuffix = EMBEDDED.meta.is_sampled ? ` (sampled from ${EMBEDDED.meta.source_orders.toLocaleString()})` : '';
     const el = document.getElementById('drawerCoverage');
     if (el) el.textContent = `Current scope: ${EMBEDDED.meta.coverage_start} to ${EMBEDDED.meta.coverage_end}${sampleSuffix}.`;
+  }
+
+  function activateTab(button) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    button.classList.add('active');
+    button.setAttribute('aria-pressed', 'true');
+    const tab = button.getAttribute('data-tab');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(`tab-${tab}`).classList.add('active');
+  }
+
+  function applySellerSort(header) {
+    const key = header.getAttribute('data-sort');
+    if (APP.sellerSort.key === key) {
+      APP.sellerSort.dir = APP.sellerSort.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      APP.sellerSort.key = key;
+      APP.sellerSort.dir = key === 'sid' || key === 'gvt' || key === 'ract' ? 'asc' : 'desc';
+    }
+    document.querySelectorAll('#tab-seller thead .sort-button').forEach(button => {
+      button.closest('th').setAttribute(
+        'aria-sort',
+        button === header ? (APP.sellerSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'
+      );
+    });
+    APP.sellerPage = 1;
+    renderSellerTable(APP.currentState);
+  }
+
+  function setMethodologyDrawerOpen(open) {
+    const drawer = document.getElementById('methodologyDrawer');
+    drawer.classList.toggle('open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    drawer.inert = !open;
+    if (open) {
+      methodologyReturnFocus = document.activeElement;
+      document.getElementById('methodologyClose').focus();
+    } else if (methodologyReturnFocus instanceof HTMLElement) {
+      methodologyReturnFocus.focus();
+    }
   }
 
   function bindEvents() {
@@ -2685,13 +3248,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = btn.getAttribute('data-tab');
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(`tab-${tab}`).classList.add('active');
-      });
+      btn.addEventListener('click', () => activateTab(btn));
     });
 
     document.getElementById('sellerSearch').addEventListener('input', (e) => {
@@ -2713,25 +3270,24 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       renderSellerTable(APP.currentState);
     });
 
-    document.querySelectorAll('#tab-seller thead th[data-sort]').forEach(th => {
-      th.addEventListener('click', () => {
-        const key = th.getAttribute('data-sort');
-        if (APP.sellerSort.key === key) {
-          APP.sellerSort.dir = APP.sellerSort.dir === 'asc' ? 'desc' : 'asc';
-        } else {
-          APP.sellerSort.key = key;
-          APP.sellerSort.dir = key === 'sid' || key === 'gvt' || key === 'ract' ? 'asc' : 'desc';
-        }
-        APP.sellerPage = 1;
-        renderSellerTable(APP.currentState);
-      });
+    document.querySelectorAll('#tab-seller thead .sort-button').forEach(button => {
+      button.addEventListener('click', () => applySellerSort(button));
     });
 
     document.getElementById('methodologyOpen').addEventListener('click', () => {
-      document.getElementById('methodologyDrawer').classList.add('open');
+      setMethodologyDrawerOpen(true);
     });
     document.getElementById('methodologyClose').addEventListener('click', () => {
-      document.getElementById('methodologyDrawer').classList.remove('open');
+      setMethodologyDrawerOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      const drawerOpen = document.getElementById('methodologyDrawer').classList.contains('open');
+      if (event.key === 'Escape' && drawerOpen) {
+        setMethodologyDrawerOpen(false);
+      } else if (event.key === 'Tab' && drawerOpen) {
+        event.preventDefault();
+        document.getElementById('methodologyClose').focus();
+      }
     });
   }
 
@@ -2742,13 +3298,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     extraProfit.className = 'row row-2';
     extraProfit.innerHTML = `
       <div class="panel">
-        <h3>Refund Rate by Category Highlights Value-Destructive Segments</h3>
-        <p class="sub">Sorted view to prioritize quality and policy intervention.</p>
+        <h3>Which categories have the highest refund rate?</h3>
+        <p class="sub">Use to prioritize quality and policy intervention in value-destructive segments.</p>
         <div id="plotRefundByCategory" class="plot"></div>
       </div>
       <div class="panel">
-        <h3>Seller Concentration Risk Can Amplify Governance and Margin Shocks</h3>
-        <p class="sub">Dependency on top sellers increases downside exposure concentration.</p>
+        <h3>How concentrated is GMV in the seller base?</h3>
+        <p class="sub">Use to understand whether a few sellers can amplify governance and margin shocks.</p>
         <div id="plotSellerConcentration" class="plot"></div>
       </div>
     `;
@@ -2776,8 +3332,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
 
 def build_dashboard(cfg: DashboardConfig) -> Path:
+    if cfg.max_orders <= 0:
+        raise ValueError("max_orders must be greater than zero.")
     payload = _build_payload(cfg)
-    data_json = json.dumps(payload, separators=(",", ":"), ensure_ascii=True)
+    data_json = json.dumps(_json_safe(payload), separators=(",", ":"), ensure_ascii=True, allow_nan=False)
     plotly_js = get_plotlyjs()
     html = _dashboard_html(data_json=data_json, plotly_js=plotly_js)
 

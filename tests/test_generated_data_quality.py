@@ -66,6 +66,11 @@ def test_referential_integrity() -> None:
     assert t["logistics_events"]["order_id"].isin(t["orders"]["order_id"]).all()
 
 
+def test_current_order_grain_has_one_seller_per_order() -> None:
+    items = _load()["order_items"]
+    assert (items.groupby("order_id")["seller_id"].nunique() == 1).all()
+
+
 
 def test_behavioral_patterns_present() -> None:
     t = _load()

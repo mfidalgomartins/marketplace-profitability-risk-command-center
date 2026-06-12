@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 PYTEST := .venv/bin/pytest
 
-.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz dashboard pages snapshot schema-contracts metric-governance schema-drift validate release-gate all
+.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz report dashboard pages snapshot schema-contracts metric-governance schema-drift validate release-gate all
 
 help:
 	@echo "Targets:"
@@ -15,13 +15,14 @@ help:
 	@echo "  scenarios  Build scenario analysis tables"
 	@echo "  montecarlo Build Monte Carlo scenario uncertainty tables"
 	@echo "  backtest   Build score policy backtesting outputs"
-	@echo "  viz        Build chart pack"
+	@echo "  viz        Build publication chart pack"
+	@echo "  report     Build publication PDF report"
 	@echo "  dashboard  Build executive HTML dashboard"
 	@echo "  pages      Publish GitHub Pages entrypoint + named dashboard artifact"
 	@echo "  snapshot   Build executive KPI snapshot artifacts"
 	@echo "  schema-contracts Generate + validate schema contracts"
 	@echo "  metric-governance Validate governed KPI contracts and recomputation"
-	@echo "  schema-drift Generate schema drift report + history snapshot"
+	@echo "  schema-drift Generate schema drift report against the release baseline"
 	@echo "  validate   Run formal validation report"
 	@echo "  release-gate Enforce release state gate from validation outputs"
 	@echo "  all        Run full end-to-end pipeline"
@@ -49,13 +50,16 @@ scenarios:
 	$(PYTHON) src/scenario_analysis/build_scenario_decision_analysis.py --raw-dir data/raw --processed-dir data/processed --baseline-months 6 --horizon-months 6
 
 montecarlo:
-	$(PYTHON) src/scenario_analysis/run_scenario_monte_carlo.py --processed-dir data/processed --output-dir data/processed --charts-dir outputs/charts --iterations 2000
+	$(PYTHON) src/scenario_analysis/run_scenario_monte_carlo.py --processed-dir data/processed --output-dir data/processed --charts-dir .tmp/charts --iterations 2000
 
 backtest:
-	$(PYTHON) src/backtesting/run_score_policy_backtest.py --raw-dir data/raw --processed-dir data/processed --output-dir data/processed --charts-dir outputs/charts
+	$(PYTHON) src/backtesting/run_score_policy_backtest.py --raw-dir data/raw --processed-dir data/processed --output-dir data/processed --charts-dir .tmp/charts
 
 viz:
-	$(PYTHON) src/visualization/build_marketplace_visualizations.py --raw-dir data/raw --processed-dir data/processed --output-dir outputs/charts
+	$(PYTHON) src/visualization/build_report_graphs.py
+
+report: viz
+	$(PYTHON) src/visualization/build_report_pdf.py
 
 dashboard:
 	$(PYTHON) src/dashboard/build_executive_dashboard.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --output-file outputs/dashboard/executive-marketplace-command-center.html
@@ -74,7 +78,7 @@ metric-governance:
 	$(PYTHON) src/validation/validate_metric_governance.py --raw-dir data/raw --processed-dir data/processed --reports-dir reports --contract-file config/contracts/v1/metric_governance_contract.csv --output-file reports/metric_governance_issues.csv
 
 schema-drift:
-	$(PYTHON) src/validation/generate_schema_drift_report.py --current-schema-file config/contracts/v1/schema_contracts.json --history-dir config/contracts/history --output-csv reports/schema_drift_changes.csv --output-report reports/schema_drift_report.md --snapshot-current
+	$(PYTHON) src/validation/generate_schema_drift_report.py --current-schema-file config/contracts/v1/schema_contracts.json --history-dir config/contracts/history --output-csv reports/schema_drift_changes.csv --output-report reports/schema_drift_report.md
 
 validate:
 	$(PYTHON) src/validation/run_full_validation.py --raw-dir data/raw --processed-dir data/processed --report-dir reports --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv
@@ -83,4 +87,4 @@ release-gate:
 	$(PYTHON) src/validation/enforce_release_gate.py --release-file reports/validation_release_assessment.csv --required-state decision-support\ only
 
 all:
-	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir outputs/charts --dashboard-file outputs/dashboard/executive-marketplace-command-center.html --pages-dashboard-file .pages/executive-marketplace-command-center.html --pages-index-file .pages/index.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only
+	$(PYTHON) src/pipeline/run_full_pipeline.py --raw-dir data/raw --processed-dir data/processed --charts-dir .tmp/charts --dashboard-file outputs/dashboard/executive-marketplace-command-center.html --pages-dashboard-file .pages/executive-marketplace-command-center.html --pages-index-file .pages/index.html --monte-carlo-iterations 2000 --schema-file config/contracts/v1/schema_contracts.json --metric-contract-file config/contracts/v1/metric_governance_contract.csv --schema-history-dir config/contracts/history --reports-dir reports --required-release-state decision-support\ only

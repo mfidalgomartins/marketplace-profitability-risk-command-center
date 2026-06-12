@@ -25,11 +25,9 @@ def test_validation_release_assessment_exists_and_has_required_fields() -> None:
     required_cols = {
         "release_state",
         "technical_gate_passed",
-        "analytical_gate_passed",
-        "technically_valid",
-        "analytically_acceptable",
+        "analytical_checks_passed",
+        "public_release_ready",
         "decision_support_only",
-        "screening_grade_only",
         "not_committee_grade",
         "publish_blocked",
         "committee_grade_ready",
@@ -39,7 +37,7 @@ def test_validation_release_assessment_exists_and_has_required_fields() -> None:
         "low_issues",
         "blocker_count",
         "warning_count",
-        "min_module_confidence",
+        "limitation_count",
         "rationale",
     }
     assert required_cols.issubset(release.columns)
@@ -51,11 +49,8 @@ def test_validation_release_assessment_logic_is_coherent() -> None:
     summary = pd.read_csv(REPORTS / "validation_summary.csv").iloc[0]
 
     allowed_states = {
-        "technically valid",
-        "analytically acceptable",
         "decision-support only",
         "screening-grade only",
-        "not committee-grade",
         "publish-blocked",
     }
     assert release["release_state"] in allowed_states
@@ -67,8 +62,8 @@ def test_validation_release_assessment_logic_is_coherent() -> None:
         assert release["release_state"] == "publish-blocked"
         assert int(release["blocker_count"]) > 0
 
-    if release["release_state"] == "technically valid":
-        assert int(release["critical_issues"]) == 0
-        assert int(release["high_issues"]) == 0
-        assert int(release["medium_issues"]) == 0
-        assert int(release["low_issues"]) == 0
+    assert not _as_bool(release["committee_grade_ready"])
+    assert _as_bool(release["not_committee_grade"])
+    if release["release_state"] == "decision-support only":
+        assert _as_bool(release["public_release_ready"])
+        assert _as_bool(release["analytical_checks_passed"])

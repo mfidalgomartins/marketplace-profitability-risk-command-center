@@ -12,8 +12,6 @@ STATE_ORDER = {
     "publish-blocked": 0,
     "screening-grade only": 1,
     "decision-support only": 2,
-    "analytically acceptable": 3,
-    "technically valid": 4,
 }
 
 

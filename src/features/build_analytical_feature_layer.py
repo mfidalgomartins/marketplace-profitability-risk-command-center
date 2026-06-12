@@ -654,6 +654,8 @@ def _build_seller_risk_base(
 
 
 def build_feature_layer(cfg: FeatureBuildConfig) -> Dict[str, pd.DataFrame]:
+    if cfg.trailing_window_days <= 0:
+        raise ValueError("trailing_window_days must be greater than zero.")
     tables = _load_raw_tables(cfg.raw_dir)
     base = _build_order_base(tables)
 

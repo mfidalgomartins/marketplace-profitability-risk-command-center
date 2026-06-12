@@ -26,6 +26,7 @@ def _load(cfg: ExecutiveSnapshotConfig) -> Dict[str, pd.DataFrame]:
         "opf": pd.read_csv(cfg.processed_dir / "order_profitability_features.csv", parse_dates=["order_date"]),
         "seller_scorecard": pd.read_csv(cfg.processed_dir / "seller_scorecard.csv"),
         "scenario_decision": pd.read_csv(cfg.processed_dir / "scenario_decision_matrix.csv"),
+        "scenario_results": pd.read_csv(cfg.processed_dir / "scenario_results_summary.csv"),
     }
 
 
@@ -38,6 +39,7 @@ def _build_snapshot_tables(t: Dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, st
     opf = t["opf"]
     seller_scorecard = t["seller_scorecard"]
     scenario_decision = t["scenario_decision"]
+    scenario_results = t["scenario_results"]
 
     gmv = float(opf["gross_value"].sum())
     net_value = float(opf["net_value"].sum())
@@ -69,6 +71,7 @@ def _build_snapshot_tables(t: Dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, st
         f"CM delta={best_scenario['contribution_margin_change_vs_baseline']:.0f} | "
         f"leakage avoided={best_scenario['leakage_avoided_vs_baseline']:.0f}"
     )
+    positive_scenario_count = int((scenario_results["contribution_margin_proxy"] > 0).sum())
 
     metrics = pd.DataFrame(
         [
@@ -105,8 +108,10 @@ def _build_snapshot_tables(t: Dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, st
             f"- Top-ranked scenario: `{best_scenario_text}`",
             "",
             "## Notes",
-            "- `realized_contribution_margin_proxy` uses realized refund/dispute/chargeback leakage.",
-            "- `expected_margin_after_risk` is model-based expected-risk margin from the feature layer.",
+            "- `realized_contribution_margin_proxy` is a conservative gross-leakage view that subtracts full refund, dispute, and chargeback values.",
+            "- `expected_margin_after_risk` is a pre-outcome underwriting proxy; it is not directly comparable with realized contribution margin.",
+            f"- Positive contribution-margin scenarios in the deterministic scenario set: `{positive_scenario_count}`.",
+            "- Scores, thresholds, and scenarios are decision-support diagnostics built on synthetic data.",
         ]
     )
     return metrics, markdown

@@ -1138,6 +1138,8 @@
     {
       "column_types": {
         "conversion_friction_cost": "number",
+        "deployment_status": "string",
+        "evaluation_scope": "string",
         "expected_avoided_loss": "number",
         "net_benefit": "number",
         "policy_guidance": "string",
@@ -1156,6 +1158,8 @@
         "review_cost",
         "conversion_friction_cost",
         "net_benefit",
+        "evaluation_scope",
+        "deployment_status",
         "policy_guidance"
       ],
       "enforcement": "exact_columns",

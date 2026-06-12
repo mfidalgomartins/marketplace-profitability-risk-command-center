@@ -93,6 +93,7 @@ Processed joins:
 - Main joins: `order_risk_scores.order_id`, `orders.order_id`
 - Key columns: `gross_value`, `net_value`, `subsidy_amount`, `commission_fee`, `refund_amount`, `dispute_amount`, `chargeback_loss_proxy`, `realized_contribution_margin_proxy`, `estimated_margin_after_risk`, `risk_adjusted_order_value`, `profitability_flag`
 - Major metrics: GMV, net value, risk-adjusted value, margin proxy, leakage components
+- Interpretation guardrail: `realized_contribution_margin_proxy` and `estimated_margin_after_risk` use different loss concepts and are not a calibrated actual-versus-forecast pair
 
 ## `seller_monthly_quality.csv`
 - Grain: one row per seller per month
@@ -226,6 +227,17 @@ Processed joins:
 - Main joins: executive decision recommendations
 - Key columns: `decision_priority_score`, GMV delta, quality delta, CM delta, leakage avoided, `recommended_decision`
 - Major metrics: intervention prioritization
+
+## `backtesting_recommended_policy.csv`
+- Grain: one row per current policy simulation
+- Key columns: `recommended_threshold`, `review_rate`, `precision`, `recall`, `net_benefit`, `evaluation_scope`, `deployment_status`
+- Major metrics: retrospective review-capacity and intervention-economics starting point
+- Interpretation guardrail: in-sample simulation; requires later-period holdout validation before deployment
+
+## `scenario_monte_carlo_summary.csv`
+- Grain: one row per scenario
+- Key columns: probability fields and P05/P50/P95 ranges for contribution margin, leakage, and protected value
+- Major metrics: assumption uncertainty ranges, not forecast confidence intervals
 
 ---
 

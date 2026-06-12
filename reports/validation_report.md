@@ -8,37 +8,39 @@ Skeptical validation pass focused on reconciliation, coherence, leakage controls
 - Sellers validated: `1,200`
 - Buyers validated: `9,000`
 - Issue count: `Critical=0`, `High=0`, `Medium=0`, `Low=0`
-- Release state: `technically valid`
-- Release gates: `publish_blocked=False`, `committee_grade_ready=True`, `min_module_confidence=98.0`
+- Release state: `decision-support only`
+- Release gates: `publish_blocked=False`, `public_release_ready=True`, `committee_grade_ready=False`
 
 ## Release Readiness Classification
 Release states are governance labels for this project and do not imply external certification.
 - `technical_gate_passed`: `True`
-- `analytical_gate_passed`: `True`
-- `technically valid`: `True`
-- `analytically acceptable`: `False`
-- `decision-support only`: `False`
-- `screening-grade only`: `False`
-- `not committee-grade`: `False`
+- `analytical_checks_passed`: `True`
+- `public_release_ready`: `True`
+- `decision-support only`: `True`
+- `not committee-grade`: `True`
 - `publish-blocked`: `False`
-- Rationale: No detected validation issues across configured checks.
+- Rationale: Configured technical and analytical checks pass. Synthetic data, heuristic scores, proxy economics, and assumption-driven scenarios limit use to decision support.
 
 ## Issues Ranked by Severity
 - No issues detected within the configured validation checks in this run.
 
-## Unresolved Caveats
-- None.
+## Known Limitations
+- All data is synthetic; findings demonstrate analytical workflow behavior, not real marketplace performance.
+- Risk and governance scores are interpretable heuristic indices, not calibrated probabilities or causal estimates.
+- The threshold policy evaluation is retrospective and in-sample; it requires later-period holdout validation before deployment.
+- Scenario outputs are assumption-driven stress tests, not forecasts.
+- Realized contribution margin is a conservative gross-leakage proxy; expected margin after risk is a pre-outcome underwriting proxy and is not directly comparable.
 
-## Confidence by Module
-- `synthetic_data`: `98.0/100` (`High`)
-- `processed_features`: `98.0/100` (`High`)
-- `metrics_logic`: `98.0/100` (`High`)
-- `metric_governance`: `98.0/100` (`High`)
-- `scoring`: `98.0/100` (`High`)
-- `scenarios`: `98.0/100` (`High`)
-- `schema_contracts`: `98.0/100` (`High`)
-- `dashboard_feeds`: `98.0/100` (`High`)
-- `narrative`: `98.0/100` (`High`)
+## Validation Coverage by Module
+- `synthetic_data`: checks=`8`, open_issues=`0`, status=`passed`
+- `processed_features`: checks=`6`, open_issues=`0`, status=`passed`
+- `metrics_logic`: checks=`6`, open_issues=`0`, status=`passed`
+- `metric_governance`: checks=`5`, open_issues=`0`, status=`passed`
+- `scoring`: checks=`3`, open_issues=`0`, status=`passed`
+- `scenarios`: checks=`4`, open_issues=`0`, status=`passed`
+- `schema_contracts`: checks=`1`, open_issues=`0`, status=`passed`
+- `dashboard_feeds`: checks=`3`, open_issues=`0`, status=`passed`
+- `narrative`: checks=`1`, open_issues=`0`, status=`passed`
 
 ## Validation Scope Checklist
 - row count sanity

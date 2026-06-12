@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 import argparse
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List
+
+_matplotlib_cache = Path(".tmp/matplotlib").resolve()
+_matplotlib_cache.mkdir(parents=True, exist_ok=True)
+os.environ.setdefault("MPLCONFIGDIR", str(_matplotlib_cache))
+os.environ.setdefault("MPLBACKEND", "Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,7 +21,7 @@ import seaborn as sns
 class MonteCarloConfig:
     processed_dir: Path = Path("data/processed")
     output_dir: Path = Path("data/processed")
-    charts_dir: Path = Path("outputs/charts")
+    charts_dir: Path = Path(".tmp/charts")
     iterations: int = 2000
     seed: int = 42
 
@@ -205,6 +211,8 @@ def _plot(summary: pd.DataFrame, output_path: Path) -> None:
 
 
 def run_monte_carlo(cfg: MonteCarloConfig) -> dict[str, pd.DataFrame]:
+    if cfg.iterations <= 0:
+        raise ValueError("iterations must be greater than zero.")
     data = _load(cfg)
     baseline = data["results"][data["results"]["scenario"] == "baseline"].iloc[0]
     exposure = data["exposure"].iloc[0]
@@ -239,7 +247,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run Monte Carlo scenario uncertainty analysis.")
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path("outputs/charts"))
+    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
     parser.add_argument("--iterations", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()

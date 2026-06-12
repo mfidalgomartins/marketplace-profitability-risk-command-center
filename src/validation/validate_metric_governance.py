@@ -29,11 +29,14 @@ class MetricGovernanceConfig:
 
 def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, float]:
     orders = pd.read_csv(raw_dir / "orders.csv")
+    order_items = pd.read_csv(raw_dir / "order_items.csv")
+    payments = pd.read_csv(raw_dir / "payments.csv")
     opf = pd.read_csv(processed_dir / "order_profitability_features.csv")
     seller_scorecard = pd.read_csv(processed_dir / "seller_scorecard.csv")
 
     gmv = float(opf["gross_value"].sum())
     net_value = float(opf["net_value"].sum())
+    seller_gmv = order_items.groupby("seller_id")["gross_item_value"].sum().sort_values(ascending=False)
     out = {
         "gmv": gmv,
         "net_value": net_value,
@@ -41,8 +44,11 @@ def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, 
         "take_rate": float(opf["commission_fee"].sum() / gmv) if gmv else 0.0,
         "subsidy_share": float(opf["subsidy_amount"].sum() / gmv) if gmv else 0.0,
         "realized_contribution_margin_proxy": float(opf["realized_contribution_margin_proxy"].sum()),
+        "expected_margin_after_risk": float(opf["estimated_margin_after_risk"].sum()),
         "refund_rate": float((opf["refund_amount"] > 0).mean()),
         "dispute_rate": float((opf["dispute_amount"] > 0).mean()),
+        "chargeback_rate": float(payments["chargeback_flag"].mean()),
+        "top10_seller_gmv_share": float(seller_gmv.head(10).sum() / seller_gmv.sum()) if len(seller_gmv) else 0.0,
         "critical_sellers": float((seller_scorecard["governance_priority_tier"] == "Critical").sum()),
     }
 
@@ -50,7 +56,9 @@ def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, 
     out["relationship__risk_adjusted_le_net"] = float(out["risk_adjusted_value"] <= out["net_value"] + 1e-9)
     out["relationship__net_le_gmv"] = float(out["net_value"] <= out["gmv"] + 1e-9)
     out["relationship__rates_within_unit_interval"] = float(
-        0.0 <= out["refund_rate"] <= 1.0 and 0.0 <= out["dispute_rate"] <= 1.0
+        0.0 <= out["refund_rate"] <= 1.0
+        and 0.0 <= out["dispute_rate"] <= 1.0
+        and 0.0 <= out["chargeback_rate"] <= 1.0
     )
     out["relationship__opf_order_grain"] = float(len(opf) == int(opf["order_id"].nunique()))
     out["relationship__raw_order_count_positive"] = float(len(orders) > 0)

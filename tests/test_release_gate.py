@@ -35,3 +35,12 @@ def test_release_gate_rejects_excessive_required_state() -> None:
             require_committee_grade=True,
         )
     tmp.unlink(missing_ok=True)
+
+
+def test_current_release_is_not_committee_grade() -> None:
+    with pytest.raises(RuntimeError):
+        enforce_release_gate(
+            release_file=ROOT / "reports" / "validation_release_assessment.csv",
+            required_state="decision-support only",
+            require_committee_grade=True,
+        )

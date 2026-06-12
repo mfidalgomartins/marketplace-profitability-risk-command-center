@@ -34,3 +34,4 @@ def test_schema_contract_file_exists_and_has_expected_core_tables() -> None:
 def test_schema_contracts_validate_cleanly() -> None:
     issues = validate_schema_contracts(SCHEMA_FILE)
     assert issues.empty
+    assert list(issues.columns) == ["table_name", "path", "issue_type", "detail"]

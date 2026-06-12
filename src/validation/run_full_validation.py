@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Dict, List
 import sys
 
-import numpy as np
 import pandas as pd
 
 if __package__ is None or __package__ == "":
@@ -16,6 +15,27 @@ if __package__ is None or __package__ == "":
 
 from src.validation.validate_schema_contracts import validate_schema_contracts
 from src.validation.validate_metric_governance import MetricGovernanceConfig, validate_metric_governance
+
+
+KNOWN_LIMITATIONS = [
+    "All data is synthetic; findings demonstrate analytical workflow behavior, not real marketplace performance.",
+    "Risk and governance scores are interpretable heuristic indices, not calibrated probabilities or causal estimates.",
+    "The threshold policy evaluation is retrospective and in-sample; it requires later-period holdout validation before deployment.",
+    "Scenario outputs are assumption-driven stress tests, not forecasts.",
+    "Realized contribution margin is a conservative gross-leakage proxy; expected margin after risk is a pre-outcome underwriting proxy and is not directly comparable.",
+]
+
+MODULE_CHECK_COUNTS = {
+    "synthetic_data": 8,
+    "processed_features": 6,
+    "metrics_logic": 6,
+    "metric_governance": 5,
+    "scoring": 3,
+    "scenarios": 4,
+    "schema_contracts": 1,
+    "dashboard_feeds": 3,
+    "narrative": 1,
+}
 
 
 @dataclass(frozen=True)
@@ -123,66 +143,34 @@ def _tier(score: float) -> str:
     return "Low"
 
 
-def _confidence_summary(issues: pd.DataFrame) -> pd.DataFrame:
-    modules = [
-        "synthetic_data",
-        "processed_features",
-        "metrics_logic",
-        "metric_governance",
-        "scoring",
-        "scenarios",
-        "schema_contracts",
-        "dashboard_feeds",
-        "narrative",
-    ]
-    penalties = {"Critical": 35, "High": 20, "Medium": 10, "Low": 3}
-    check_counts = {
-        "synthetic_data": 8,
-        "processed_features": 5,
-        "metrics_logic": 5,
-        "metric_governance": 4,
-        "scoring": 2,
-        "scenarios": 4,
-        "schema_contracts": 1,
-        "dashboard_feeds": 2,
-        "narrative": 1,
-    }
+def _coverage_summary(issues: pd.DataFrame) -> pd.DataFrame:
     rows = []
-
-    for module in modules:
+    for module, checks_configured in MODULE_CHECK_COUNTS.items():
         sub = issues[issues["module"] == module]
-        score = 98.0
-        max_penalty = check_counts.get(module, 1) * penalties["Critical"]
-        module_penalty = 0
-        for sev, pen in penalties.items():
-            module_penalty += int((sub["severity"] == sev).sum()) * pen
-        score -= (module_penalty / max_penalty) * 100.0
-        score = max(20.0, min(98.0, score))
-        if score >= 90:
-            band = "High"
-        elif score >= 75:
-            band = "Medium-High"
-        elif score >= 60:
-            band = "Medium"
-        else:
-            band = "Low"
-        rows.append({"module": module, "confidence_score": round(score, 1), "confidence_band": band})
-
+        blocker_issues = int(sub["severity"].isin(["Critical", "High"]).sum())
+        open_issues = int(len(sub))
+        rows.append(
+            {
+                "module": module,
+                "checks_configured": checks_configured,
+                "open_issues": open_issues,
+                "blocker_issues": blocker_issues,
+                "validation_status": "blocked" if blocker_issues else "passed_with_warnings" if open_issues else "passed",
+            }
+        )
     return pd.DataFrame(rows)
 
 
-def _release_assessment(issues: pd.DataFrame, confidence: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
+def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataFrame:
     if summary.empty:
         return pd.DataFrame(
             [
                 {
                     "release_state": "publish-blocked",
                     "technical_gate_passed": False,
-                    "analytical_gate_passed": False,
-                    "technically_valid": False,
-                    "analytically_acceptable": False,
+                    "analytical_checks_passed": False,
+                    "public_release_ready": False,
                     "decision_support_only": False,
-                    "screening_grade_only": False,
                     "not_committee_grade": True,
                     "publish_blocked": True,
                     "committee_grade_ready": False,
@@ -192,7 +180,7 @@ def _release_assessment(issues: pd.DataFrame, confidence: pd.DataFrame, summary:
                     "low_issues": 0,
                     "blocker_count": 1,
                     "warning_count": 0,
-                    "min_module_confidence": 0.0,
+                    "limitation_count": len(KNOWN_LIMITATIONS),
                     "rationale": "Validation summary is missing; release cannot be trusted.",
                 }
             ]
@@ -238,51 +226,35 @@ def _release_assessment(issues: pd.DataFrame, confidence: pd.DataFrame, summary:
     )
     blocker_count = int(blocker_issue_mask.sum()) if not issues.empty else 0
     warning_count = int(len(issues) - blocker_count) if not issues.empty else 0
-    min_conf = float(confidence["confidence_score"].min()) if not confidence.empty else 0.0
 
     publish_blocked = blocker_count > 0
     technical_gate_passed = not publish_blocked
-    analytical_gate_passed = technical_gate_passed and high == 0 and medium <= 2
-    committee_grade_ready = technical_gate_passed and high == 0 and medium == 0 and low <= 2 and min_conf >= 90.0
-
-    decision_support_gate = technical_gate_passed and not committee_grade_ready and high == 0 and medium > 2 and min_conf >= 75.0
-    screening_grade_gate = technical_gate_passed and (
-        (high > 0 and high <= 2 and min_conf >= 70.0)
-        or medium > 6
-        or min_conf < 75.0
-    )
-    not_committee_gate = technical_gate_passed and not committee_grade_ready
+    analytical_checks_passed = technical_gate_passed and high == 0 and medium <= 2
+    committee_grade_ready = False
+    public_release_ready = technical_gate_passed and analytical_checks_passed
 
     if publish_blocked:
         release_state = "publish-blocked"
         rationale = "Critical or blocker-class high-severity issues detected in governed modules."
-    elif screening_grade_gate:
+    elif not analytical_checks_passed:
         release_state = "screening-grade only"
-        rationale = "Usable for directional screening only; issue burden or confidence is below decision threshold."
-    elif decision_support_gate:
-        release_state = "decision-support only"
-        rationale = "Suitable for leadership diagnostics with caveats; not strict enough for committee decisions."
-    elif analytical_gate_passed and (low > 0 or medium > 0):
-        release_state = "analytically acceptable"
-        rationale = "No blocker-class issues; residual non-blocking issues remain."
-    elif technical_gate_passed and critical == 0 and high == 0 and medium == 0 and low == 0:
-        release_state = "technically valid"
-        rationale = "No detected validation issues across configured checks."
+        rationale = "Technical execution is usable for directional screening, but unresolved analytical warnings remain."
     else:
-        release_state = "not committee-grade"
-        rationale = "Technically runnable but below committee-grade readiness."
+        release_state = "decision-support only"
+        rationale = (
+            "Configured technical and analytical checks pass. Synthetic data, heuristic scores, proxy economics, "
+            "and assumption-driven scenarios limit use to decision support."
+        )
 
     return pd.DataFrame(
         [
             {
                 "release_state": release_state,
                 "technical_gate_passed": bool(technical_gate_passed),
-                "analytical_gate_passed": bool(analytical_gate_passed),
-                "technically_valid": release_state == "technically valid",
-                "analytically_acceptable": release_state == "analytically acceptable",
+                "analytical_checks_passed": bool(analytical_checks_passed),
+                "public_release_ready": bool(public_release_ready),
                 "decision_support_only": release_state == "decision-support only",
-                "screening_grade_only": release_state == "screening-grade only",
-                "not_committee_grade": release_state == "not committee-grade",
+                "not_committee_grade": True,
                 "publish_blocked": bool(publish_blocked),
                 "committee_grade_ready": bool(committee_grade_ready),
                 "critical_issues": critical,
@@ -291,7 +263,7 @@ def _release_assessment(issues: pd.DataFrame, confidence: pd.DataFrame, summary:
                 "low_issues": low,
                 "blocker_count": blocker_count,
                 "warning_count": warning_count,
-                "min_module_confidence": round(min_conf, 1),
+                "limitation_count": len(KNOWN_LIMITATIONS),
                 "rationale": rationale,
             }
         ]
@@ -467,6 +439,20 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
             "<=0.01",
             "Order-level and item-level economic values do not reconcile.",
             "Fix order assembly logic before using data for economics analysis.",
+        )
+    multi_seller_orders = int((items.groupby("order_id")["seller_id"].nunique() > 1).sum())
+    if multi_seller_orders > 0:
+        _add_issue(
+            issues,
+            "V007B",
+            "metrics_logic",
+            "single_seller_order_grain",
+            "Critical",
+            "open",
+            str(multi_seller_orders),
+            "0",
+            "The order-grain analytical model assigns one seller to each order and cannot safely allocate multi-seller economics.",
+            "Allocate economics to seller-order grain or constrain source orders to one seller before downstream analysis.",
         )
 
     # 7) Refund/dispute/payment coherence.
@@ -670,6 +656,39 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
             "Strong direct correlation between risk score and realized outcomes could indicate leakage.",
             "Audit feature timing and shift logic for strict pre-outcome feature windows.",
         )
+    ord_eval["bad_event_flag"] = (
+        (ord_eval["refund_flag"] > 0) | (ord_eval["dispute_flag"] > 0) | (ord_eval["chargeback_flag"] > 0)
+    ).astype(int)
+    score_decile = pd.qcut(ord_eval["order_risk_score"], 10, duplicates="drop")
+    event_rate_by_decile = ord_eval.groupby(score_decile, observed=True)["bad_event_flag"].mean()
+    if len(event_rate_by_decile) < 2:
+        _add_issue(
+            issues,
+            "V015B",
+            "scoring",
+            "order_risk_directional_separation",
+            "Medium",
+            "open",
+            str(len(event_rate_by_decile)),
+            ">=2 score groups",
+            "Order risk scores do not create enough distinct groups to evaluate directional separation.",
+            "Recalibrate score components before using thresholds for review routing.",
+        )
+    else:
+        score_lift_pp = float(event_rate_by_decile.iloc[-1] - event_rate_by_decile.iloc[0])
+        if score_lift_pp < 0.10:
+            _add_issue(
+                issues,
+                "V015B",
+                "scoring",
+                "order_risk_directional_separation",
+                "Medium",
+                "open",
+                f"{score_lift_pp:.2%}",
+                ">=10.00pp",
+                "Top score decile does not separate adverse-event incidence enough from the bottom decile.",
+                "Recalibrate score components before using thresholds for review routing.",
+            )
 
     # 13) Tier assignment correctness.
     tier_checks = [
@@ -837,6 +856,16 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         ],
         "scenario_assumptions": ["scenario", "assumption_summary"],
         "scenario_decision_matrix": ["scenario", "decision_priority_score", "recommended_decision"],
+        "backtesting_recommended_policy": [
+            "recommended_threshold",
+            "review_rate",
+            "precision",
+            "recall",
+            "net_benefit",
+            "evaluation_scope",
+            "deployment_status",
+            "policy_guidance",
+        ],
     }
     for table_name, cols in required_dashboard_tables.items():
         p = cfg.processed_dir / f"{table_name}.csv"
@@ -877,9 +906,12 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         "take_rate",
         "subsidy_share",
         "realized_contribution_margin_proxy",
+        "expected_margin_after_risk",
         "refund_rate",
         "dispute_rate",
+        "chargeback_rate",
         "risk_adjusted_value",
+        "top10_seller_gmv_share",
         "critical_sellers",
     }
     if not snapshot_path.exists():
@@ -951,6 +983,10 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
             dispute_rate_calc = float((opf["dispute_amount"] > 0).mean())
             crit_sellers_calc = float((ssc["governance_priority_tier"] == "Critical").sum())
             cm_calc = float(opf["realized_contribution_margin_proxy"].sum()) if "realized_contribution_margin_proxy" in opf.columns else 0.0
+            expected_margin_calc = float(opf["estimated_margin_after_risk"].sum())
+            chargeback_rate_calc = float(payments["chargeback_flag"].mean())
+            seller_gmv = items.groupby("seller_id")["gross_item_value"].sum().sort_values(ascending=False)
+            top10_seller_share_calc = float(seller_gmv.head(10).sum() / seller_gmv.sum()) if len(seller_gmv) else 0.0
 
             check_pairs = [
                 ("gmv", gmv_calc, 1e-6),
@@ -962,6 +998,9 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
                 ("dispute_rate", dispute_rate_calc, 1e-9),
                 ("critical_sellers", crit_sellers_calc, 1e-9),
                 ("realized_contribution_margin_proxy", cm_calc, 1e-6),
+                ("expected_margin_after_risk", expected_margin_calc, 1e-6),
+                ("chargeback_rate", chargeback_rate_calc, 1e-9),
+                ("top10_seller_gmv_share", top10_seller_share_calc, 1e-9),
             ]
             max_snap_diff = 0.0
             for key, expected, tol in check_pairs:
@@ -1113,7 +1152,7 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     else:
         issues_df = pd.DataFrame(columns=issue_columns)
 
-    confidence_df = _confidence_summary(issues_df if not issues_df.empty else pd.DataFrame(columns=["module", "severity"]))
+    coverage_df = _coverage_summary(issues_df if not issues_df.empty else pd.DataFrame(columns=["module", "severity"]))
 
     summary = {
         "row_count_orders": int(len(orders)),
@@ -1126,12 +1165,12 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         "low_issues": int((issues_df["severity"] == "Low").sum()) if not issues_df.empty else 0,
     }
     summary_df = pd.DataFrame([summary])
-    release_df = _release_assessment(issues_df, confidence_df, summary_df)
+    release_df = _release_assessment(issues_df, summary_df)
     summary_df = pd.concat([summary_df, release_df[["release_state", "publish_blocked", "committee_grade_ready"]]], axis=1)
 
     return {
         "issues": issues_df,
-        "confidence": confidence_df,
+        "coverage": coverage_df,
         "summary": summary_df,
         "release": release_df,
         "metric_governance_issues": mg_issues,
@@ -1140,7 +1179,7 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
 
 def _render_report(results: Dict[str, pd.DataFrame]) -> str:
     issues = results["issues"]
-    confidence = results["confidence"]
+    coverage = results["coverage"]
     summary = results["summary"].iloc[0]
     release = results["release"].iloc[0]
 
@@ -1161,19 +1200,17 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
     lines.append(f"- Release state: `{release['release_state']}`")
     lines.append(
         f"- Release gates: `publish_blocked={bool(release['publish_blocked'])}`, "
-        f"`committee_grade_ready={bool(release['committee_grade_ready'])}`, "
-        f"`min_module_confidence={float(release['min_module_confidence']):.1f}`"
+        f"`public_release_ready={bool(release['public_release_ready'])}`, "
+        f"`committee_grade_ready={bool(release['committee_grade_ready'])}`"
     )
     lines.append("")
 
     lines.append("## Release Readiness Classification")
     lines.append("Release states are governance labels for this project and do not imply external certification.")
     lines.append(f"- `technical_gate_passed`: `{bool(release['technical_gate_passed'])}`")
-    lines.append(f"- `analytical_gate_passed`: `{bool(release['analytical_gate_passed'])}`")
-    lines.append(f"- `technically valid`: `{bool(release['technically_valid'])}`")
-    lines.append(f"- `analytically acceptable`: `{bool(release['analytically_acceptable'])}`")
+    lines.append(f"- `analytical_checks_passed`: `{bool(release['analytical_checks_passed'])}`")
+    lines.append(f"- `public_release_ready`: `{bool(release['public_release_ready'])}`")
     lines.append(f"- `decision-support only`: `{bool(release['decision_support_only'])}`")
-    lines.append(f"- `screening-grade only`: `{bool(release['screening_grade_only'])}`")
     lines.append(f"- `not committee-grade`: `{bool(release['not_committee_grade'])}`")
     lines.append(f"- `publish-blocked`: `{bool(release['publish_blocked'])}`")
     lines.append(f"- Rationale: {release['rationale']}")
@@ -1192,21 +1229,17 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
             lines.append(f"  action: {r['fix_or_action']}")
     lines.append("")
 
-    lines.append("## Unresolved Caveats")
-    if issues.empty:
-        lines.append("- None.")
-    else:
-        unresolved = issues[~issues["status"].str.contains("fixed", case=False, na=False)]
-        if unresolved.empty:
-            lines.append("- No unresolved issues in current run.")
-        else:
-            for _, r in unresolved.iterrows():
-                lines.append(f"- `{r['issue_id']}` ({r['severity']}): {r['detail']}")
+    lines.append("## Known Limitations")
+    for limitation in KNOWN_LIMITATIONS:
+        lines.append(f"- {limitation}")
     lines.append("")
 
-    lines.append("## Confidence by Module")
-    for _, r in confidence.iterrows():
-        lines.append(f"- `{r['module']}`: `{float(r['confidence_score']):.1f}/100` (`{r['confidence_band']}`)")
+    lines.append("## Validation Coverage by Module")
+    for _, r in coverage.iterrows():
+        lines.append(
+            f"- `{r['module']}`: checks=`{int(r['checks_configured'])}`, "
+            f"open_issues=`{int(r['open_issues'])}`, status=`{r['validation_status']}`"
+        )
     lines.append("")
 
     lines.append("## Validation Scope Checklist")
@@ -1235,13 +1268,13 @@ def save_outputs(results: Dict[str, pd.DataFrame], cfg: ValidationConfig) -> Dic
     cfg.report_dir.mkdir(parents=True, exist_ok=True)
     issues_path = cfg.report_dir / cfg.issues_file
     report_path = cfg.report_dir / cfg.report_file
-    confidence_path = cfg.report_dir / "validation_confidence_by_module.csv"
+    coverage_path = cfg.report_dir / "validation_coverage_by_module.csv"
     summary_path = cfg.report_dir / "validation_summary.csv"
     release_path = cfg.report_dir / "validation_release_assessment.csv"
     metric_governance_path = cfg.report_dir / "metric_governance_issues.csv"
 
     results["issues"].to_csv(issues_path, index=False)
-    results["confidence"].to_csv(confidence_path, index=False)
+    results["coverage"].to_csv(coverage_path, index=False)
     results["summary"].to_csv(summary_path, index=False)
     results["release"].to_csv(release_path, index=False)
     results["metric_governance_issues"].to_csv(metric_governance_path, index=False)
@@ -1249,7 +1282,7 @@ def save_outputs(results: Dict[str, pd.DataFrame], cfg: ValidationConfig) -> Dic
 
     return {
         "issues": issues_path,
-        "confidence": confidence_path,
+        "coverage": coverage_path,
         "summary": summary_path,
         "release": release_path,
         "metric_governance_issues": metric_governance_path,

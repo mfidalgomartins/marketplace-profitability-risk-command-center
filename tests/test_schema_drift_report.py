@@ -59,3 +59,30 @@ def test_compare_contracts_detects_added_removed_and_type_changes(tmp_path: Path
     assert "table_removed" in change_types
     assert "column_added" in change_types
     assert "type_changed" in change_types
+
+
+def test_compare_contracts_keeps_columns_when_no_drift(tmp_path: Path) -> None:
+    prev = tmp_path / "prev.json"
+    curr = tmp_path / "curr.json"
+    tables = [
+        {
+            "table_name": "orders",
+            "columns": ["order_id", "net_paid_amount"],
+            "column_types": {"order_id": "string", "net_paid_amount": "number"},
+            "primary_key_candidate": ["order_id"],
+        }
+    ]
+    _write_contract(prev, tables)
+    _write_contract(curr, tables)
+
+    changes = compare_contracts(prev, curr)
+
+    assert changes.empty
+    assert list(changes.columns) == [
+        "change_type",
+        "table_name",
+        "column_name",
+        "previous_value",
+        "current_value",
+        "severity",
+    ]

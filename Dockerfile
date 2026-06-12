@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 COPY . /app
 
-CMD ["python", "src/pipeline/run_full_pipeline.py", "--raw-dir", "data/raw", "--processed-dir", "data/processed", "--charts-dir", "outputs/charts", "--dashboard-file", "outputs/dashboard/marketplace_command_center_dashboard.html", "--monte-carlo-iterations", "2000", "--schema-file", "config/contracts/v1/schema_contracts.json", "--reports-dir", "reports"]
+CMD ["python", "src/pipeline/run_full_pipeline.py", "--raw-dir", "data/raw", "--processed-dir", "data/processed", "--charts-dir", ".tmp/charts", "--dashboard-file", "outputs/dashboard/executive-marketplace-command-center.html", "--pages-dashboard-file", ".pages/executive-marketplace-command-center.html", "--pages-index-file", ".pages/index.html", "--monte-carlo-iterations", "2000", "--schema-file", "config/contracts/v1/schema_contracts.json", "--metric-contract-file", "config/contracts/v1/metric_governance_contract.csv", "--schema-history-dir", "config/contracts/history", "--reports-dir", "reports", "--required-release-state", "decision-support only"]

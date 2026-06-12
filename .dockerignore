@@ -1,9 +1,14 @@
 .git
 .github
 .venv
+.pages
+.tmp
 .pytest_cache
 __pycache__
 *.pyc
 .DS_Store
+data
+docs
 outputs
 reports
+tests

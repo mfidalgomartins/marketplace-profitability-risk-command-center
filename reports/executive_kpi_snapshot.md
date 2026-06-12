@@ -1,6 +1,6 @@
 # Executive KPI Snapshot
 
-- Generated at: `2026-04-13 00:42 UTC`
+- Generated at: `2026-06-12 08:23 UTC`
 - Coverage: `2024-03-01` to `2026-02-28`
 - Orders: `156,121`
 
@@ -22,5 +22,7 @@
 - Top-ranked scenario: `fraud_control_improvement | score=21.71 | CM delta=646332 | leakage avoided=658977`
 
 ## Notes
-- `realized_contribution_margin_proxy` uses realized refund/dispute/chargeback leakage.
-- `expected_margin_after_risk` is model-based expected-risk margin from the feature layer.
+- `realized_contribution_margin_proxy` is a conservative gross-leakage view that subtracts full refund, dispute, and chargeback values.
+- `expected_margin_after_risk` is a pre-outcome underwriting proxy; it is not directly comparable with realized contribution margin.
+- Positive contribution-margin scenarios in the deterministic scenario set: `0`.
+- Scores, thresholds, and scenarios are decision-support diagnostics built on synthetic data.

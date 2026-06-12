@@ -10,6 +10,9 @@ from typing import Dict, List, Optional, Tuple
 import pandas as pd
 
 
+DRIFT_COLUMNS = ["change_type", "table_name", "column_name", "previous_value", "current_value", "severity"]
+
+
 @dataclass(frozen=True)
 class DriftConfig:
     current_schema_file: Path = Path("config/contracts/v1/schema_contracts.json")
@@ -17,7 +20,7 @@ class DriftConfig:
     history_dir: Path = Path("config/contracts/history")
     output_csv: Path = Path("reports/schema_drift_changes.csv")
     output_report: Path = Path("reports/schema_drift_report.md")
-    snapshot_current: bool = True
+    snapshot_current: bool = False
 
 
 def _load_contract(path: Path) -> Dict[str, dict]:
@@ -105,7 +108,9 @@ def compare_contracts(previous_schema: Path, current_schema: Path) -> pd.DataFra
         if p["pk"] != c["pk"]:
             _add_change(rows, "primary_key_changed", t, "", str(p["pk"]), str(c["pk"]), "High")
 
-    return pd.DataFrame(rows)
+    if rows:
+        return pd.DataFrame(rows)
+    return pd.DataFrame(columns=DRIFT_COLUMNS)
 
 
 def _render_report(previous_schema: Optional[Path], current_schema: Path, changes: pd.DataFrame) -> str:
@@ -164,9 +169,7 @@ def run_drift(cfg: DriftConfig) -> Tuple[pd.DataFrame, Optional[Path], Optional[
 
     previous = _resolve_previous_schema(cfg)
     if previous is None:
-        changes = pd.DataFrame(
-            columns=["change_type", "table_name", "column_name", "previous_value", "current_value", "severity"]
-        )
+        changes = pd.DataFrame(columns=DRIFT_COLUMNS)
     else:
         changes = compare_contracts(previous, cfg.current_schema_file)
 

@@ -20,11 +20,17 @@ def test_metric_governance_contract_exists_and_has_core_metrics() -> None:
         "take_rate",
         "subsidy_share",
         "realized_contribution_margin_proxy",
+        "expected_margin_after_risk",
         "refund_rate",
         "dispute_rate",
+        "chargeback_rate",
+        "top10_seller_gmv_share",
         "critical_sellers",
     }
     assert required.issubset(set(contract["metric_name"]))
+
+    snapshot = pd.read_csv(ROOT / "reports" / "executive_kpi_snapshot.csv")
+    assert set(snapshot["metric"]).issubset(set(contract["metric_name"]))
 
 
 def test_metric_governance_validator_passes_on_current_outputs() -> None:
