@@ -97,11 +97,11 @@ src/                pipeline, feature, scoring, scenario, and publishing code
 tests/              analytical, governance, release-gate, and publishing tests
 ```
 
-## Validation And Limits
+## Validation
 
-The current release passes the configured technical and analytical gates with state `decision-support only`. The validation layer checks key uniqueness, joins, reconciliations, metric contracts, scenario arithmetic, directional score separation, dashboard feeds, and narrative overclaiming.
+The pipeline enforces a release gate covering key uniqueness, joins, reconciliations, metric contracts, scenario arithmetic, directional score separation, dashboard feeds, and narrative consistency. The current release passes all configured checks.
 
-The outputs are suitable for demonstrating an analytics operating model and reviewing implementation choices. They are **not** suitable for financial reporting, production fraud decisions, seller enforcement, forecasting, or causal inference without real data, calibrated models, and external validation.
+The dataset is synthetic. The outputs demonstrate an analytics operating model and are not suitable for financial reporting, production fraud decisions, seller enforcement, or causal inference without real data and external validation.
 
 ## License
 
