@@ -3,12 +3,10 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
-
 
 DRIFT_COLUMNS = ["change_type", "table_name", "column_name", "previous_value", "current_value", "severity"]
 
@@ -16,16 +14,16 @@ DRIFT_COLUMNS = ["change_type", "table_name", "column_name", "previous_value", "
 @dataclass(frozen=True)
 class DriftConfig:
     current_schema_file: Path = Path("config/contracts/v1/schema_contracts.json")
-    previous_schema_file: Optional[Path] = None
+    previous_schema_file: Path | None = None
     history_dir: Path = Path("config/contracts/history")
     output_csv: Path = Path("reports/schema_drift_changes.csv")
     output_report: Path = Path("reports/schema_drift_report.md")
     snapshot_current: bool = False
 
 
-def _load_contract(path: Path) -> Dict[str, dict]:
+def _load_contract(path: Path) -> dict[str, dict]:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    out: Dict[str, dict] = {}
+    out: dict[str, dict] = {}
     for table in payload.get("tables", []):
         out[str(table["table_name"])] = {
             "columns": list(table.get("columns", [])),
@@ -36,7 +34,7 @@ def _load_contract(path: Path) -> Dict[str, dict]:
     return out
 
 
-def _resolve_previous_schema(cfg: DriftConfig) -> Optional[Path]:
+def _resolve_previous_schema(cfg: DriftConfig) -> Path | None:
     if cfg.previous_schema_file is not None:
         return cfg.previous_schema_file if cfg.previous_schema_file.exists() else None
 
@@ -50,7 +48,7 @@ def _resolve_previous_schema(cfg: DriftConfig) -> Optional[Path]:
 
 
 def _add_change(
-    rows: List[dict],
+    rows: list[dict],
     change_type: str,
     table_name: str,
     column_name: str,
@@ -74,7 +72,7 @@ def compare_contracts(previous_schema: Path, current_schema: Path) -> pd.DataFra
     prev = _load_contract(previous_schema)
     curr = _load_contract(current_schema)
 
-    rows: List[dict] = []
+    rows: list[dict] = []
     prev_tables = set(prev.keys())
     curr_tables = set(curr.keys())
 
@@ -113,8 +111,8 @@ def compare_contracts(previous_schema: Path, current_schema: Path) -> pd.DataFra
     return pd.DataFrame(columns=DRIFT_COLUMNS)
 
 
-def _render_report(previous_schema: Optional[Path], current_schema: Path, changes: pd.DataFrame) -> str:
-    lines: List[str] = []
+def _render_report(previous_schema: Path | None, current_schema: Path, changes: pd.DataFrame) -> str:
+    lines: list[str] = []
     lines.append("# Schema Drift Report")
     lines.append("")
     lines.append(f"- Current schema: `{current_schema}`")
@@ -157,13 +155,13 @@ def _snapshot_schema(current_schema: Path, history_dir: Path) -> Path:
         if latest.read_text(encoding="utf-8") == current_text:
             return latest
 
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    stamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     dst = history_dir / f"schema_contract_{stamp}.json"
     dst.write_text(current_text, encoding="utf-8")
     return dst
 
 
-def run_drift(cfg: DriftConfig) -> Tuple[pd.DataFrame, Optional[Path], Optional[Path]]:
+def run_drift(cfg: DriftConfig) -> tuple[pd.DataFrame, Path | None, Path | None]:
     if not cfg.current_schema_file.exists():
         raise FileNotFoundError(f"Current schema contract not found: {cfg.current_schema_file}")
 

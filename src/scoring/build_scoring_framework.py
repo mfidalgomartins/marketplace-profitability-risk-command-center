@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable
 
 import numpy as np
 import pandas as pd
@@ -32,7 +32,7 @@ def _tier_from_score(score: pd.Series) -> pd.Series:
     return pd.cut(score, bins=RISK_TIER_BINS, labels=RISK_TIER_LABELS, right=False).astype(str)
 
 
-def _main_driver(df: pd.DataFrame, contrib_cols: Dict[str, str]) -> pd.Series:
+def _main_driver(df: pd.DataFrame, contrib_cols: dict[str, str]) -> pd.Series:
     contrib_df = pd.DataFrame({name: df[col] for name, col in contrib_cols.items()})
     return contrib_df.idxmax(axis=1)
 
@@ -43,7 +43,7 @@ def _compute_prior_rates(
     time_col: str,
     event_cols: Iterable[str],
     smoothing_strength: float,
-    priors: Dict[str, float],
+    priors: dict[str, float],
     prefix: str,
 ) -> pd.DataFrame:
     temp = df[["order_id", entity_col, time_col, *event_cols]].copy()
@@ -67,7 +67,7 @@ def _compute_prior_rates(
     return temp[keep]
 
 
-def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "buyers": pd.read_csv(raw_dir / "buyers.csv", parse_dates=["signup_date"]),
         "sellers": pd.read_csv(raw_dir / "sellers.csv", parse_dates=["onboarding_date"]),
@@ -84,14 +84,14 @@ def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_processed(processed_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "opf": pd.read_csv(processed_dir / "order_profitability_features.csv", parse_dates=["order_date"]),
         "smq": pd.read_csv(processed_dir / "seller_monthly_quality.csv"),
     }
 
 
-def _build_order_base(raw: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _build_order_base(raw: dict[str, pd.DataFrame]) -> pd.DataFrame:
     orders = raw["orders"]
     items = raw["order_items"]
     products = raw["products"]
@@ -375,7 +375,7 @@ def _build_order_risk_scores(base: pd.DataFrame) -> pd.DataFrame:
 def _build_seller_level_base(
     base: pd.DataFrame,
     order_scores: pd.DataFrame,
-    processed: Dict[str, pd.DataFrame],
+    processed: dict[str, pd.DataFrame],
     trailing_window_days: int,
 ) -> pd.DataFrame:
     snapshot_date = base["order_date"].max().normalize() + pd.Timedelta(days=1)
@@ -390,9 +390,7 @@ def _build_seller_level_base(
     window = window.merge(pair[["order_id", "repeat_buyer_flag"]], on="order_id", how="left")
 
     eligible = (
-        (window["cancellation_flag"] == 0)
-        & window["delivered_date"].notna()
-        & window["promised_delivery_date"].notna()
+        (window["cancellation_flag"] == 0) & window["delivered_date"].notna() & window["promised_delivery_date"].notna()
     )
     window["delivery_eligible"] = eligible.astype(int)
     window["delay_flag"] = ((window["delay_days"] >= 3) & eligible).astype(int)
@@ -473,9 +471,9 @@ def _build_seller_level_base(
     )
 
     seller = seller.merge(smq_agg, on="seller_id", how="left")
-    seller[["smq_quality_proxy", "smq_fragility_share"]] = seller[
-        ["smq_quality_proxy", "smq_fragility_share"]
-    ].fillna(0.0)
+    seller[["smq_quality_proxy", "smq_fragility_share"]] = seller[["smq_quality_proxy", "smq_fragility_share"]].fillna(
+        0.0
+    )
 
     # Concentration metrics.
     seller["gmv_rank_pct"] = seller["gmv"].rank(pct=True, method="average")
@@ -730,10 +728,30 @@ def _build_governance_priority_scores(
 
 def _sensitivity_summary(governance_base: pd.DataFrame, comp_df: pd.DataFrame) -> pd.DataFrame:
     scenarios = {
-        "baseline": {"seller_quality": 0.27, "fraud_exposure": 0.29, "margin_fragility": 0.24, "concentration_risk": 0.20},
-        "fraud_heavy": {"seller_quality": 0.20, "fraud_exposure": 0.42, "margin_fragility": 0.20, "concentration_risk": 0.18},
-        "margin_heavy": {"seller_quality": 0.20, "fraud_exposure": 0.22, "margin_fragility": 0.40, "concentration_risk": 0.18},
-        "quality_heavy": {"seller_quality": 0.42, "fraud_exposure": 0.22, "margin_fragility": 0.20, "concentration_risk": 0.16},
+        "baseline": {
+            "seller_quality": 0.27,
+            "fraud_exposure": 0.29,
+            "margin_fragility": 0.24,
+            "concentration_risk": 0.20,
+        },
+        "fraud_heavy": {
+            "seller_quality": 0.20,
+            "fraud_exposure": 0.42,
+            "margin_fragility": 0.20,
+            "concentration_risk": 0.18,
+        },
+        "margin_heavy": {
+            "seller_quality": 0.20,
+            "fraud_exposure": 0.22,
+            "margin_fragility": 0.40,
+            "concentration_risk": 0.18,
+        },
+        "quality_heavy": {
+            "seller_quality": 0.42,
+            "fraud_exposure": 0.22,
+            "margin_fragility": 0.20,
+            "concentration_risk": 0.16,
+        },
     }
 
     baseline_rank = governance_base.sort_values("governance_priority_score", ascending=False)
@@ -765,7 +783,7 @@ def _sensitivity_summary(governance_base: pd.DataFrame, comp_df: pd.DataFrame) -
     return pd.DataFrame(rows)
 
 
-def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
+def build_scoring_tables(cfg: ScoringConfig) -> dict[str, pd.DataFrame]:
     raw = _load_raw(cfg.raw_dir)
     processed = _load_processed(cfg.processed_dir)
 
@@ -790,9 +808,15 @@ def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
     )
 
     seller_scorecard = (
-        governance.merge(seller_quality[["seller_id", "seller_quality_score", "seller_quality_tier"]], on="seller_id", how="left")
+        governance.merge(
+            seller_quality[["seller_id", "seller_quality_score", "seller_quality_tier"]], on="seller_id", how="left"
+        )
         .merge(fraud_exposure[["seller_id", "fraud_exposure_score", "fraud_exposure_tier"]], on="seller_id", how="left")
-        .merge(margin_fragility[["seller_id", "margin_fragility_score", "margin_fragility_tier"]], on="seller_id", how="left")
+        .merge(
+            margin_fragility[["seller_id", "margin_fragility_score", "margin_fragility_tier"]],
+            on="seller_id",
+            how="left",
+        )
         .merge(seller_base[["seller_id", "orders", "gmv", "net_value"]], on="seller_id", how="left")
     )
 
@@ -800,9 +824,9 @@ def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
         ["governance_priority_score", "gmv"], ascending=[False, False]
     ).head(100)
 
-    top_high_risk_orders = order_scores.sort_values(
-        ["order_risk_score", "order_date"], ascending=[False, False]
-    ).head(250)
+    top_high_risk_orders = order_scores.sort_values(["order_risk_score", "order_date"], ascending=[False, False]).head(
+        250
+    )
 
     sensitivity_comp = (
         seller_quality[["seller_id", "seller_quality_score"]]
@@ -830,7 +854,7 @@ def build_scoring_tables(cfg: ScoringConfig) -> Dict[str, pd.DataFrame]:
     }
 
 
-def save_tables(tables: Dict[str, pd.DataFrame], processed_dir: Path) -> None:
+def save_tables(tables: dict[str, pd.DataFrame], processed_dir: Path) -> None:
     processed_dir.mkdir(parents=True, exist_ok=True)
     for name, df in tables.items():
         df.to_csv(processed_dir / f"{name}.csv", index=False)

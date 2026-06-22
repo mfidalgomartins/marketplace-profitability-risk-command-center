@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pandas as pd
 
-
 REPORTS = Path(__file__).resolve().parents[1] / "reports"
 
 

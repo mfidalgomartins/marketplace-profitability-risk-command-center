@@ -4,7 +4,6 @@ import argparse
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
 
 _matplotlib_cache = Path(".tmp/matplotlib").resolve()
 _matplotlib_cache.mkdir(parents=True, exist_ok=True)
@@ -26,7 +25,7 @@ class MonteCarloConfig:
     seed: int = 42
 
 
-def _load(cfg: MonteCarloConfig) -> Dict[str, pd.DataFrame]:
+def _load(cfg: MonteCarloConfig) -> dict[str, pd.DataFrame]:
     return {
         "assumptions": pd.read_csv(cfg.processed_dir / "scenario_assumptions.csv"),
         "results": pd.read_csv(cfg.processed_dir / "scenario_results_summary.csv"),
@@ -39,15 +38,23 @@ def _draw_factor(rng: np.random.Generator, base: float, sigma: float, lower: flo
     return float(max(lower, x))
 
 
-def _simulate(cfg: MonteCarloConfig, assumptions: pd.DataFrame, baseline_row: pd.Series, exposure: pd.Series) -> pd.DataFrame:
+def _simulate(
+    cfg: MonteCarloConfig, assumptions: pd.DataFrame, baseline_row: pd.Series, exposure: pd.Series
+) -> pd.DataFrame:
     rng = np.random.default_rng(cfg.seed)
 
     baseline_gmv = float(baseline_row["gmv"])
     baseline_net_to_gmv = float(baseline_row["net_value"] / baseline_row["gmv"]) if float(baseline_row["gmv"]) else 0.0
-    baseline_commission_rate = float(baseline_row["commission_revenue"] / baseline_row["gmv"]) if float(baseline_row["gmv"]) else 0.0
+    baseline_commission_rate = (
+        float(baseline_row["commission_revenue"] / baseline_row["gmv"]) if float(baseline_row["gmv"]) else 0.0
+    )
     baseline_subsidy_rate = float(baseline_row["subsidy"] / baseline_row["gmv"]) if float(baseline_row["gmv"]) else 0.0
-    baseline_refund_rate = float(baseline_row["refunds"] / baseline_row["net_value"]) if float(baseline_row["net_value"]) else 0.0
-    baseline_dispute_rate = float(baseline_row["disputes"] / baseline_row["net_value"]) if float(baseline_row["net_value"]) else 0.0
+    baseline_refund_rate = (
+        float(baseline_row["refunds"] / baseline_row["net_value"]) if float(baseline_row["net_value"]) else 0.0
+    )
+    baseline_dispute_rate = (
+        float(baseline_row["disputes"] / baseline_row["net_value"]) if float(baseline_row["net_value"]) else 0.0
+    )
     baseline_chargeback_rate = (
         float(baseline_row["chargeback_loss"] / baseline_row["net_value"]) if float(baseline_row["net_value"]) else 0.0
     )
@@ -57,7 +64,7 @@ def _simulate(cfg: MonteCarloConfig, assumptions: pd.DataFrame, baseline_row: pd
         else 0.0
     )
 
-    rows: List[dict[str, float | int | str]] = []
+    rows: list[dict[str, float | int | str]] = []
     for it in range(cfg.iterations):
         macro_scale = 1.0 + rng.normal(0.0, 0.015)
 
@@ -114,7 +121,7 @@ def _simulate(cfg: MonteCarloConfig, assumptions: pd.DataFrame, baseline_row: pd
 
 
 def _summarize(samples: pd.DataFrame) -> pd.DataFrame:
-    out_rows: List[dict[str, float | str]] = []
+    out_rows: list[dict[str, float | str]] = []
     metrics = [
         "gmv",
         "net_value",
@@ -124,7 +131,9 @@ def _summarize(samples: pd.DataFrame) -> pd.DataFrame:
         "top_risk_seller_downside_exposure",
     ]
 
-    baseline = samples[samples["scenario"] == "baseline"][["iteration", "contribution_margin_proxy", "total_leakage"]].rename(
+    baseline = samples[samples["scenario"] == "baseline"][
+        ["iteration", "contribution_margin_proxy", "total_leakage"]
+    ].rename(
         columns={
             "contribution_margin_proxy": "baseline_cm",
             "total_leakage": "baseline_leakage",
@@ -140,15 +149,19 @@ def _summarize(samples: pd.DataFrame) -> pd.DataFrame:
             row[f"{m}_p95"] = float(grp[m].quantile(0.95))
             row[f"{m}_std"] = float(grp[m].std(ddof=0))
 
-        merged = grp[["iteration", "contribution_margin_proxy", "total_leakage"]].merge(baseline, on="iteration", how="left")
+        merged = grp[["iteration", "contribution_margin_proxy", "total_leakage"]].merge(
+            baseline, on="iteration", how="left"
+        )
         row["prob_cm_positive"] = float((grp["contribution_margin_proxy"] > 0).mean())
-        row["prob_cm_better_than_baseline"] = float((merged["contribution_margin_proxy"] > merged["baseline_cm"]).mean())
+        row["prob_cm_better_than_baseline"] = float(
+            (merged["contribution_margin_proxy"] > merged["baseline_cm"]).mean()
+        )
         row["prob_leakage_better_than_baseline"] = float((merged["total_leakage"] < merged["baseline_leakage"]).mean())
         out_rows.append(row)
 
     out = pd.DataFrame(out_rows)
-    out["expected_cm_delta_vs_baseline"] = (
-        out["contribution_margin_proxy_mean"] - float(out.loc[out["scenario"] == "baseline", "contribution_margin_proxy_mean"].iloc[0])
+    out["expected_cm_delta_vs_baseline"] = out["contribution_margin_proxy_mean"] - float(
+        out.loc[out["scenario"] == "baseline", "contribution_margin_proxy_mean"].iloc[0]
     )
     out = out.sort_values("expected_cm_delta_vs_baseline", ascending=False)
     return out

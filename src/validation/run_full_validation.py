@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Dict, List
-import sys
 
 import pandas as pd
 
@@ -13,9 +12,8 @@ if __package__ is None or __package__ == "":
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-from src.validation.validate_schema_contracts import validate_schema_contracts
 from src.validation.validate_metric_governance import MetricGovernanceConfig, validate_metric_governance
-
+from src.validation.validate_schema_contracts import validate_schema_contracts
 
 KNOWN_LIMITATIONS = [
     "All data is synthetic; findings demonstrate analytical workflow behavior, not real marketplace performance.",
@@ -63,7 +61,7 @@ class ValidationIssue:
 
 
 def _add_issue(
-    issues: List[ValidationIssue],
+    issues: list[ValidationIssue],
     issue_id: str,
     module: str,
     check_name: str,
@@ -89,7 +87,7 @@ def _add_issue(
     )
 
 
-def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "buyers": pd.read_csv(raw_dir / "buyers.csv", parse_dates=["signup_date"]),
         "sellers": pd.read_csv(raw_dir / "sellers.csv", parse_dates=["onboarding_date"]),
@@ -106,7 +104,7 @@ def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_processed(processed_dir: Path) -> dict[str, pd.DataFrame]:
     def _read(name: str, **kwargs: object) -> pd.DataFrame:
         path = processed_dir / f"{name}.csv"
         if not path.exists():
@@ -155,7 +153,11 @@ def _coverage_summary(issues: pd.DataFrame) -> pd.DataFrame:
                 "checks_configured": checks_configured,
                 "open_issues": open_issues,
                 "blocker_issues": blocker_issues,
-                "validation_status": "blocked" if blocker_issues else "passed_with_warnings" if open_issues else "passed",
+                "validation_status": "blocked"
+                if blocker_issues
+                else "passed_with_warnings"
+                if open_issues
+                else "passed",
             }
         )
     return pd.DataFrame(rows)
@@ -214,15 +216,9 @@ def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataF
         "metric_governance_contract",
         "metric_governance_recompute",
     }
-    blocker_issue_mask = (
-        issues["severity"].eq("Critical")
-        | (
-            issues["severity"].eq("High")
-            & (
-                issues["module"].isin(blocker_modules)
-                | issues["check_name"].isin(blocker_checks)
-            )
-        )
+    blocker_issue_mask = issues["severity"].eq("Critical") | (
+        issues["severity"].eq("High")
+        & (issues["module"].isin(blocker_modules) | issues["check_name"].isin(blocker_checks))
     )
     blocker_count = int(blocker_issue_mask.sum()) if not issues.empty else 0
     warning_count = int(len(issues) - blocker_count) if not issues.empty else 0
@@ -238,7 +234,9 @@ def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataF
         rationale = "Critical or blocker-class high-severity issues detected in governed modules."
     elif not analytical_checks_passed:
         release_state = "screening-grade only"
-        rationale = "Technical execution is usable for directional screening, but unresolved analytical warnings remain."
+        rationale = (
+            "Technical execution is usable for directional screening, but unresolved analytical warnings remain."
+        )
     else:
         release_state = "decision-support only"
         rationale = (
@@ -270,10 +268,10 @@ def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataF
     )
 
 
-def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
+def run_validation(cfg: ValidationConfig) -> dict[str, pd.DataFrame]:
     raw = _load_raw(cfg.raw_dir)
     proc = _load_processed(cfg.processed_dir)
-    issues: List[ValidationIssue] = []
+    issues: list[ValidationIssue] = []
 
     buyers = raw["buyers"]
     sellers = raw["sellers"]
@@ -286,7 +284,6 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     logistics = raw["logistics"]
 
     opf = proc["opf"]
-    smq = proc["smq"]
     crs = proc["crs"]
     ors = proc["ors"]
     sqs = proc["sqs"]
@@ -296,7 +293,6 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     ssc = proc["ssc"]
     gar = proc["gar"]
     scen = proc["scen"]
-    scen_comp = proc["scen_comp"]
     scen_dec = proc["scen_dec"]
 
     # 1) Row count sanity.
@@ -359,7 +355,9 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
             _add_issue(
                 issues,
                 f"V-DUP-{tname}",
-                "synthetic_data" if tname in {"buyers", "sellers", "products", "orders", "order_items", "payments", "logistics"} else "processed_features",
+                "synthetic_data"
+                if tname in {"buyers", "sellers", "products", "orders", "order_items", "payments", "logistics"}
+                else "processed_features",
                 "duplicate_key_check",
                 "Critical",
                 "open",
@@ -456,8 +454,16 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         )
 
     # 7) Refund/dispute/payment coherence.
-    ref_sum = refunds.groupby("order_id", as_index=False)["refund_amount"].sum().rename(columns={"refund_amount": "refund_sum"})
-    dsp_sum = disputes.groupby("order_id", as_index=False)["dispute_amount"].sum().rename(columns={"dispute_amount": "dispute_sum"})
+    ref_sum = (
+        refunds.groupby("order_id", as_index=False)["refund_amount"]
+        .sum()
+        .rename(columns={"refund_amount": "refund_sum"})
+    )
+    dsp_sum = (
+        disputes.groupby("order_id", as_index=False)["dispute_amount"]
+        .sum()
+        .rename(columns={"dispute_amount": "dispute_sum"})
+    )
     coherence = (
         orders[["order_id", "net_paid_amount"]]
         .merge(ref_sum, on="order_id", how="left")
@@ -745,12 +751,13 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
                 "Fix baseline anchoring logic in scenario evaluation.",
             )
     leak_mismatch = float(
-        (
-            (scen["subsidy"] + scen["refunds"] + scen["disputes"] + scen["chargeback_loss"])
-            - scen["total_leakage"]
-        ).abs().max()
+        ((scen["subsidy"] + scen["refunds"] + scen["disputes"] + scen["chargeback_loss"]) - scen["total_leakage"])
+        .abs()
+        .max()
     )
-    cm_mismatch = float((scen["commission_revenue"] - scen["total_leakage"] - scen["contribution_margin_proxy"]).abs().max())
+    cm_mismatch = float(
+        (scen["commission_revenue"] - scen["total_leakage"] - scen["contribution_margin_proxy"]).abs().max()
+    )
     if leak_mismatch > 1e-6 or cm_mismatch > 1e-6:
         _add_issue(
             issues,
@@ -787,7 +794,7 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         Path("README.md"),
     ]
     risky_terms = ["proves", "guarantees", "always", "certainly", "directly causes"]
-    hits: List[str] = []
+    hits: list[str] = []
     for p in docs:
         if not p.exists():
             continue
@@ -982,7 +989,11 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
             refund_rate_calc = float((opf["refund_amount"] > 0).mean())
             dispute_rate_calc = float((opf["dispute_amount"] > 0).mean())
             crit_sellers_calc = float((ssc["governance_priority_tier"] == "Critical").sum())
-            cm_calc = float(opf["realized_contribution_margin_proxy"].sum()) if "realized_contribution_margin_proxy" in opf.columns else 0.0
+            cm_calc = (
+                float(opf["realized_contribution_margin_proxy"].sum())
+                if "realized_contribution_margin_proxy" in opf.columns
+                else 0.0
+            )
             expected_margin_calc = float(opf["estimated_margin_after_risk"].sum())
             chargeback_rate_calc = float(payments["chargeback_flag"].mean())
             seller_gmv = items.groupby("seller_id")["gross_item_value"].sum().sort_values(ascending=False)
@@ -1116,7 +1127,11 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     mg_issues = validate_metric_governance(mg_cfg)
     if not mg_issues.empty:
         for _, r in mg_issues.iterrows():
-            check_name = "metric_governance_recompute" if str(r["check_name"]) == "recompute_consistency_check" else "metric_governance_contract"
+            check_name = (
+                "metric_governance_recompute"
+                if str(r["check_name"]) == "recompute_consistency_check"
+                else "metric_governance_contract"
+            )
             _add_issue(
                 issues,
                 f"V-MG-{str(r['metric_name'])}",
@@ -1158,7 +1173,9 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
         "row_count_orders": int(len(orders)),
         "row_count_sellers": int(len(sellers)),
         "row_count_buyers": int(len(buyers)),
-        "duplicate_key_failures": int(len(issues_df[issues_df["check_name"] == "duplicate_key_check"])) if not issues_df.empty else 0,
+        "duplicate_key_failures": int(len(issues_df[issues_df["check_name"] == "duplicate_key_check"]))
+        if not issues_df.empty
+        else 0,
         "critical_issues": int((issues_df["severity"] == "Critical").sum()) if not issues_df.empty else 0,
         "high_issues": int((issues_df["severity"] == "High").sum()) if not issues_df.empty else 0,
         "medium_issues": int((issues_df["severity"] == "Medium").sum()) if not issues_df.empty else 0,
@@ -1166,7 +1183,9 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     }
     summary_df = pd.DataFrame([summary])
     release_df = _release_assessment(issues_df, summary_df)
-    summary_df = pd.concat([summary_df, release_df[["release_state", "publish_blocked", "committee_grade_ready"]]], axis=1)
+    summary_df = pd.concat(
+        [summary_df, release_df[["release_state", "publish_blocked", "committee_grade_ready"]]], axis=1
+    )
 
     return {
         "issues": issues_df,
@@ -1177,17 +1196,19 @@ def run_validation(cfg: ValidationConfig) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _render_report(results: Dict[str, pd.DataFrame]) -> str:
+def _render_report(results: dict[str, pd.DataFrame]) -> str:
     issues = results["issues"]
     coverage = results["coverage"]
     summary = results["summary"].iloc[0]
     release = results["release"].iloc[0]
 
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append("# Marketplace Project Validation Report")
     lines.append("")
     lines.append("## QA Stance")
-    lines.append("Skeptical validation pass focused on reconciliation, coherence, leakage controls, and decision-risk overclaiming.")
+    lines.append(
+        "Skeptical validation pass focused on reconciliation, coherence, leakage controls, and decision-risk overclaiming."
+    )
     lines.append("")
     lines.append("## Executive Summary")
     lines.append(f"- Orders validated: `{int(summary['row_count_orders']):,}`")
@@ -1264,7 +1285,7 @@ def _render_report(results: Dict[str, pd.DataFrame]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def save_outputs(results: Dict[str, pd.DataFrame], cfg: ValidationConfig) -> Dict[str, Path]:
+def save_outputs(results: dict[str, pd.DataFrame], cfg: ValidationConfig) -> dict[str, Path]:
     cfg.report_dir.mkdir(parents=True, exist_ok=True)
     issues_path = cfg.report_dir / cfg.issues_file
     report_path = cfg.report_dir / cfg.report_file
@@ -1296,7 +1317,9 @@ def main() -> None:
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--report-dir", type=Path, default=Path("reports"))
     parser.add_argument("--schema-file", type=Path, default=Path("config/contracts/v1/schema_contracts.json"))
-    parser.add_argument("--metric-contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
+    parser.add_argument(
+        "--metric-contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv")
+    )
     parser.add_argument("--report-file", type=str, default="validation_report.md")
     parser.add_argument("--issues-file", type=str, default="validation_issue_log.csv")
     args = parser.parse_args()

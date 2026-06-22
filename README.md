@@ -75,6 +75,20 @@ make test
 
 `make all` regenerates the raw and processed data, governed reports, dashboard, publication charts, PDF report, and GitHub Pages staging files.
 
+### Development
+
+`make setup` installs the runtime and tooling dependencies. Run the full quality
+gate — lint, format check, types, security, and tests with a coverage floor —
+with a single command:
+
+```bash
+make verify
+```
+
+Individual gates are also available: `make lint`, `make format`, `make typecheck`,
+`make security`, and `make test`. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+details and [SECURITY.md](SECURITY.md) for the security posture.
+
 Run the same pipeline in Docker:
 
 ```bash

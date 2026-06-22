@@ -4,11 +4,9 @@ import argparse
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict
 
 import numpy as np
 import pandas as pd
-
 
 # Domain priors used to smooth early-activity entities and avoid unstable rates.
 SMOOTHING_STRENGTH = 12.0
@@ -71,7 +69,7 @@ def _clip_series(series: pd.Series, low: float, high: float) -> pd.Series:
     return series.clip(lower=low, upper=high)
 
 
-def _load_raw_tables(raw_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_raw_tables(raw_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "buyers": pd.read_csv(raw_dir / "buyers.csv", parse_dates=["signup_date"]),
         "sellers": pd.read_csv(raw_dir / "sellers.csv", parse_dates=["onboarding_date"]),
@@ -88,7 +86,7 @@ def _load_raw_tables(raw_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _build_order_base(tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _build_order_base(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     orders = tables["orders"].copy()
     order_items = tables["order_items"].copy()
     products = tables["products"][["product_id", "category"]].copy()
@@ -123,7 +121,11 @@ def _build_order_base(tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
     base = (
         orders.merge(item_agg, on="order_id", how="left")
         .merge(primary_category, on="order_id", how="left")
-        .merge(payments[["order_id", "payment_status", "payment_attempts", "chargeback_flag", "payment_risk_signal"]], on="order_id", how="left")
+        .merge(
+            payments[["order_id", "payment_status", "payment_attempts", "chargeback_flag", "payment_risk_signal"]],
+            on="order_id",
+            how="left",
+        )
         .merge(refund_agg, on="order_id", how="left")
         .merge(dispute_agg, on="order_id", how="left")
         .merge(
@@ -184,9 +186,9 @@ def _compute_entity_prior_rates(base: pd.DataFrame, entity_col: str, prefix: str
 
     for event_col in ["refund_flag", "dispute_flag", "chargeback_flag"]:
         prior_count = grouped[event_col].cumsum() - temp[event_col]
-        prior_rate = (
-            prior_count + SMOOTHING_STRENGTH * GLOBAL_PRIORS[event_col]
-        ) / (temp[f"{prefix}_prior_orders"] + SMOOTHING_STRENGTH)
+        prior_rate = (prior_count + SMOOTHING_STRENGTH * GLOBAL_PRIORS[event_col]) / (
+            temp[f"{prefix}_prior_orders"] + SMOOTHING_STRENGTH
+        )
         temp[f"{prefix}_prior_{event_col}_rate"] = prior_rate.astype(float)
 
     return temp[
@@ -331,17 +333,14 @@ def _build_seller_monthly_quality(order_enriched: pd.DataFrame) -> pd.DataFrame:
     margin_rate = grouped["margin_sum"] / grouped["GMV"].replace(0, np.nan)
     margin_rate = margin_rate.fillna(0.0)
 
-    quality_score = (
-        100.0
-        * (
-            0.24 * (1.0 - grouped["refund_rate"])
-            + 0.17 * (1.0 - grouped["dispute_rate"])
-            + 0.12 * (1.0 - grouped["chargeback_rate"])
-            + 0.12 * (1.0 - grouped["cancellation_rate"])
-            + 0.13 * grouped["on_time_rate"]
-            + 0.10 * (1.0 - grouped["promo_dependency_rate"].clip(upper=1.0))
-            + 0.12 * grouped["repeat_buyer_rate"]
-        )
+    quality_score = 100.0 * (
+        0.24 * (1.0 - grouped["refund_rate"])
+        + 0.17 * (1.0 - grouped["dispute_rate"])
+        + 0.12 * (1.0 - grouped["chargeback_rate"])
+        + 0.12 * (1.0 - grouped["cancellation_rate"])
+        + 0.13 * grouped["on_time_rate"]
+        + 0.10 * (1.0 - grouped["promo_dependency_rate"].clip(upper=1.0))
+        + 0.12 * grouped["repeat_buyer_rate"]
     )
     quality_score = quality_score + (margin_rate * 100.0).clip(lower=-12.0, upper=12.0)
     grouped["seller_quality_proxy"] = quality_score.clip(lower=0.0, upper=100.0)
@@ -405,9 +404,11 @@ def _build_buyer_behavior_risk(
     )
 
     out = buyers[["buyer_id"]].merge(buyer_agg, on="buyer_id", how="left")
-    out[["trailing_order_count", "refund_count", "dispute_count", "chargeback_count", "gross_sum", "promo_count"]] = out[
-        ["trailing_order_count", "refund_count", "dispute_count", "chargeback_count", "gross_sum", "promo_count"]
-    ].fillna(0.0)
+    out[["trailing_order_count", "refund_count", "dispute_count", "chargeback_count", "gross_sum", "promo_count"]] = (
+        out[
+            ["trailing_order_count", "refund_count", "dispute_count", "chargeback_count", "gross_sum", "promo_count"]
+        ].fillna(0.0)
+    )
 
     out["trailing_order_count"] = out["trailing_order_count"].astype(int)
 
@@ -437,9 +438,7 @@ def _build_buyer_behavior_risk(
             flags.append("high_chargeback_frequency")
         if row["promo_usage_rate"] > 0.75:
             flags.append("promo_dependence")
-        if row["trailing_order_count"] > 20 and (
-            row["dispute_frequency"] > 0.12 or row["chargeback_frequency"] > 0.05
-        ):
+        if row["trailing_order_count"] > 20 and (row["dispute_frequency"] > 0.12 or row["chargeback_frequency"] > 0.05):
             flags.append("high_velocity_high_risk")
         if not flags:
             flags.append("none")
@@ -572,7 +571,7 @@ def _build_seller_risk_base(
     grouped["gmv_rank_percentile"] = grouped["gmv"].rank(method="average", pct=True)
     grouped["top_decile_volume"] = (grouped["gmv_rank_percentile"] >= 0.90).astype(int)
 
-    def _pack_json(row: pd.Series, mapping: Dict[str, str]) -> str:
+    def _pack_json(row: pd.Series, mapping: dict[str, str]) -> str:
         payload = {out_key: round(float(row[in_key]), 6) for out_key, in_key in mapping.items()}
         return json.dumps(payload, sort_keys=True)
 
@@ -653,7 +652,7 @@ def _build_seller_risk_base(
     ].copy()
 
 
-def build_feature_layer(cfg: FeatureBuildConfig) -> Dict[str, pd.DataFrame]:
+def build_feature_layer(cfg: FeatureBuildConfig) -> dict[str, pd.DataFrame]:
     if cfg.trailing_window_days <= 0:
         raise ValueError("trailing_window_days must be greater than zero.")
     tables = _load_raw_tables(cfg.raw_dir)
@@ -709,7 +708,7 @@ def build_feature_layer(cfg: FeatureBuildConfig) -> Dict[str, pd.DataFrame]:
     }
 
 
-def save_feature_tables(feature_tables: Dict[str, pd.DataFrame], output_dir: Path) -> None:
+def save_feature_tables(feature_tables: dict[str, pd.DataFrame], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     for table_name, df in feature_tables.items():
         df.to_csv(output_dir / f"{table_name}.csv", index=False)

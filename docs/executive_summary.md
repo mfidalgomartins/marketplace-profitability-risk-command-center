@@ -25,6 +25,9 @@ This avoids stale hard-coded values and keeps the memo aligned with current arti
 4. Seller and order risk concentration can be routed through a finite intervention queue.
 5. Delivery delay is associated with higher refund and dispute pressure in the generated data.
 
+## Materiality
+The current synthetic run requires a program-level economics repair, not KPI tuning. Break-even would require either a material increase in take-rate yield, a large reduction in refund/dispute/chargeback leakage, or a structural mix and policy reset that changes both sides of the bridge. The PDF report quantifies this gap directly from the governed run artifacts.
+
 ## Risks
 1. Economic risk: margin leakage can persist even under topline growth.
 2. Fraud risk: dispute/chargeback clusters can scale in specific channel/payment combinations.
@@ -38,6 +41,14 @@ This avoids stale hard-coded values and keeps the memo aligned with current arti
 3. Near term (30-60 days): enforce seller coaching and SLA compliance for high-priority sellers in the governance queue.
 4. Near term (30-90 days): tighten promo eligibility selectively by category, channel, and risk tier.
 5. Operating cadence: review the action register weekly and rerun scenarios monthly.
+
+## Further Questions
+Before applying this framework to real operating decisions, the evidence gaps are:
+1. full management P&L reconciliation by category, seller tier, and order cohort;
+2. out-of-sample score validation and threshold economics;
+3. refund root-cause taxonomy and operational addressability;
+4. measured customer and seller friction from controls;
+5. causal evidence that intervention benefits persist after launch.
 
 ## Operating Artifacts
 Execution-focused outputs:

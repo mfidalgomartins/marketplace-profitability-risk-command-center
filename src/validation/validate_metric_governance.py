@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
 
 import pandas as pd
 
@@ -27,7 +26,7 @@ class MetricGovernanceConfig:
     output_file: Path = Path("reports/metric_governance_issues.csv")
 
 
-def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, float]:
+def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> dict[str, float]:
     orders = pd.read_csv(raw_dir / "orders.csv")
     order_items = pd.read_csv(raw_dir / "order_items.csv")
     payments = pd.read_csv(raw_dir / "payments.csv")
@@ -56,9 +55,7 @@ def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, 
     out["relationship__risk_adjusted_le_net"] = float(out["risk_adjusted_value"] <= out["net_value"] + 1e-9)
     out["relationship__net_le_gmv"] = float(out["net_value"] <= out["gmv"] + 1e-9)
     out["relationship__rates_within_unit_interval"] = float(
-        0.0 <= out["refund_rate"] <= 1.0
-        and 0.0 <= out["dispute_rate"] <= 1.0
-        and 0.0 <= out["chargeback_rate"] <= 1.0
+        0.0 <= out["refund_rate"] <= 1.0 and 0.0 <= out["dispute_rate"] <= 1.0 and 0.0 <= out["chargeback_rate"] <= 1.0
     )
     out["relationship__opf_order_grain"] = float(len(opf) == int(opf["order_id"].nunique()))
     out["relationship__raw_order_count_positive"] = float(len(orders) > 0)
@@ -66,7 +63,7 @@ def _compute_metric_references(raw_dir: Path, processed_dir: Path) -> Dict[str, 
 
 
 def validate_metric_governance(cfg: MetricGovernanceConfig) -> pd.DataFrame:
-    issues: List[MetricGovernanceIssue] = []
+    issues: list[MetricGovernanceIssue] = []
 
     if not cfg.contract_file.exists():
         issues.append(
@@ -193,7 +190,9 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--reports-dir", type=Path, default=Path("reports"))
-    parser.add_argument("--contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv"))
+    parser.add_argument(
+        "--contract-file", type=Path, default=Path("config/contracts/v1/metric_governance_contract.csv")
+    )
     parser.add_argument("--output-file", type=Path, default=Path("reports/metric_governance_issues.csv"))
     args = parser.parse_args()
 

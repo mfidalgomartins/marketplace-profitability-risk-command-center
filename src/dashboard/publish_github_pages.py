@@ -5,6 +5,10 @@ from pathlib import Path
 
 
 def _build_index_html(target_filename: str) -> str:
+    # Matches the executive dashboard's Apple-grade design language: system/SF
+    # type, #f5f5f7 canvas, hairline card, soft ambient shadow, indigo accent,
+    # pill control. No gradients/glass/eyebrow-pill/serif (the dashboard's
+    # banned "AI smell"). Adapts to light/dark via prefers-color-scheme.
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -14,76 +18,87 @@ def _build_index_html(target_filename: str) -> str:
   <meta http-equiv="refresh" content="0; url={target_filename}">
   <style>
     :root {{
-      --bg-start: #edf4fb;
-      --bg-end: #f7f8fb;
-      --panel: rgba(255, 255, 255, 0.94);
-      --ink: #0e1726;
-      --muted: #56657d;
-      --line: #d5deea;
-      --brand: #0a5bd3;
-      --brand-soft: #e6f0ff;
-      --brand-ink: #0d4dad;
-      --shadow: 0 18px 40px rgba(12, 23, 39, 0.08);
+      --bg: #f5f5f7;
+      --panel: #ffffff;
+      --ink: #0a1628;
+      --muted: #5c6b80;
+      --eyebrow: #8593a5;
+      --line: #e6e9ef;
+      --accent: #5b54e0;
+      --accent-ink: #4a43c9;
+      --shadow: 0 1px 2px rgba(10, 22, 40, 0.05), 0 8px 24px rgba(10, 22, 40, 0.045);
     }}
+    @media (prefers-color-scheme: dark) {{
+      :root {{
+        --bg: #0a0c10;
+        --panel: #12151c;
+        --ink: #edf0f5;
+        --muted: #98a3b3;
+        --eyebrow: #6b7686;
+        --line: #222732;
+        --accent: #8e88ff;
+        --accent-ink: #aaa4ff;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+      }}
+    }}
+    * {{ box-sizing: border-box; }}
     body {{
       margin: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      font-family: "Avenir Next", "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(33, 94, 190, 0.08), transparent 34%),
-        linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Geist", "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
       color: var(--ink);
       padding: 24px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }}
     .card {{
-      max-width: 680px;
+      max-width: 640px;
       width: 100%;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 28px;
+      border-radius: 16px;
+      padding: 32px;
       box-shadow: var(--shadow);
     }}
     .eyebrow {{
-      display: inline-flex;
-      margin-bottom: 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--brand-soft);
-      color: var(--brand-ink);
+      margin-bottom: 14px;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
+      color: var(--eyebrow);
     }}
     h1 {{
-      margin: 0 0 10px 0;
-      font-size: 30px;
-      line-height: 1.08;
-      letter-spacing: -0.3px;
-      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      margin: 0 0 12px 0;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      font-weight: 600;
     }}
-    p {{ margin: 0 0 16px 0; color: var(--muted); font-size: 15px; line-height: 1.55; }}
+    p {{ margin: 0 0 20px 0; color: var(--muted); font-size: 15px; line-height: 1.55; }}
     a {{
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 11px 14px;
-      border-radius: 12px;
-      background: var(--brand);
+      padding: 11px 18px;
+      border-radius: 980px;
+      background: var(--accent);
       color: #ffffff;
       font-weight: 600;
       text-decoration: none;
+      transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }}
-    a:hover {{ filter: brightness(0.98); }}
+    a:hover {{ background: var(--accent-ink); }}
   </style>
 </head>
 <body>
   <div class="card">
     <div class="eyebrow">Live Dashboard</div>
-    <h1>Marketplace Profitability, Fraud & Seller Quality Command Center</h1>
+    <h1>Marketplace Profitability, Fraud &amp; Seller Quality Command Center</h1>
     <p>Redirecting to the live executive dashboard. If the redirect does not trigger automatically, use the link below.</p>
     <a href="{target_filename}">Open the live dashboard</a>
   </div>
@@ -104,9 +119,7 @@ def publish_pages_entry(source_html: Path, destination_html: Path, index_html: P
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Publish the governed dashboard to a GitHub Pages entrypoint."
-    )
+    parser = argparse.ArgumentParser(description="Publish the governed dashboard to a GitHub Pages entrypoint.")
     parser.add_argument(
         "--source-html",
         type=Path,

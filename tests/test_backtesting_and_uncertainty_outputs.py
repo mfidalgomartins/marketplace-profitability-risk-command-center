@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pandas as pd
 
-
 PROCESSED = Path(__file__).resolve().parents[1] / "data" / "processed"
 
 SCENARIOS = {
@@ -63,14 +62,8 @@ def test_monte_carlo_tables_exist_and_capture_uncertainty() -> None:
     assert set(summary["scenario"].unique()) == SCENARIOS
     assert set(decision["scenario"].unique()) == SCENARIOS
 
-    assert (
-        summary["contribution_margin_proxy_p05"]
-        <= summary["contribution_margin_proxy_p50"]
-    ).all()
-    assert (
-        summary["contribution_margin_proxy_p50"]
-        <= summary["contribution_margin_proxy_p95"]
-    ).all()
+    assert (summary["contribution_margin_proxy_p05"] <= summary["contribution_margin_proxy_p50"]).all()
+    assert (summary["contribution_margin_proxy_p50"] <= summary["contribution_margin_proxy_p95"]).all()
 
     assert decision["decision_score_uncertain"].is_monotonic_decreasing
     assert decision["prob_cm_positive"].between(0, 1).all()

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pandas as pd
-
 
 # Ordem de maturidade (mais alto = mais pronto para decisão).
 STATE_ORDER = {
@@ -47,16 +46,16 @@ def enforce_release_gate(
         raise RuntimeError("Release is publish-blocked by validation issues.")
 
     if STATE_ORDER[state] < STATE_ORDER[required_state]:
-        raise RuntimeError(
-            f"Release state `{state}` does not meet required minimum `{required_state}`."
-        )
+        raise RuntimeError(f"Release state `{state}` does not meet required minimum `{required_state}`.")
 
     if require_committee_grade and not committee_grade_ready:
         raise RuntimeError("Release is not committee-grade ready.")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Fail build when validation release state is below required governance gate.")
+    parser = argparse.ArgumentParser(
+        description="Fail build when validation release state is below required governance gate."
+    )
     parser.add_argument("--release-file", type=Path, default=Path("reports/validation_release_assessment.csv"))
     parser.add_argument(
         "--required-state",

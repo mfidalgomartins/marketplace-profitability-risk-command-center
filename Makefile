@@ -1,13 +1,23 @@
 PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 PYTEST := .venv/bin/pytest
+RUFF := .venv/bin/ruff
+MYPY := .venv/bin/mypy
+BANDIT := .venv/bin/bandit
+PIP_AUDIT := .venv/bin/pip-audit
 
-.PHONY: help setup test data features scoring governance scenarios montecarlo backtest viz report dashboard pages snapshot schema-contracts metric-governance schema-drift validate release-gate all
+.PHONY: help setup test lint format format-check typecheck security audit verify data features scoring governance scenarios montecarlo backtest viz report dashboard pages snapshot schema-contracts metric-governance schema-drift validate release-gate all
 
 help:
 	@echo "Targets:"
-	@echo "  setup      Create virtualenv + install requirements"
-	@echo "  test       Run test suite"
+	@echo "  setup      Create virtualenv + install runtime + dev requirements"
+	@echo "  verify     Run all quality gates (lint, format, types, security, tests)"
+	@echo "  lint       Ruff lint check"
+	@echo "  format     Ruff format + lint autofix"
+	@echo "  format-check Ruff format check (no writes)"
+	@echo "  typecheck  Mypy static type check"
+	@echo "  security   Bandit code scan + pip-audit dependency scan"
+	@echo "  test       Run test suite with coverage gate"
 	@echo "  data       Generate synthetic raw tables"
 	@echo "  features   Build analytical feature tables"
 	@echo "  scoring    Build scoring tables"
@@ -29,10 +39,31 @@ help:
 
 setup:
 	python3 -m venv .venv
-	$(PIP) install -r requirements.txt
+	$(PIP) install -r requirements-dev.txt
 
 test:
-	$(PYTEST) -q
+	$(PYTEST)
+
+lint:
+	$(RUFF) check src tests
+
+format:
+	$(RUFF) format src tests
+	$(RUFF) check --fix src tests
+
+format-check:
+	$(RUFF) format --check src tests
+
+typecheck:
+	$(MYPY)
+
+security:
+	$(BANDIT) -c pyproject.toml -r src -q
+	$(PIP_AUDIT) -r requirements.txt
+
+audit: security
+
+verify: lint format-check typecheck security test
 
 data:
 	$(PYTHON) src/data_generation/generate_synthetic_marketplace_data.py --output-dir data/raw

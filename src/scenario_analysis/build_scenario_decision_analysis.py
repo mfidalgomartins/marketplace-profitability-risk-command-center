@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict
 
 import numpy as np
 import pandas as pd
@@ -17,7 +16,7 @@ class ScenarioConfig:
     horizon_months: int = 6
 
 
-def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "orders": pd.read_csv(raw_dir / "orders.csv", parse_dates=["order_date"]),
         "order_items": pd.read_csv(raw_dir / "order_items.csv"),
@@ -28,7 +27,7 @@ def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_processed(processed_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "opf": pd.read_csv(processed_dir / "order_profitability_features.csv", parse_dates=["order_date"]),
         "governance": pd.read_csv(processed_dir / "governance_priority_scores.csv"),
@@ -36,7 +35,7 @@ def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _build_order_analytical_base(raw: Dict[str, pd.DataFrame], processed: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _build_order_analytical_base(raw: dict[str, pd.DataFrame], processed: dict[str, pd.DataFrame]) -> pd.DataFrame:
     orders = raw["orders"]
     items = raw["order_items"]
     payments = raw["payments"]
@@ -119,7 +118,7 @@ def _get_baseline_window(base: pd.DataFrame, baseline_months: int) -> pd.DataFra
     return base[(base["order_date"] >= start) & (base["order_date"] <= latest_ts)].copy()
 
 
-def _baseline_metrics(window: pd.DataFrame) -> Dict[str, float]:
+def _baseline_metrics(window: pd.DataFrame) -> dict[str, float]:
     gmv = float(window["gross_order_value"].sum())
     net = float(window["net_paid_amount"].sum())
     commission = float(window["commission_fee"].sum())
@@ -156,7 +155,7 @@ def _seller_exposure_metrics(
     window: pd.DataFrame,
     governance: pd.DataFrame,
     seller_scorecard: pd.DataFrame,
-) -> Dict[str, float]:
+) -> dict[str, float]:
     merged = window.merge(
         governance[["seller_id", "governance_priority_tier", "governance_priority_score"]],
         on="seller_id",
@@ -165,7 +164,11 @@ def _seller_exposure_metrics(
 
     top_risk = merged[merged["governance_priority_tier"].isin(["High", "Critical"])]
     top_risk_net_share = float(top_risk["net_paid_amount"].sum() / merged["net_paid_amount"].sum())
-    top_risk_leak_rate = float(top_risk["total_leakage"].sum() / top_risk["net_paid_amount"].sum()) if top_risk["net_paid_amount"].sum() else 0.0
+    top_risk_leak_rate = (
+        float(top_risk["total_leakage"].sum() / top_risk["net_paid_amount"].sum())
+        if top_risk["net_paid_amount"].sum()
+        else 0.0
+    )
 
     # Bad actors: top 5% by governance score, constrained to critical tier.
     threshold = seller_scorecard["governance_priority_score"].quantile(0.95)
@@ -184,9 +187,19 @@ def _seller_exposure_metrics(
 
     bad = merged[merged["seller_id"].isin(bad_actor_ids)]
 
-    bad_actor_gmv_share = float(bad["gross_order_value"].sum() / merged["gross_order_value"].sum()) if merged["gross_order_value"].sum() else 0.0
-    bad_actor_net_share = float(bad["net_paid_amount"].sum() / merged["net_paid_amount"].sum()) if merged["net_paid_amount"].sum() else 0.0
-    bad_actor_leak_rate = float(bad["total_leakage"].sum() / bad["net_paid_amount"].sum()) if bad["net_paid_amount"].sum() else 0.0
+    bad_actor_gmv_share = (
+        float(bad["gross_order_value"].sum() / merged["gross_order_value"].sum())
+        if merged["gross_order_value"].sum()
+        else 0.0
+    )
+    bad_actor_net_share = (
+        float(bad["net_paid_amount"].sum() / merged["net_paid_amount"].sum())
+        if merged["net_paid_amount"].sum()
+        else 0.0
+    )
+    bad_actor_leak_rate = (
+        float(bad["total_leakage"].sum() / bad["net_paid_amount"].sum()) if bad["net_paid_amount"].sum() else 0.0
+    )
 
     return {
         "top_risk_net_share": top_risk_net_share,
@@ -280,8 +293,8 @@ def _scenario_definitions() -> pd.DataFrame:
 
 
 def _evaluate_scenarios(
-    baseline: Dict[str, float],
-    exposure: Dict[str, float],
+    baseline: dict[str, float],
+    exposure: dict[str, float],
     assumptions: pd.DataFrame,
 ) -> pd.DataFrame:
     rows = []
@@ -302,24 +315,15 @@ def _evaluate_scenarios(
         risk_adjusted = net * (1.0 - baseline["risk_gap_rate"] * r.risk_gap_factor)
 
         top_risk_downside_exposure = (
-            net
-            * exposure["top_risk_net_share"]
-            * exposure["top_risk_leak_rate"]
-            * r.top_risk_exposure_factor
+            net * exposure["top_risk_net_share"] * exposure["top_risk_leak_rate"] * r.top_risk_exposure_factor
         )
 
         remove_bad_actor_gmv_loss = gmv * exposure["bad_actor_gmv_share"] * r.remove_bad_actor_intensity
         remove_bad_actor_leakage_avoided = (
-            net
-            * exposure["bad_actor_net_share"]
-            * exposure["bad_actor_leak_rate"]
-            * r.remove_bad_actor_intensity
+            net * exposure["bad_actor_net_share"] * exposure["bad_actor_leak_rate"] * r.remove_bad_actor_intensity
         )
         correct_bad_actor_leakage_avoided = (
-            net
-            * exposure["bad_actor_net_share"]
-            * exposure["bad_actor_leak_rate"]
-            * r.correct_bad_actor_effectiveness
+            net * exposure["bad_actor_net_share"] * exposure["bad_actor_leak_rate"] * r.correct_bad_actor_effectiveness
         )
 
         rows.append(
@@ -421,7 +425,7 @@ def _decision_matrix(results: pd.DataFrame) -> pd.DataFrame:
     ].sort_values("decision_priority_score", ascending=False)
 
 
-def build_scenarios(cfg: ScenarioConfig) -> Dict[str, pd.DataFrame]:
+def build_scenarios(cfg: ScenarioConfig) -> dict[str, pd.DataFrame]:
     if cfg.baseline_months <= 0 or cfg.horizon_months <= 0:
         raise ValueError("baseline_months and horizon_months must be greater than zero.")
     raw = _load_raw(cfg.raw_dir)
@@ -497,7 +501,7 @@ def build_scenarios(cfg: ScenarioConfig) -> Dict[str, pd.DataFrame]:
     }
 
 
-def save_tables(tables: Dict[str, pd.DataFrame], processed_dir: Path) -> None:
+def save_tables(tables: dict[str, pd.DataFrame], processed_dir: Path) -> None:
     processed_dir.mkdir(parents=True, exist_ok=True)
     for name, df in tables.items():
         df.to_csv(processed_dir / f"{name}.csv", index=False)

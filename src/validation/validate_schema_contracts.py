@@ -4,7 +4,6 @@ import argparse
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List
 
 import pandas as pd
 
@@ -25,7 +24,7 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
         raise FileNotFoundError(f"Schema file not found: {schema_file}")
 
     contract = json.loads(schema_file.read_text(encoding="utf-8"))
-    issues: List[ContractIssue] = []
+    issues: list[ContractIssue] = []
 
     for t in contract.get("tables", []):
         table_name = str(t.get("table_name"))

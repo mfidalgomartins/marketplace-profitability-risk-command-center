@@ -1,9 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
-
 from src.validation.validate_metric_governance import MetricGovernanceConfig, validate_metric_governance
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict
 
 import pandas as pd
 
@@ -16,7 +15,7 @@ class GovernanceConfig:
     max_order_actions: int = 250
 
 
-def _load_tables(processed_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_tables(processed_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "seller_scorecard": pd.read_csv(processed_dir / "seller_scorecard.csv"),
         "order_risk_scores": pd.read_csv(processed_dir / "order_risk_scores.csv"),
@@ -71,10 +70,9 @@ def _build_seller_actions(
             seller_subsidy=("subsidy_amount", "sum"),
         )
         .assign(
-            seller_total_leakage=lambda d: d["seller_refunds"]
-            + d["seller_disputes"]
-            + d["seller_chargeback_loss"]
-            + d["seller_subsidy"]
+            seller_total_leakage=lambda d: (
+                d["seller_refunds"] + d["seller_disputes"] + d["seller_chargeback_loss"] + d["seller_subsidy"]
+            )
         )
     )
 
@@ -201,9 +199,7 @@ def build_action_register(cfg: GovernanceConfig) -> pd.DataFrame:
     rank_map = {idx: rank for rank, idx in enumerate(ordered_idx, start=1)}
     register["priority_rank"] = register.index.map(rank_map).astype(int)
     register["status"] = "open"
-    register["next_review_step"] = (
-        "assign owner and execute recommended action within SLA"
-    )
+    register["next_review_step"] = "assign owner and execute recommended action within SLA"
     register = register.sort_values(["priority_rank"], ascending=[True]).reset_index(drop=True)
     return register
 

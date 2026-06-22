@@ -3,10 +3,8 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict, List
 
 import pandas as pd
-
 
 RAW_TABLES = [
     "buyers",
@@ -92,7 +90,7 @@ def _infer_kind(series: pd.Series) -> str:
     return "string"
 
 
-def _table_contract(path: Path, table_name: str) -> Dict[str, object]:
+def _table_contract(path: Path, table_name: str) -> dict[str, object]:
     sample = pd.read_csv(path, nrows=200)
     return {
         "table_name": table_name,
@@ -104,8 +102,8 @@ def _table_contract(path: Path, table_name: str) -> Dict[str, object]:
     }
 
 
-def generate_contract(raw_dir: Path, processed_dir: Path) -> Dict[str, object]:
-    tables: List[Dict[str, object]] = []
+def generate_contract(raw_dir: Path, processed_dir: Path) -> dict[str, object]:
+    tables: list[dict[str, object]] = []
 
     for t in RAW_TABLES:
         p = raw_dir / f"{t}.csv"

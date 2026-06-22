@@ -3,9 +3,8 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, List
 
 import numpy as np
 import pandas as pd
@@ -55,7 +54,7 @@ def _json_safe(value: object) -> object:
     return value
 
 
-def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "buyers": pd.read_csv(raw_dir / "buyers.csv", parse_dates=["signup_date"]),
         "sellers": pd.read_csv(raw_dir / "sellers.csv", parse_dates=["onboarding_date"]),
@@ -71,7 +70,7 @@ def _load_raw(raw_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
+def _load_processed(processed_dir: Path) -> dict[str, pd.DataFrame]:
     return {
         "opf": pd.read_csv(processed_dir / "order_profitability_features.csv", parse_dates=["order_date"]),
         "order_risk": pd.read_csv(processed_dir / "order_risk_scores.csv", parse_dates=["order_date"]),
@@ -84,7 +83,7 @@ def _load_processed(processed_dir: Path) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _load_official_kpis(reports_dir: Path) -> Dict[str, object]:
+def _load_official_kpis(reports_dir: Path) -> dict[str, object]:
     snap_path = reports_dir / "executive_kpi_snapshot.csv"
     if not snap_path.exists():
         return {"source": "fallback_missing_snapshot", "metrics": {}}
@@ -97,11 +96,11 @@ def _load_official_kpis(reports_dir: Path) -> Dict[str, object]:
     return {"source": str(snap_path), "metrics": metrics}
 
 
-def _load_validation_summary(reports_dir: Path) -> Dict[str, object]:
+def _load_validation_summary(reports_dir: Path) -> dict[str, object]:
     summary_path = reports_dir / "validation_summary.csv"
     release_path = reports_dir / "validation_release_assessment.csv"
 
-    out: Dict[str, object] = {
+    out: dict[str, object] = {
         "source": str(summary_path),
         "release_source": str(release_path),
         "release_state": "unknown",
@@ -145,7 +144,7 @@ def _load_validation_summary(reports_dir: Path) -> Dict[str, object]:
     return out
 
 
-def _build_order_facts(raw: Dict[str, pd.DataFrame], proc: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _build_order_facts(raw: dict[str, pd.DataFrame], proc: dict[str, pd.DataFrame]) -> pd.DataFrame:
     opf = proc["opf"].copy()
     orders = raw["orders"]
     buyers = raw["buyers"]
@@ -270,7 +269,7 @@ def _build_order_facts(raw: Dict[str, pd.DataFrame], proc: Dict[str, pd.DataFram
     return fact
 
 
-def _build_seller_meta(raw: Dict[str, pd.DataFrame], proc: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def _build_seller_meta(raw: dict[str, pd.DataFrame], proc: dict[str, pd.DataFrame]) -> pd.DataFrame:
     sellers = raw["sellers"]
     scorecard = proc["seller_scorecard"]
     out = scorecard.merge(
@@ -322,7 +321,7 @@ def _sample_fact_rows(fact: pd.DataFrame, max_orders: int, sample_seed: int) -> 
     # Preserve broad distribution across time/category/risk while shrinking payload for demo mode.
     strata = fact.assign(_strata=fact["m"].astype(str) + "|" + fact["cat"].astype(str) + "|" + fact["rt"].astype(str))
     frac = max_orders / len(strata)
-    sampled_parts: List[pd.DataFrame] = []
+    sampled_parts: list[pd.DataFrame] = []
 
     for _, grp in strata.groupby("_strata", sort=False):
         n = int(round(len(grp) * frac))
@@ -336,7 +335,7 @@ def _sample_fact_rows(fact: pd.DataFrame, max_orders: int, sample_seed: int) -> 
     return sampled.drop(columns=["_strata"]).sort_values(["m", "sid"]).reset_index(drop=True)
 
 
-def _build_payload(cfg: DashboardConfig) -> Dict[str, object]:
+def _build_payload(cfg: DashboardConfig) -> dict[str, object]:
     raw = _load_raw(cfg.raw_dir)
     proc = _load_processed(cfg.processed_dir)
     official = _load_official_kpis(cfg.reports_dir)
@@ -362,7 +361,7 @@ def _build_payload(cfg: DashboardConfig) -> Dict[str, object]:
 
     payload = {
         "meta": {
-            "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            "generated_at_utc": datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC"),
             "dashboard_version": DASHBOARD_VERSION,
             "coverage_start": str(fact["d"].min()),
             "coverage_end": str(fact["d"].max()),
@@ -399,9 +398,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-start: #f6f8fa;
-      --bg-end: #f6f8fa;
-      --top-shell-bg: #ffffff;
+      --bg-start: #f5f5f7;
+      --bg-end: #f5f5f7;
+      --top-shell-bg: rgba(255, 255, 255, 0.72);
+      --top-shell-solid: #ffffff;
       --panel: #ffffff;
       --panel-soft: #f3f5f8;
       --panel-strong: #ffffff;
@@ -435,9 +435,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       --alert-bad-line: #f0cfcb;
       --alert-info-bg: #f1f0fd;
       --alert-info-line: #ddd9f7;
-      --shadow: 0 1px 2px rgba(10, 22, 40, 0.04), 0 1px 1px rgba(10, 22, 40, 0.03);
-      --shadow-soft: 0 1px 2px rgba(10, 22, 40, 0.03);
-      --radius: 10px;
+      --shadow: 0 1px 2px rgba(10, 22, 40, 0.05), 0 8px 24px rgba(10, 22, 40, 0.045);
+      --shadow-soft: 0 1px 2px rgba(10, 22, 40, 0.04);
+      --radius: 16px;
+      --radius-sm: 11px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
       --axis: #6b7888;
       --grid: #eaedf2;
       --hover-bg: #0a1628;
@@ -446,7 +448,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     body[data-theme="dark"] {
       --bg-start: #0a0c10;
       --bg-end: #0a0c10;
-      --top-shell-bg: #0e1117;
+      --top-shell-bg: rgba(16, 18, 24, 0.68);
+      --top-shell-solid: #0e1117;
       --panel: #12151c;
       --panel-soft: #171b24;
       --panel-strong: #12151c;
@@ -480,8 +483,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       --alert-bad-line: #43262a;
       --alert-info-bg: #1a1b2b;
       --alert-info-line: #2c2d44;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-      --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+      --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.32);
       --axis: #8693a4;
       --grid: #20252f;
       --hover-bg: #20242e;
@@ -503,11 +506,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin: 0;
       background: var(--bg-start);
       color: var(--ink);
-      font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Geist", "Segoe UI", Arial, sans-serif;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      font-feature-settings: "cv01", "ss01";
+      text-rendering: optimizeLegibility;
     }
     .mono, .value, .kpi .value, .decision-stat .value, .scenario-card .main, .bench .num {
       font-family: "Geist Mono", "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -531,12 +534,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       top: 0;
       z-index: 30;
       background: var(--top-shell-bg);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--line);
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .top-shell { background: var(--top-shell-solid); }
     }
     .header {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 16px 24px 14px 24px;
+      padding: 20px 28px 18px 28px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 18px;
@@ -593,18 +601,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       justify-content: flex-end;
     }
     button, .btn {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel-strong);
+      border: 1px solid transparent;
+      border-radius: 980px;
+      background: var(--panel-soft);
       color: var(--ink-2);
-      padding: 8px 13px;
+      padding: 8px 15px;
       font-family: inherit;
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.12s var(--ease);
       box-shadow: none;
     }
+    button:active { transform: scale(0.97); }
     button.primary {
       background: var(--accent);
       color: #ffffff;
@@ -616,7 +625,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: transparent;
       color: var(--muted);
     }
-    button:hover { background: var(--panel-soft); border-color: var(--line-strong, var(--line)); color: var(--ink); }
+    button:hover { background: var(--line); color: var(--ink); }
     button:focus-visible,
     input:focus-visible,
     select:focus-visible,
@@ -646,14 +655,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .filter-bar {
       max-width: 1680px;
       margin: 0 auto;
-      padding: 14px 16px;
+      padding: 16px 18px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-      gap: 10px;
+      gap: 12px;
       align-items: end;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       box-shadow: var(--shadow-soft);
     }
     .filter {
@@ -807,8 +816,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       gap: 12px;
     }
     .decision-point {
-      padding: 14px 16px;
-      border-radius: 9px;
+      padding: 15px 17px;
+      border-radius: var(--radius-sm);
       background: var(--panel-soft);
       border: 1px solid var(--line);
     }
@@ -832,8 +841,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       gap: 12px;
     }
     .decision-stat {
-      padding: 14px 16px;
-      border-radius: 9px;
+      padding: 15px 17px;
+      border-radius: var(--radius-sm);
       background: var(--panel);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
@@ -868,11 +877,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .signal-card {
       border: 1px solid var(--line);
-      border-radius: 9px;
+      border-radius: var(--radius-sm);
       background: var(--panel-strong);
-      padding: 10px 13px;
+      padding: 12px 15px;
       box-shadow: var(--shadow-soft);
-      min-width: 132px;
+      min-width: 136px;
       position: relative;
     }
     .signal-card::before {
@@ -913,7 +922,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 0;
     }
     .kpi {
@@ -922,11 +931,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 16px 16px 15px 16px;
-      min-height: 116px;
+      padding: 18px 18px 17px 18px;
+      min-height: 120px;
       display: grid;
       align-content: start;
       gap: 7px;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
     }
     .kpi.feature {
       grid-column: span 3;
@@ -989,9 +999,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .action-card {
       border: 1px solid var(--line);
-      border-radius: 9px;
+      border-radius: var(--radius-sm);
       background: var(--panel-strong);
-      padding: 14px 16px;
+      padding: 15px 17px;
       box-shadow: var(--shadow-soft);
     }
     .action-card .name {
@@ -1047,7 +1057,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px;
+      padding: 22px 24px;
     }
     .panel h3 {
       margin: 0 0 6px 0;
@@ -1067,7 +1077,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .plot {
       width: 100%;
       min-height: 338px;
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--line-soft);
       background: var(--panel-strong);
@@ -1079,8 +1089,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       font-size: 13.5px;
       background: var(--narrative-bg);
       border: 1px solid var(--narrative-line);
-      border-radius: 9px;
-      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
     }
     .badges {
       display: flex;

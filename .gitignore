@@ -16,6 +16,12 @@ env/
 **/__pycache__/
 **/*.py[cod]
 
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
 # Build / packaging
 build/
 dist/

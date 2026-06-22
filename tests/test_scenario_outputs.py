@@ -3,7 +3,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-
 PROCESSED = Path(__file__).resolve().parents[1] / "data" / "processed"
 
 SCENARIOS = {
@@ -53,9 +52,7 @@ def test_scenario_results_reconcile_to_business_math() -> None:
     assert np.isclose(baseline["gmv_change_vs_baseline_pct"], 0.0, atol=1e-9)
     assert np.isclose(baseline["leakage_avoided_vs_baseline"], 0.0, atol=1e-9)
 
-    expected_leakage = (
-        results["subsidy"] + results["refunds"] + results["disputes"] + results["chargeback_loss"]
-    )
+    expected_leakage = results["subsidy"] + results["refunds"] + results["disputes"] + results["chargeback_loss"]
     assert np.allclose(results["total_leakage"], expected_leakage)
 
     expected_cm = results["commission_revenue"] - results["total_leakage"]

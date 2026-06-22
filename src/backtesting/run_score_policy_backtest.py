@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import argparse
 import os
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, List
 
 _matplotlib_cache = Path(".tmp/matplotlib").resolve()
 _matplotlib_cache.mkdir(parents=True, exist_ok=True)
@@ -89,9 +89,7 @@ def _build_base(tables: dict[str, pd.DataFrame]) -> pd.DataFrame:
     base["bad_event_flag"] = (
         (base["refund_amount"] > 0) | (base["dispute_amount"] > 0) | (base["chargeback_flag"] == 1)
     ).astype(int)
-    base["event_loss_proxy"] = (
-        base["refund_amount"] + base["dispute_amount"] + base["chargeback_loss_proxy"]
-    )
+    base["event_loss_proxy"] = base["refund_amount"] + base["dispute_amount"] + base["chargeback_loss_proxy"]
     return base
 
 
@@ -102,7 +100,7 @@ def _curve_for_thresholds(
     friction_rate: float,
     efficacy: float,
 ) -> pd.DataFrame:
-    rows: List[dict[str, float | int]] = []
+    rows: list[dict[str, float | int]] = []
 
     total_orders = len(base)
     total_bad = int(base["bad_event_flag"].sum())
@@ -218,7 +216,7 @@ def run_backtest(cfg: BacktestConfig) -> dict[str, pd.DataFrame]:
         efficacy=cfg.base_efficacy,
     )
 
-    impact_rows: List[pd.DataFrame] = []
+    impact_rows: list[pd.DataFrame] = []
     for eff in cfg.efficacy_scenarios:
         c = _curve_for_thresholds(
             base=base,

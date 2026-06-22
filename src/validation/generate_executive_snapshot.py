@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict
 
 import pandas as pd
 
@@ -16,7 +15,7 @@ class ExecutiveSnapshotConfig:
     reports_dir: Path = Path("reports")
 
 
-def _load(cfg: ExecutiveSnapshotConfig) -> Dict[str, pd.DataFrame]:
+def _load(cfg: ExecutiveSnapshotConfig) -> dict[str, pd.DataFrame]:
     return {
         "orders": pd.read_csv(cfg.raw_dir / "orders.csv", parse_dates=["order_date"]),
         "order_items": pd.read_csv(cfg.raw_dir / "order_items.csv"),
@@ -30,7 +29,7 @@ def _load(cfg: ExecutiveSnapshotConfig) -> Dict[str, pd.DataFrame]:
     }
 
 
-def _build_snapshot_tables(t: Dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, str]:
+def _build_snapshot_tables(t: dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, str]:
     orders = t["orders"]
     items = t["order_items"]
     refunds = t["refunds"]
@@ -78,21 +77,25 @@ def _build_snapshot_tables(t: Dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, st
             {"metric": "gmv", "value": gmv, "display": f"${gmv:,.2f}"},
             {"metric": "net_value", "value": net_value, "display": f"${net_value:,.2f}"},
             {"metric": "risk_adjusted_value", "value": risk_adjusted_value, "display": f"${risk_adjusted_value:,.2f}"},
-            {"metric": "take_rate", "value": take_rate, "display": f"{take_rate*100:.2f}%"},
-            {"metric": "subsidy_share", "value": subsidy_share, "display": f"{subsidy_share*100:.2f}%"},
+            {"metric": "take_rate", "value": take_rate, "display": f"{take_rate * 100:.2f}%"},
+            {"metric": "subsidy_share", "value": subsidy_share, "display": f"{subsidy_share * 100:.2f}%"},
             {"metric": "realized_contribution_margin_proxy", "value": realized_cm, "display": f"${realized_cm:,.2f}"},
             {"metric": "expected_margin_after_risk", "value": expected_cm, "display": f"${expected_cm:,.2f}"},
-            {"metric": "refund_rate", "value": refund_rate, "display": f"{refund_rate*100:.2f}%"},
-            {"metric": "dispute_rate", "value": dispute_rate, "display": f"{dispute_rate*100:.2f}%"},
-            {"metric": "chargeback_rate", "value": chargeback_rate, "display": f"{chargeback_rate*100:.2f}%"},
-            {"metric": "top10_seller_gmv_share", "value": top10_seller_share, "display": f"{top10_seller_share*100:.2f}%"},
+            {"metric": "refund_rate", "value": refund_rate, "display": f"{refund_rate * 100:.2f}%"},
+            {"metric": "dispute_rate", "value": dispute_rate, "display": f"{dispute_rate * 100:.2f}%"},
+            {"metric": "chargeback_rate", "value": chargeback_rate, "display": f"{chargeback_rate * 100:.2f}%"},
+            {
+                "metric": "top10_seller_gmv_share",
+                "value": top10_seller_share,
+                "display": f"{top10_seller_share * 100:.2f}%",
+            },
             {"metric": "critical_sellers", "value": float(critical_sellers), "display": str(critical_sellers)},
         ]
     )
 
     coverage_start = opf["order_date"].min().date().isoformat()
     coverage_end = opf["order_date"].max().date().isoformat()
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     markdown = "\n".join(
         [
             "# Executive KPI Snapshot",
@@ -131,7 +134,9 @@ def generate_snapshot(cfg: ExecutiveSnapshotConfig) -> tuple[Path, Path]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate executive KPI snapshot artifacts from latest processed outputs.")
+    parser = argparse.ArgumentParser(
+        description="Generate executive KPI snapshot artifacts from latest processed outputs."
+    )
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--reports-dir", type=Path, default=Path("reports"))

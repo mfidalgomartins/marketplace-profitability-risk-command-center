@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pandas as pd
 
-
 RAW_DIR = Path(__file__).resolve().parents[1] / "data" / "raw"
 
 
@@ -71,7 +70,6 @@ def test_current_order_grain_has_one_seller_per_order() -> None:
     assert (items.groupby("order_id")["seller_id"].nunique() == 1).all()
 
 
-
 def test_behavioral_patterns_present() -> None:
     t = _load()
 
@@ -108,8 +106,7 @@ def test_behavioral_patterns_present() -> None:
     )
 
     cluster = pay[
-        (pay["order_channel"] == "social_commerce")
-        & (pay["category"].isin(["Electronics", "Digital Goods"]))
+        (pay["order_channel"] == "social_commerce") & (pay["category"].isin(["Electronics", "Digital Goods"]))
     ]
     assert cluster["chargeback_flag"].mean() > pay["chargeback_flag"].mean() + 0.02
 

@@ -3,13 +3,11 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
 
-
-CATEGORY_CONFIG: Dict[str, Dict[str, object]] = {
+CATEGORY_CONFIG: dict[str, dict[str, object]] = {
     "Electronics": {
         "subcategories": ["Phones", "Computers", "Audio", "Accessories"],
         "base_price": 240.0,
@@ -129,7 +127,7 @@ def _month_weights(month_starts: pd.DatetimeIndex) -> np.ndarray:
     return w / w.sum()
 
 
-def generate_buyers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def generate_buyers(cfg: GenerationConfig, rng: np.random.Generator) -> tuple[pd.DataFrame, pd.DataFrame]:
     buyer_ids = [f"B{idx:06d}" for idx in range(1, cfg.n_buyers + 1)]
     signup_dates = pd.to_datetime(
         rng.integers(
@@ -164,7 +162,13 @@ def generate_buyers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[pd
 
     propensity = rng.lognormal(mean=-0.03, sigma=0.52, size=cfg.n_buyers)
     propensity *= np.select(
-        [segment == "repeat_good", segment == "standard", segment == "price_hunter", segment == "suspicious", segment == "repeat_bad"],
+        [
+            segment == "repeat_good",
+            segment == "standard",
+            segment == "price_hunter",
+            segment == "suspicious",
+            segment == "repeat_bad",
+        ],
         [1.27, 0.95, 1.02, 1.35, 1.62],
     )
 
@@ -185,15 +189,33 @@ def generate_buyers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[pd
             "segment": segment,
             "propensity": propensity,
             "segment_risk": np.select(
-                [segment == "repeat_good", segment == "standard", segment == "price_hunter", segment == "suspicious", segment == "repeat_bad"],
+                [
+                    segment == "repeat_good",
+                    segment == "standard",
+                    segment == "price_hunter",
+                    segment == "suspicious",
+                    segment == "repeat_bad",
+                ],
                 [0.015, 0.03, 0.045, 0.13, 0.22],
             ),
             "refund_bias": np.select(
-                [segment == "repeat_good", segment == "standard", segment == "price_hunter", segment == "suspicious", segment == "repeat_bad"],
+                [
+                    segment == "repeat_good",
+                    segment == "standard",
+                    segment == "price_hunter",
+                    segment == "suspicious",
+                    segment == "repeat_bad",
+                ],
                 [0.015, 0.03, 0.05, 0.08, 0.13],
             ),
             "dispute_bias": np.select(
-                [segment == "repeat_good", segment == "standard", segment == "price_hunter", segment == "suspicious", segment == "repeat_bad"],
+                [
+                    segment == "repeat_good",
+                    segment == "standard",
+                    segment == "price_hunter",
+                    segment == "suspicious",
+                    segment == "repeat_bad",
+                ],
                 [0.006, 0.012, 0.022, 0.08, 0.14],
             ),
         }
@@ -202,7 +224,7 @@ def generate_buyers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[pd
     return buyers, buyer_latent
 
 
-def generate_sellers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def generate_sellers(cfg: GenerationConfig, rng: np.random.Generator) -> tuple[pd.DataFrame, pd.DataFrame]:
     seller_ids = [f"S{idx:05d}" for idx in range(1, cfg.n_sellers + 1)]
     onboarding_dates = pd.to_datetime(
         rng.integers(
@@ -214,7 +236,9 @@ def generate_sellers(cfg: GenerationConfig, rng: np.random.Generator) -> Tuple[p
     ).normalize()
 
     seller_region = rng.choice(REGIONS, size=cfg.n_sellers, p=[0.18, 0.3, 0.2, 0.19, 0.13])
-    seller_type = rng.choice(["individual", "smb", "brand", "enterprise"], size=cfg.n_sellers, p=[0.34, 0.42, 0.16, 0.08])
+    seller_type = rng.choice(
+        ["individual", "smb", "brand", "enterprise"], size=cfg.n_sellers, p=[0.34, 0.42, 0.16, 0.08]
+    )
 
     categories = list(CATEGORY_CONFIG.keys())
     category_focus = rng.choice(categories, size=cfg.n_sellers, p=[0.16, 0.18, 0.14, 0.11, 0.1, 0.08, 0.13, 0.1])
@@ -317,7 +341,7 @@ def generate_products(
     seller_latent: pd.DataFrame,
     rng: np.random.Generator,
 ) -> pd.DataFrame:
-    product_rows: List[Dict[str, object]] = []
+    product_rows: list[dict[str, object]] = []
     product_counter = 1
     category_names = list(CATEGORY_CONFIG.keys())
 
@@ -422,7 +446,7 @@ def _compute_buyer_order_counts(
     counts[active_idx] = 1
     counts = np.clip(counts, 0, 140)
 
-    return pd.Series(counts, index=merged["buyer_id"])  # type: ignore[return-value]
+    return pd.Series(counts, index=merged["buyer_id"])
 
 
 def generate_transactions(
@@ -433,7 +457,7 @@ def generate_transactions(
     products: pd.DataFrame,
     cfg: GenerationConfig,
     rng: np.random.Generator,
-) -> Dict[str, pd.DataFrame]:
+) -> dict[str, pd.DataFrame]:
     start = pd.Timestamp(cfg.start_date)
     end = pd.Timestamp(cfg.end_date)
 
@@ -460,7 +484,7 @@ def generate_transactions(
     ]
     products_small = products[product_cols].copy()
 
-    products_by_seller: Dict[str, np.ndarray] = {}
+    products_by_seller: dict[str, np.ndarray] = {}
     for sid, grp in products_small.groupby("seller_id"):
         products_by_seller[sid] = grp.index.to_numpy()
 
@@ -488,12 +512,12 @@ def generate_transactions(
     region_risk_adj = {"Northeast": 0.0, "Midwest": 0.004, "West": 0.012, "Central": 0.008, "South": 0.02}
     category_risk_adj = {cat: float(cfgv["fraud_risk"]) for cat, cfgv in CATEGORY_CONFIG.items()}
 
-    orders_rows: List[Dict[str, object]] = []
-    order_items_rows: List[Dict[str, object]] = []
-    payments_rows: List[Dict[str, object]] = []
-    logistics_rows: List[Dict[str, object]] = []
+    orders_rows: list[dict[str, object]] = []
+    order_items_rows: list[dict[str, object]] = []
+    payments_rows: list[dict[str, object]] = []
+    logistics_rows: list[dict[str, object]] = []
 
-    order_context: List[Dict[str, object]] = []
+    order_context: list[dict[str, object]] = []
 
     order_counter = 1
     order_item_counter = 1
@@ -536,16 +560,22 @@ def generate_transactions(
             seg = str(buyer.segment)
             pm_probs = payment_method_probs_by_segment[seg]
             if order_channel == "social_commerce":
-                pm_probs = [pm_probs[0] * 0.82, pm_probs[1] * 0.85, pm_probs[2] * 1.22, pm_probs[3] * 0.9, pm_probs[4] * 1.45]
+                pm_probs = [
+                    pm_probs[0] * 0.82,
+                    pm_probs[1] * 0.85,
+                    pm_probs[2] * 1.22,
+                    pm_probs[3] * 0.9,
+                    pm_probs[4] * 1.45,
+                ]
                 pm_probs = (np.array(pm_probs) / np.sum(pm_probs)).tolist()
             payment_method = str(rng.choice(payment_methods, p=pm_probs))
 
             n_items = int(rng.choice([1, 2, 3, 4], p=[0.67, 0.23, 0.08, 0.02]))
             selected_product_idx = rng.choice(seller_product_idx, size=n_items, replace=True)
 
-            item_gross_values: List[float] = []
-            item_merchant_discounts: List[float] = []
-            item_rows_pending: List[Dict[str, object]] = []
+            item_gross_values: list[float] = []
+            item_merchant_discounts: list[float] = []
+            item_rows_pending: list[dict[str, object]] = []
 
             order_main_category = None
 
@@ -677,9 +707,19 @@ def generate_transactions(
             risk_score += float(seller.seller_risk) * 0.52
             risk_score += category_risk_adj[str(order_main_category)] * 0.44
             risk_score += region_risk_adj[str(buyer.region)]
-            risk_score += {"credit_card": 0.016, "debit_card": 0.013, "digital_wallet": 0.028, "bank_transfer": 0.01, "prepaid_card": 0.075}[payment_method]
+            risk_score += {
+                "credit_card": 0.016,
+                "debit_card": 0.013,
+                "digital_wallet": 0.028,
+                "bank_transfer": 0.01,
+                "prepaid_card": 0.075,
+            }[payment_method]
             risk_score += {"web": 0.0, "mobile_app": 0.01, "social_commerce": 0.045}[order_channel]
-            if str(buyer.region) == "South" and str(order_main_category) in ("Electronics", "Digital Goods") and order_channel == "social_commerce":
+            if (
+                str(buyer.region) == "South"
+                and str(order_main_category) in ("Electronics", "Digital Goods")
+                and order_channel == "social_commerce"
+            ):
                 risk_score += 0.095
             if bool(seller.very_high_risk_flag) and payment_method in ("prepaid_card", "digital_wallet"):
                 risk_score += 0.08
@@ -688,7 +728,9 @@ def generate_transactions(
             risk_score = _clip(risk_score, 0.003, 0.95)
 
             payment_attempts = int(1 + (rng.random() < risk_score * 0.95) + (rng.random() < risk_score * 0.34))
-            payment_fail_prob = _clip(0.012 + risk_score * 0.18 + (0.012 if payment_attempts >= 3 else 0.0), 0.005, 0.45)
+            payment_fail_prob = _clip(
+                0.012 + risk_score * 0.18 + (0.012 if payment_attempts >= 3 else 0.0), 0.005, 0.45
+            )
             payment_status = "failed" if rng.random() < payment_fail_prob else "paid"
 
             if risk_score < 0.075:
@@ -719,7 +761,16 @@ def generate_transactions(
                     base_transit -= 0.7
 
                 category_ship_adj = float(CATEGORY_CONFIG[str(order_main_category)]["shipping_base"]) / 6.0
-                processing_days = max(0, int(round(rng.normal(1.2 + (0.85 if str(seller.fulfillment_model) == "seller_fulfilled" else 0.2), 0.8))))
+                processing_days = max(
+                    0,
+                    int(
+                        round(
+                            rng.normal(
+                                1.2 + (0.85 if str(seller.fulfillment_model) == "seller_fulfilled" else 0.2), 0.8
+                            )
+                        )
+                    ),
+                )
 
                 seasonal_delay = 0.0
                 if month_start.month in (11, 12):
@@ -827,8 +878,8 @@ def generate_transactions(
     payments = pd.DataFrame(payments_rows)
     logistics = pd.DataFrame(logistics_rows)
 
-    refunds_rows: List[Dict[str, object]] = []
-    disputes_rows: List[Dict[str, object]] = []
+    refunds_rows: list[dict[str, object]] = []
+    disputes_rows: list[dict[str, object]] = []
     refund_counter = 1
     dispute_counter = 1
 
@@ -858,7 +909,7 @@ def generate_transactions(
             + (0.115 if delay_days >= 7 else 0.0)
             + float(buyer_row["refund_bias"])
             + float(seller_row["defect_risk"]) * 0.4
-            + region_risk_adj[str(ctx["region"]) ] * 0.7
+            + region_risk_adj[str(ctx["region"])] * 0.7
             + (0.028 if bool(ctx["promo_used"]) else 0.0)
         )
         refund_prob = _clip(refund_prob, 0.01, 0.88)
@@ -884,15 +935,25 @@ def generate_transactions(
                 refund_date = pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=int(rng.integers(1, 5)))
             elif delay_days >= 6:
                 reason = rng.choice(["late_delivery", "item_not_received"], p=[0.64, 0.36])
-                base_date = pd.Timestamp(ctx["delivered_date"]) if pd.notna(ctx["delivered_date"]) else pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=6)
+                base_date = (
+                    pd.Timestamp(ctx["delivered_date"])
+                    if pd.notna(ctx["delivered_date"])
+                    else pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=6)
+                )
                 refund_date = base_date + pd.Timedelta(days=int(rng.integers(1, 14)))
-            elif str(buyer_row["segment"]) in ("suspicious", "repeat_bad") and float(ctx["payment_risk_numeric"]) > 0.22:
+            elif (
+                str(buyer_row["segment"]) in ("suspicious", "repeat_bad") and float(ctx["payment_risk_numeric"]) > 0.22
+            ):
                 reason = "fraud_suspected"
                 base_date = pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=int(rng.integers(2, 16)))
                 refund_date = base_date
             else:
                 reason = rng.choice(["not_as_described", "damaged_item", "buyer_remorse"], p=[0.42, 0.29, 0.29])
-                base_date = pd.Timestamp(ctx["delivered_date"]) if pd.notna(ctx["delivered_date"]) else pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=5)
+                base_date = (
+                    pd.Timestamp(ctx["delivered_date"])
+                    if pd.notna(ctx["delivered_date"])
+                    else pd.Timestamp(ctx["order_date"]) + pd.Timedelta(days=5)
+                )
                 refund_date = base_date + pd.Timedelta(days=int(rng.integers(1, 21)))
 
             current_refund_date = pd.Timestamp(refund_date)
@@ -930,11 +991,17 @@ def generate_transactions(
 
         if rng.random() < dispute_prob:
             if float(ctx["payment_risk_numeric"]) > 0.24:
-                dispute_reason = rng.choice(["unauthorized_transaction", "item_not_received", "not_as_described"], p=[0.58, 0.27, 0.15])
+                dispute_reason = rng.choice(
+                    ["unauthorized_transaction", "item_not_received", "not_as_described"], p=[0.58, 0.27, 0.15]
+                )
             elif delay_days >= 5:
-                dispute_reason = rng.choice(["item_not_received", "late_delivery", "refund_not_processed"], p=[0.45, 0.33, 0.22])
+                dispute_reason = rng.choice(
+                    ["item_not_received", "late_delivery", "refund_not_processed"], p=[0.45, 0.33, 0.22]
+                )
             else:
-                dispute_reason = rng.choice(["not_as_described", "damaged_item", "refund_not_processed"], p=[0.49, 0.31, 0.2])
+                dispute_reason = rng.choice(
+                    ["not_as_described", "damaged_item", "refund_not_processed"], p=[0.49, 0.31, 0.2]
+                )
 
             dispute_amount = round(net_paid * _clip(rng.normal(0.71, 0.23), 0.2, 1.0), 2)
             dispute_amount = round(min(dispute_amount, remaining_exposure), 2)
@@ -947,7 +1014,10 @@ def generate_transactions(
                 status = rng.choice(["won_by_buyer", "won_by_seller", "under_review"], p=[0.57, 0.24, 0.19])
             else:
                 good_seller = float(seller_row["quality_score"]) > 0.62
-                status = rng.choice(["won_by_buyer", "won_by_seller", "under_review"], p=[0.33, 0.49 if good_seller else 0.35, 0.18 if good_seller else 0.32])
+                status = rng.choice(
+                    ["won_by_buyer", "won_by_seller", "under_review"],
+                    p=[0.33, 0.49 if good_seller else 0.35, 0.18 if good_seller else 0.32],
+                )
 
             if has_refund and current_refund_date is not None:
                 base_dispute_date = current_refund_date
@@ -1003,7 +1073,7 @@ def generate_transactions(
     }
 
 
-def generate_all_tables(cfg: GenerationConfig) -> Dict[str, pd.DataFrame]:
+def generate_all_tables(cfg: GenerationConfig) -> dict[str, pd.DataFrame]:
     rng = np.random.default_rng(cfg.seed)
     buyers, buyer_latent = generate_buyers(cfg, rng)
     sellers, seller_latent = generate_sellers(cfg, rng)
@@ -1121,7 +1191,7 @@ def generate_all_tables(cfg: GenerationConfig) -> Dict[str, pd.DataFrame]:
     return tables
 
 
-def save_tables(tables: Dict[str, pd.DataFrame], output_dir: Path) -> None:
+def save_tables(tables: dict[str, pd.DataFrame], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     for name, df in tables.items():
         df.to_csv(output_dir / f"{name}.csv", index=False)

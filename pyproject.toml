@@ -1,0 +1,68 @@
+[project]
+name = "marketplace-command-center"
+version = "1.0.0"
+description = "Reproducible marketplace profitability, fraud, and seller-quality analytics with governed release validation."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = [
+    "E501",   # line length is owned by the formatter; embedded HTML/CSS strings run long by design
+    "B008",   # function calls in argparse defaults are intentional
+    "SIM108", # ternary rewrites can hurt readability in analytics code
+]
+
+[tool.ruff.lint.per-file-ignores]
+# These modules pin the matplotlib backend/cache via os.environ before the
+# matplotlib import, so the import legitimately cannot sit at the top.
+"src/backtesting/run_score_policy_backtest.py" = ["E402"]
+"src/scenario_analysis/run_scenario_monte_carlo.py" = ["E402"]
+"src/visualization/build_report_graphs.py" = ["E402"]
+# Imports a sibling module after inserting the repo root on sys.path.
+"src/pipeline/run_full_pipeline.py" = ["E402"]
+
+[tool.bandit]
+# B404 (importing subprocess) is not itself a vulnerability; the single call site
+# is justified inline with a nosec comment. Tests are excluded from scanning.
+skips = ["B404"]
+exclude_dirs = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+namespace_packages = true
+explicit_package_bases = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+# The synthetic data generator extracts many numpy/pandas scalars (typed as
+# `object` by the stubs) and coerces them to float/int. These are numeric by
+# construction, not type bugs, so the noisy coercion codes are relaxed here only.
+module = "src.data_generation.generate_synthetic_marketplace_data"
+disable_error_code = ["arg-type", "call-overload"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q --cov=src --cov-report=term-missing --cov-fail-under=82"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["src/**/__init__.py"]
+
+[tool.coverage.report]
+skip_empty = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
