@@ -66,6 +66,7 @@ def test_index_html_matches_apple_design_language() -> None:
     assert "#f5f5f7" in html
     assert "prefers-color-scheme: dark" in html
     assert "border-radius: 980px" in html  # pill button
+    assert "prefers-reduced-motion: reduce" in html  # honors Reduce Motion
     assert "linear-gradient" not in html
     assert "radial-gradient" not in html
     assert "backdrop-filter" not in html  # no glass on the card

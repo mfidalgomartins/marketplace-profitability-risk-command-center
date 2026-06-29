@@ -491,6 +491,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       --hover-ink: #edf0f5;
     }
     * { box-sizing: border-box; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
     .sr-only {
       position: absolute;
       width: 1px;

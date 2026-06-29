@@ -42,6 +42,9 @@ def _build_index_html(target_filename: str) -> str:
       }}
     }}
     * {{ box-sizing: border-box; }}
+    @media (prefers-reduced-motion: reduce) {{
+      * {{ transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }}
+    }}
     body {{
       margin: 0;
       min-height: 100vh;
