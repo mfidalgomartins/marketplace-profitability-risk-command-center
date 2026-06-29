@@ -9,7 +9,7 @@
         "customer_type": "string",
         "loyalty_tier": "string",
         "region": "string",
-        "signup_date": "string"
+        "signup_date": "datetime"
       },
       "columns": [
         "buyer_id",
@@ -31,7 +31,7 @@
         "category_focus": "string",
         "commission_plan": "string",
         "fulfillment_model": "string",
-        "onboarding_date": "string",
+        "onboarding_date": "datetime",
         "seller_id": "string",
         "seller_region": "string",
         "seller_tier": "string",
@@ -86,7 +86,7 @@
         "gross_order_value": "number",
         "net_paid_amount": "number",
         "order_channel": "string",
-        "order_date": "string",
+        "order_date": "datetime",
         "order_id": "string",
         "order_status": "string",
         "payment_method": "string",
@@ -177,7 +177,7 @@
         "full_refund_flag": "integer",
         "order_id": "string",
         "refund_amount": "number",
-        "refund_date": "string",
+        "refund_date": "datetime",
         "refund_id": "string",
         "refund_reason": "string"
       },
@@ -199,7 +199,7 @@
     {
       "column_types": {
         "dispute_amount": "number",
-        "dispute_date": "string",
+        "dispute_date": "datetime",
         "dispute_id": "string",
         "dispute_reason": "string",
         "dispute_status": "string",
@@ -224,12 +224,12 @@
       "column_types": {
         "cancellation_flag": "integer",
         "delay_days": "number",
-        "delivered_date": "string",
+        "delivered_date": "datetime",
         "event_id": "string",
         "order_id": "string",
-        "promised_delivery_date": "string",
+        "promised_delivery_date": "datetime",
         "seller_id": "string",
-        "shipped_date": "string"
+        "shipped_date": "datetime"
       },
       "columns": [
         "event_id",
@@ -258,7 +258,7 @@
         "estimated_margin_after_risk": "number",
         "gross_value": "number",
         "net_value": "number",
-        "order_date": "string",
+        "order_date": "datetime",
         "order_id": "string",
         "profitability_flag": "string",
         "realized_contribution_margin_proxy": "number",
@@ -301,7 +301,7 @@
         "delay_rate": "number",
         "dispute_rate": "number",
         "fragility_flag": "string",
-        "month": "string",
+        "month": "datetime",
         "net_value": "number",
         "on_time_rate": "number",
         "orders": "integer",
@@ -370,7 +370,7 @@
         "category": "string",
         "dispute_rate": "number",
         "margin_fragility_index": "number",
-        "month": "string",
+        "month": "datetime",
         "net_value": "number",
         "refund_rate": "number",
         "subsidy_rate": "number"
@@ -393,7 +393,7 @@
     {
       "column_types": {
         "concentration_inputs": "string",
-        "current_period": "string",
+        "current_period": "datetime",
         "fraud_inputs": "string",
         "operational_inputs": "string",
         "profitability_inputs": "string",
@@ -419,7 +419,7 @@
         "buyer_id": "string",
         "category": "string",
         "order_channel": "string",
-        "order_date": "string",
+        "order_date": "datetime",
         "order_id": "string",
         "order_risk_main_driver": "string",
         "order_risk_score": "number",
@@ -450,7 +450,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "main_risk_driver": "string",
         "recommended_action": "string",
         "seller_id": "string",
@@ -474,7 +474,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "fraud_exposure_score": "number",
         "fraud_exposure_tier": "string",
         "main_risk_driver": "string",
@@ -498,7 +498,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "main_risk_driver": "string",
         "margin_fragility_score": "number",
         "margin_fragility_tier": "string",
@@ -522,7 +522,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "governance_priority_score": "number",
         "governance_priority_tier": "string",
         "main_risk_driver": "string",
@@ -546,7 +546,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "fraud_exposure_score": "number",
         "fraud_exposure_tier": "string",
         "gmv": "number",
@@ -588,7 +588,7 @@
     },
     {
       "column_types": {
-        "current_period": "string",
+        "current_period": "datetime",
         "fraud_exposure_score": "number",
         "fraud_exposure_tier": "string",
         "gmv": "number",
@@ -631,7 +631,7 @@
         "buyer_id": "string",
         "category": "string",
         "order_channel": "string",
-        "order_date": "string",
+        "order_date": "datetime",
         "order_id": "string",
         "order_risk_main_driver": "string",
         "order_risk_score": "number",

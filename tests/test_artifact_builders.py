@@ -25,6 +25,26 @@ RAW = ROOT / "data" / "raw"
 PROC = ROOT / "data" / "processed"
 
 
+def test_infer_kind_detects_iso_date_strings() -> None:
+    import pandas as pd
+
+    # pandas 3.0 read_csv yields the new str dtype; ISO date columns must still
+    # be detected as datetime (regression for the previously-dead branch).
+    dates = pd.Series(["2024-03-01", "2024-04-15", "2025-01-09"], dtype="str")
+    assert _infer_kind(dates) == "datetime"
+    # Non-date identifiers stay strings.
+    assert _infer_kind(pd.Series(["O0001", "O0002"], dtype="str")) == "string"
+
+
+def test_committed_contract_types_date_columns_as_datetime() -> None:
+    contract = generate_contract(RAW, PROC)
+    tables = {t["table_name"]: t for t in contract["tables"]}
+    assert tables["orders"]["column_types"]["order_date"] == "datetime"
+    assert tables["buyers"]["column_types"]["signup_date"] == "datetime"
+    # Identifier columns remain strings.
+    assert tables["orders"]["column_types"]["order_id"] == "string"
+
+
 def test_generate_schema_contracts_cli_writes_file(tmp_path: Path, monkeypatch, capsys) -> None:
     out = tmp_path / "schema.json"
     monkeypatch.setattr(

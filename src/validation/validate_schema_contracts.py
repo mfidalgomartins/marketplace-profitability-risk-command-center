@@ -67,8 +67,15 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
             elif expected_kind == "boolean":
                 ok = ("bool" in dtype) or ("int" in dtype)
             elif expected_kind == "datetime":
-                parsed = pd.to_datetime(df[c], errors="coerce", utc=False)
-                ok = bool(parsed.notna().mean() >= 0.98)
+                # Judge datetime validity on populated values only: a date column
+                # may legitimately have nulls (e.g. undelivered orders), and that
+                # must match how the contract generator infers the kind.
+                non_null = df[c].dropna()
+                if len(non_null) == 0:
+                    ok = True
+                else:
+                    parsed = pd.to_datetime(non_null, errors="coerce", utc=False, format="ISO8601")
+                    ok = bool(parsed.notna().mean() >= 0.98)
             else:
                 ok = True
             if not ok:

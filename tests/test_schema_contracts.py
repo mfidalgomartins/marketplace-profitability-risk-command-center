@@ -81,6 +81,25 @@ def test_validate_flags_column_type_and_key_problems(tmp_path: Path) -> None:
     assert "primary_key_duplicates" in found
 
 
+def test_datetime_column_with_nulls_validates_cleanly(tmp_path: Path) -> None:
+    # A date column may legitimately have missing values (e.g. undelivered
+    # orders); validation must judge it on populated values only.
+    data = tmp_path / "logistics.csv"
+    pd.DataFrame({"delivered_date": ["2024-03-01", None, "2024-03-05", None]}).to_csv(data, index=False)
+    schema = tmp_path / "schema.json"
+    _write_schema(
+        schema,
+        {
+            "table_name": "logistics",
+            "path": str(data),
+            "columns": ["delivered_date"],
+            "column_types": {"delivered_date": "datetime"},
+        },
+    )
+    issues = validate_schema_contracts(schema)
+    assert issues.empty
+
+
 def test_validate_flags_missing_primary_key_columns(tmp_path: Path) -> None:
     data = tmp_path / "t.csv"
     pd.DataFrame({"a": [1, 2]}).to_csv(data, index=False)

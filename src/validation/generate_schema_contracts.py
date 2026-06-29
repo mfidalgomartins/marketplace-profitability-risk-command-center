@@ -79,11 +79,15 @@ def _infer_kind(series: pd.Series) -> str:
         return "boolean"
     if "datetime" in dtype:
         return "datetime"
-    # CSV reads datetime-like values as strings; detect parseable date columns explicitly.
-    if series.dtype == object:
+    # CSV reads datetime-like values as strings; detect parseable date columns
+    # explicitly. Under pandas 3.0 read_csv yields the new `str` dtype (not
+    # `object`), so accept any string-like dtype here, guarded by parse rate.
+    # Dates in this dataset are ISO-8601, so parse with that format to avoid
+    # mis-parsing non-date text (which coerces cleanly to NaT).
+    if series.dtype == object or pd.api.types.is_string_dtype(series):
         non_null = series.dropna()
         if len(non_null) > 0:
-            parsed = pd.to_datetime(non_null, errors="coerce", utc=False)
+            parsed = pd.to_datetime(non_null, errors="coerce", utc=False, format="ISO8601")
             parse_rate = float(parsed.notna().mean())
             if parse_rate >= 0.98:
                 return "datetime"
