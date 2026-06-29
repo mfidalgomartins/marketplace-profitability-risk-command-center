@@ -53,7 +53,7 @@ disable_error_code = ["arg-type", "call-overload"]
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
-addopts = "-q --cov=src --cov-report=term-missing --cov-fail-under=82"
+addopts = "-q --cov=src --cov-report=term-missing --cov-fail-under=85"
 
 [tool.coverage.run]
 source = ["src"]
