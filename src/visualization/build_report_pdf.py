@@ -37,20 +37,24 @@ REPORTS = ROOT / "reports"
 GRAPHS = ROOT / "outputs" / "graphs"
 OUT = ROOT / "outputs" / "reports"
 
-NAVY = colors.HexColor("#14213D")
-INK = colors.HexColor("#1B2233")
-MUTE = colors.HexColor("#566074")
-FAINT = colors.HexColor("#8A94A6")
-ACCENT = colors.HexColor("#4F46E5")
-ACCENT_SOFT = colors.HexColor("#EEF0FF")
-RED = colors.HexColor("#C93636")
-RED_SOFT = colors.HexColor("#FCECEC")
-AMBER = colors.HexColor("#A96B13")
-AMBER_SOFT = colors.HexColor("#FFF5DE")
-GREEN = colors.HexColor("#1D7755")
-GREEN_SOFT = colors.HexColor("#E7F5EF")
-LINE = colors.HexColor("#DDE2EA")
-PANEL = colors.HexColor("#F5F7FA")
+# Brand palette — kept identical to the executive dashboard's light-mode CSS
+# tokens (src/dashboard/build_executive_dashboard.py) and the chart pack's
+# palette (src/visualization/build_report_graphs.py) so the dashboard, chart
+# pack, and PDF read as one cohesive product rather than three near-matches.
+NAVY = colors.HexColor("#0A1628")
+INK = colors.HexColor("#1D2B3E")
+MUTE = colors.HexColor("#5C6B80")
+FAINT = colors.HexColor("#8593A5")
+ACCENT = colors.HexColor("#5B54E0")
+ACCENT_SOFT = colors.HexColor("#EEEDFD")
+RED = colors.HexColor("#C5453B")
+RED_SOFT = colors.HexColor("#FBECEA")
+AMBER = colors.HexColor("#B07407")
+AMBER_SOFT = colors.HexColor("#FBF3E4")
+GREEN = colors.HexColor("#1F8A55")
+GREEN_SOFT = colors.HexColor("#ECF6F0")
+LINE = colors.HexColor("#E6E9EF")
+PANEL = colors.HexColor("#F3F5F8")
 WHITE = colors.white
 PAGE_W, PAGE_H = A4
 MARGIN = 1.9 * cm
@@ -721,7 +725,9 @@ def build():
             [
                 f"<b>{num}</b>",
                 f"<b>{dtxt}</b>",
-                f"{ev}<br/><font color='#4F46E5'><b>{owner}</b></font>",
+                # Inline <font> tags need a literal hex string (reportlab markup
+                # can't reference the ACCENT Color object) — keep in sync with ACCENT above.
+                f"{ev}<br/><font color='#5B54E0'><b>{owner}</b></font>",
             ]
         )
     story += [KeepTogether(table(rows, [0.8 * cm, 5.2 * cm, FW - 6.0 * cm], header=True)), Spacer(1, 8)]

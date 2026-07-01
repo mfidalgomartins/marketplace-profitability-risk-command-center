@@ -20,20 +20,24 @@ PROC = ROOT / "data" / "processed"
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "outputs" / "graphs"
 
-INK = "#111827"
-MUTE = "#6B7280"
-FAINT = "#D1D5DB"
-GRID = "#E9ECEF"
-PANEL = "#F3F4F6"
-ACCENT = "#4F46E5"
-LOSS = "#DC2626"
+# Brand palette — kept identical to the executive dashboard's light-mode CSS
+# tokens (src/dashboard/build_executive_dashboard.py) and the PDF report's
+# palette (src/visualization/build_report_pdf.py) so the dashboard, chart
+# pack, and PDF read as one cohesive product rather than three near-matches.
+INK = "#0A1628"
+MUTE = "#5C6B80"
+FAINT = "#D4DAE3"
+GRID = "#EEF1F5"
+PANEL = "#F3F5F8"
+ACCENT = "#5B54E0"
+LOSS = "#C5453B"
 
 plt.rcParams.update(
     {
         "font.family": "DejaVu Sans",
         "font.size": 10,
         "text.color": INK,
-        "axes.edgecolor": "#C7CDD4",
+        "axes.edgecolor": "#D4DAE3",
         "axes.labelcolor": MUTE,
         "axes.linewidth": 0.8,
         "axes.titlesize": 13,
