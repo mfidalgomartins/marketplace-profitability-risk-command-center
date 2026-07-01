@@ -1345,6 +1345,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 860px) {
+      /* The full header (title + subtitle + actions + coverage badges) is too
+         tall to stay pinned on small viewports — it would eat ~45% of a phone
+         screen while scrolling. Let it scroll away with the page instead. */
+      .top-shell { position: static; }
       .title h1 { font-size: 28px; }
       .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .kpi, .kpi.feature { grid-column: span 1; }
@@ -1361,14 +1365,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       :root {
         --panel: #ffffff;
         --panel-soft: #ffffff;
-        --ink: #111827;
-        --muted: #4b5563;
-        --line: #d1d5db;
-        --line-soft: #e5e7eb;
+        --ink: #0a1628;
+        --muted: #5c6b80;
+        --line: #d4dae3;
+        --line-soft: #e6e9ef;
       }
       body {
         background: #ffffff;
-        color: #111827;
+        color: #0a1628;
       }
       .top-shell {
         position: static;
@@ -1400,7 +1404,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       .filter input, .filter select {
         border: none;
         background: transparent;
-        color: #111827;
+        color: #0a1628;
         padding: 0;
         min-height: auto;
       }
