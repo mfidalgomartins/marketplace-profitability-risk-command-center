@@ -415,6 +415,7 @@ def build():
     threshold_curve = pd.read_csv(PROC / "backtesting_threshold_curve.csv").set_index("threshold")
     scen = pd.read_csv(PROC / "scenario_results_summary.csv").set_index("scenario")
     mc = pd.read_csv(PROC / "scenario_monte_carlo_summary.csv").set_index("scenario")
+    scen_exposure = pd.read_csv(PROC / "scenario_top_risk_exposure.csv").iloc[0]
     release = pd.read_csv(REPORTS / "validation_release_assessment.csv").iloc[0]
     buyers_raw = pd.read_csv(RAW / "buyers.csv")[["buyer_id", "region"]]
 
@@ -506,6 +507,18 @@ def build():
     subs = scen.loc["subsidy_tightening"]
     down = scen.loc["downside_high_risk_deterioration"]
     mc_fraud = mc.loc["fraud_control_improvement"]
+    # Since probabilities are non-negative, the maximum across scenarios is 0
+    # if and only if every scenario's modeled probability of a positive
+    # contribution margin is 0 — so this single derived value backs both the
+    # "zero in any scenario" and "zero in every scenario" claims below.
+    mc_prob_positive_max = float(mc["prob_cm_positive"].max())
+    # The scenario baseline is a trailing run-rate window, not the cumulative
+    # 24-month figures used elsewhere in this report. Read the window length
+    # from the pipeline's own recorded output (scenario_top_risk_exposure.csv)
+    # rather than hardcoding it, so the disclosure can never silently drift
+    # out of sync with whatever window actually produced the loaded data.
+    scenario_baseline_months = int(scen_exposure["baseline_months_used"])
+    scenario_horizon_months = int(scen_exposure["horizon_months"])
 
     # ---- Document skeleton -------------------------------------------------
     doc = BaseDocTemplate(
@@ -735,7 +748,7 @@ def build():
         p(
             f"The economic boundary is explicit. The best modeled contribution-margin "
             f"improvement is {money(fraud.contribution_margin_change_vs_baseline)} and the "
-            f"probability of a positive margin in any scenario is {pct(0)}. The board should "
+            f"probability of a positive margin in any scenario is {pct(mc_prob_positive_max)}. The board should "
             f"approve a recovery program and a controlled policy validation. It should not read "
             f"the synthetic values as a budget, a forecast or a profitability claim. The evidence "
             f"that would change the conclusion is specific: governed real economics, holdout score "
@@ -1404,11 +1417,17 @@ def build():
             "break-even, and the policy that supports them still needs holdout evidence."
         ),
         p(
-            f"Four interventions are modeled against a run-rate baseline: tighter fraud and review "
-            f"controls, seller quality improvement, subsidy tightening, and an adverse downside in "
-            f"which risky cohorts expand faster. Fraud control is the strongest lever, improving "
-            f"contribution margin by {money(fraud.contribution_margin_change_vs_baseline)} and "
-            f"avoiding {money(fraud.leakage_avoided_vs_baseline)} of leakage for a modest "
+            f"Four interventions are modeled against a run-rate baseline built from the trailing "
+            f"{scenario_baseline_months} months and scaled to a {scenario_horizon_months}-month "
+            f"forward horizon. That baseline is a smaller, forward-looking window, not the "
+            f"cumulative 24-month totals used earlier in this report, so the dollar figures below "
+            f"should not be compared directly to the executive summary's full-period numbers; read "
+            f"them as relative rankings of the mitigations against each other. The four "
+            f"interventions are tighter fraud and review controls, seller quality improvement, "
+            f"subsidy tightening, and an adverse downside in which risky cohorts expand faster. "
+            f"Fraud control is the strongest lever, improving contribution margin by "
+            f"{money(fraud.contribution_margin_change_vs_baseline)} and avoiding "
+            f"{money(fraud.leakage_avoided_vs_baseline)} of leakage for a modest "
             f"{abs(fraud.gmv_change_vs_baseline_pct):.1f}% reduction in GMV. Seller quality "
             f"improvement adds {money(quality.contribution_margin_change_vs_baseline)} and subsidy "
             f"tightening {money(subs.contribution_margin_change_vs_baseline)}, the latter at a larger "
@@ -1441,8 +1460,9 @@ def build():
             f"range. Fraud control improves on the baseline in essentially every draw, with a median "
             f"contribution margin around {money(mc_fraud['contribution_margin_proxy_p50'])} and a "
             f"95th-percentile outcome near {money(mc_fraud['contribution_margin_proxy_p95'])}, still "
-            f"a loss. The modeled probability of a positive contribution margin is {pct(0)} in every "
-            f"scenario. The conclusion is not that the mitigations are worthless; it is that they are "
+            f"a loss. The modeled probability of a positive contribution margin is "
+            f"{pct(mc_prob_positive_max)} in every scenario. The conclusion is not that the "
+            f"mitigations are worthless; it is that they are "
             f"too small relative to a structural loss of this size. Scenario ranking guides the "
             f"sequence of mitigation funding. It does not support any claim of profitability."
         ),
@@ -1790,7 +1810,7 @@ def build():
                 money(r.contribution_margin_change_vs_baseline),
                 money(r.leakage_avoided_vs_baseline),
                 f"{r.gmv_change_vs_baseline_pct:+.1f}%",
-                pct(0),
+                pct(mc.loc[key, "prob_cm_positive"]),
             ]
         )
     story += [
