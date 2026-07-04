@@ -159,6 +159,7 @@ def styles():
     s.add(ParagraphStyle("MetricRed", parent=s["Metric"], textColor=RED))
     s.add(ParagraphStyle("MetricLabel", fontName="Helvetica", fontSize=7.2, textColor=MUTE, leading=9))
     s.add(ParagraphStyle("TblH", fontName="Helvetica-Bold", fontSize=7.8, textColor=WHITE, leading=9.5))
+    s.add(ParagraphStyle("TblHR", parent=s["TblH"], alignment=TA_RIGHT))
     s.add(ParagraphStyle("Tbl", fontName="Helvetica", fontSize=7.9, textColor=INK, leading=10.2))
     s.add(ParagraphStyle("TblR", parent=s["Tbl"], alignment=TA_RIGHT))
     s.add(
@@ -249,13 +250,19 @@ def pull(text):
         TableStyle(
             [
                 ("LINEBEFORE", (0, 0), (0, 0), 2.5, ACCENT),
-                ("LEFTPADDING", (0, 0), (-1, -1), 4),
+                ("LEFTPADDING", (0, 0), (-1, -1), 12),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-                ("TOPPADDING", (0, 0), (-1, -1), 2),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
             ]
         )
     )
+    # Table flowables carry no spacing of their own (unlike Paragraph styles),
+    # so without this the callout sits flush against the body text before and
+    # after it. Match Body's own spaceAfter (8) on both sides so the pull
+    # quote reads as a distinct, breathing callout rather than run-in text.
+    bar.spaceBefore = 8
+    bar.spaceAfter = 10
     return bar
 
 
@@ -342,7 +349,10 @@ def table(rows, widths, numeric_cols=(), header=True, small=False):
         cooked_row = []
         for c_idx, value in enumerate(row):
             if header and r_idx == 0:
-                style = ST["TblH"]
+                # A numeric column's header must share its data's right edge —
+                # left-aligning the label over right-aligned figures below it
+                # reads as misaligned columns, not just a styling nicety.
+                style = ST["TblHR"] if c_idx in numeric_cols else ST["TblH"]
             elif c_idx in numeric_cols:
                 style = ST["TblR"]
             else:
@@ -691,11 +701,15 @@ def build():
             f"is zero. These are mitigations. They buy time and reduce the bleed. They do not, by "
             f"themselves, make the marketplace profitable."
         ),
-        h2("What leadership should decide"),
-        p(
-            "Four decisions follow directly from the evidence. They are sequenced so that the cheapest "
-            "and most reversible control comes first and the structural change comes last, after the "
-            "diagnostics that justify it are in place."
+        KeepTogether(
+            [
+                h2("What leadership should decide"),
+                p(
+                    "Four decisions follow directly from the evidence. They are sequenced so that the "
+                    "cheapest and most reversible control comes first and the structural change comes "
+                    "last, after the diagnostics that justify it are in place."
+                ),
+            ]
         ),
     ]
     decisions = [
@@ -1200,15 +1214,17 @@ def build():
             f"of all GMV sits with the top 100 sellers ({pct(top100)})."
         ),
         fig("10_seller_concentration_curve.png", "Cumulative share of GMV by seller, largest first."),
-        p(
-            f"That curve is concentrated but not fragile. No handful of sellers can sink the platform "
-            f"on its own, yet enough value sits in the top decile to make graduated, exposure-weighted "
-            f"controls worthwhile. The twenty worst sellers by contribution already account for "
-            f"{pct(worst20_share)} of the total loss, and {high_quality_n} of the {high_n} "
-            f"High-priority sellers are driven primarily by seller-quality signals. That combination "
-            f"matters: the queue is not mostly a fraud blacklist, and the right response is a "
-            f"seller-performance operating model with reserves, audits and payout controls reserved "
-            f"for accounts where quality issues create material dollar exposure."
+        KeepTogether(
+            p(
+                f"That curve is concentrated but not fragile. No handful of sellers can sink the "
+                f"platform on its own, yet enough value sits in the top decile to make graduated, "
+                f"exposure-weighted controls worthwhile. The twenty worst sellers by contribution "
+                f"already account for {pct(worst20_share)} of the total loss, and {high_quality_n} of "
+                f"the {high_n} High-priority sellers are driven primarily by seller-quality signals. "
+                f"That combination matters: the queue is not mostly a fraud blacklist, and the right "
+                f"response is a seller-performance operating model with reserves, audits and payout "
+                f"controls reserved for accounts where quality issues create material dollar exposure."
+            )
         ),
         pull(
             f"{high_n} High-priority sellers, no Critical sellers, and the worst 20 sellers carry "
@@ -1774,9 +1790,26 @@ def build():
         "chargeback_rate": "Share of orders charged back",
         "top10_seller_gmv_share": "Current-period seller concentration",
     }
+    # Metric keys carry acronyms (GMV) and embedded digits (top10) that
+    # str.title() mangles into "Gmv" and "Top10 Seller Gmv Share" — a
+    # display name is a deliberate editorial choice, not a mechanical
+    # transform of the underlying column name.
+    display_name = {
+        "gmv": "GMV",
+        "net_value": "Net Value",
+        "risk_adjusted_value": "Risk-Adjusted Value",
+        "take_rate": "Take Rate",
+        "subsidy_share": "Subsidy Share",
+        "realized_contribution_margin_proxy": "Realized Contribution Margin",
+        "expected_margin_after_risk": "Expected Margin After Risk",
+        "refund_rate": "Refund Rate",
+        "dispute_rate": "Dispute Rate",
+        "chargeback_rate": "Chargeback Rate",
+        "top10_seller_gmv_share": "Top 10 Seller GMV Share",
+    }
     kpi_rows = [["Metric", "Value", "Interpretation"]]
     for key, txt in interp.items():
-        kpi_rows.append([key.replace("_", " ").title(), kd[key], txt])
+        kpi_rows.append([display_name[key], kd[key], txt])
     story += [
         table(kpi_rows, [5.6 * cm, 3.2 * cm, FW - 8.8 * cm], numeric_cols=(1,)),
         Spacer(1, 12),

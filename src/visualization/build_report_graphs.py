@@ -107,6 +107,9 @@ def horizontal_bars(df, value, label, headline, subtitle, filename, fmt="{:.1f}%
             color=MUTE,
         )
     ax.set_xlim(0, g[value].max() * 1.2)
+    # Data is already on a 0-100 percentage scale and the per-bar labels show
+    # "%" (fmt); label the shared x-axis the same way so the two don't disagree.
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0f}%"))
     title(ax, headline, subtitle)
     save(fig, filename)
 
@@ -197,7 +200,10 @@ def main():
         ax.text(i, (bottom + abs(val)) / 1e6, f"{val / 1e6:+.2f}", ha="center", va="bottom", fontsize=9)
         running += val
     ax.bar(5, running / 1e6, color=ACCENT, width=0.62)
-    ax.text(5, running / 1e6, f"{running / 1e6:.2f}", ha="center", va="top", color=ACCENT, fontweight="bold")
+    # Anchor at the bar's zero-line edge (not its negative tip) with va="bottom" so the
+    # label sits in open space above the bar, matching the other bars' treatment. Anchoring
+    # at the tip with va="top" pushed the label past the bar into the axis tick labels below.
+    ax.text(5, 0, f"{running / 1e6:.2f}", ha="center", va="bottom", color=ACCENT, fontweight="bold")
     ax.set_xticks(range(6), [*vals.keys(), "Contribution\nmargin"])
     ax.yaxis.set_major_formatter(FuncFormatter(money_m))
     title(
@@ -398,9 +404,12 @@ def main():
     for b, v in zip(bars, values, strict=True):
         ax.text(b.get_x() + b.get_width() / 2, v, f"{int(v):,}", ha="center", va="bottom", fontweight="bold")
     ax.set_ylabel("Orders / events")
+    # Headline must state recall (share of adverse orders captured), not
+    # precision — a prior hardcoded version quoted precision (41.8%) under
+    # the word "captures", which describes recall (31.3%) instead.
     title(
         ax,
-        "A 25% review queue captures 42% of adverse orders",
+        f"A {rec.review_rate:.0%} review queue captures {rec.recall:.0%} of adverse orders",
         "Operational review funnel at the recommended score threshold",
     )
     save(fig, "13_review_funnel.png")
