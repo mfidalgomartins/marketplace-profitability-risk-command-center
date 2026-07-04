@@ -120,3 +120,5 @@ The dataset is synthetic. The outputs demonstrate an analytics operating model a
 ## License
 
 [MIT](LICENSE)
+
+The PDF report embeds [PT Serif](https://github.com/google/fonts/tree/main/ofl/ptserif) (ParaType Ltd.), licensed under the [SIL Open Font License 1.1](assets/fonts/OFL.txt).

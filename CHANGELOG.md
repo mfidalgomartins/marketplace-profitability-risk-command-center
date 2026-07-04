@@ -27,6 +27,9 @@ All notable changes to this project are documented here. The format is based on
   metric-governance validator's failure branches and CLI.
 - `prefers-reduced-motion` support on the dashboard and the Pages landing page
   so animations/transitions respect the OS Reduce Motion setting (accessibility).
+- `assets/fonts/`: PT Serif (SIL OFL), embedded in the PDF report for an
+  editorial serif treatment of headlines, body prose, and pull quotes,
+  distinct from the sans used for tables, labels, and metric cards.
 
 ### Changed
 - Refactored `src/pipeline/run_full_pipeline.py` into a testable
@@ -40,6 +43,9 @@ All notable changes to this project are documented here. The format is based on
 - Redesigned the GitHub Pages landing/redirect page to match the dashboard's
   design language (removing the old gradient/glass/serif treatment) and added
   light/dark support.
+- Retypeset the PDF report with a mixed serif/sans system (PT Serif for
+  narrative prose, sans for tables and data chrome) after a full page-by-page
+  audit against Big Four presentation standards.
 
 ### Fixed
 - The pipeline accepted `--required-release-state` values

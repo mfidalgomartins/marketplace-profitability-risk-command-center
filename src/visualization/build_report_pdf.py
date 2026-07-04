@@ -16,6 +16,8 @@ from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import cm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
@@ -36,6 +38,22 @@ RAW = ROOT / "data" / "raw"
 REPORTS = ROOT / "reports"
 GRAPHS = ROOT / "outputs" / "graphs"
 OUT = ROOT / "outputs" / "reports"
+FONTS = ROOT / "assets" / "fonts"
+
+# Editorial serif for narrative prose (cover title, section heads, body copy,
+# pull quotes) — PT Serif (SIL OFL, ParaType), bundled in assets/fonts/. Tables,
+# labels, badges, and metric cards stay on the base-14 sans (Helvetica) below;
+# mixing a serif for reading prose with a grotesque for data/UI chrome is
+# standard print-report typesetting, not decoration.
+SERIF = "PTSerif"
+SERIF_BOLD = "PTSerif-Bold"
+SERIF_ITALIC = "PTSerif-Italic"
+SERIF_BOLD_ITALIC = "PTSerif-BoldItalic"
+pdfmetrics.registerFont(TTFont(SERIF, str(FONTS / "PT_Serif-Web-Regular.ttf")))
+pdfmetrics.registerFont(TTFont(SERIF_BOLD, str(FONTS / "PT_Serif-Web-Bold.ttf")))
+pdfmetrics.registerFont(TTFont(SERIF_ITALIC, str(FONTS / "PT_Serif-Web-Italic.ttf")))
+pdfmetrics.registerFont(TTFont(SERIF_BOLD_ITALIC, str(FONTS / "PT_Serif-Web-BoldItalic.ttf")))
+pdfmetrics.registerFontFamily(SERIF, normal=SERIF, bold=SERIF_BOLD, italic=SERIF_ITALIC, boldItalic=SERIF_BOLD_ITALIC)
 
 # Brand palette — kept identical to the executive dashboard's light-mode CSS
 # tokens (src/dashboard/build_executive_dashboard.py) and the chart pack's
@@ -82,10 +100,8 @@ def styles():
             "CoverEyebrow", fontName="Helvetica-Bold", fontSize=9, textColor=ACCENT, leading=11, tracking=1.6
         )
     )
-    s.add(
-        ParagraphStyle("CoverTitle", fontName="Helvetica-Bold", fontSize=30, textColor=NAVY, leading=34, spaceAfter=12)
-    )
-    s.add(ParagraphStyle("CoverSub", fontName="Helvetica", fontSize=13.5, textColor=MUTE, leading=19))
+    s.add(ParagraphStyle("CoverTitle", fontName=SERIF_BOLD, fontSize=30, textColor=NAVY, leading=35, spaceAfter=12))
+    s.add(ParagraphStyle("CoverSub", fontName=SERIF_ITALIC, fontSize=13.5, textColor=MUTE, leading=19))
     s.add(
         ParagraphStyle("MetaLabel", fontName="Helvetica-Bold", fontSize=7.3, textColor=FAINT, leading=9, tracking=0.7)
     )
@@ -98,35 +114,35 @@ def styles():
     # Section heading: tagged for the table of contents (level 0)
     s.add(
         ParagraphStyle(
-            "SectionH1", fontName="Helvetica-Bold", fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
+            "SectionH1", fontName=SERIF_BOLD, fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
         )
     )
     # Same look as SectionH1 but not tagged for the table of contents
     s.add(
         ParagraphStyle(
-            "PlainH1", fontName="Helvetica-Bold", fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
+            "PlainH1", fontName=SERIF_BOLD, fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
         )
     )
-    s.add(ParagraphStyle("Deck", fontName="Helvetica", fontSize=10.5, textColor=MUTE, leading=15, spaceAfter=11))
+    s.add(ParagraphStyle("Deck", fontName=SERIF_ITALIC, fontSize=10.5, textColor=MUTE, leading=15, spaceAfter=11))
     # Sub heading: tagged for the table of contents (level 1)
     s.add(
         ParagraphStyle(
-            "SubH", fontName="Helvetica-Bold", fontSize=11.5, textColor=NAVY, leading=14, spaceBefore=9, spaceAfter=4
+            "SubH", fontName=SERIF_BOLD, fontSize=11.5, textColor=NAVY, leading=14, spaceBefore=9, spaceAfter=4
         )
     )
     s.add(
         ParagraphStyle(
-            "Body", fontName="Helvetica", fontSize=9.7, textColor=INK, leading=14.4, spaceAfter=8, alignment=TA_JUSTIFY
+            "Body", fontName=SERIF, fontSize=9.9, textColor=INK, leading=14.8, spaceAfter=8, alignment=TA_JUSTIFY
         )
     )
     s.add(ParagraphStyle("BodyTight", parent=s["Body"], spaceAfter=5))
     s.add(
         ParagraphStyle(
             "Pull",
-            fontName="Helvetica-Bold",
-            fontSize=11,
+            fontName=SERIF_BOLD_ITALIC,
+            fontSize=11.5,
             textColor=NAVY,
-            leading=15.5,
+            leading=16,
             spaceBefore=2,
             spaceAfter=8,
             leftIndent=10,
