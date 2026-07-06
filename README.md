@@ -99,6 +99,7 @@ docker run --rm -v "$PWD:/app" marketplace-command-center
 ## Repository Structure
 
 ```text
+assets/fonts/       third-party fonts embedded in the PDF report
 config/contracts/   governed metric and schema contracts
 data/raw/           deterministic synthetic source tables
 data/processed/     analytical, scoring, scenario, and action outputs

@@ -3,4 +3,12 @@ outputs/dashboard/*.html linguist-generated=true
 outputs/graphs/*.png linguist-generated=true
 outputs/reports/*.pdf linguist-generated=true
 reports/* linguist-generated=true
+
+# Third-party font assets: not project source, exclude from language stats
+assets/fonts/* linguist-vendored=true
+
+# Force binary handling (avoids bad diffs/line-ending mangling regardless of
+# platform autocrlf settings)
 *.pdf binary
+*.png binary
+*.ttf binary
