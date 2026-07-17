@@ -13,18 +13,23 @@ No pipeline step calls an external service. All network-facing behavior is opt-i
 
 ## Execution flow
 
-```text
-synthetic source tables
-  -> point-in-time feature layer
-  -> order and seller heuristic scores
-  -> temporal probability calibration
-       development -> maturation gap -> matured holdout -> unmatured shadow
-  -> governed order P&L and double-entry journals
-  -> synthetic randomized intervention analysis
-  -> governance register, scenarios, Monte Carlo, and threshold backtest
-  -> DuckDB raw/analytics views and curated marts
-  -> KPI snapshot, schema drift, formal validation, and release gate
-  -> dashboard, chart pack, analytical PDF, tagged PDF/UA, and Pages staging
+```mermaid
+flowchart TD
+    A[Synthetic source tables] --> B[Point-in-time feature layer]
+    B --> C[Order/seller heuristic scores]
+    C --> D[Temporal probability calibration]
+    D --> D1[development]
+    D --> D2[maturation gap]
+    D --> D3[matured holdout]
+    D --> D4[unmatured shadow]
+    D --> E[Governed order P&L\n+ double-entry journals]
+    E --> F[Synthetic randomized\nintervention analysis]
+    F --> G[Governance register · scenarios\nMonte Carlo · threshold backtest]
+    G --> H[(DuckDB raw/analytics views\n+ curated marts)]
+    H --> I[KPI snapshot · schema drift\nformal validation · release gate]
+    I -->|gate pass| J[[Dashboard]]
+    I -->|gate pass| K[[Chart pack + analytical PDF]]
+    I -->|gate pass| L[[Tagged PDF/UA + Pages staging]]
 ```
 
 The warehouse synchronizes after all analytical outputs exist. Schema and formal validation then examine the complete release. Public-facing artifacts are staged only after the release gate passes.
