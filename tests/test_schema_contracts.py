@@ -81,6 +81,53 @@ def test_validate_flags_column_type_and_key_problems(tmp_path: Path) -> None:
     assert "primary_key_duplicates" in found
 
 
+def test_validate_flags_nulls_and_unique_constraint_violations(tmp_path: Path) -> None:
+    data = tmp_path / "payments.csv"
+    pd.DataFrame(
+        {
+            "payment_id": ["P1", None, "P3"],
+            "order_id": ["O1", "O1", "O2"],
+        }
+    ).to_csv(data, index=False)
+    schema = tmp_path / "schema.json"
+    _write_schema(
+        schema,
+        {
+            "table_name": "payments",
+            "path": str(data),
+            "columns": ["payment_id", "order_id"],
+            "column_types": {"payment_id": "string", "order_id": "string"},
+            "primary_key_candidate": ["payment_id"],
+            "not_null_columns": ["payment_id", "order_id"],
+            "unique_constraints": [["order_id"]],
+        },
+    )
+    issues = validate_schema_contracts(schema)
+    found = set(issues["issue_type"])
+    assert "not_null_violation" in found
+    assert "primary_key_nulls" in found
+    assert "unique_constraint_violation" in found
+
+
+def test_validate_flags_row_count_constraints(tmp_path: Path) -> None:
+    data = tmp_path / "policy.csv"
+    pd.DataFrame({"threshold": [50, 60]}).to_csv(data, index=False)
+    schema = tmp_path / "schema.json"
+    _write_schema(
+        schema,
+        {
+            "table_name": "policy",
+            "path": str(data),
+            "columns": ["threshold"],
+            "column_types": {"threshold": "integer"},
+            "row_count_constraint": {"minimum": 1, "maximum": 1},
+        },
+    )
+
+    issues = validate_schema_contracts(schema)
+    assert "row_count_above_maximum" in set(issues["issue_type"])
+
+
 def test_datetime_column_with_nulls_validates_cleanly(tmp_path: Path) -> None:
     # A date column may legitimately have missing values (e.g. undelivered
     # orders); validation must judge it on populated values only.
@@ -121,3 +168,17 @@ def test_validate_schema_contracts_cli_writes_report(tmp_path: Path, monkeypatch
     vsc_module.main()
     assert out.exists()
     assert "PASSED" in capsys.readouterr().out
+
+
+def test_validate_schema_contracts_cli_exits_nonzero_on_failure(tmp_path: Path, monkeypatch) -> None:
+    schema = tmp_path / "schema.json"
+    _write_schema(schema, {"table_name": "missing", "path": str(tmp_path / "missing.csv"), "columns": []})
+    out = tmp_path / "issues.csv"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["validate_schema_contracts.py", "--schema-file", str(schema), "--output-file", str(out)],
+    )
+    with pytest.raises(SystemExit) as exc_info:
+        vsc_module.main()
+    assert exc_info.value.code == 1
+    assert out.exists()

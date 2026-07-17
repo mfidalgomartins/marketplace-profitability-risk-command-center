@@ -13,12 +13,15 @@ EXPECTED_STEP_ORDER = [
     "generate synthetic data",
     "build feature layer",
     "build scoring layer",
+    "run temporal model validation",
+    "build governed management accounts",
+    "run controlled intervention trial",
     "build governance action register",
     "build scenario analysis",
     "run scenario monte carlo",
     "run score policy backtesting",
+    "synchronize DuckDB warehouse",
     "generate executive snapshot",
-    "generate schema contracts",
     "validate schema contracts",
     "generate schema drift report",
     "run formal validation",
@@ -45,6 +48,7 @@ def test_parser_defaults() -> None:
     args = build_parser().parse_args([])
     assert args.required_release_state == "decision-support only"
     assert args.monte_carlo_iterations == 2000
+    assert args.charts_dir is None
     assert args.require_committee_grade is False
 
 
@@ -56,6 +60,7 @@ def test_parser_rejects_unknown_release_state() -> None:
 def test_pipeline_steps_full_order() -> None:
     steps = build_pipeline_steps(_args())
     assert [s.name for s in steps] == EXPECTED_STEP_ORDER
+    assert all("accessible" not in step.name.lower() for step in steps)
 
 
 def test_pipeline_steps_use_absolute_script_paths_and_given_interpreter() -> None:
@@ -73,6 +78,13 @@ def test_pipeline_steps_thread_monte_carlo_iterations() -> None:
     mc = next(s for s in steps if s.name == "run scenario monte carlo")
     assert "--iterations" in mc.command
     assert "123" in mc.command
+
+
+def test_production_pipeline_does_not_write_intermediate_chart_paths() -> None:
+    steps = build_pipeline_steps(_args())
+    command_arguments = [argument for step in steps for argument in step.command]
+    assert "--charts-dir" not in command_arguments
+    assert not any(".tmp" in argument for argument in command_arguments)
 
 
 def test_pipeline_steps_committee_grade_flag_propagates() -> None:

@@ -5,9 +5,6 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-_matplotlib_cache = Path(".tmp/matplotlib").resolve()
-_matplotlib_cache.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("MPLCONFIGDIR", str(_matplotlib_cache))
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 import matplotlib.pyplot as plt
@@ -20,7 +17,7 @@ import seaborn as sns
 class MonteCarloConfig:
     processed_dir: Path = Path("data/processed")
     output_dir: Path = Path("data/processed")
-    charts_dir: Path = Path(".tmp/charts")
+    charts_dir: Path | None = None
     iterations: int = 2000
     seed: int = 42
 
@@ -250,17 +247,18 @@ def save_outputs(outputs: dict[str, pd.DataFrame], cfg: MonteCarloConfig) -> Non
     for name, df in outputs.items():
         df.to_csv(cfg.output_dir / f"{name}.csv", index=False)
 
-    _plot(
-        summary=outputs["scenario_monte_carlo_summary"],
-        output_path=cfg.charts_dir / "18_scenario_monte_carlo_ranges.png",
-    )
+    if cfg.charts_dir is not None:
+        _plot(
+            summary=outputs["scenario_monte_carlo_summary"],
+            output_path=cfg.charts_dir / "18_scenario_monte_carlo_ranges.png",
+        )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Monte Carlo scenario uncertainty analysis.")
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
+    parser.add_argument("--charts-dir", type=Path)
     parser.add_argument("--iterations", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
@@ -279,7 +277,8 @@ def main() -> None:
     print("Monte Carlo scenario outputs generated:")
     for name, df in outputs.items():
         print(f"  - {name}: {len(df):,} rows")
-    print("  - chart: 18_scenario_monte_carlo_ranges.png")
+    if cfg.charts_dir is not None:
+        print("  - chart: 18_scenario_monte_carlo_ranges.png")
 
 
 if __name__ == "__main__":

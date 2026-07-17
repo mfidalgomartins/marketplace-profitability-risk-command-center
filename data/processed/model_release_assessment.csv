@@ -1,0 +1,2 @@
+assessment_scope,as_of_date,development_end,holdout_start,holdout_end,holdout_rows,unmatured_shadow_rows,roc_auc_gate_passed,average_precision_lift_gate_passed,brier_gate_passed,calibration_gate_passed,monitoring_gate_passed,release_status,automated_decision_status,required_next_step
+simulated later-period shadow holdout,2026-02-28T22:58:00,2025-07-03T22:58:00,2025-09-01T22:59:00,2025-12-30T22:51:00,42688,22334,False,True,True,True,False,recalibration-required,not approved,"Prospective validation on real, fully matured outcomes before automated decisions."

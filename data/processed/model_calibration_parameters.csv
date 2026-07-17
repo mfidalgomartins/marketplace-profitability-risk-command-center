@@ -1,0 +1,2 @@
+calibration_method,outcome,development_start,development_end,intercept,slope,score_mean,score_standard_deviation,outcome_maturation_lag_days,policy_version
+logistic_intercept_slope,refund_or_dispute_or_chargeback,2024-03-01T08:29:00,2025-07-03T22:52:00,-0.7022447779225504,0.2917049700146147,54.830775715639874,7.342952759761515,60,1.0.0

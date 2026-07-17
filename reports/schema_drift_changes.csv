@@ -1,1 +1,17 @@
 change_type,table_name,column_name,previous_value,current_value,severity
+table_added,accounting_kpi_summary,,,present,Medium
+table_added,experiment_assignments,,,present,Medium
+table_added,experiment_balance,,,present,Medium
+table_added,experiment_heterogeneity,,,present,Medium
+table_added,experiment_power,,,present,Medium
+table_added,experiment_results,,,present,Medium
+table_added,finance_general_ledger,,,present,Medium
+table_added,finance_reconciliation,,,present,Medium
+table_added,model_calibration_curve,,,present,Medium
+table_added,model_calibration_parameters,,,present,Medium
+table_added,model_monitoring_alerts,,,present,Medium
+table_added,model_monitoring_monthly,,,present,Medium
+table_added,model_release_assessment,,,present,Medium
+table_added,order_accounting_pnl,,,present,Medium
+table_added,order_risk_calibrated,,,present,Medium
+table_added,temporal_holdout_metrics,,,present,Medium

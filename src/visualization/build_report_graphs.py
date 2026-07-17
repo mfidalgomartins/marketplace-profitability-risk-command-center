@@ -5,14 +5,13 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-_matplotlib_cache = Path(".tmp/matplotlib").resolve()
-_matplotlib_cache.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("MPLCONFIGDIR", str(_matplotlib_cache))
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter, PercentFormatter
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,44 +19,54 @@ PROC = ROOT / "data" / "processed"
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "outputs" / "graphs"
 
-# Brand palette — kept identical to the executive dashboard's light-mode CSS
-# tokens (src/dashboard/build_executive_dashboard.py) and the PDF report's
-# palette (src/visualization/build_report_pdf.py) so the dashboard, chart
-# pack, and PDF read as one cohesive product rather than three near-matches.
-INK = "#0A1628"
-MUTE = "#5C6B80"
-FAINT = "#D4DAE3"
-GRID = "#EEF1F5"
-PANEL = "#F3F5F8"
-ACCENT = "#5B54E0"
-LOSS = "#C5453B"
+# Editorial chart palette aligned with the report's consulting-grade visual
+# system: neutral scaffolding, vermilion/coral emphasis and selective gold or
+# pink comparators. Explicit constants prevent plotting-library defaults.
+INK = "#2B2A28"
+MUTE = "#666765"
+FAINT = "#CCCECA"
+GRID = "#E8E6E1"
+PANEL = "#F3F2EF"
+ACCENT = "#F04423"
+CORAL = "#EF9A80"
+LOSS = "#8C302B"
+GOLD = "#C99A2E"
+PINK = "#B76A88"
+EDITORIAL_DIVERGING = LinearSegmentedColormap.from_list(
+    "editorial_diverging",
+    [PINK, PANEL, ACCENT],
+)
 
 plt.rcParams.update(
     {
         "font.family": "DejaVu Sans",
-        "font.size": 10,
+        "font.size": 9.2,
         "text.color": INK,
-        "axes.edgecolor": "#D4DAE3",
+        "axes.edgecolor": FAINT,
         "axes.labelcolor": MUTE,
-        "axes.linewidth": 0.8,
-        "axes.titlesize": 13,
+        "axes.linewidth": 0.65,
+        "axes.titlesize": 14.5,
         "xtick.color": MUTE,
         "ytick.color": MUTE,
+        "xtick.labelsize": 8.2,
+        "ytick.labelsize": 8.2,
         "figure.dpi": 180,
         "savefig.dpi": 200,
         "savefig.bbox": "tight",
+        "savefig.pad_inches": 0.12,
     }
 )
 
 
 def style(ax, grid="y"):
     ax.spines[["top", "right"]].set_visible(False)
-    ax.grid(axis=grid, color=GRID, lw=0.8)
+    ax.spines[["left", "bottom"]].set_color(FAINT)
+    ax.grid(axis=grid, color=GRID, lw=0.65)
     ax.set_axisbelow(True)
 
 
 def title(ax, headline, subtitle):
-    ax.set_title(subtitle, loc="left", fontsize=9, color=MUTE, pad=7)
+    ax.set_title(subtitle, loc="left", fontsize=8.2, color=MUTE, pad=8, fontweight="normal")
     ax.annotate(
         headline,
         (0, 1),
@@ -66,9 +75,18 @@ def title(ax, headline, subtitle):
         textcoords="offset points",
         ha="left",
         va="bottom",
-        fontsize=13,
-        fontweight="bold",
+        fontsize=14.5,
+        fontweight="normal",
         color=INK,
+    )
+    ax.figure.add_artist(
+        Line2D(
+            [0.125, 0.9],
+            [0.965, 0.965],
+            transform=ax.figure.transFigure,
+            color=GOLD,
+            linewidth=0.75,
+        )
     )
 
 
@@ -154,9 +172,9 @@ def main():
     )
     fig, ax = plt.subplots(figsize=(8.4, 4.5))
     style(ax)
-    ax.plot(m.month, m.gmv / 1e6, color=MUTE, lw=1.8)
-    ax.plot(m.month, m.risk_adjusted / 1e6, color=ACCENT, lw=2.5)
-    ax.fill_between(m.month, m.risk_adjusted / 1e6, m.gmv / 1e6, color=ACCENT, alpha=0.08)
+    ax.plot(m.month, m.gmv / 1e6, color=MUTE, lw=1.65)
+    ax.plot(m.month, m.risk_adjusted / 1e6, color=ACCENT, lw=2.25)
+    ax.fill_between(m.month, m.risk_adjusted / 1e6, m.gmv / 1e6, color=CORAL, alpha=0.18)
     ax.text(m.month.iloc[-1], m.gmv.iloc[-1] / 1e6, "  GMV", color=MUTE, va="center")
     ax.text(m.month.iloc[-1], m.risk_adjusted.iloc[-1] / 1e6, "  Risk-adjusted", color=ACCENT, va="center")
     ax.yaxis.set_major_formatter(FuncFormatter(money_m))
@@ -172,7 +190,7 @@ def main():
     mm = facts.groupby("month", as_index=False).agg(margin=("realized_contribution_margin_proxy", "sum"))
     fig, ax = plt.subplots(figsize=(8.4, 4.5))
     style(ax)
-    ax.bar(mm.month, mm.margin / 1e3, width=20, color=LOSS, alpha=0.82)
+    ax.bar(mm.month, mm.margin / 1e3, width=20, color=CORAL, edgecolor=LOSS, linewidth=0.45)
     ax.plot(mm.month, mm.margin.rolling(3).mean() / 1e3, color=INK, lw=2.1)
     ax.axhline(0, color=INK, lw=0.9)
     ax.set_ylabel("Contribution margin ($000)")
@@ -196,14 +214,12 @@ def main():
     style(ax)
     for i, (_lab, val) in enumerate(vals.items()):
         bottom = running if val >= 0 else running + val
-        ax.bar(i, abs(val) / 1e6, bottom=bottom / 1e6, color=FAINT if val >= 0 else LOSS, width=0.62)
+        ax.bar(i, abs(val) / 1e6, bottom=bottom / 1e6, color=FAINT if val >= 0 else ACCENT, width=0.62)
         ax.text(i, (bottom + abs(val)) / 1e6, f"{val / 1e6:+.2f}", ha="center", va="bottom", fontsize=9)
         running += val
-    ax.bar(5, running / 1e6, color=ACCENT, width=0.62)
-    # Anchor at the bar's zero-line edge (not its negative tip) with va="bottom" so the
-    # label sits in open space above the bar, matching the other bars' treatment. Anchoring
-    # at the tip with va="top" pushed the label past the bar into the axis tick labels below.
-    ax.text(5, 0, f"{running / 1e6:.2f}", ha="center", va="bottom", color=ACCENT, fontweight="bold")
+    ax.bar(5, running / 1e6, color=LOSS, width=0.62)
+    # Keep the total label above the zero line and clear of tick labels.
+    ax.text(5, 0, f"{running / 1e6:.2f}", ha="center", va="bottom", color=LOSS, fontweight="bold")
     ax.set_xticks(range(6), [*vals.keys(), "Contribution\nmargin"])
     ax.yaxis.set_major_formatter(FuncFormatter(money_m))
     title(
@@ -226,8 +242,14 @@ def main():
     style(ax, "x")
     ax.grid(axis="y", visible=False)
     left = 0
-    for i, (lab, val) in enumerate(leakage.items()):
-        color = ACCENT if lab == "Refunds" else [LOSS, MUTE, FAINT][i - 1]
+    leakage_colors = {
+        "Refunds": ACCENT,
+        "Disputes": CORAL,
+        "Chargebacks": LOSS,
+        "Subsidy": GOLD,
+    }
+    for lab, val in leakage.items():
+        color = leakage_colors[lab]
         ax.barh(["Total leakage"], [val / 1e6], left=left, color=color, label=lab, height=0.52)
         ax.text(
             left + val / 2e6,
@@ -293,7 +315,7 @@ def main():
     ].mean()
     heat = (heat - heat.mean()) / heat.std()
     fig, ax = plt.subplots(figsize=(8.4, 4.8))
-    ax.imshow(heat.values, cmap="RdBu_r", aspect="auto", vmin=-2, vmax=2)
+    ax.imshow(heat.values, cmap=EDITORIAL_DIVERGING, aspect="auto", vmin=-2, vmax=2)
     ax.set_xticks(range(4), ["Refund", "Dispute", "Subsidy", "Fragility"])
     ax.set_yticks(range(len(heat)), heat.index)
     for i in range(len(heat)):
@@ -318,7 +340,7 @@ def main():
     tiers = score.governance_priority_tier.value_counts().reindex(["Low", "Moderate", "High", "Critical"]).fillna(0)
     fig, ax = plt.subplots(figsize=(8.4, 4.5))
     style(ax)
-    bars = ax.bar(tiers.index, tiers.values, color=[FAINT, FAINT, ACCENT, LOSS])
+    bars = ax.bar(tiers.index, tiers.values, color=[FAINT, PANEL, ACCENT, LOSS], edgecolor=[MUTE, FAINT, ACCENT, LOSS])
     for b, v in zip(bars, tiers.values, strict=True):
         ax.text(b.get_x() + b.get_width() / 2, v, f"{int(v):,}", ha="center", va="bottom", fontweight="bold")
     ax.set_ylabel("Sellers")
@@ -400,13 +422,11 @@ def main():
     labels = ["All orders", "Sent to review", "Adverse captured", "Adverse missed"]
     fig, ax = plt.subplots(figsize=(8.4, 4.5))
     style(ax)
-    bars = ax.bar(labels, values, color=[FAINT, ACCENT, ACCENT, LOSS])
+    bars = ax.bar(labels, values, color=[FAINT, ACCENT, CORAL, LOSS])
     for b, v in zip(bars, values, strict=True):
         ax.text(b.get_x() + b.get_width() / 2, v, f"{int(v):,}", ha="center", va="bottom", fontweight="bold")
     ax.set_ylabel("Orders / events")
-    # Headline must state recall (share of adverse orders captured), not
-    # precision — a prior hardcoded version quoted precision (41.8%) under
-    # the word "captures", which describes recall (31.3%) instead.
+    # "Captured" is recall, not precision.
     title(
         ax,
         f"A {rec.review_rate:.0%} review queue captures {rec.recall:.0%} of adverse orders",
@@ -437,9 +457,9 @@ def main():
     style(ax)
     bars = ax.bar(geo.region, geo.gmv / 1e6, color=FAINT)
     ax2 = ax.twinx()
-    ax2.plot(geo.region, geo.margin_rate, color=ACCENT, marker="o", lw=2.2)
+    ax2.plot(geo.region, geo.margin_rate, color=GOLD, marker="o", lw=2.2)
     ax.set_ylabel("GMV ($M)")
-    ax2.set_ylabel("Contribution margin / GMV", color=ACCENT)
+    ax2.set_ylabel("Contribution margin / GMV", color=GOLD)
     ax.yaxis.set_major_formatter(FuncFormatter(money_m))
     ax2.yaxis.set_major_formatter(PercentFormatter())
     ax2.spines[["top"]].set_visible(False)
@@ -463,7 +483,7 @@ def main():
     ]
     corr = facts[corr_cols].corr()
     fig, ax = plt.subplots(figsize=(8.4, 5.5))
-    ax.imshow(corr, cmap="RdBu_r", vmin=-1, vmax=1)
+    ax.imshow(corr, cmap=EDITORIAL_DIVERGING, vmin=-1, vmax=1)
     labels = ["GMV", "Subsidy", "Refund", "Dispute", "Chargeback", "Delay", "Risk score", "Margin"]
     ax.set_xticks(range(len(labels)), labels, rotation=35, ha="right")
     ax.set_yticks(range(len(labels)), labels)
@@ -549,7 +569,11 @@ def main():
     style(ax, "x")
     ax.grid(axis="y", visible=False)
     y = np.arange(len(order))
-    ax.barh(y, sc.contribution_margin_proxy / 1e6, color=[LOSS, FAINT, FAINT, FAINT, ACCENT])
+    ax.barh(
+        y,
+        sc.contribution_margin_proxy / 1e6,
+        color=[LOSS, FAINT, GOLD, PINK, ACCENT],
+    )
     ax.set_yticks(y, [nice[x] for x in order])
     ax.axvline(0, color=INK, lw=1)
     ax.xaxis.set_major_formatter(FuncFormatter(money_m))

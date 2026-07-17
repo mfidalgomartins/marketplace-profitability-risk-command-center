@@ -11,9 +11,11 @@ import types
 from pathlib import Path
 
 import pandas as pd
+import reportlab
+from reportlab import rl_config
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT, TA_RIGHT
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
@@ -23,6 +25,7 @@ from reportlab.platypus import (
     Frame,
     Image,
     KeepTogether,
+    NextPageTemplate,
     PageBreak,
     PageTemplate,
     Paragraph,
@@ -32,6 +35,8 @@ from reportlab.platypus import (
 )
 from reportlab.platypus.tableofcontents import TableOfContents
 
+rl_config.invariant = 1
+
 ROOT = Path(__file__).resolve().parents[2]
 PROC = ROOT / "data" / "processed"
 RAW = ROOT / "data" / "raw"
@@ -39,44 +44,54 @@ REPORTS = ROOT / "reports"
 GRAPHS = ROOT / "outputs" / "graphs"
 OUT = ROOT / "outputs" / "reports"
 FONTS = ROOT / "assets" / "fonts"
+REPORTLAB_FONTS = Path(reportlab.__file__).resolve().parent / "fonts"
 
-# Editorial serif for narrative prose (cover title, section heads, body copy,
-# pull quotes) — PT Serif (SIL OFL, ParaType), bundled in assets/fonts/. Tables,
-# labels, badges, and metric cards stay on the base-14 sans (Helvetica) below;
-# mixing a serif for reading prose with a grotesque for data/UI chrome is
-# standard print-report typesetting, not decoration.
+# Editorial pairing: PT Serif for display hierarchy and embedded Vera Sans for
+# body copy, chart notes, tables and navigation. The pairing intentionally
+# mirrors the reference report's Charter/Helvetica contrast while remaining
+# reproducible in local, CI and container builds.
 SERIF = "PTSerif"
 SERIF_BOLD = "PTSerif-Bold"
 SERIF_ITALIC = "PTSerif-Italic"
 SERIF_BOLD_ITALIC = "PTSerif-BoldItalic"
+SANS = "Vera"
+SANS_BOLD = "Vera-Bold"
+SANS_ITALIC = "Vera-Italic"
+SANS_BOLD_ITALIC = "Vera-BoldItalic"
 pdfmetrics.registerFont(TTFont(SERIF, str(FONTS / "PT_Serif-Web-Regular.ttf")))
 pdfmetrics.registerFont(TTFont(SERIF_BOLD, str(FONTS / "PT_Serif-Web-Bold.ttf")))
 pdfmetrics.registerFont(TTFont(SERIF_ITALIC, str(FONTS / "PT_Serif-Web-Italic.ttf")))
 pdfmetrics.registerFont(TTFont(SERIF_BOLD_ITALIC, str(FONTS / "PT_Serif-Web-BoldItalic.ttf")))
 pdfmetrics.registerFontFamily(SERIF, normal=SERIF, bold=SERIF_BOLD, italic=SERIF_ITALIC, boldItalic=SERIF_BOLD_ITALIC)
+pdfmetrics.registerFont(TTFont(SANS, str(REPORTLAB_FONTS / "Vera.ttf")))
+pdfmetrics.registerFont(TTFont(SANS_BOLD, str(REPORTLAB_FONTS / "VeraBd.ttf")))
+pdfmetrics.registerFont(TTFont(SANS_ITALIC, str(REPORTLAB_FONTS / "VeraIt.ttf")))
+pdfmetrics.registerFont(TTFont(SANS_BOLD_ITALIC, str(REPORTLAB_FONTS / "VeraBI.ttf")))
+pdfmetrics.registerFontFamily(SANS, normal=SANS, bold=SANS_BOLD, italic=SANS_ITALIC, boldItalic=SANS_BOLD_ITALIC)
 
-# Brand palette — kept identical to the executive dashboard's light-mode CSS
-# tokens (src/dashboard/build_executive_dashboard.py) and the chart pack's
-# palette (src/visualization/build_report_graphs.py) so the dashboard, chart
-# pack, and PDF read as one cohesive product rather than three near-matches.
-NAVY = colors.HexColor("#0A1628")
-INK = colors.HexColor("#1D2B3E")
-MUTE = colors.HexColor("#5C6B80")
-FAINT = colors.HexColor("#8593A5")
-ACCENT = colors.HexColor("#5B54E0")
-ACCENT_SOFT = colors.HexColor("#EEEDFD")
-RED = colors.HexColor("#C5453B")
-RED_SOFT = colors.HexColor("#FBECEA")
-AMBER = colors.HexColor("#B07407")
-AMBER_SOFT = colors.HexColor("#FBF3E4")
-GREEN = colors.HexColor("#1F8A55")
-GREEN_SOFT = colors.HexColor("#ECF6F0")
-LINE = colors.HexColor("#E6E9EF")
-PANEL = colors.HexColor("#F3F5F8")
+# Full-palette editorial system derived from the supplied consulting report:
+# charcoal text, vermilion/coral emphasis, muted gold references and quiet
+# neutral surfaces. No semantic green/red shorthand is used.
+NAVY = colors.HexColor("#252422")
+INK = colors.HexColor("#353432")
+MUTE = colors.HexColor("#666765")
+FAINT = colors.HexColor("#8D8E8B")
+ACCENT = colors.HexColor("#D45A43")
+ACCENT_BRIGHT = colors.HexColor("#F04423")
+ACCENT_SOFT = colors.HexColor("#F9E7E2")
+CORAL = colors.HexColor("#EF9A80")
+BURGUNDY = colors.HexColor("#8C302B")
+BURGUNDY_SOFT = colors.HexColor("#F3E4E2")
+GOLD = colors.HexColor("#C99A2E")
+GOLD_SOFT = colors.HexColor("#F6EFD9")
+LINE = colors.HexColor("#D8D7D2")
+PANEL = colors.HexColor("#F3F2EF")
+PANEL_DARK = colors.HexColor("#DEDEDA")
 WHITE = colors.white
-PAGE_W, PAGE_H = A4
-MARGIN = 1.9 * cm
+PAGE_W, PAGE_H = letter
+MARGIN = 1.7 * cm
 FW = PAGE_W - 2 * MARGIN
+COVER_SERIES: list[tuple[float, float]] = []
 
 
 def money(v: float, decimals: int = 2) -> str:
@@ -95,96 +110,89 @@ def pct(v: float, decimals: int = 1) -> str:
 
 def styles():
     s = getSampleStyleSheet()
+    s.add(ParagraphStyle("CoverEyebrow", fontName=SANS_BOLD, fontSize=7.4, textColor=INK, leading=9.2, tracking=0.8))
+    s.add(ParagraphStyle("CoverTitle", fontName=SERIF_BOLD, fontSize=27.5, textColor=NAVY, leading=31, spaceAfter=0))
+    s.add(ParagraphStyle("CoverSub", fontName=SANS_BOLD, fontSize=9.6, textColor=INK, leading=13.5))
+    s.add(ParagraphStyle("MetaLabel", fontName=SANS_BOLD, fontSize=6.2, textColor=ACCENT, leading=8, tracking=0.45))
+    s.add(ParagraphStyle("MetaValue", fontName=SANS, fontSize=7.2, textColor=INK, leading=9.6))
     s.add(
         ParagraphStyle(
-            "CoverEyebrow", fontName="Helvetica-Bold", fontSize=9, textColor=ACCENT, leading=11, tracking=1.6
-        )
-    )
-    s.add(ParagraphStyle("CoverTitle", fontName=SERIF_BOLD, fontSize=30, textColor=NAVY, leading=35, spaceAfter=12))
-    s.add(ParagraphStyle("CoverSub", fontName=SERIF_ITALIC, fontSize=13.5, textColor=MUTE, leading=19))
-    s.add(
-        ParagraphStyle("MetaLabel", fontName="Helvetica-Bold", fontSize=7.3, textColor=FAINT, leading=9, tracking=0.7)
-    )
-    s.add(ParagraphStyle("MetaValue", fontName="Helvetica", fontSize=9.3, textColor=INK, leading=12.5))
-    s.add(
-        ParagraphStyle(
-            "Kicker", fontName="Helvetica-Bold", fontSize=8, textColor=ACCENT, leading=10, tracking=1.2, spaceAfter=3
+            "Kicker", fontName=SANS_BOLD, fontSize=7, textColor=MUTE, leading=8.5, tracking=0.7, spaceAfter=4
         )
     )
     # Section heading: tagged for the table of contents (level 0)
     s.add(
         ParagraphStyle(
-            "SectionH1", fontName=SERIF_BOLD, fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
+            "SectionH1", fontName=SERIF_BOLD, fontSize=18.5, textColor=ACCENT, leading=21.5, spaceBefore=0, spaceAfter=3
         )
     )
     # Same look as SectionH1 but not tagged for the table of contents
     s.add(
         ParagraphStyle(
-            "PlainH1", fontName=SERIF_BOLD, fontSize=17, textColor=NAVY, leading=20, spaceBefore=0, spaceAfter=2
+            "PlainH1", fontName=SERIF_BOLD, fontSize=18.5, textColor=ACCENT, leading=21.5, spaceBefore=0, spaceAfter=3
         )
     )
-    s.add(ParagraphStyle("Deck", fontName=SERIF_ITALIC, fontSize=10.5, textColor=MUTE, leading=15, spaceAfter=11))
+    s.add(ParagraphStyle("Deck", fontName=SANS, fontSize=9.5, textColor=MUTE, leading=13.5, spaceAfter=11))
     # Sub heading: tagged for the table of contents (level 1)
     s.add(
         ParagraphStyle(
-            "SubH", fontName=SERIF_BOLD, fontSize=11.5, textColor=NAVY, leading=14, spaceBefore=9, spaceAfter=4
+            "SubH", fontName=SANS_BOLD, fontSize=10.1, textColor=INK, leading=13.2, spaceBefore=9, spaceAfter=4
         )
     )
     s.add(
         ParagraphStyle(
-            "Body", fontName=SERIF, fontSize=9.9, textColor=INK, leading=14.8, spaceAfter=8, alignment=TA_JUSTIFY
+            "Body", fontName=SANS, fontSize=8.8, textColor=INK, leading=12.8, spaceAfter=7.2, alignment=TA_LEFT
         )
     )
     s.add(ParagraphStyle("BodyTight", parent=s["Body"], spaceAfter=5))
     s.add(
         ParagraphStyle(
             "Pull",
-            fontName=SERIF_BOLD_ITALIC,
-            fontSize=11.5,
-            textColor=NAVY,
-            leading=16,
+            fontName=SANS_BOLD,
+            fontSize=9.3,
+            textColor=INK,
+            leading=13.8,
             spaceBefore=2,
             spaceAfter=8,
-            leftIndent=10,
             alignment=TA_LEFT,
         )
     )
     s.add(
         ParagraphStyle(
             "Caption",
-            fontName="Helvetica-Oblique",
-            fontSize=7.6,
-            textColor=FAINT,
-            leading=10,
+            fontName=SANS,
+            fontSize=6.6,
+            textColor=MUTE,
+            leading=8.8,
             spaceBefore=3,
-            alignment=TA_CENTER,
+            alignment=TA_LEFT,
         )
     )
     s.add(
         ParagraphStyle(
             "FigNo",
-            fontName="Helvetica-Bold",
-            fontSize=7.6,
+            fontName=SANS_BOLD,
+            fontSize=6.6,
             textColor=ACCENT,
-            leading=10,
+            leading=8.8,
             spaceBefore=3,
-            alignment=TA_CENTER,
+            alignment=TA_LEFT,
         )
     )
-    s.add(ParagraphStyle("Metric", fontName="Helvetica-Bold", fontSize=18, textColor=NAVY, leading=20))
-    s.add(ParagraphStyle("MetricRed", parent=s["Metric"], textColor=RED))
-    s.add(ParagraphStyle("MetricLabel", fontName="Helvetica", fontSize=7.2, textColor=MUTE, leading=9))
-    s.add(ParagraphStyle("TblH", fontName="Helvetica-Bold", fontSize=7.8, textColor=WHITE, leading=9.5))
+    s.add(ParagraphStyle("Metric", fontName=SERIF_BOLD, fontSize=17.5, textColor=ACCENT, leading=19.5))
+    s.add(ParagraphStyle("MetricRed", parent=s["Metric"], textColor=BURGUNDY))
+    s.add(ParagraphStyle("MetricLabel", fontName=SANS, fontSize=6.8, textColor=MUTE, leading=8.6))
+    s.add(ParagraphStyle("TblH", fontName=SANS_BOLD, fontSize=7.2, textColor=INK, leading=8.8))
     s.add(ParagraphStyle("TblHR", parent=s["TblH"], alignment=TA_RIGHT))
-    s.add(ParagraphStyle("Tbl", fontName="Helvetica", fontSize=7.9, textColor=INK, leading=10.2))
+    s.add(ParagraphStyle("Tbl", fontName=SANS, fontSize=7.15, textColor=INK, leading=9.2))
     s.add(ParagraphStyle("TblR", parent=s["Tbl"], alignment=TA_RIGHT))
     s.add(
         ParagraphStyle(
             "BadgeHigh",
-            fontName="Helvetica-Bold",
-            fontSize=7.2,
-            textColor=RED,
-            backColor=RED_SOFT,
+            fontName=SANS_BOLD,
+            fontSize=6.8,
+            textColor=BURGUNDY,
+            backColor=BURGUNDY_SOFT,
             borderPadding=(3, 5, 3, 5),
             alignment=TA_CENTER,
         )
@@ -192,10 +200,10 @@ def styles():
     s.add(
         ParagraphStyle(
             "BadgeMed",
-            fontName="Helvetica-Bold",
-            fontSize=7.2,
-            textColor=AMBER,
-            backColor=AMBER_SOFT,
+            fontName=SANS_BOLD,
+            fontSize=6.8,
+            textColor=ACCENT,
+            backColor=ACCENT_SOFT,
             borderPadding=(3, 5, 3, 5),
             alignment=TA_CENTER,
         )
@@ -203,37 +211,84 @@ def styles():
     s.add(
         ParagraphStyle(
             "BadgeLow",
-            fontName="Helvetica-Bold",
-            fontSize=7.2,
-            textColor=GREEN,
-            backColor=GREEN_SOFT,
+            fontName=SANS_BOLD,
+            fontSize=6.8,
+            textColor=NAVY,
+            backColor=GOLD_SOFT,
             borderPadding=(3, 5, 3, 5),
             alignment=TA_CENTER,
         )
     )
-    s.add(ParagraphStyle("TOC0", fontName="Helvetica-Bold", fontSize=9.6, textColor=NAVY, leading=18, spaceBefore=5))
-    s.add(ParagraphStyle("TOC1", fontName="Helvetica", fontSize=9.2, textColor=MUTE, leading=15, leftIndent=14))
+    s.add(ParagraphStyle("TOC0", fontName=SERIF_BOLD, fontSize=8.6, textColor=ACCENT, leading=12.4, spaceBefore=0))
+    s.add(ParagraphStyle("TOC1", fontName=SANS, fontSize=7.1, textColor=MUTE, leading=10.1, leftIndent=14))
     return s
 
 
 def footer(canvas, doc):
     canvas.saveState()
+    rule_y = PAGE_H - 1.08 * cm
     canvas.setStrokeColor(LINE)
-    canvas.line(MARGIN, 1.25 * cm, PAGE_W - MARGIN, 1.25 * cm)
-    canvas.setFont("Helvetica", 7)
+    canvas.setLineWidth(0.45)
+    canvas.line(MARGIN, rule_y, PAGE_W - MARGIN, rule_y)
+    canvas.setStrokeColor(GOLD)
+    canvas.setLineWidth(0.8)
+    canvas.line(MARGIN, rule_y, MARGIN + 1.5 * cm, rule_y)
+    canvas.setFont(SANS, 6.2)
     canvas.setFillColor(FAINT)
-    canvas.drawString(MARGIN, 0.9 * cm, "Marketplace Profitability, Fraud & Seller Quality")
-    canvas.drawCentredString(PAGE_W / 2, 0.9 * cm, "Marketplace Intelligence and Analytics")
-    canvas.drawRightString(PAGE_W - MARGIN, 0.9 * cm, str(doc.page))
+    canvas.drawString(MARGIN, 0.72 * cm, "Marketplace Profitability, Fraud & Seller Quality")
+    canvas.drawRightString(PAGE_W - MARGIN, 0.72 * cm, str(doc.page))
     canvas.restoreState()
 
 
 def cover_canvas(canvas, _doc):
     canvas.saveState()
+    canvas.setFillColor(WHITE)
+    canvas.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
+
+    # Cover architecture follows the reference's decisive modular composition:
+    # a quiet title field, a committed vermilion block and a data-led image band.
+    top_h = 8.8 * cm
+    title_w = PAGE_W * 0.74
+    canvas.setFillColor(PANEL_DARK)
+    canvas.rect(0, PAGE_H - top_h, title_w, top_h, fill=1, stroke=0)
+    canvas.setFillColor(ACCENT_BRIGHT)
+    canvas.rect(title_w, PAGE_H - top_h, PAGE_W - title_w, top_h, fill=1, stroke=0)
+
+    art_x = 0.7 * cm
+    art_y = PAGE_H - 16.55 * cm
+    art_w = title_w - art_x
+    art_h = 7.15 * cm
     canvas.setFillColor(NAVY)
-    canvas.rect(0, 0, 0.55 * cm, PAGE_H, fill=1, stroke=0)
+    canvas.rect(art_x, art_y, art_w, art_h, fill=1, stroke=0)
+
+    # The cover art is generated directly from the report's monthly GMV and
+    # risk-adjusted value series, avoiding decorative stock imagery or an
+    # additional asset file while keeping the visual truthful to the analysis.
+    if COVER_SERIES:
+        step = art_w / len(COVER_SERIES)
+        baseline = art_y + 0.52 * cm
+        plot_h = art_h - 1.05 * cm
+        points: list[tuple[float, float]] = []
+        for idx, (gross_scaled, protected_scaled) in enumerate(COVER_SERIES):
+            x = art_x + idx * step
+            bar_h = max(0.35 * cm, gross_scaled * plot_h)
+            canvas.setFillColor(CORAL if idx % 4 else GOLD)
+            canvas.rect(x + step * 0.16, baseline, step * 0.56, bar_h, fill=1, stroke=0)
+            points.append((x + step * 0.44, baseline + protected_scaled * plot_h))
+        canvas.setStrokeColor(WHITE)
+        canvas.setLineWidth(1.35)
+        for start, end in zip(points, points[1:], strict=False):
+            canvas.line(start[0], start[1], end[0], end[1])
+        canvas.setFillColor(WHITE)
+        for x, y in points[::4]:
+            canvas.circle(x, y, 1.7, fill=1, stroke=0)
+
     canvas.setFillColor(ACCENT)
-    canvas.rect(0.55 * cm, PAGE_H - 0.32 * cm, PAGE_W - 0.55 * cm, 0.32 * cm, fill=1, stroke=0)
+    canvas.rect(title_w, art_y + art_h * 0.52, PAGE_W - title_w, art_h * 0.48, fill=1, stroke=0)
+    canvas.setFillColor(GOLD)
+    canvas.rect(title_w, art_y, (PAGE_W - title_w) * 0.42, art_h * 0.52, fill=1, stroke=0)
+    canvas.setFillColor(PANEL)
+    canvas.rect(title_w + (PAGE_W - title_w) * 0.42, art_y, (PAGE_W - title_w) * 0.58, art_h * 0.52, fill=1, stroke=0)
     canvas.restoreState()
 
 
@@ -265,31 +320,32 @@ def pull(text):
     bar.setStyle(
         TableStyle(
             [
-                ("LINEBEFORE", (0, 0), (0, 0), 2.5, ACCENT),
-                ("LEFTPADDING", (0, 0), (-1, -1), 12),
+                ("LINEBEFORE", (0, 0), (0, 0), 0.8, ACCENT),
+                ("LEFTPADDING", (0, 0), (-1, -1), 10),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-                ("TOPPADDING", (0, 0), (-1, -1), 8),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 6),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
             ]
         )
     )
-    # Table flowables carry no spacing of their own (unlike Paragraph styles),
-    # so without this the callout sits flush against the body text before and
-    # after it. Match Body's own spaceAfter (8) on both sides so the pull
-    # quote reads as a distinct, breathing callout rather than run-in text.
+    # Tables have no built-in paragraph spacing.
     bar.spaceBefore = 8
     bar.spaceAfter = 10
     return bar
 
 
-def fig(name, caption, width=14.4 * cm):
+def fig(name, caption, width=None):
     from PIL import Image as PILImage
 
     FIG["n"] += 1
+    width = width or FW
     path = GRAPHS / name
     iw, ih = PILImage.open(path).size
     img = Image(str(path), width=width, height=width * ih / iw)
-    cap = Paragraph(f"Figure {FIG['n']}.&nbsp;&nbsp;{caption}", ST["Caption"])
+    cap = Paragraph(
+        f"<font color='#D45A43'><b>Figure {FIG['n']}.</b></font>&nbsp;&nbsp;{caption}",
+        ST["Caption"],
+    )
     block = Table([[img], [cap]], colWidths=[width])
     block.setStyle(
         TableStyle(
@@ -308,10 +364,11 @@ def fig(name, caption, width=14.4 * cm):
         TableStyle(
             [
                 ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("LINEABOVE", (0, 0), (-1, 0), 0.65, GOLD),
                 ("LEFTPADDING", (0, 0), (-1, -1), 0),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 0),
-                ("TOPPADDING", (0, 0), (-1, -1), 4),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
             ]
         )
     )
@@ -329,14 +386,13 @@ def metric_card(value, label, negative=False):
     t.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, -1), PANEL),
-                ("LINEABOVE", (0, 0), (-1, 0), 2, RED if negative else ACCENT),
-                ("LEFTPADDING", (0, 0), (-1, -1), 9),
+                ("LINEBEFORE", (0, 0), (0, -1), 0.75, BURGUNDY if negative else ACCENT),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 8),
-                ("TOPPADDING", (0, 0), (-1, 0), 7),
+                ("TOPPADDING", (0, 0), (-1, 0), 4),
                 ("BOTTOMPADDING", (0, 0), (-1, 0), 0),
                 ("TOPPADDING", (0, 1), (-1, 1), 2),
-                ("BOTTOMPADDING", (0, 1), (-1, 1), 8),
+                ("BOTTOMPADDING", (0, 1), (-1, 1), 5),
             ]
         )
     )
@@ -349,9 +405,13 @@ def metric_strip(cards):
         TableStyle(
             [
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LINEABOVE", (0, 0), (-1, -1), 0.7, GOLD),
+                ("LINEBELOW", (0, 0), (-1, -1), 0.45, LINE),
                 ("LEFTPADDING", (0, 0), (0, 0), 0),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 6),
                 ("LEFTPADDING", (1, 0), (-1, -1), 6),
+                ("TOPPADDING", (0, 0), (-1, -1), 7),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
             ]
         )
     )
@@ -365,9 +425,7 @@ def table(rows, widths, numeric_cols=(), header=True, small=False):
         cooked_row = []
         for c_idx, value in enumerate(row):
             if header and r_idx == 0:
-                # A numeric column's header must share its data's right edge —
-                # left-aligning the label over right-aligned figures below it
-                # reads as misaligned columns, not just a styling nicety.
+                # Align numeric headers with the values below them.
                 style = ST["TblHR"] if c_idx in numeric_cols else ST["TblH"]
             elif c_idx in numeric_cols:
                 style = ST["TblR"]
@@ -378,7 +436,7 @@ def table(rows, widths, numeric_cols=(), header=True, small=False):
     t = Table(cooked, colWidths=widths, repeatRows=1 if header else 0)
     cmds = [
         ("ROWBACKGROUNDS", (0, 1 if header else 0), (-1, -1), [WHITE, PANEL]),
-        ("LINEBELOW", (0, 0), (-1, -1), 0.45, LINE),
+        ("LINEBELOW", (0, 0), (-1, -1), 0.35, LINE),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("LEFTPADDING", (0, 0), (-1, -1), 7),
         ("RIGHTPADDING", (0, 0), (-1, -1), 7),
@@ -386,7 +444,10 @@ def table(rows, widths, numeric_cols=(), header=True, small=False):
         ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
     ]
     if header:
-        cmds.insert(0, ("BACKGROUND", (0, 0), (-1, 0), NAVY))
+        cmds[:0] = [
+            ("BACKGROUND", (0, 0), (-1, 0), PANEL_DARK),
+            ("LINEABOVE", (0, 0), (-1, 0), 0.8, ACCENT),
+        ]
     t.setStyle(TableStyle(cmds))
     return t
 
@@ -404,13 +465,14 @@ def priority_table(rows):
                 Paragraph(row[4], ST["TblR"]),
             ]
         )
-    t = Table(cooked, colWidths=[2.2 * cm, 4.4 * cm, 3.3 * cm, 4.4 * cm, 2.9 * cm])
+    t = Table(cooked, colWidths=[2.2 * cm, 4.4 * cm, 3.3 * cm, 4.4 * cm, FW - 14.3 * cm])
     t.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, 0), NAVY),
+                ("BACKGROUND", (0, 0), (-1, 0), PANEL_DARK),
+                ("LINEABOVE", (0, 0), (-1, 0), 0.8, ACCENT),
                 ("ROWBACKGROUNDS", (0, 1), (-1, -1), [WHITE, PANEL]),
-                ("LINEBELOW", (0, 0), (-1, -1), 0.45, LINE),
+                ("LINEBELOW", (0, 0), (-1, -1), 0.35, LINE),
                 ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
                 ("LEFTPADDING", (0, 0), (-1, -1), 6),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 6),
@@ -426,7 +488,7 @@ def priority_table(rows):
 # Build
 # ----------------------------------------------------------------------------
 def build():
-    global ST
+    global COVER_SERIES, ST
     OUT.mkdir(parents=True, exist_ok=True)
     ST = styles()
 
@@ -470,6 +532,16 @@ def build():
             margin=("realized_contribution_margin_proxy", "sum"),
         )
     )
+    cover_min = float(monthly[["gmv", "rav"]].min().min())
+    cover_max = float(monthly[["gmv", "rav"]].max().max())
+    cover_span = max(cover_max - cover_min, 1.0)
+    COVER_SERIES = [
+        (
+            0.28 + 0.72 * (float(row.gmv) - cover_min) / cover_span,
+            0.28 + 0.72 * (float(row.rav) - cover_min) / cover_span,
+        )
+        for row in monthly.itertuples()
+    ]
     n_months = len(monthly)
     first_loss, last_loss = monthly.margin.iloc[0], monthly.margin.iloc[-1]
     gap_first = 1 - monthly.rav.iloc[0] / monthly.gmv.iloc[0]
@@ -533,33 +605,26 @@ def build():
     subs = scen.loc["subsidy_tightening"]
     down = scen.loc["downside_high_risk_deterioration"]
     mc_fraud = mc.loc["fraud_control_improvement"]
-    # Since probabilities are non-negative, the maximum across scenarios is 0
-    # if and only if every scenario's modeled probability of a positive
-    # contribution margin is 0 — so this single derived value backs both the
-    # "zero in any scenario" and "zero in every scenario" claims below.
+    # The maximum supports report-wide statements about positive-margin probability.
     mc_prob_positive_max = float(mc["prob_cm_positive"].max())
-    # The scenario baseline is a trailing run-rate window, not the cumulative
-    # 24-month figures used elsewhere in this report. Read the window length
-    # from the pipeline's own recorded output (scenario_top_risk_exposure.csv)
-    # rather than hardcoding it, so the disclosure can never silently drift
-    # out of sync with whatever window actually produced the loaded data.
+    # Scenario windows come from the governed exposure artifact.
     scenario_baseline_months = int(scen_exposure["baseline_months_used"])
     scenario_horizon_months = int(scen_exposure["horizon_months"])
 
     # ---- Document skeleton -------------------------------------------------
     doc = BaseDocTemplate(
         str(OUT / "marketplace-command-center-report.pdf"),
-        pagesize=A4,
+        pagesize=letter,
         leftMargin=MARGIN,
         rightMargin=MARGIN,
-        topMargin=1.55 * cm,
-        bottomMargin=1.65 * cm,
+        topMargin=1.5 * cm,
+        bottomMargin=1.45 * cm,
         title="Marketplace Profitability, Fraud & Seller Quality",
         author="Marketplace Intelligence and Analytics",
         subject="Marketplace analytical report",
     )
-    body = Frame(MARGIN, 1.5 * cm, FW, PAGE_H - 3.05 * cm, id="body")
-    cover_frame = Frame(2.35 * cm, 2.0 * cm, PAGE_W - 4.1 * cm, PAGE_H - 4 * cm, id="cover")
+    body = Frame(MARGIN, 1.35 * cm, FW, PAGE_H - 2.9 * cm, id="body")
+    cover_frame = Frame(MARGIN, 1.1 * cm, FW, PAGE_H - 2.2 * cm, id="cover")
     doc.addPageTemplates(
         [
             PageTemplate(id="cover", frames=[cover_frame], onPage=cover_canvas),
@@ -587,16 +652,17 @@ def build():
     # COVER
     # ===================================================================
     story += [
-        Spacer(1, 3.6 * cm),
+        Spacer(1, 0.45 * cm),
         Paragraph("MARKETPLACE PERFORMANCE REVIEW", ST["CoverEyebrow"]),
-        Spacer(1, 9),
-        Paragraph("Marketplace Profitability, Fraud &amp; Seller Quality", ST["CoverTitle"]),
+        Spacer(1, 0.45 * cm),
+        Paragraph("Marketplace Profitability,<br/>Fraud &amp; Seller Quality", ST["CoverTitle"]),
+        Spacer(1, 12.7 * cm),
         Paragraph(
             "A decision report on growth quality, value leakage and the controls "
             "that recover the most contribution margin",
             ST["CoverSub"],
         ),
-        Spacer(1, 1.15 * cm),
+        Spacer(1, 0.55 * cm),
     ]
     meta = [
         [Paragraph("ANALYSIS PERIOD", ST["MetaLabel"]), Paragraph("SCOPE", ST["MetaLabel"])],
@@ -610,12 +676,12 @@ def build():
             Paragraph("Marketplace Intelligence and Analytics", ST["MetaValue"]),
         ],
     ]
-    mt = Table(meta, colWidths=[8.0 * cm, 7.0 * cm])
+    mt = Table(meta, colWidths=[FW / 2, FW / 2])
     mt.setStyle(
         TableStyle(
             [
-                ("LINEABOVE", (0, 0), (-1, 0), 1.5, ACCENT),
-                ("LINEABOVE", (0, 2), (-1, 2), 0.6, LINE),
+                ("LINEABOVE", (0, 0), (-1, 0), 0.8, ACCENT),
+                ("LINEABOVE", (0, 2), (-1, 2), 0.45, LINE),
                 ("LEFTPADDING", (0, 0), (-1, -1), 0),
                 ("RIGHTPADDING", (0, 0), (-1, -1), 12),
                 ("TOPPADDING", (0, 0), (-1, -1), 6),
@@ -624,7 +690,7 @@ def build():
             ]
         )
     )
-    story += [mt, Spacer(1, 6.2 * cm), PageBreak()]
+    story += [mt, NextPageTemplate("body"), PageBreak()]
 
     # ===================================================================
     # TABLE OF CONTENTS
@@ -641,7 +707,6 @@ def build():
     # 1. EXECUTIVE SUMMARY
     # ===================================================================
     story += [
-        Paragraph("SECTION 1", ST["Kicker"]),
         h1("Executive summary"),
         deck(
             "The marketplace is scaling into a contribution loss. Growth is real, but it "
@@ -770,7 +835,7 @@ def build():
                 f"<b>{dtxt}</b>",
                 # Inline <font> tags need a literal hex string (reportlab markup
                 # can't reference the ACCENT Color object) — keep in sync with ACCENT above.
-                f"{ev}<br/><font color='#5B54E0'><b>{owner}</b></font>",
+                f"{ev}<br/><font color='#D45A43'><b>{owner}</b></font>",
             ]
         )
     story += [KeepTogether(table(rows, [0.8 * cm, 5.2 * cm, FW - 6.0 * cm], header=True)), Spacer(1, 8)]
@@ -792,7 +857,6 @@ def build():
     # 2. CONTEXT AND OBJECTIVES
     # ===================================================================
     story += [
-        Paragraph("SECTION 2", ST["Kicker"]),
         h1("Context and objectives"),
         deck("Why this review exists, who it is for, and the decision it is built to support."),
         p(
@@ -850,7 +914,6 @@ def build():
     # 3. DATA AND METHODOLOGY
     # ===================================================================
     story += [
-        Paragraph("SECTION 3", ST["Kicker"]),
         h1("Data and methodology"),
         deck(
             "A governed workflow connects realized economics, pre-outcome risk and "
@@ -942,7 +1005,6 @@ def build():
     # 4. ANALYTICAL FRAMEWORK
     # ===================================================================
     story += [
-        Paragraph("SECTION 4", ST["Kicker"]),
         h1("Analytical framework"),
         deck(
             "The diagnosis follows the money: from the topline gap, through the leakage "
@@ -1005,7 +1067,6 @@ def build():
     # 5. GROWTH QUALITY
     # ===================================================================
     story += [
-        Paragraph("SECTION 5  |  FINDINGS", ST["Kicker"]),
         h1("Growth quality and the protection gap"),
         deck("Topline expansion is real and steady. It is not converting into value the platform gets to keep."),
         p(
@@ -1064,7 +1125,6 @@ def build():
     # 6. UNIT ECONOMICS
     # ===================================================================
     story += [
-        Paragraph("SECTION 6  |  FINDINGS", ST["Kicker"]),
         h1("Unit economics and where the money goes"),
         deck(
             "The revenue pool is consumed before structural costs are even considered. "
@@ -1125,7 +1185,6 @@ def build():
     # 7. CATEGORY EXPOSURE
     # ===================================================================
     story += [
-        Paragraph("SECTION 7  |  FINDINGS", ST["Kicker"]),
         h1("Category exposure"),
         deck("The loss is concentrated by category, and the categories that matter most need opposite interventions."),
         p(
@@ -1190,7 +1249,6 @@ def build():
     # 8. SELLER GOVERNANCE
     # ===================================================================
     story += [
-        Paragraph("SECTION 8  |  FINDINGS", ST["Kicker"]),
         h1("Seller governance and concentration"),
         deck(
             "The intervention queue is small enough to own by name, and the controls should "
@@ -1260,7 +1318,6 @@ def build():
     # 9. ORDER AND BUYER RISK
     # ===================================================================
     story += [
-        Paragraph("SECTION 9  |  FINDINGS", ST["Kicker"]),
         h1("Order and buyer risk"),
         deck(
             "The order risk score separates outcomes directionally and supports a bounded "
@@ -1348,7 +1405,6 @@ def build():
     # 10. STRUCTURE: GEOGRAPHY AND CORRELATION
     # ===================================================================
     story += [
-        Paragraph("SECTION 10  |  FINDINGS", ST["Kicker"]),
         h1("Structure: geography and correlation"),
         deck(
             "Geography does not explain the loss, and the correlation structure confirms "
@@ -1404,7 +1460,6 @@ def build():
     # 11. COHORTS
     # ===================================================================
     story += [
-        Paragraph("SECTION 11  |  FINDINGS", ST["Kicker"]),
         h1("Seller onboarding cohorts"),
         deck(
             "Recent onboarding cohorts do not show a clean quality improvement, so "
@@ -1442,7 +1497,6 @@ def build():
     # 12. SCENARIO AND POLICY ECONOMICS
     # ===================================================================
     story += [
-        Paragraph("SECTION 12  |  FINDINGS", ST["Kicker"]),
         h1("Scenario and policy economics"),
         deck(
             "The scenarios rank the available mitigations clearly. None of them reaches "
@@ -1532,7 +1586,6 @@ def build():
     # 13. RISKS AND LIMITATIONS
     # ===================================================================
     story += [
-        Paragraph("SECTION 13", ST["Kicker"]),
         h1("Risks, limitations and caveats"),
         deck(
             "The largest risk in this report is confusing disciplined analytics with "
@@ -1604,7 +1657,6 @@ def build():
     # 14. RECOMMENDATIONS
     # ===================================================================
     story += [
-        Paragraph("SECTION 14", ST["Kicker"]),
         h1("Recommendations and action priorities"),
         deck(
             "A 180-day program in three tiers. Immediate economic control, near-term "
@@ -1707,7 +1759,6 @@ def build():
     # 15. FURTHER QUESTIONS
     # ===================================================================
     story += [
-        Paragraph("SECTION 15", ST["Kicker"]),
         h1("Further questions and evidence gaps"),
         deck(
             "The current report is decision-ready for a synthetic command-center demonstration. "
@@ -1806,10 +1857,7 @@ def build():
         "chargeback_rate": "Share of orders charged back",
         "top10_seller_gmv_share": "Current-period seller concentration",
     }
-    # Metric keys carry acronyms (GMV) and embedded digits (top10) that
-    # str.title() mangles into "Gmv" and "Top10 Seller Gmv Share" — a
-    # display name is a deliberate editorial choice, not a mechanical
-    # transform of the underlying column name.
+    # Preserve acronyms and embedded digits in metric labels.
     display_name = {
         "gmv": "GMV",
         "net_value": "Net Value",

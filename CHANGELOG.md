@@ -6,6 +6,23 @@ All notable changes to this project are documented here. The format is based on
 ## [Unreleased]
 
 ### Added
+- Matured temporal validation with logistic calibration, a development/maturation-gap/holdout/shadow split, monthly PSI and calibration monitoring, alerts, and model release gates.
+- Governed synthetic management accounts with an order subledger, monthly double-entry ledger, and cent-level reconciliation controls.
+- Deterministic randomized intervention analysis with balance, power, intention-to-treat effects, seller-clustered inference, and exploratory heterogeneity.
+- Idempotent DuckDB catalog with SHA-256 source releases and curated order, seller, finance, model-monitoring, and experiment marts.
+- Secured FastAPI case-management service with RBAC, optimistic concurrency, idempotent commands, approval workflow, immutable events, and HMAC-chained audit verification.
+- Tagged PDF/UA executive summary generated from semantic HTML and validated for structure, language, marked content, and PDF/UA metadata.
+- Narrow-phone dashboard layout that preserves the existing desktop visual identity.
+- Versioned model-monitoring, finance, and experiment policy contracts plus dedicated tests and formal release controls.
+
+### Changed
+- Historical buyer and seller outcomes now enter order scoring only after the 60-day maturation lag.
+- Pipeline, Make targets, Docker runtime, documentation, schema contracts, validation coverage, CI artifacts, and dependency pins now cover all strategic expansion layers.
+- README now leads with a flagship-deliverables section contrasting the interactive dashboard and the analytical PDF report.
+
+## [1.0.0] - 2026-07-14
+
+### Added
 - `pyproject.toml` centralising `ruff`, `mypy`, `pytest`, `coverage`, and
   `bandit` configuration.
 - `requirements-dev.txt` separating tooling from runtime dependencies.
@@ -28,6 +45,13 @@ All notable changes to this project are documented here. The format is based on
 - `assets/fonts/`: PT Serif (SIL OFL), embedded in the PDF report for an
   editorial serif treatment of headlines, body prose, and pull quotes,
   distinct from the sans used for tables, labels, and metric cards.
+- Immutable schema-contract validation during normal runs, expanded key/null/
+  uniqueness enforcement, deterministic artifact checks, and dependency update
+  automation.
+- Temporal-integrity tests proving that current outcomes and future orders do
+  not change historical order scores.
+- `docs/architecture.md` documenting boundaries, grains, release semantics,
+  reproducibility, and the production scale-up path.
 
 ### Changed
 - Refactored `src/pipeline/run_full_pipeline.py` into a testable
@@ -35,10 +59,8 @@ All notable changes to this project are documented here. The format is based on
   directory.
 - Test coverage raised from ~30% to ~89% (measured across the full `src` tree),
   enforced by an `--cov-fail-under=85` floor.
-- Elevated the executive dashboard to an Apple-grade finish (SF system type,
-  `#f5f5f7` canvas, larger tokenised radii, soft ambient elevation, pill
-  controls, frosted sticky nav, smoother motion) and stopped pinning the full
-  header on mobile viewports, where it previously ate ~45% of the screen.
+- Refined dashboard typography, spacing, controls, motion, and mobile header
+  behavior while retaining the established information architecture.
 - Redesigned the GitHub Pages landing/redirect page to match the dashboard's
   design language (removing the old gradient/glass/serif treatment) and added
   light/dark support.
@@ -46,9 +68,13 @@ All notable changes to this project are documented here. The format is based on
   dashboard, the matplotlib chart pack, and the PDF report to one canonical
   set of hex values, so all three read as one product instead of three
   near-matches.
-- Retypeset the PDF report with a mixed serif/sans system (PT Serif for
-  narrative prose, sans for tables and data chrome) after a full page-by-page
-  audit against Big Four presentation standards.
+- Retypeset the PDF report with PT Serif for narrative prose and sans-serif
+  typography for tables, labels, and metric cards.
+- Fixed score smoothing and order-value transforms so they no longer depend on
+  full-sample outcomes or future records.
+- Made governed Markdown, dashboard HTML, and PDF builds deterministic.
+- Escaped embedded dashboard JSON and data-backed DOM strings without changing
+  the dashboard design.
 
 ### Fixed
 - The pipeline accepted `--required-release-state` values
@@ -61,19 +87,9 @@ All notable changes to this project are documented here. The format is based on
   so date columns were mistyped as `"string"`. Fixed detection and made the
   schema-contract validator null-tolerant for datetime columns with legitimate
   gaps; re-baselined the schema history snapshot so drift stays clean.
-- PDF report: three places asserted "probability of a positive contribution
-  margin is 0.0%" as a hardcoded literal rather than reading the real
-  `prob_cm_positive` column, and the scenario section's dollar figures (a
-  6-month window) sat next to the 24-month headline figures with no scope
-  disclosure. Both now derive from governed data.
-- PDF report: a waterfall chart's total-bar label overlapped the axis tick
-  labels below it; a chart headline stated precision (41.8%) under the word
-  "captures", which describes recall (31.3%); two charts showed unitless axis
-  ticks next to per-bar labels already in percent; pull-quote callouts had no
-  vertical spacing and read as run-in text; two paragraphs left a stranded
-  single word/line (a widow) at the top of a page; appendix metric labels ran
-  through `str.title()` producing "Gmv" and "Top10 Seller Gmv Share"; and
-  numeric table headers were left-aligned over right-aligned data. All fixed
-  after a full 32-page visual audit.
+- Replaced hardcoded PDF probability and period-scope claims with governed
+  scenario values.
+- Corrected PDF and chart labeling, spacing, pagination, acronym casing, and
+  numeric-column alignment after a 32-page visual review.
 - Removed unused variables and modernised the codebase to pass a clean
   `ruff check` and `ruff format --check`.

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -95,12 +94,10 @@ def _build_snapshot_tables(t: dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, st
 
     coverage_start = opf["order_date"].min().date().isoformat()
     coverage_end = opf["order_date"].max().date().isoformat()
-    generated_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
     markdown = "\n".join(
         [
             "# Executive KPI Snapshot",
             "",
-            f"- Generated at: `{generated_at}`",
             f"- Coverage: `{coverage_start}` to `{coverage_end}`",
             f"- Orders: `{len(opf):,}`",
             "",

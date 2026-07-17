@@ -1,72 +1,118 @@
 # Methodology
 
-## Purpose
-Demonstrate a reproducible marketplace decision-support workflow with three priorities:
-- interpretability over black-box models
-- risk-aware economics over topline-only growth
-- reproducible, auditable outputs
+## Evidence standard
 
-## Synthetic Data
-- 24-month horizon, multi-category marketplace.
-- Heterogeneous seller quality, promo sensitivity, and region/channel risk.
-- Post-order events (refunds, disputes, chargebacks) tied to operational and risk signals.
-- One seller per order. The validation layer blocks publication if multi-seller orders appear because current economics are modeled at order grain.
+The project separates four kinds of evidence:
 
-## Core Metrics
-- GMV, Net Value, Take Rate, Subsidy Share.
-- Realized Contribution Margin Proxy: commission minus subsidy, refund value, dispute value, and chargeback loss proxy.
-- Expected Margin After Risk: pre-outcome margin proxy minus modeled expected risk loss.
-- Risk-Adjusted Value: net value minus modeled expected risk loss.
-- Refund/Dispute/Chargeback/Cancellation/On-time rates.
+- Descriptive: governed KPIs and reconciled synthetic management accounts.
+- Predictive: a heuristic score calibrated and tested on later, fully matured synthetic outcomes.
+- Causal-design demonstration: a randomized synthetic intervention trial.
+- Assumption-led: scenario, Monte Carlo, and retrospective threshold economics.
 
-Realized contribution margin is intentionally conservative and is not directly comparable with expected margin after risk. The two measures answer different questions: realized gross leakage versus pre-outcome underwriting exposure.
+These categories are not interchangeable. Synthetic results do not authorize real decisions.
 
-## Feature Layer (Core Tables)
-- `order_profitability_features`
-- `seller_monthly_quality`
-- `buyer_behavior_risk`
-- `category_risk_summary`
-- `seller_risk_base`
+## Synthetic population
 
-Historical buyer and seller event rates use only prior orders. Current-order outcomes are excluded from score inputs.
+- Horizon: March 2024 through February 2026.
+- Multi-category marketplace with heterogeneous seller quality, promotion dependence, region/channel risk, and fulfillment performance.
+- Refund, dispute, and chargeback outcomes depend on operational and risk signals.
+- One seller per order. Validation blocks a release if multi-seller orders appear because current allocation rules operate at order grain.
 
-## Scoring Summary
-All scores are 0-100 heuristic indices (Low/Moderate/High/Critical).
-- `seller_quality_score`: refund/dispute/chargeback + operational reliability.
-- `order_risk_score`: payment signal/method + channel/category + prior buyer/seller risk.
-- `fraud_exposure_score`: dispute/chargeback concentration + risky order share.
-- `margin_fragility_score`: negative margin share + subsidy dependence + leakage exposure.
-- `governance_priority_score`: blended seller quality, fraud exposure, margin fragility, concentration.
+## Point-in-time feature layer
 
-Scores include a main driver and recommended action for operational routing. They are not calibrated event probabilities.
+Core feature tables are `order_profitability_features`, `seller_monthly_quality`, `buyer_behavior_risk`, `category_risk_summary`, and `seller_risk_base`.
 
-## Scenarios
-Deterministic what-if scenarios:
-- baseline
-- seller quality improvement
-- subsidy tightening
-- fraud control improvement
-- downside risk deterioration
+Buyer and seller histories are computed with `merge_asof` against an eligibility timestamp 60 days before each order. An outcome therefore enters history only after the policy’s maturation lag. Current-order and future-order outcomes cannot affect an earlier score.
 
-Monte Carlo outputs apply uncertainty ranges around the same assumptions. Neither deterministic nor Monte Carlo scenarios are forecasts.
+Smoothing uses fixed priors—17% refund, 14% dispute, and 5% chargeback—with a fixed strength. Order value is transformed against a fixed $1,000 reference. Neither input is learned from the full outcome sample.
 
-## Threshold Policy Simulation
-The threshold analysis evaluates historical score/outcome combinations and assumed intervention economics. It is retrospective and in-sample. The recommended threshold is a capacity-planning starting point, not a deployable policy without later-period holdout validation.
+## Heuristic scoring
 
-## Validation
-Checks run before dashboard publication:
-- reconciliation and coherence (orders/refunds/disputes/payments)
-- schema contract validation
-- complete metric governance coverage for official dashboard KPIs
-- scenario arithmetic consistency
-- score directional separation
-- single-seller order-grain enforcement
-- narrative overclaiming scan
+The 0–100 indices support interpretation and routing:
 
-Passing validation means the repository is suitable for public decision-support demonstration. It does not make the synthetic analysis production-ready or committee-grade.
+- `order_risk_score`: payment signal/method, channel/category, order value, and matured buyer/seller history.
+- `seller_quality_score`: defect incidence and operational reliability.
+- `fraud_exposure_score`: dispute/chargeback pressure and risky-order concentration.
+- `margin_fragility_score`: negative-margin share, subsidy dependence, and leakage exposure.
+- `governance_priority_score`: consolidated quality, fraud, fragility, and concentration priority.
 
-## Publication Outputs
-- The standalone dashboard is generated from the current processed tables and validation outputs.
-- The publication chart pack is rebuilt into `outputs/graphs/`.
-- The analytical PDF report is rebuilt into `outputs/reports/marketplace-command-center-report.pdf`.
-- GitHub Pages is staged only after the configured release gate passes.
+Each score carries a tier, main driver, and recommended action. The raw heuristic score is not itself a probability.
+
+## Probability calibration and temporal validation
+
+The binary outcome is refund, dispute, or chargeback. A logistic intercept/slope calibrator is fitted to the matured development population after standardizing the heuristic score.
+
+The run uses four populations:
+
+1. `development`: outcomes available by the training cutoff.
+2. `maturation_gap`: excluded from fitting so labels could mature before holdout entry.
+3. `holdout`: the next 120 days with fully matured labels.
+4. `shadow_unmatured`: the most recent 60 days; score drift is available, outcome performance is not.
+
+Reported controls include ROC AUC, average precision and lift, Brier score, expected calibration error, calibration bins, score PSI, and monthly alerts. Release thresholds live in `model_monitoring_policy.json`.
+
+Current result: Brier score and calibration error pass, but holdout ROC AUC is 0.582 against a 0.600 minimum. The release status is `recalibration-required`; automated decisions are `not approved`.
+
+## Management accounts
+
+The accounting layer is separate from the legacy conservative leakage proxy. The order subledger recognizes:
+
+- gross commission revenue and refund-related commission reversal;
+- payment processing and marketplace subsidy;
+- unrecovered refund, dispute, and chargeback loss;
+- fulfillment support cost.
+
+All policy rates and account codes are in `finance_policy.json`. Amounts are rounded at order grain before monthly journal aggregation. Each P&L posting has an equal balance-sheet counter-entry. Two controls must pass: debit-credit balance and P&L-to-subledger reconciliation.
+
+These are synthetic management accounts. They demonstrate controlled accounting logic but are not GAAP/IFRS financial statements.
+
+## Controlled intervention trial
+
+Orders in the trailing 180-day window with score at or above 60 are eligible. A stable SHA-256 hash assigns each order to business-as-usual or enhanced manual review at a 50% target rate.
+
+Because no live intervention occurred, prevented outcomes are generated by a separate deterministic hash under the policy’s 18% synthetic efficacy assumption. The analysis reports:
+
+- allocation counts and standardized mean differences;
+- intention-to-treat adverse-event and adverse-loss effects;
+- seller-clustered standard errors, 95% confidence intervals, and p-values;
+- power against a 2.5 percentage-point minimum detectable effect;
+- exploratory category and channel heterogeneity.
+
+The experiment is randomized inside the simulation, but the outcome response is still synthetic. Its purpose is to show a correct experimental operating model, not to claim measured marketplace efficacy.
+
+## Risk-adjusted economics and scenarios
+
+The feature layer retains two pre-existing diagnostics:
+
+- Realized contribution margin proxy: commission less gross subsidy/refund/dispute/chargeback leakage.
+- Expected margin after risk: pre-outcome margin proxy less modeled expected loss.
+
+They answer different questions and are not an actual-versus-forecast pair.
+
+Deterministic scenarios cover baseline, seller-quality improvement, subsidy tightening, fraud-control improvement, and downside deterioration. Monte Carlo ranges vary the same assumptions. These are stress tests, not forecasts.
+
+## Threshold backtest
+
+The threshold curve combines historical score/outcome pairs with assumed review cost and efficacy. It remains retrospective and in-sample. Its recommended threshold is a capacity-planning starting point, not the temporal holdout and not a deployment approval.
+
+## Validation and release
+
+Before publication, the pipeline checks:
+
+- raw/processed key, null, range, lifecycle, and referential integrity;
+- schema and metric governance contracts;
+- order/item and event-value reconciliation;
+- matured temporal split coverage, calibration direction, and automation guardrail;
+- accounting grain and double-entry reconciliation;
+- experiment balance and explicit synthetic evidence scope;
+- DuckDB source readability and curated-mart grain;
+- scenario arithmetic, dashboard feeds, and narrative overclaiming.
+
+The current formal release has zero blocker issues and one medium model-monitoring warning. It is `decision-support only`, not committee-grade.
+
+## Publication
+
+- The dashboard uses full-data KPI snapshots and a deterministic stratified order sample for interactive detail.
+- The analytical report contains the complete visual narrative.
+- The executive summary is generated as tagged PDF/UA from semantic HTML and validated for structure tree, marked content, document language, and PDF/UA metadata.
+- GitHub Pages staging occurs only after the release gate passes.

@@ -1,5 +1,5 @@
 {
-  "contract_version": "v1.0.0",
+  "contract_version": "v1.1.0",
   "schema_family": "marketplace_command_center",
   "tables": [
     {
@@ -20,11 +20,16 @@
         "loyalty_tier"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "buyer_id"
+      ],
       "path": "data/raw/buyers.csv",
       "primary_key_candidate": [
         "buyer_id"
       ],
-      "table_name": "buyers"
+      "row_count_constraint": {},
+      "table_name": "buyers",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -48,11 +53,16 @@
         "fulfillment_model"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/raw/sellers.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "sellers"
+      "row_count_constraint": {},
+      "table_name": "sellers",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -74,11 +84,17 @@
         "shipping_cost_proxy"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "product_id",
+        "seller_id"
+      ],
       "path": "data/raw/products.csv",
       "primary_key_candidate": [
         "product_id"
       ],
-      "table_name": "products"
+      "row_count_constraint": {},
+      "table_name": "products",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -106,11 +122,18 @@
         "order_status"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id",
+        "buyer_id",
+        "order_date"
+      ],
       "path": "data/raw/orders.csv",
       "primary_key_candidate": [
         "order_id"
       ],
-      "table_name": "orders"
+      "row_count_constraint": {},
+      "table_name": "orders",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -142,11 +165,19 @@
         "margin_proxy"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_item_id",
+        "order_id",
+        "product_id",
+        "seller_id"
+      ],
       "path": "data/raw/order_items.csv",
       "primary_key_candidate": [
         "order_item_id"
       ],
-      "table_name": "order_items"
+      "row_count_constraint": {},
+      "table_name": "order_items",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -166,11 +197,21 @@
         "payment_risk_signal"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "payment_id",
+        "order_id"
+      ],
       "path": "data/raw/payments.csv",
       "primary_key_candidate": [
         "payment_id"
       ],
-      "table_name": "payments"
+      "row_count_constraint": {},
+      "table_name": "payments",
+      "unique_constraints": [
+        [
+          "order_id"
+        ]
+      ]
     },
     {
       "column_types": {
@@ -190,11 +231,18 @@
         "full_refund_flag"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "refund_id",
+        "order_id",
+        "refund_date"
+      ],
       "path": "data/raw/refunds.csv",
       "primary_key_candidate": [
         "refund_id"
       ],
-      "table_name": "refunds"
+      "row_count_constraint": {},
+      "table_name": "refunds",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -214,11 +262,18 @@
         "dispute_amount"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "dispute_id",
+        "order_id",
+        "dispute_date"
+      ],
       "path": "data/raw/disputes.csv",
       "primary_key_candidate": [
         "dispute_id"
       ],
-      "table_name": "disputes"
+      "row_count_constraint": {},
+      "table_name": "disputes",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -242,11 +297,22 @@
         "cancellation_flag"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "event_id",
+        "order_id",
+        "seller_id"
+      ],
       "path": "data/raw/logistics_events.csv",
       "primary_key_candidate": [
         "event_id"
       ],
-      "table_name": "logistics_events"
+      "row_count_constraint": {},
+      "table_name": "logistics_events",
+      "unique_constraints": [
+        [
+          "order_id"
+        ]
+      ]
     },
     {
       "column_types": {
@@ -286,11 +352,16 @@
         "profitability_flag"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
       "path": "data/processed/order_profitability_features.csv",
       "primary_key_candidate": [
         "order_id"
       ],
-      "table_name": "order_profitability_features"
+      "row_count_constraint": {},
+      "table_name": "order_profitability_features",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -330,9 +401,18 @@
         "fragility_flag"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id",
+        "month"
+      ],
       "path": "data/processed/seller_monthly_quality.csv",
-      "primary_key_candidate": [],
-      "table_name": "seller_monthly_quality"
+      "primary_key_candidate": [
+        "seller_id",
+        "month"
+      ],
+      "row_count_constraint": {},
+      "table_name": "seller_monthly_quality",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -358,11 +438,16 @@
         "order_risk_proxy"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "buyer_id"
+      ],
       "path": "data/processed/buyer_behavior_risk.csv",
       "primary_key_candidate": [
         "buyer_id"
       ],
-      "table_name": "buyer_behavior_risk"
+      "row_count_constraint": {},
+      "table_name": "buyer_behavior_risk",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -386,9 +471,18 @@
         "margin_fragility_index"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "month",
+        "category"
+      ],
       "path": "data/processed/category_risk_summary.csv",
-      "primary_key_candidate": [],
-      "table_name": "category_risk_summary"
+      "primary_key_candidate": [
+        "month",
+        "category"
+      ],
+      "row_count_constraint": {},
+      "table_name": "category_risk_summary",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -410,9 +504,18 @@
         "concentration_inputs"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id",
+        "current_period"
+      ],
       "path": "data/processed/seller_risk_base.csv",
-      "primary_key_candidate": [],
-      "table_name": "seller_risk_base"
+      "primary_key_candidate": [
+        "seller_id",
+        "current_period"
+      ],
+      "row_count_constraint": {},
+      "table_name": "seller_risk_base",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -442,11 +545,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
       "path": "data/processed/order_risk_scores.csv",
       "primary_key_candidate": [
         "order_id"
       ],
-      "table_name": "order_risk_scores"
+      "row_count_constraint": {},
+      "table_name": "order_risk_scores",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -466,11 +574,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/seller_quality_scores.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "seller_quality_scores"
+      "row_count_constraint": {},
+      "table_name": "seller_quality_scores",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -490,11 +603,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/fraud_exposure_scores.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "fraud_exposure_scores"
+      "row_count_constraint": {},
+      "table_name": "fraud_exposure_scores",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -514,11 +632,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/margin_fragility_scores.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "margin_fragility_scores"
+      "row_count_constraint": {},
+      "table_name": "margin_fragility_scores",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -538,11 +661,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/governance_priority_scores.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "governance_priority_scores"
+      "row_count_constraint": {},
+      "table_name": "governance_priority_scores",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -580,11 +708,16 @@
         "net_value"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/seller_scorecard.csv",
       "primary_key_candidate": [
         "seller_id"
       ],
-      "table_name": "seller_scorecard"
+      "row_count_constraint": {},
+      "table_name": "seller_scorecard",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -622,9 +755,16 @@
         "net_value"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "seller_id"
+      ],
       "path": "data/processed/top_high_priority_sellers.csv",
-      "primary_key_candidate": [],
-      "table_name": "top_high_priority_sellers"
+      "primary_key_candidate": [
+        "seller_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "top_high_priority_sellers",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -654,9 +794,16 @@
         "recommended_action"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
       "path": "data/processed/top_high_risk_orders.csv",
-      "primary_key_candidate": [],
-      "table_name": "top_high_risk_orders"
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "top_high_risk_orders",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -674,9 +821,16 @@
         "top50_overlap_rate"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scoring_sensitivity_summary.csv",
-      "primary_key_candidate": [],
-      "table_name": "scoring_sensitivity_summary"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scoring_sensitivity_summary",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -718,12 +872,18 @@
         "next_review_step"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "entity_type",
+        "entity_id"
+      ],
       "path": "data/processed/governance_action_register.csv",
       "primary_key_candidate": [
         "entity_type",
         "entity_id"
       ],
-      "table_name": "governance_action_register"
+      "row_count_constraint": {},
+      "table_name": "governance_action_register",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -757,9 +917,16 @@
         "assumption_summary"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_assumptions.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_assumptions"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_assumptions",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -825,9 +992,16 @@
         "decision_priority_score"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_results_summary.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_results_summary"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_results_summary",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -855,9 +1029,16 @@
         "contribution_margin_change_vs_baseline"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_component_bridge.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_component_bridge"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_component_bridge",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -881,9 +1062,15 @@
         "bad_actor_leak_rate"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [],
       "path": "data/processed/scenario_top_risk_exposure.csv",
       "primary_key_candidate": [],
-      "table_name": "scenario_top_risk_exposure"
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "scenario_top_risk_exposure",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -909,9 +1096,16 @@
         "recommended_decision"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_decision_matrix.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_decision_matrix"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_decision_matrix",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -947,9 +1141,18 @@
         "top_risk_seller_downside_exposure"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "iteration",
+        "scenario"
+      ],
       "path": "data/processed/scenario_monte_carlo_samples.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_monte_carlo_samples"
+      "primary_key_candidate": [
+        "iteration",
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_monte_carlo_samples",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -1029,9 +1232,16 @@
         "expected_cm_delta_vs_baseline"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_monte_carlo_summary.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_monte_carlo_summary"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_monte_carlo_summary",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -1059,9 +1269,16 @@
         "contribution_margin_proxy_p95"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "scenario"
+      ],
       "path": "data/processed/scenario_monte_carlo_decision.csv",
-      "primary_key_candidate": [],
-      "table_name": "scenario_monte_carlo_decision"
+      "primary_key_candidate": [
+        "scenario"
+      ],
+      "row_count_constraint": {},
+      "table_name": "scenario_monte_carlo_decision",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -1095,9 +1312,16 @@
         "efficacy_assumption"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "threshold"
+      ],
       "path": "data/processed/backtesting_threshold_curve.csv",
-      "primary_key_candidate": [],
-      "table_name": "backtesting_threshold_curve"
+      "primary_key_candidate": [
+        "threshold"
+      ],
+      "row_count_constraint": {},
+      "table_name": "backtesting_threshold_curve",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -1131,9 +1355,18 @@
         "efficacy_assumption"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [
+        "threshold",
+        "efficacy_assumption"
+      ],
       "path": "data/processed/backtesting_action_impact.csv",
-      "primary_key_candidate": [],
-      "table_name": "backtesting_action_impact"
+      "primary_key_candidate": [
+        "threshold",
+        "efficacy_assumption"
+      ],
+      "row_count_constraint": {},
+      "table_name": "backtesting_action_impact",
+      "unique_constraints": []
     },
     {
       "column_types": {
@@ -1163,9 +1396,673 @@
         "policy_guidance"
       ],
       "enforcement": "exact_columns",
+      "not_null_columns": [],
       "path": "data/processed/backtesting_recommended_policy.csv",
       "primary_key_candidate": [],
-      "table_name": "backtesting_recommended_policy"
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "backtesting_recommended_policy",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "adverse_flag": "integer",
+        "calibrated_probability": "number",
+        "calibration_policy_version": "string",
+        "order_date": "datetime",
+        "order_id": "string",
+        "order_risk_score": "number",
+        "split": "string"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "order_risk_score",
+        "calibrated_probability",
+        "adverse_flag",
+        "split",
+        "calibration_policy_version"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
+      "path": "data/processed/order_risk_calibrated.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "order_risk_calibrated",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "calibration_method": "string",
+        "development_end": "datetime",
+        "development_start": "datetime",
+        "intercept": "number",
+        "outcome": "string",
+        "outcome_maturation_lag_days": "integer",
+        "policy_version": "string",
+        "score_mean": "number",
+        "score_standard_deviation": "number",
+        "slope": "number"
+      },
+      "columns": [
+        "calibration_method",
+        "outcome",
+        "development_start",
+        "development_end",
+        "intercept",
+        "slope",
+        "score_mean",
+        "score_standard_deviation",
+        "outcome_maturation_lag_days",
+        "policy_version"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "policy_version"
+      ],
+      "path": "data/processed/model_calibration_parameters.csv",
+      "primary_key_candidate": [
+        "policy_version"
+      ],
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "model_calibration_parameters",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "absolute_calibration_error": "number",
+        "calibration_bin": "integer",
+        "maximum_probability": "number",
+        "minimum_probability": "number",
+        "observed_event_rate": "number",
+        "predicted_probability": "number",
+        "row_count": "integer",
+        "split": "string"
+      },
+      "columns": [
+        "split",
+        "calibration_bin",
+        "row_count",
+        "predicted_probability",
+        "observed_event_rate",
+        "minimum_probability",
+        "maximum_probability",
+        "absolute_calibration_error"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "split",
+        "calibration_bin"
+      ],
+      "path": "data/processed/model_calibration_curve.csv",
+      "primary_key_candidate": [
+        "split",
+        "calibration_bin"
+      ],
+      "row_count_constraint": {},
+      "table_name": "model_calibration_curve",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "average_precision": "number",
+        "average_precision_lift": "number",
+        "brier_score": "number",
+        "end_date": "datetime",
+        "event_rate": "number",
+        "expected_calibration_error": "number",
+        "predicted_probability_mean": "number",
+        "roc_auc": "number",
+        "row_count": "integer",
+        "score_mean": "number",
+        "split": "string",
+        "start_date": "datetime"
+      },
+      "columns": [
+        "split",
+        "start_date",
+        "end_date",
+        "row_count",
+        "event_rate",
+        "score_mean",
+        "predicted_probability_mean",
+        "roc_auc",
+        "average_precision",
+        "average_precision_lift",
+        "brier_score",
+        "expected_calibration_error"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "split"
+      ],
+      "path": "data/processed/temporal_holdout_metrics.csv",
+      "primary_key_candidate": [
+        "split"
+      ],
+      "row_count_constraint": {},
+      "table_name": "temporal_holdout_metrics",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "average_precision": "number",
+        "brier_score": "number",
+        "event_rate": "number",
+        "expected_calibration_error": "number",
+        "matured_row_count": "integer",
+        "month": "datetime",
+        "outcome_status": "string",
+        "population_stability_index": "number",
+        "predicted_probability_mean": "number",
+        "roc_auc": "number",
+        "row_count": "integer",
+        "score_mean": "number"
+      },
+      "columns": [
+        "month",
+        "row_count",
+        "matured_row_count",
+        "outcome_status",
+        "event_rate",
+        "score_mean",
+        "predicted_probability_mean",
+        "roc_auc",
+        "average_precision",
+        "brier_score",
+        "expected_calibration_error",
+        "population_stability_index"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "month"
+      ],
+      "path": "data/processed/model_monitoring_monthly.csv",
+      "primary_key_candidate": [
+        "month"
+      ],
+      "row_count_constraint": {},
+      "table_name": "model_monitoring_monthly",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "alert_id": "string",
+        "metric": "string",
+        "month": "datetime",
+        "observed_value": "number",
+        "recommended_action": "string",
+        "severity": "string",
+        "threshold": "number"
+      },
+      "columns": [
+        "alert_id",
+        "month",
+        "metric",
+        "observed_value",
+        "threshold",
+        "severity",
+        "recommended_action"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "alert_id"
+      ],
+      "path": "data/processed/model_monitoring_alerts.csv",
+      "primary_key_candidate": [
+        "alert_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "model_monitoring_alerts",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "as_of_date": "datetime",
+        "assessment_scope": "string",
+        "automated_decision_status": "string",
+        "average_precision_lift_gate_passed": "boolean",
+        "brier_gate_passed": "boolean",
+        "calibration_gate_passed": "boolean",
+        "development_end": "datetime",
+        "holdout_end": "datetime",
+        "holdout_rows": "integer",
+        "holdout_start": "datetime",
+        "monitoring_gate_passed": "boolean",
+        "release_status": "string",
+        "required_next_step": "string",
+        "roc_auc_gate_passed": "boolean",
+        "unmatured_shadow_rows": "integer"
+      },
+      "columns": [
+        "assessment_scope",
+        "as_of_date",
+        "development_end",
+        "holdout_start",
+        "holdout_end",
+        "holdout_rows",
+        "unmatured_shadow_rows",
+        "roc_auc_gate_passed",
+        "average_precision_lift_gate_passed",
+        "brier_gate_passed",
+        "calibration_gate_passed",
+        "monitoring_gate_passed",
+        "release_status",
+        "automated_decision_status",
+        "required_next_step"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "assessment_scope"
+      ],
+      "path": "data/processed/model_release_assessment.csv",
+      "primary_key_candidate": [
+        "assessment_scope"
+      ],
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "model_release_assessment",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "accounting_basis": "string",
+        "accounting_contribution": "number",
+        "chargeback_loss_expense": "number",
+        "chargeback_loss_proxy": "number",
+        "commission_fee": "number",
+        "commission_reversal": "number",
+        "dispute_amount": "number",
+        "dispute_loss_expense": "number",
+        "finance_policy_version": "string",
+        "fulfillment_support_expense": "number",
+        "gross_commission_revenue": "number",
+        "gross_value": "number",
+        "marketplace_subsidy_expense": "number",
+        "net_commission_revenue": "number",
+        "net_value": "number",
+        "order_date": "datetime",
+        "order_id": "string",
+        "payment_processing_expense": "number",
+        "refund_amount": "number",
+        "subsidy_amount": "number",
+        "unrecovered_refund_expense": "number"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "gross_value",
+        "net_value",
+        "subsidy_amount",
+        "commission_fee",
+        "refund_amount",
+        "dispute_amount",
+        "chargeback_loss_proxy",
+        "gross_commission_revenue",
+        "commission_reversal",
+        "net_commission_revenue",
+        "payment_processing_expense",
+        "marketplace_subsidy_expense",
+        "unrecovered_refund_expense",
+        "dispute_loss_expense",
+        "chargeback_loss_expense",
+        "fulfillment_support_expense",
+        "accounting_contribution",
+        "accounting_basis",
+        "finance_policy_version"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
+      "path": "data/processed/order_accounting_pnl.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "order_accounting_pnl",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "account_code": "integer",
+        "account_name": "string",
+        "accounting_month": "datetime",
+        "credit": "number",
+        "currency": "string",
+        "debit": "number",
+        "entry_type": "string",
+        "finance_policy_version": "string",
+        "journal_id": "string",
+        "journal_line_id": "string",
+        "posting_date": "datetime"
+      },
+      "columns": [
+        "journal_id",
+        "journal_line_id",
+        "accounting_month",
+        "posting_date",
+        "entry_type",
+        "account_code",
+        "account_name",
+        "debit",
+        "credit",
+        "currency",
+        "finance_policy_version"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "journal_line_id"
+      ],
+      "path": "data/processed/finance_general_ledger.csv",
+      "primary_key_candidate": [
+        "journal_line_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "finance_general_ledger",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "actual_value": "number",
+        "check_name": "string",
+        "difference": "number",
+        "expected_value": "number",
+        "status": "string",
+        "tolerance": "number"
+      },
+      "columns": [
+        "check_name",
+        "actual_value",
+        "expected_value",
+        "difference",
+        "tolerance",
+        "status"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "check_name"
+      ],
+      "path": "data/processed/finance_reconciliation.csv",
+      "primary_key_candidate": [
+        "check_name"
+      ],
+      "row_count_constraint": {},
+      "table_name": "finance_reconciliation",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "accounting_basis": "string",
+        "accounting_contribution": "number",
+        "as_of_date": "datetime",
+        "commission_reversals": "number",
+        "currency": "string",
+        "finance_policy_version": "string",
+        "gross_commission_revenue": "number",
+        "gross_marketplace_value": "number",
+        "order_count": "integer",
+        "total_operating_expense": "number"
+      },
+      "columns": [
+        "as_of_date",
+        "currency",
+        "order_count",
+        "gross_marketplace_value",
+        "gross_commission_revenue",
+        "commission_reversals",
+        "total_operating_expense",
+        "accounting_contribution",
+        "accounting_basis",
+        "finance_policy_version"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "finance_policy_version"
+      ],
+      "path": "data/processed/accounting_kpi_summary.csv",
+      "primary_key_candidate": [
+        "finance_policy_version"
+      ],
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "accounting_kpi_summary",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "assigned_arm": "string",
+        "assignment_uniform": "number",
+        "baseline_adverse_flag": "integer",
+        "baseline_adverse_loss": "number",
+        "calibrated_probability": "number",
+        "category": "string",
+        "chargeback_loss_proxy": "number",
+        "dispute_amount": "number",
+        "evidence_scope": "string",
+        "experiment_id": "string",
+        "experiment_policy_version": "string",
+        "gross_value": "number",
+        "net_value": "number",
+        "observed_adverse_flag": "integer",
+        "observed_adverse_loss": "number",
+        "order_channel": "string",
+        "order_date": "datetime",
+        "order_id": "string",
+        "order_risk_score": "number",
+        "prevention_uniform": "number",
+        "refund_amount": "number",
+        "seller_id": "string",
+        "simulated_prevention_flag": "integer",
+        "treatment_flag": "integer"
+      },
+      "columns": [
+        "order_id",
+        "order_date",
+        "seller_id",
+        "category",
+        "order_channel",
+        "order_risk_score",
+        "calibrated_probability",
+        "gross_value",
+        "net_value",
+        "refund_amount",
+        "dispute_amount",
+        "chargeback_loss_proxy",
+        "assignment_uniform",
+        "treatment_flag",
+        "assigned_arm",
+        "baseline_adverse_flag",
+        "baseline_adverse_loss",
+        "prevention_uniform",
+        "simulated_prevention_flag",
+        "observed_adverse_flag",
+        "observed_adverse_loss",
+        "experiment_id",
+        "experiment_policy_version",
+        "evidence_scope"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "order_id"
+      ],
+      "path": "data/processed/experiment_assignments.csv",
+      "primary_key_candidate": [
+        "order_id"
+      ],
+      "row_count_constraint": {},
+      "table_name": "experiment_assignments",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "absolute_standardized_mean_difference": "number",
+        "balance_status": "string",
+        "control_mean": "number",
+        "covariate": "string",
+        "standardized_mean_difference": "number",
+        "treatment_mean": "number"
+      },
+      "columns": [
+        "covariate",
+        "control_mean",
+        "treatment_mean",
+        "standardized_mean_difference",
+        "absolute_standardized_mean_difference",
+        "balance_status"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "covariate"
+      ],
+      "path": "data/processed/experiment_balance.csv",
+      "primary_key_candidate": [
+        "covariate"
+      ],
+      "row_count_constraint": {},
+      "table_name": "experiment_balance",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "clustered_standard_error": "number",
+        "confidence_interval_lower": "number",
+        "confidence_interval_upper": "number",
+        "control_mean": "number",
+        "control_rows": "integer",
+        "evidence_scope": "string",
+        "experiment_id": "string",
+        "intention_to_treat_effect": "number",
+        "maximum_absolute_balance_smd": "number",
+        "metric": "string",
+        "operational_decision_status": "string",
+        "p_value": "number",
+        "sample_size": "integer",
+        "seller_cluster_count": "integer",
+        "treatment_mean": "number",
+        "treatment_rows": "integer",
+        "unit": "string"
+      },
+      "columns": [
+        "experiment_id",
+        "metric",
+        "control_mean",
+        "treatment_mean",
+        "intention_to_treat_effect",
+        "clustered_standard_error",
+        "confidence_interval_lower",
+        "confidence_interval_upper",
+        "p_value",
+        "unit",
+        "seller_cluster_count",
+        "sample_size",
+        "control_rows",
+        "treatment_rows",
+        "maximum_absolute_balance_smd",
+        "evidence_scope",
+        "operational_decision_status"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "experiment_id",
+        "metric"
+      ],
+      "path": "data/processed/experiment_results.csv",
+      "primary_key_candidate": [
+        "experiment_id",
+        "metric"
+      ],
+      "row_count_constraint": {},
+      "table_name": "experiment_results",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "alpha": "number",
+        "control_baseline_rate": "number",
+        "estimated_power_at_mde": "number",
+        "experiment_id": "string",
+        "minimum_detectable_effect_pp": "number",
+        "observed_minimum_rows_per_arm": "integer",
+        "power_status": "string",
+        "required_rows_per_arm": "integer",
+        "target_power": "number"
+      },
+      "columns": [
+        "experiment_id",
+        "alpha",
+        "target_power",
+        "minimum_detectable_effect_pp",
+        "control_baseline_rate",
+        "required_rows_per_arm",
+        "observed_minimum_rows_per_arm",
+        "estimated_power_at_mde",
+        "power_status"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "experiment_id"
+      ],
+      "path": "data/processed/experiment_power.csv",
+      "primary_key_candidate": [
+        "experiment_id"
+      ],
+      "row_count_constraint": {
+        "maximum": 1,
+        "minimum": 1
+      },
+      "table_name": "experiment_power",
+      "unique_constraints": []
+    },
+    {
+      "column_types": {
+        "control_adverse_rate": "number",
+        "control_rows": "integer",
+        "dimension": "string",
+        "evidence_scope": "string",
+        "intention_to_treat_effect_pp": "number",
+        "row_count": "integer",
+        "segment": "string",
+        "treatment_adverse_rate": "number",
+        "treatment_rows": "integer"
+      },
+      "columns": [
+        "dimension",
+        "segment",
+        "row_count",
+        "control_rows",
+        "treatment_rows",
+        "control_adverse_rate",
+        "treatment_adverse_rate",
+        "intention_to_treat_effect_pp",
+        "evidence_scope"
+      ],
+      "enforcement": "exact_columns",
+      "not_null_columns": [
+        "dimension",
+        "segment"
+      ],
+      "path": "data/processed/experiment_heterogeneity.csv",
+      "primary_key_candidate": [
+        "dimension",
+        "segment"
+      ],
+      "row_count_constraint": {},
+      "table_name": "experiment_heterogeneity",
+      "unique_constraints": []
     }
   ]
 }

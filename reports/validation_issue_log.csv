@@ -1,1 +1,2 @@
 issue_id,module,check_name,severity,status,metric_value,threshold,detail,fix_or_action
+V-MODEL-006,model_monitoring,model_shadow_release_gate,Medium,open,recalibration-required,shadow-ready,The score is not ready for a prospective shadow release under the governed thresholds.,Investigate monthly discrimination alerts before prospective validation.

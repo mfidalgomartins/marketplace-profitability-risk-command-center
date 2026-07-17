@@ -25,13 +25,52 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
 
     contract = json.loads(schema_file.read_text(encoding="utf-8"))
     issues: list[ContractIssue] = []
+    tables = contract.get("tables")
+    if not isinstance(tables, list) or not tables:
+        return pd.DataFrame(
+            [
+                ContractIssue(
+                    table_name="__contract__",
+                    path=str(schema_file),
+                    issue_type="invalid_contract",
+                    detail="Contract must contain a non-empty tables list.",
+                ).__dict__
+            ]
+        )
 
-    for t in contract.get("tables", []):
+    invalid_entries = [position for position, table in enumerate(tables) if not isinstance(table, dict)]
+    for position in invalid_entries:
+        issues.append(
+            ContractIssue(
+                table_name="__contract__",
+                path=str(schema_file),
+                issue_type="invalid_table_contract",
+                detail=f"Table contract at position {position} must be an object.",
+            )
+        )
+
+    valid_tables = [table for table in tables if isinstance(table, dict)]
+    table_names = [str(table.get("table_name")) for table in valid_tables]
+    duplicate_tables = sorted({name for name in table_names if table_names.count(name) > 1})
+    for table_name in duplicate_tables:
+        issues.append(
+            ContractIssue(
+                table_name=table_name,
+                path=str(schema_file),
+                issue_type="duplicate_table_contract",
+                detail="Table is defined more than once in the contract.",
+            )
+        )
+
+    for t in valid_tables:
         table_name = str(t.get("table_name"))
         path = Path(str(t.get("path")))
         expected_cols = list(t.get("columns", []))
         expected_types = dict(t.get("column_types", {}))
         pk = list(t.get("primary_key_candidate", []))
+        not_null_columns = list(t.get("not_null_columns", pk))
+        unique_constraints = [list(columns) for columns in t.get("unique_constraints", [])]
+        row_count_constraint = dict(t.get("row_count_constraint", {}))
 
         if not path.exists():
             issues.append(
@@ -45,6 +84,27 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
             continue
 
         df = pd.read_csv(path)
+        minimum_rows = row_count_constraint.get("minimum")
+        maximum_rows = row_count_constraint.get("maximum")
+        if minimum_rows is not None and len(df) < int(minimum_rows):
+            issues.append(
+                ContractIssue(
+                    table_name=table_name,
+                    path=str(path),
+                    issue_type="row_count_below_minimum",
+                    detail=f"Expected at least {int(minimum_rows)} row(s), found {len(df)}.",
+                )
+            )
+        if maximum_rows is not None and len(df) > int(maximum_rows):
+            issues.append(
+                ContractIssue(
+                    table_name=table_name,
+                    path=str(path),
+                    issue_type="row_count_above_maximum",
+                    detail=f"Expected at most {int(maximum_rows)} row(s), found {len(df)}.",
+                )
+            )
+
         actual_cols = list(df.columns)
         if actual_cols != expected_cols:
             issues.append(
@@ -88,6 +148,20 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
                     )
                 )
 
+        for c in not_null_columns:
+            if c not in df.columns:
+                continue
+            null_count = int(df[c].isna().sum())
+            if null_count:
+                issues.append(
+                    ContractIssue(
+                        table_name=table_name,
+                        path=str(path),
+                        issue_type="not_null_violation",
+                        detail=f"Column {c}: {null_count} null value(s)",
+                    )
+                )
+
         if pk:
             missing_pk = [k for k in pk if k not in df.columns]
             if missing_pk:
@@ -100,6 +174,16 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
                     )
                 )
             else:
+                null_pk = int(df[pk].isna().any(axis=1).sum())
+                if null_pk > 0:
+                    issues.append(
+                        ContractIssue(
+                            table_name=table_name,
+                            path=str(path),
+                            issue_type="primary_key_nulls",
+                            detail=f"{null_pk} row(s) contain nulls in key {pk}",
+                        )
+                    )
                 dup = int(df.duplicated(subset=pk).sum())
                 if dup > 0:
                     issues.append(
@@ -110,6 +194,29 @@ def validate_schema_contracts(schema_file: Path) -> pd.DataFrame:
                             detail=f"{dup} duplicated rows on key {pk}",
                         )
                     )
+
+        for columns in unique_constraints:
+            missing_columns = [column for column in columns if column not in df.columns]
+            if missing_columns:
+                issues.append(
+                    ContractIssue(
+                        table_name=table_name,
+                        path=str(path),
+                        issue_type="missing_unique_constraint_columns",
+                        detail=f"Missing unique-constraint columns: {missing_columns}",
+                    )
+                )
+                continue
+            duplicate_count = int(df.duplicated(subset=columns).sum())
+            if duplicate_count:
+                issues.append(
+                    ContractIssue(
+                        table_name=table_name,
+                        path=str(path),
+                        issue_type="unique_constraint_violation",
+                        detail=f"{duplicate_count} duplicated row(s) on constraint {columns}",
+                    )
+                )
 
     if issues:
         return pd.DataFrame([i.__dict__ for i in issues])
@@ -130,6 +237,7 @@ def main() -> None:
         print("Schema contracts: PASSED")
     else:
         print(f"Schema contracts: FAILED with {len(issues)} issue(s). See {args.output_file}")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

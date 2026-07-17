@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import pandas as pd
+import pytest
+from src.data_generation.generate_synthetic_marketplace_data import GenerationConfig, generate_all_tables
 
 RAW_DIR = Path(__file__).resolve().parents[1] / "data" / "raw"
 
@@ -137,3 +139,16 @@ def test_post_order_loss_overlap_is_bounded() -> None:
         (chk["refund_amount"] + chk["dispute_amount"] + chk["chargeback_loss"]) > chk["net_paid_amount"] + 1e-6
     ).mean()
     assert overlap_rate <= 0.05
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        GenerationConfig(n_buyers=0),
+        GenerationConfig(n_sellers=0),
+        GenerationConfig(start_date="2026-01-01", end_date="2025-01-01"),
+    ],
+)
+def test_generator_rejects_invalid_configuration(config: GenerationConfig) -> None:
+    with pytest.raises(ValueError):
+        generate_all_tables(config)

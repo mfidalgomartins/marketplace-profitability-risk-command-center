@@ -5,6 +5,18 @@ description = "Reproducible marketplace profitability, fraud, and seller-quality
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
+dynamic = ["dependencies"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
 
 [tool.ruff]
 line-length = 120
@@ -20,7 +32,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-# These modules pin the matplotlib backend/cache via os.environ before the
+# These modules pin the matplotlib backend via os.environ before the
 # matplotlib import, so the import legitimately cannot sit at the top.
 "src/backtesting/run_score_policy_backtest.py" = ["E402"]
 "src/scenario_analysis/run_scenario_monte_carlo.py" = ["E402"]
@@ -54,6 +66,12 @@ disable_error_code = ["arg-type", "call-overload"]
 pythonpath = ["."]
 testpaths = ["tests"]
 addopts = "-q --cov=src --cov-report=term-missing --cov-fail-under=85"
+filterwarnings = [
+    # FastAPI 0.139 re-exports Starlette's legacy TestClient while Starlette
+    # transitions to httpx2; keep the production dependency current and silence
+    # only this upstream compatibility notice in tests.
+    "ignore:Using `httpx` with `starlette.testclient` is deprecated:starlette.exceptions.StarletteDeprecationWarning",
+]
 
 [tool.coverage.run]
 source = ["src"]

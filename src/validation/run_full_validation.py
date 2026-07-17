@@ -17,18 +17,24 @@ from src.validation.validate_schema_contracts import validate_schema_contracts
 
 KNOWN_LIMITATIONS = [
     "All data is synthetic; findings demonstrate analytical workflow behavior, not real marketplace performance.",
-    "Risk and governance scores are interpretable heuristic indices, not calibrated probabilities or causal estimates.",
-    "The threshold policy evaluation is retrospective and in-sample; it requires later-period holdout validation before deployment.",
+    "Risk and governance scores are interpretable heuristic indices; calibrated probabilities inherit those design limitations.",
+    "The threshold backtest is retrospective and in-sample; the separate matured holdout is still simulated and requires prospective validation.",
+    "Controlled-intervention outcomes are randomized but synthetically generated; they do not establish real-world efficacy.",
+    "Management accounts use explicit synthetic policies and require Finance approval before operational reporting.",
     "Scenario outputs are assumption-driven stress tests, not forecasts.",
     "Realized contribution margin is a conservative gross-leakage proxy; expected margin after risk is a pre-outcome underwriting proxy and is not directly comparable.",
 ]
 
 MODULE_CHECK_COUNTS = {
-    "synthetic_data": 8,
+    "synthetic_data": 10,
     "processed_features": 6,
     "metrics_logic": 6,
     "metric_governance": 5,
     "scoring": 3,
+    "model_monitoring": 5,
+    "finance": 3,
+    "experimentation": 3,
+    "warehouse": 2,
     "scenarios": 4,
     "schema_contracts": 1,
     "dashboard_feeds": 3,
@@ -128,6 +134,16 @@ def _load_processed(processed_dir: Path) -> dict[str, pd.DataFrame]:
         "scen_comp": _read("scenario_component_bridge"),
         "scen_ass": _read("scenario_assumptions"),
         "scen_dec": _read("scenario_decision_matrix"),
+        "calibrated": _read("order_risk_calibrated", parse_dates=["order_date"]),
+        "calibration_parameters": _read("model_calibration_parameters"),
+        "holdout": _read("temporal_holdout_metrics"),
+        "monitoring": _read("model_monitoring_monthly"),
+        "model_release": _read("model_release_assessment"),
+        "order_pnl": _read("order_accounting_pnl", parse_dates=["order_date"]),
+        "finance_reconciliation": _read("finance_reconciliation"),
+        "experiment_balance": _read("experiment_balance"),
+        "experiment_results": _read("experiment_results"),
+        "experiment_power": _read("experiment_power"),
     }
 
 
@@ -201,6 +217,10 @@ def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataF
         "scenarios",
         "schema_contracts",
         "dashboard_feeds",
+        "model_monitoring",
+        "finance",
+        "experimentation",
+        "warehouse",
     }
     blocker_checks = {
         "order_item_reconciliation",
@@ -240,8 +260,8 @@ def _release_assessment(issues: pd.DataFrame, summary: pd.DataFrame) -> pd.DataF
     else:
         release_state = "decision-support only"
         rationale = (
-            "Configured technical and analytical checks pass. Synthetic data, heuristic scores, proxy economics, "
-            "and assumption-driven scenarios limit use to decision support."
+            "Configured technical and analytical checks pass. Synthetic data, model-monitoring warnings, "
+            "synthetic accounting policies, and simulated interventions limit use to decision support."
         )
 
     return pd.DataFrame(
@@ -294,6 +314,16 @@ def run_validation(cfg: ValidationConfig) -> dict[str, pd.DataFrame]:
     gar = proc["gar"]
     scen = proc["scen"]
     scen_dec = proc["scen_dec"]
+    calibrated = proc["calibrated"]
+    calibration_parameters = proc["calibration_parameters"]
+    holdout = proc["holdout"]
+    monitoring = proc["monitoring"]
+    model_release = proc["model_release"]
+    order_pnl = proc["order_pnl"]
+    finance_reconciliation = proc["finance_reconciliation"]
+    experiment_balance = proc["experiment_balance"]
+    experiment_results = proc["experiment_results"]
+    experiment_power = proc["experiment_power"]
 
     # 1) Row count sanity.
     if not (5000 <= len(buyers) <= 15000):
@@ -365,6 +395,54 @@ def run_validation(cfg: ValidationConfig) -> dict[str, pd.DataFrame]:
                 "0",
                 f"Duplicate primary-key candidates detected in {tname}.{key}.",
                 "Deduplicate source and enforce key uniqueness before downstream builds.",
+            )
+
+    # Referential integrity and one-to-one lifecycle coverage.
+    foreign_key_checks = [
+        ("orders.buyer_id", orders, "buyer_id", buyers, "buyer_id"),
+        ("products.seller_id", products, "seller_id", sellers, "seller_id"),
+        ("order_items.order_id", items, "order_id", orders, "order_id"),
+        ("order_items.product_id", items, "product_id", products, "product_id"),
+        ("order_items.seller_id", items, "seller_id", sellers, "seller_id"),
+        ("payments.order_id", payments, "order_id", orders, "order_id"),
+        ("refunds.order_id", refunds, "order_id", orders, "order_id"),
+        ("disputes.order_id", disputes, "order_id", orders, "order_id"),
+        ("logistics.order_id", logistics, "order_id", orders, "order_id"),
+        ("logistics.seller_id", logistics, "seller_id", sellers, "seller_id"),
+    ]
+    for relationship, child, child_key, parent, parent_key in foreign_key_checks:
+        orphan_count = int((~child[child_key].isin(parent[parent_key])).sum())
+        if orphan_count:
+            _add_issue(
+                issues,
+                f"V-FK-{relationship}",
+                "synthetic_data",
+                "referential_integrity",
+                "Critical",
+                "open",
+                str(orphan_count),
+                "0",
+                f"Orphan foreign keys detected for {relationship}.",
+                "Repair or reject orphan records before downstream joins.",
+            )
+
+    order_ids = set(orders["order_id"])
+    for table_name, table in [("payments", payments), ("logistics", logistics)]:
+        covered_order_ids = set(table["order_id"])
+        missing_orders = len(order_ids - covered_order_ids)
+        duplicate_orders = int(table["order_id"].duplicated().sum())
+        if missing_orders or duplicate_orders:
+            _add_issue(
+                issues,
+                f"V-COVERAGE-{table_name}",
+                "synthetic_data",
+                "order_lifecycle_coverage",
+                "Critical",
+                "open",
+                f"missing_orders={missing_orders}, duplicate_orders={duplicate_orders}",
+                "both == 0",
+                f"{table_name} must contain exactly one lifecycle record per order.",
+                f"Restore one-to-one order coverage in {table_name} before feature generation.",
             )
 
     # 3) Null and 4) impossible values.
@@ -787,7 +865,222 @@ def run_validation(cfg: ValidationConfig) -> dict[str, pd.DataFrame]:
             "Rebuild scenario decision matrix from current scenario output.",
         )
 
-    # 15) Narrative overclaiming risk.
+    # 15) Matured temporal validation, calibrated probabilities, and drift monitoring.
+    if any(
+        frame.empty
+        for frame in [
+            calibrated,
+            calibration_parameters,
+            holdout,
+            monitoring,
+            model_release,
+        ]
+    ):
+        _add_issue(
+            issues,
+            "V-MODEL-001",
+            "model_monitoring",
+            "temporal_validation_outputs_exist",
+            "High",
+            "open",
+            "one or more outputs missing",
+            "all outputs present",
+            "Temporal calibration or monitoring outputs are incomplete.",
+            "Run the temporal validation step after rebuilding point-in-time scores.",
+        )
+    else:
+        calibrated_grain_ok = len(calibrated) == len(ors) and not calibrated["order_id"].duplicated().any()
+        if not calibrated_grain_ok:
+            _add_issue(
+                issues,
+                "V-MODEL-002",
+                "model_monitoring",
+                "calibrated_order_grain",
+                "High",
+                "open",
+                str(len(calibrated)),
+                str(len(ors)),
+                "Calibrated probabilities do not preserve one row per scored order.",
+                "Rebuild calibration using a one-to-one order join.",
+            )
+        expected_splits = {"development", "maturation_gap", "holdout"}
+        if set(holdout["split"]) != expected_splits:
+            _add_issue(
+                issues,
+                "V-MODEL-003",
+                "model_monitoring",
+                "mature_temporal_split_coverage",
+                "High",
+                "open",
+                str(sorted(holdout["split"].astype(str).tolist())),
+                str(sorted(expected_splits)),
+                "Mature evaluation does not contain the governed temporal splits.",
+                "Reapply the outcome-maturation gap and later-period holdout policy.",
+            )
+        if float(calibration_parameters.iloc[0]["slope"]) <= 0:
+            _add_issue(
+                issues,
+                "V-MODEL-004",
+                "model_monitoring",
+                "calibration_slope_positive",
+                "High",
+                "open",
+                str(calibration_parameters.iloc[0]["slope"]),
+                ">0",
+                "Probability calibration is directionally invalid.",
+                "Review score direction and refit on the matured development window.",
+            )
+        release_row = model_release.iloc[0]
+        if str(release_row["automated_decision_status"]) != "not approved":
+            _add_issue(
+                issues,
+                "V-MODEL-005",
+                "model_monitoring",
+                "automated_decision_guardrail",
+                "Critical",
+                "open",
+                str(release_row["automated_decision_status"]),
+                "not approved",
+                "Synthetic validation must not authorize automated decisions.",
+                "Restore the human-approval guardrail and require prospective evidence.",
+            )
+        if str(release_row["release_status"]) != "shadow-ready":
+            _add_issue(
+                issues,
+                "V-MODEL-006",
+                "model_monitoring",
+                "model_shadow_release_gate",
+                "Medium",
+                "open",
+                str(release_row["release_status"]),
+                "shadow-ready",
+                "The score is not ready for a prospective shadow release under the governed thresholds.",
+                "Investigate monthly discrimination alerts before prospective validation.",
+            )
+
+    # 16) Governed management-accounting reconciliation.
+    if order_pnl.empty or finance_reconciliation.empty:
+        _add_issue(
+            issues,
+            "V-FIN-001",
+            "finance",
+            "finance_outputs_exist",
+            "High",
+            "open",
+            "missing output",
+            "present",
+            "Order subledger or finance reconciliation is missing.",
+            "Run the governed management-accounts step.",
+        )
+    else:
+        if len(order_pnl) != len(orders) or order_pnl["order_id"].duplicated().any():
+            _add_issue(
+                issues,
+                "V-FIN-002",
+                "finance",
+                "order_subledger_grain",
+                "High",
+                "open",
+                str(len(order_pnl)),
+                str(len(orders)),
+                "Finance subledger does not preserve order grain.",
+                "Rebuild the subledger from the governed order profitability source.",
+            )
+        failed_reconciliations = int(finance_reconciliation["status"].ne("passed").sum())
+        if failed_reconciliations:
+            _add_issue(
+                issues,
+                "V-FIN-003",
+                "finance",
+                "double_entry_reconciliation",
+                "Critical",
+                "open",
+                str(failed_reconciliations),
+                "0",
+                "General-ledger or subledger reconciliation failed.",
+                "Resolve journal mapping or cent-level rounding before publication.",
+            )
+
+    # 17) Randomized intervention diagnostics and evidence boundary.
+    if experiment_balance.empty or experiment_results.empty or experiment_power.empty:
+        _add_issue(
+            issues,
+            "V-EXP-001",
+            "experimentation",
+            "experiment_outputs_exist",
+            "High",
+            "open",
+            "missing output",
+            "present",
+            "Controlled-intervention diagnostics are incomplete.",
+            "Run the controlled experiment step after calibration.",
+        )
+    else:
+        maximum_smd = float(experiment_balance["absolute_standardized_mean_difference"].max())
+        if maximum_smd >= 0.1:
+            _add_issue(
+                issues,
+                "V-EXP-002",
+                "experimentation",
+                "randomization_balance",
+                "High",
+                "open",
+                f"{maximum_smd:.4f}",
+                "<0.1",
+                "Treatment allocation is imbalanced on governed covariates.",
+                "Review assignment hashing and stratify only under a pre-specified design.",
+            )
+        evidence_boundary_ok = (
+            experiment_results["evidence_scope"].eq("synthetic_randomized_trial").all()
+            and experiment_results["operational_decision_status"].eq("not approved").all()
+        )
+        if not evidence_boundary_ok:
+            _add_issue(
+                issues,
+                "V-EXP-003",
+                "experimentation",
+                "synthetic_evidence_boundary",
+                "Critical",
+                "open",
+                "invalid",
+                "synthetic and not approved",
+                "Experiment outputs overstate the authority of synthetic outcomes.",
+                "Restore explicit synthetic scope and prohibit operational approval.",
+            )
+
+    # 18) Warehouse source and curated-mart controls.
+    warehouse_validation_path = cfg.report_dir / "warehouse_validation.csv"
+    if not warehouse_validation_path.exists():
+        _add_issue(
+            issues,
+            "V-WH-001",
+            "warehouse",
+            "warehouse_validation_exists",
+            "High",
+            "open",
+            "missing file",
+            "present",
+            "Warehouse validation evidence is missing.",
+            "Synchronize the DuckDB warehouse before formal validation.",
+        )
+    else:
+        warehouse_validation = pd.read_csv(warehouse_validation_path)
+        warehouse_failures = int(warehouse_validation["status"].ne("passed").sum())
+        if warehouse_failures:
+            _add_issue(
+                issues,
+                "V-WH-002",
+                "warehouse",
+                "warehouse_source_and_mart_checks",
+                "High",
+                "open",
+                str(warehouse_failures),
+                "0",
+                "Warehouse source or curated-mart validation failed.",
+                "Refresh changed sources and resolve curated-grain or finance checks.",
+            )
+
+    # 19) Narrative overclaiming risk.
     docs = [
         Path("docs/methodology.md"),
         Path("docs/executive_summary.md"),

@@ -1,0 +1,12 @@
+dimension,segment,row_count,control_rows,treatment_rows,control_adverse_rate,treatment_adverse_rate,intention_to_treat_effect_pp,evidence_scope
+category,Beauty,944,485,459,0.4536082474226804,0.3420479302832244,-11.156031713945602,exploratory_synthetic_randomized_trial
+category,Digital Goods,3430,1714,1716,0.4014002333722287,0.3269230769230769,-7.447715644915176,exploratory_synthetic_randomized_trial
+category,Electronics,6685,3446,3239,0.4251305861868833,0.32942266131522074,-9.570792487166258,exploratory_synthetic_randomized_trial
+category,Fashion,3093,1523,1570,0.43860801050558107,0.3503184713375796,-8.828953916800147,exploratory_synthetic_randomized_trial
+category,Grocery,1555,790,765,0.4417721518987342,0.3516339869281046,-9.01381649706296,exploratory_synthetic_randomized_trial
+category,Home,1542,763,779,0.43774574049803405,0.3581514762516046,-7.959426424642945,exploratory_synthetic_randomized_trial
+category,Sports,780,343,437,0.446064139941691,0.35697940503432496,-8.9084734907366,exploratory_synthetic_randomized_trial
+category,Toys,954,454,500,0.4713656387665198,0.376,-9.536563876651982,exploratory_synthetic_randomized_trial
+order_channel,mobile_app,9375,4665,4710,0.4267952840300107,0.340552016985138,-8.624326704487274,exploratory_synthetic_randomized_trial
+order_channel,social_commerce,3224,1630,1594,0.4343558282208589,0.34065244667503136,-9.370338154582752,exploratory_synthetic_randomized_trial
+order_channel,web,6384,3223,3161,0.4318957493018927,0.34166403037013604,-9.023171893175663,exploratory_synthetic_randomized_trial

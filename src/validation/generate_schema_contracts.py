@@ -45,9 +45,25 @@ PROCESSED_TABLES = [
     "backtesting_threshold_curve",
     "backtesting_action_impact",
     "backtesting_recommended_policy",
+    "order_risk_calibrated",
+    "model_calibration_parameters",
+    "model_calibration_curve",
+    "temporal_holdout_metrics",
+    "model_monitoring_monthly",
+    "model_monitoring_alerts",
+    "model_release_assessment",
+    "order_accounting_pnl",
+    "finance_general_ledger",
+    "finance_reconciliation",
+    "accounting_kpi_summary",
+    "experiment_assignments",
+    "experiment_balance",
+    "experiment_results",
+    "experiment_power",
+    "experiment_heterogeneity",
 ]
 
-PRIMARY_KEYS = {
+PRIMARY_KEYS: dict[str, list[str]] = {
     "buyers": ["buyer_id"],
     "sellers": ["seller_id"],
     "products": ["product_id"],
@@ -58,14 +74,71 @@ PRIMARY_KEYS = {
     "disputes": ["dispute_id"],
     "logistics_events": ["event_id"],
     "order_profitability_features": ["order_id"],
+    "seller_monthly_quality": ["seller_id", "month"],
     "buyer_behavior_risk": ["buyer_id"],
+    "category_risk_summary": ["month", "category"],
+    "seller_risk_base": ["seller_id", "current_period"],
     "order_risk_scores": ["order_id"],
     "seller_quality_scores": ["seller_id"],
     "fraud_exposure_scores": ["seller_id"],
     "margin_fragility_scores": ["seller_id"],
     "governance_priority_scores": ["seller_id"],
     "seller_scorecard": ["seller_id"],
+    "top_high_priority_sellers": ["seller_id"],
+    "top_high_risk_orders": ["order_id"],
+    "scoring_sensitivity_summary": ["scenario"],
     "governance_action_register": ["entity_type", "entity_id"],
+    "scenario_assumptions": ["scenario"],
+    "scenario_results_summary": ["scenario"],
+    "scenario_component_bridge": ["scenario"],
+    "scenario_decision_matrix": ["scenario"],
+    "scenario_monte_carlo_samples": ["iteration", "scenario"],
+    "scenario_monte_carlo_summary": ["scenario"],
+    "scenario_monte_carlo_decision": ["scenario"],
+    "backtesting_threshold_curve": ["threshold"],
+    "backtesting_action_impact": ["threshold", "efficacy_assumption"],
+    "order_risk_calibrated": ["order_id"],
+    "model_calibration_parameters": ["policy_version"],
+    "model_calibration_curve": ["split", "calibration_bin"],
+    "temporal_holdout_metrics": ["split"],
+    "model_monitoring_monthly": ["month"],
+    "model_monitoring_alerts": ["alert_id"],
+    "model_release_assessment": ["assessment_scope"],
+    "order_accounting_pnl": ["order_id"],
+    "finance_general_ledger": ["journal_line_id"],
+    "finance_reconciliation": ["check_name"],
+    "accounting_kpi_summary": ["finance_policy_version"],
+    "experiment_assignments": ["order_id"],
+    "experiment_balance": ["covariate"],
+    "experiment_results": ["experiment_id", "metric"],
+    "experiment_power": ["experiment_id"],
+    "experiment_heterogeneity": ["dimension", "segment"],
+}
+
+UNIQUE_CONSTRAINTS: dict[str, list[list[str]]] = {
+    "payments": [["order_id"]],
+    "logistics_events": [["order_id"]],
+}
+
+NOT_NULL_COLUMNS: dict[str, list[str]] = {
+    "buyers": ["buyer_id"],
+    "sellers": ["seller_id"],
+    "products": ["product_id", "seller_id"],
+    "orders": ["order_id", "buyer_id", "order_date"],
+    "order_items": ["order_item_id", "order_id", "product_id", "seller_id"],
+    "payments": ["payment_id", "order_id"],
+    "refunds": ["refund_id", "order_id", "refund_date"],
+    "disputes": ["dispute_id", "order_id", "dispute_date"],
+    "logistics_events": ["event_id", "order_id", "seller_id"],
+}
+
+ROW_COUNT_CONSTRAINTS: dict[str, dict[str, int]] = {
+    "scenario_top_risk_exposure": {"minimum": 1, "maximum": 1},
+    "backtesting_recommended_policy": {"minimum": 1, "maximum": 1},
+    "model_calibration_parameters": {"minimum": 1, "maximum": 1},
+    "model_release_assessment": {"minimum": 1, "maximum": 1},
+    "accounting_kpi_summary": {"minimum": 1, "maximum": 1},
+    "experiment_power": {"minimum": 1, "maximum": 1},
 }
 
 
@@ -102,25 +175,26 @@ def _table_contract(path: Path, table_name: str) -> dict[str, object]:
         "columns": list(sample.columns),
         "column_types": {c: _infer_kind(sample[c]) for c in sample.columns},
         "primary_key_candidate": PRIMARY_KEYS.get(table_name, []),
+        "unique_constraints": UNIQUE_CONSTRAINTS.get(table_name, []),
+        "not_null_columns": NOT_NULL_COLUMNS.get(table_name, PRIMARY_KEYS.get(table_name, [])),
+        "row_count_constraint": ROW_COUNT_CONSTRAINTS.get(table_name, {}),
         "enforcement": "exact_columns",
     }
 
 
 def generate_contract(raw_dir: Path, processed_dir: Path) -> dict[str, object]:
-    tables: list[dict[str, object]] = []
+    paths = [(table, raw_dir / f"{table}.csv") for table in RAW_TABLES]
+    paths.extend((table, processed_dir / f"{table}.csv") for table in PROCESSED_TABLES)
 
-    for t in RAW_TABLES:
-        p = raw_dir / f"{t}.csv"
-        if p.exists():
-            tables.append(_table_contract(p, t))
+    missing = [path for _, path in paths if not path.exists()]
+    if missing:
+        missing_text = ", ".join(path.as_posix() for path in missing)
+        raise FileNotFoundError(f"Cannot generate a complete schema contract; missing table(s): {missing_text}")
 
-    for t in PROCESSED_TABLES:
-        p = processed_dir / f"{t}.csv"
-        if p.exists():
-            tables.append(_table_contract(p, t))
+    tables = [_table_contract(path, table) for table, path in paths]
 
     return {
-        "contract_version": "v1.0.0",
+        "contract_version": "v1.1.0",
         "schema_family": "marketplace_command_center",
         "tables": tables,
     }

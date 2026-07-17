@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
@@ -14,10 +15,17 @@ class ScoringConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     trailing_window_days: int = 180
+    outcome_maturation_lag_days: int = 60
 
 
 RISK_TIER_BINS = [0.0, 30.0, 55.0, 75.0, 100.0001]
 RISK_TIER_LABELS = ["Low", "Moderate", "High", "Critical"]
+ORDER_EVENT_PRIORS = {
+    "refund_flag": 0.17,
+    "dispute_flag": 0.14,
+    "chargeback_flag": 0.05,
+}
+ORDER_VALUE_REFERENCE = 1_000.0
 
 
 def _clip(series: pd.Series, low: float = 0.0, high: float = 100.0) -> pd.Series:
@@ -45,26 +53,51 @@ def _compute_prior_rates(
     smoothing_strength: float,
     priors: dict[str, float],
     prefix: str,
+    maturation_lag_days: int,
 ) -> pd.DataFrame:
     temp = df[["order_id", entity_col, time_col, *event_cols]].copy()
-    temp = temp.sort_values([entity_col, time_col, "order_id"]).reset_index(drop=True)
-    grouped = temp.groupby(entity_col, sort=False)
-
-    temp[f"{prefix}_prior_orders"] = grouped.cumcount()
+    history = (
+        temp.groupby([entity_col, time_col], as_index=False, sort=False)
+        .agg(period_orders=("order_id", "size"), **{f"period_{col}": (col, "sum") for col in event_cols})
+        .sort_values([entity_col, time_col])
+    )
+    grouped_history = history.groupby(entity_col, sort=False)
+    history["cumulative_orders"] = grouped_history["period_orders"].cumsum()
 
     for event_col in event_cols:
-        prior_count = grouped[event_col].cumsum() - temp[event_col]
+        period_event_col = f"period_{event_col}"
+        history[f"cumulative_{event_col}"] = grouped_history[period_event_col].cumsum()
+
+    queries = temp[["order_id", entity_col, time_col]].copy()
+    queries["history_cutoff"] = queries[time_col] - pd.Timedelta(days=maturation_lag_days)
+    history_time_col = "history_time"
+    history = history.rename(columns={time_col: history_time_col})
+    queries = queries.sort_values(["history_cutoff", entity_col, "order_id"])
+    history = history.sort_values([history_time_col, entity_col])
+    prior = pd.merge_asof(
+        queries,
+        history,
+        left_on="history_cutoff",
+        right_on=history_time_col,
+        by=entity_col,
+        direction="backward",
+        allow_exact_matches=True,
+    )
+    prior[f"{prefix}_prior_orders"] = prior["cumulative_orders"].fillna(0).astype(int)
+
+    for event_col in event_cols:
+        prior_count = prior[f"cumulative_{event_col}"].fillna(0.0)
         rate = (prior_count + smoothing_strength * priors[event_col]) / (
-            temp[f"{prefix}_prior_orders"] + smoothing_strength
+            prior[f"{prefix}_prior_orders"] + smoothing_strength
         )
-        temp[f"{prefix}_prior_{event_col}_rate"] = rate.astype(float)
+        prior[f"{prefix}_prior_{event_col}_rate"] = rate.astype(float)
 
     keep = [
         "order_id",
         f"{prefix}_prior_orders",
         *[f"{prefix}_prior_{col}_rate" for col in event_cols],
     ]
-    return temp[keep]
+    return prior[keep]
 
 
 def _load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
@@ -243,9 +276,8 @@ def _priority_actions(tier: str, driver: str) -> str:
     return "escalate for manual review"
 
 
-def _build_order_risk_scores(base: pd.DataFrame) -> pd.DataFrame:
+def _build_order_risk_scores(base: pd.DataFrame, outcome_maturation_lag_days: int = 60) -> pd.DataFrame:
     event_cols = ["refund_flag", "dispute_flag", "chargeback_flag"]
-    priors = {col: float(base[col].mean()) for col in event_cols}
 
     seller_priors = _compute_prior_rates(
         df=base,
@@ -253,8 +285,9 @@ def _build_order_risk_scores(base: pd.DataFrame) -> pd.DataFrame:
         time_col="order_date",
         event_cols=event_cols,
         smoothing_strength=10.0,
-        priors=priors,
+        priors=ORDER_EVENT_PRIORS,
         prefix="seller",
+        maturation_lag_days=outcome_maturation_lag_days,
     )
     buyer_priors = _compute_prior_rates(
         df=base,
@@ -262,8 +295,9 @@ def _build_order_risk_scores(base: pd.DataFrame) -> pd.DataFrame:
         time_col="order_date",
         event_cols=event_cols,
         smoothing_strength=12.0,
-        priors=priors,
+        priors=ORDER_EVENT_PRIORS,
         prefix="buyer",
+        maturation_lag_days=outcome_maturation_lag_days,
     )
 
     df = base.merge(seller_priors, on="order_id", how="left").merge(buyer_priors, on="order_id", how="left")
@@ -308,8 +342,9 @@ def _build_order_risk_scores(base: pd.DataFrame) -> pd.DataFrame:
     df["comp_buyer_history"] = _clip(buyer_history)
     df["comp_seller_history"] = _clip(seller_history)
 
-    df["amount_pct_rank"] = df["gross_order_value"].rank(pct=True)
-    df["comp_order_value"] = _clip(100.0 * df["amount_pct_rank"])
+    df["comp_order_value"] = _clip(
+        100.0 * np.log1p(df["gross_order_value"].clip(lower=0.0)) / np.log1p(ORDER_VALUE_REFERENCE)
+    )
 
     weights = {
         "payment_signal": 0.25,
@@ -784,11 +819,16 @@ def _sensitivity_summary(governance_base: pd.DataFrame, comp_df: pd.DataFrame) -
 
 
 def build_scoring_tables(cfg: ScoringConfig) -> dict[str, pd.DataFrame]:
+    if cfg.trailing_window_days <= 0:
+        raise ValueError("trailing_window_days must be greater than zero.")
+    if cfg.outcome_maturation_lag_days < 0:
+        raise ValueError("outcome_maturation_lag_days must be non-negative.")
+
     raw = _load_raw(cfg.raw_dir)
     processed = _load_processed(cfg.processed_dir)
 
     order_base = _build_order_base(raw)
-    order_scores = _build_order_risk_scores(order_base)
+    order_scores = _build_order_risk_scores(order_base, cfg.outcome_maturation_lag_days)
 
     seller_base = _build_seller_level_base(
         base=order_base,
@@ -860,17 +900,38 @@ def save_tables(tables: dict[str, pd.DataFrame], processed_dir: Path) -> None:
         df.to_csv(processed_dir / f"{name}.csv", index=False)
 
 
+def _maturation_lag_from_policy(policy_file: Path) -> int:
+    policy = json.loads(policy_file.read_text(encoding="utf-8"))
+    if "outcome_maturation_lag_days" not in policy:
+        raise ValueError("Model monitoring policy is missing outcome_maturation_lag_days.")
+    lag = int(policy["outcome_maturation_lag_days"])
+    if lag < 0:
+        raise ValueError("Model monitoring maturation lag must be non-negative.")
+    return lag
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build scoring framework tables for marketplace risk and governance.")
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--trailing-window-days", type=int, default=180)
+    parser.add_argument(
+        "--monitoring-policy-file",
+        type=Path,
+        default=Path("config/contracts/v1/model_monitoring_policy.json"),
+    )
+    parser.add_argument("--outcome-maturation-lag-days", type=int)
     args = parser.parse_args()
+
+    policy_lag = _maturation_lag_from_policy(args.monitoring_policy_file)
+    if args.outcome_maturation_lag_days is not None and args.outcome_maturation_lag_days != policy_lag:
+        raise ValueError("CLI maturation lag must match the governed model monitoring policy.")
 
     cfg = ScoringConfig(
         raw_dir=args.raw_dir,
         processed_dir=args.processed_dir,
         trailing_window_days=args.trailing_window_days,
+        outcome_maturation_lag_days=policy_lag,
     )
 
     tables = build_scoring_tables(cfg)

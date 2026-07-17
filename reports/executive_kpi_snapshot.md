@@ -1,6 +1,5 @@
 # Executive KPI Snapshot
 
-- Generated at: `2026-06-12 08:23 UTC`
 - Coverage: `2024-03-01` to `2026-02-28`
 - Orders: `156,121`
 

@@ -1,0 +1,15 @@
+{
+  "allocation_rate": 0.5,
+  "alpha": 0.05,
+  "analysis_unit": "order",
+  "assignment_salt": "enhanced-review-v1",
+  "eligibility_score_threshold": 60.0,
+  "eligibility_window_days": 180,
+  "experiment_id": "EXP-ENHANCED-REVIEW-001",
+  "manual_review_cost": 1.2,
+  "minimum_detectable_effect_pp": 2.5,
+  "policy_version": "1.0.0",
+  "power": 0.8,
+  "simulated_prevention_efficacy": 0.18,
+  "treatment": "enhanced_manual_review"
+}

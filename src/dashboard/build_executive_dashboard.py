@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
@@ -361,7 +360,6 @@ def _build_payload(cfg: DashboardConfig) -> dict[str, object]:
 
     payload = {
         "meta": {
-            "generated_at_utc": datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC"),
             "dashboard_version": DASHBOARD_VERSION,
             "coverage_start": str(fact["d"].min()),
             "coverage_end": str(fact["d"].max()),
@@ -395,7 +393,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   <title>Marketplace Profitability, Fraud & Seller Quality Command Center</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-start: #f5f5f7;
@@ -444,6 +442,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       --grid: #eaedf2;
       --hover-bg: #0a1628;
       --hover-ink: #ffffff;
+      /* Editorial display face. Deliberately the same family the printed analytical
+         report is typeset in, so the interactive and printed surfaces read as one
+         product. It carries argument text only — never figures (see .figure). */
+      --serif: "PT Serif", Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Geist", "Segoe UI", Arial, sans-serif;
+      --mono: "Geist Mono", "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     }
     body[data-theme="dark"] {
       --bg-start: #0a0c10;
@@ -514,16 +518,37 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin: 0;
       background: var(--bg-start);
       color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Geist", "Segoe UI", Arial, sans-serif;
+      font-family: var(--sans);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
-    .mono, .value, .kpi .value, .decision-stat .value, .scenario-card .main, .bench .num {
-      font-family: "Geist Mono", "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    /* Tabular figures are for numbers that stack into a column — table cells, ledger
+       rows, axis-like readouts. They are wrong on a standalone display figure, where
+       equal-width digits open visible gaps. */
+    .mono {
+      font-family: var(--mono);
       font-feature-settings: "tnum" 1;
       font-variant-numeric: tabular-nums;
+    }
+    /* Every standalone figure on the page. Proportional numerals in the UI sans,
+       optically tightened — the display treatment, not the ledger treatment. */
+    .figure,
+    .kpi .value,
+    .decision-stat .value,
+    .scenario-card .main,
+    .bench .num {
+      font-family: var(--sans);
+      font-variant-numeric: proportional-nums lining-nums;
+      font-feature-settings: "pnum" 1, "lnum" 1;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      font-variant-ligatures: none;
+    }
+    .serif {
+      font-family: var(--serif);
+      font-weight: 400;
     }
     .skip-link {
       position: absolute;
@@ -571,26 +596,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .title h1 {
       margin: 0;
-      font-size: 20px;
-      letter-spacing: -0.3px;
-      line-height: 1.2;
-      font-weight: 600;
+      font-family: var(--serif);
+      font-size: 23px;
+      letter-spacing: -0.2px;
+      line-height: 1.18;
+      font-weight: 700;
       color: var(--ink);
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-    }
-    .title h1::before {
-      content: "";
-      width: 4px;
-      height: 19px;
-      border-radius: 3px;
-      background: var(--accent);
-      flex: 0 0 auto;
-      margin-top: 2px;
     }
     .title p {
-      margin: 6px 0 0 21px;
+      margin: 5px 0 0 0;
       color: var(--muted);
       font-size: 13px;
       max-width: 900px;
@@ -740,8 +754,8 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .tabs {
       display: flex;
       flex-wrap: nowrap;
-      gap: 2px;
-      margin-bottom: 18px;
+      gap: 28px;
+      margin-bottom: 22px;
       padding: 0;
       border-radius: 0;
       background: transparent;
@@ -754,16 +768,20 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       scrollbar-width: none;
     }
     .tabs::-webkit-scrollbar { display: none; }
+    /* Section index: the rule hugs the word instead of a padded box, which is what
+       separates an editorial index from a tab strip. */
     .tab-btn {
       flex: 0 0 auto;
       border-radius: 0;
-      padding: 11px 14px;
+      padding: 13px 0;
       background: transparent;
       border: none;
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
       color: var(--muted);
       box-shadow: none;
     }
@@ -781,12 +799,16 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
+    /* The front page: the verdict is the largest text on the screen, set in the
+       report's serif, with the status ledger opposite it. */
     .hero-strip {
-      margin: 22px 0 18px 0;
+      margin: 26px 0 22px 0;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 28px;
-      align-items: center;
+      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.85fr);
+      gap: 40px;
+      align-items: start;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
     }
     .hero-message {
       background: transparent;
@@ -799,179 +821,209 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       color: var(--ink);
     }
     .hero-message h2 {
-      margin: 7px 0 0 0;
-      font-size: 23px;
-      line-height: 1.22;
-      letter-spacing: -0.5px;
-      font-weight: 600;
-      max-width: 820px;
+      margin: 10px 0 0 0;
+      font-family: var(--serif);
+      font-size: 33px;
+      line-height: 1.2;
+      letter-spacing: -0.4px;
+      font-weight: 400;
+      max-width: 27ch;
       color: var(--ink);
+      text-wrap: balance;
+    }
+    .hero-message h2 em {
+      font-style: italic;
+      color: var(--brand-ink);
     }
     .hero-message p {
-      margin: 8px 0 0 0;
+      margin: 14px 0 0 0;
       color: var(--muted);
-      font-size: 13.5px;
-      max-width: 780px;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 62ch;
     }
     .hero-side {
       display: grid;
       gap: 10px;
+      align-content: start;
     }
+    /* A memo, not a card grid. Label hangs in the left column; the finding reads as
+       a sentence in the measure beside it. Nothing here is a box inside a box. */
     .decision-points {
       margin-top: 0;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      border-top: 1px solid var(--line);
     }
     .decision-point {
-      padding: 15px 17px;
-      border-radius: var(--radius-sm);
-      background: var(--panel-soft);
-      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 20px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-soft);
     }
+    /* The action block below opens with its own rule; without this the two stack into
+       a visible double hairline. */
+    .decision-point:last-child { border-bottom: 0; }
     .decision-point .name {
       font-size: 10.5px;
-      color: var(--muted);
+      color: var(--muted-2);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.7px;
     }
     .decision-point .main {
-      margin-top: 7px;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.4;
+      font-size: 14.5px;
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--ink);
     }
     .decision-board {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      border-top: 1px solid var(--line);
     }
     .decision-stat {
-      padding: 15px 17px;
-      border-radius: var(--radius-sm);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
+      padding: 15px 0 16px 0;
+      border-bottom: 1px solid var(--line-soft);
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: baseline;
+      column-gap: 16px;
     }
     .decision-stat .name {
-      font-size: 10.5px;
+      font-size: 12.5px;
       color: var(--muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
+      font-weight: 400;
     }
     .decision-stat .value {
-      margin-top: 8px;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -0.4px;
+      font-size: 24px;
       color: var(--ink);
+      justify-self: end;
     }
     .decision-stat.good .value { color: var(--good); }
     .decision-stat.bad .value { color: var(--bad); }
     .decision-stat .hint {
-      margin-top: 6px;
+      grid-column: 1 / -1;
+      margin-top: 4px;
       color: var(--muted-2);
-      font-size: 12px;
+      font-size: 11.5px;
       line-height: 1.45;
+      max-width: 46ch;
     }
+    /* Status ledger — four rules, not four boxes. Reads top-to-bottom as a list of
+       system states, which is what it is. */
     .signal-grid {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      display: grid;
+      border-top: 1px solid var(--line);
     }
     .signal-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: var(--panel-strong);
-      padding: 12px 15px;
-      box-shadow: var(--shadow-soft);
-      min-width: 136px;
-      position: relative;
+      display: grid;
+      grid-template-columns: 9px minmax(0, 1fr) auto;
+      align-items: baseline;
+      column-gap: 11px;
+      padding: 12px 2px;
+      border-bottom: 1px solid var(--line-soft);
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
     }
     .signal-card::before {
       content: "";
-      position: absolute;
-      left: 13px;
-      top: 14px;
       width: 6px;
       height: 6px;
       border-radius: 999px;
       background: var(--muted-2);
+      align-self: center;
     }
     .signal-card.good::before { background: var(--good); }
     .signal-card.warn::before { background: var(--warn); }
     .signal-card.bad::before { background: var(--bad); }
     .signal-card .name {
-      font-size: 10.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
+      font-size: 12.5px;
       color: var(--muted);
-      font-weight: 600;
-      padding-left: 14px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
     }
     .signal-card .state {
-      margin-top: 3px;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.1px;
+      justify-self: end;
+      text-align: right;
     }
     .signal-card .hint {
+      grid-column: 2 / -1;
       margin-top: 2px;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--muted-2);
     }
     .signal-card.good .state { color: var(--good); }
     .signal-card.warn .state { color: var(--warn); }
     .signal-card.bad .state { color: var(--bad); }
+    /* The metric band is ranked, not flat. Tier one is the argument the whole
+       repository makes — gross value, what survives risk, what reaches margin.
+       Tier two is the diagnostic strip that explains tier one. */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 0;
     }
-    .kpi {
-      grid-column: auto;
-      background: var(--panel-strong);
+    /* Separators are the 1px grid gap showing the container behind the cells, so the
+       rules stay correct however the band reflows — no border side ever has to be
+       flipped or cleared at a breakpoint. */
+    .metric-tier {
+      display: grid;
+      gap: 1px;
+      background: var(--line-soft);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 18px 18px 17px 18px;
-      min-height: 120px;
+      overflow: hidden;
+    }
+    .metric-tier.lead {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-radius: var(--radius);
+    }
+    .metric-tier.diagnostic {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-radius: var(--radius-sm);
+    }
+    .kpi {
+      background: var(--panel-strong);
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
       display: grid;
       align-content: start;
-      gap: 7px;
-      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      gap: 6px;
     }
-    .kpi.feature {
-      grid-column: span 3;
-    }
+    .metric-tier.lead .kpi { padding: 20px 24px 22px 24px; }
+    .metric-tier.diagnostic .kpi { padding: 14px 20px 15px 20px; gap: 4px; }
+    /* The status dot sits against its label. Pushed to the far edge of a wide cell it
+       reads as stray punctuation rather than as the label's state. */
     .kpi-head {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .kpi .label {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10.5px;
       text-transform: uppercase;
       font-weight: 600;
-      letter-spacing: 0.6px;
-      min-height: 26px;
+      letter-spacing: 0.7px;
       line-height: 1.2;
     }
     .kpi .value {
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: -0.8px;
-      line-height: 1.05;
+      line-height: 1.02;
       color: var(--ink);
     }
-    .kpi.feature .value { font-size: 34px; }
+    .metric-tier.lead .kpi .value { font-size: 40px; margin-top: 2px; }
+    .metric-tier.diagnostic .kpi .value { font-size: 23px; }
     .kpi .delta {
       font-size: 12px;
       color: var(--muted);
@@ -979,19 +1031,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       align-items: center;
       gap: 6px;
     }
-    .kpi .delta .dir { font-weight: 600; }
+    .kpi .delta .dir { font-weight: 500; }
     .kpi.good .delta .dir { color: var(--good); }
     .kpi.warn .delta .dir { color: var(--warn); }
     .kpi.bad .delta .dir { color: var(--bad); }
-    .kpi .interpretation { display: none; }
     .kpi .context {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--muted-2);
       font-weight: 400;
     }
+    .metric-tier.diagnostic .kpi .context { display: none; }
     .tone-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
       flex: 0 0 auto;
       background: var(--muted-2);
@@ -999,22 +1051,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .kpi.good .tone-dot { background: var(--good); }
     .kpi.warn .tone-dot { background: var(--warn); }
     .kpi.bad .tone-dot { background: var(--bad); }
+    /* The committed decisions, set as three newspaper columns under a shared rule. */
     .action-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
+      gap: 26px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
     }
     .action-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: var(--panel-strong);
-      padding: 15px 17px;
-      box-shadow: var(--shadow-soft);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
     }
     .action-card .name {
       font-size: 10.5px;
-      color: var(--muted);
+      color: var(--muted-2);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.7px;
@@ -1034,17 +1089,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .action-card.warn .name::before { background: var(--warn); }
     .action-card.good .name::before { background: var(--good); }
     .action-card .main {
-      margin-top: 8px;
+      margin-top: 9px;
       font-size: 14px;
-      font-weight: 500;
-      line-height: 1.4;
+      font-weight: 400;
+      line-height: 1.45;
       color: var(--ink);
     }
     .action-card .hint {
-      margin-top: 6px;
-      font-size: 12px;
+      margin-top: 7px;
+      font-size: 11.5px;
       color: var(--muted-2);
-      line-height: 1.45;
+      line-height: 1.5;
     }
     .kpi-band {
       margin: 0 0 22px 0;
@@ -1055,9 +1110,12 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       margin-bottom: 14px;
       align-items: start;
     }
-    .row-2 { grid-template-columns: 1fr 1fr; }
-    .row-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .overview-decisions { grid-template-columns: 1.7fr 1fr; }
+    /* minmax(0, 1fr) rather than 1fr: a plain 1fr track refuses to shrink below its
+       content's min-width, so a chart that measured itself while its tab was hidden
+       would widen the column and push the whole page into a horizontal scroll. */
+    .row-2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .overview-decisions { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
     .overview-decisions .action-grid { margin-top: 12px; }
     .overview-decisions .decision-board { grid-template-columns: 1fr; }
     .panel {
@@ -1067,16 +1125,21 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       box-shadow: var(--shadow);
       padding: 22px 24px;
     }
+    /* Panel headings are the analytical question the panel answers — argument text,
+       so they take the serif. The deck under them stays in the UI sans. */
     .panel h3 {
-      margin: 0 0 6px 0;
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.35;
-      letter-spacing: -0.2px;
+      margin: 0 0 7px 0;
+      font-family: var(--serif);
+      font-size: 17.5px;
+      font-weight: 400;
+      line-height: 1.32;
+      letter-spacing: -0.1px;
       color: var(--ink);
+      max-width: 46ch;
+      text-wrap: balance;
     }
     .panel .sub {
-      margin: 0 0 14px 0;
+      margin: 0 0 18px 0;
       color: var(--muted);
       font-size: 12.5px;
       line-height: 1.45;
@@ -1091,14 +1154,19 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: var(--panel-strong);
     }
     .plot.short { min-height: 270px; }
+    /* Standfirst treatment: the written read of the scope, set as prose against a
+       single accent rule rather than parked in a tinted box. */
     .narrative {
-      line-height: 1.6;
+      font-family: var(--serif);
+      line-height: 1.62;
       color: var(--ink-2);
-      font-size: 13.5px;
-      background: var(--narrative-bg);
-      border: 1px solid var(--narrative-line);
-      border-radius: var(--radius-sm);
-      padding: 16px 18px;
+      font-size: 15px;
+      background: transparent;
+      border: 0;
+      border-left: 2px solid var(--accent);
+      border-radius: 0;
+      padding: 2px 0 2px 20px;
+      max-width: 68ch;
     }
     .badges {
       display: flex;
@@ -1171,18 +1239,22 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .bench-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
+      gap: 0;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
     }
     .bench {
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: var(--panel-soft);
+      padding: 0 20px;
+      border: 0;
+      border-left: 1px solid var(--line-soft);
+      border-radius: 0;
+      background: transparent;
     }
-    .bench .name { font-size: 11.5px; color: var(--muted); }
-    .bench .num { margin-top: 6px; font-size: 19px; font-weight: 500; letter-spacing: -0.3px; color: var(--ink); }
-    .bench-hint { margin-top: 3px; font-size: 11px; color: var(--muted-2); }
+    .bench:first-child { padding-left: 0; border-left: 0; }
+    .bench .name { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+    .bench .num { margin-top: 8px; font-size: 20px; color: var(--ink); }
+    .bench-hint { margin-top: 4px; font-size: 11px; color: var(--muted-2); }
     .table-tools {
       display: flex;
       flex-wrap: wrap;
@@ -1239,6 +1311,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: rgba(245, 248, 252, 0.5);
     }
     tbody tr:hover { background: var(--table-row-hover); }
+    /* Measures align right so magnitudes stack digit over digit; the identifier and
+       the written action stay left. Headers follow their column. */
+    #tab-seller thead th:nth-child(n+3):nth-child(-n+9),
+    #tab-seller tbody td:nth-child(n+3):nth-child(-n+9),
+    #tab-scenario thead th:nth-child(n+2):nth-child(-n+6),
+    #tab-scenario tbody td:nth-child(n+2):nth-child(-n+6) {
+      text-align: right;
+    }
     .table-wrap {
       max-height: 420px;
       overflow: auto;
@@ -1275,24 +1355,49 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     .scenario-cards {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 1px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--line-soft);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
     .scenario-card {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
+      padding: 15px 20px 16px 20px;
+      border: 0;
+      border-radius: 0;
       background: var(--panel-strong);
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
     }
-    .scenario-card .name { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-    .scenario-card .main { margin-top: 6px; font-size: 22px; font-weight: 500; letter-spacing: -0.4px; color: var(--ink); }
-    .scenario-card .hint { margin-top: 5px; font-size: 12px; color: var(--muted-2); }
+    .scenario-card .name { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; font-weight: 600; }
+    .scenario-card .main { margin-top: 7px; font-size: 23px; color: var(--ink); }
+    .scenario-card .hint { margin-top: 5px; font-size: 11.5px; color: var(--muted-2); }
+    /* A reference page, not a dashboard panel: definitions are prose and get a real
+       reading measure instead of running the full 1680px of the container. */
     .method-tab h4 {
-      margin: 14px 0 6px 0;
+      margin: 26px 0 10px 0;
+      max-width: 76ch;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted-2);
     }
-    .method-tab ul { margin: 0; padding-left: 20px; }
-    .method-tab li { margin: 4px 0; }
+    .method-tab ul {
+      margin: 0;
+      padding-left: 18px;
+      max-width: 76ch;
+    }
+    .method-tab li {
+      margin: 8px 0;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+    .method-tab li b { color: var(--ink); font-weight: 600; }
     .drawer {
       position: fixed;
       right: -520px;
@@ -1333,13 +1438,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       background: var(--panel-soft);
     }
     @media (max-width: 1280px) {
-      .hero-strip { grid-template-columns: 1fr; }
-      .decision-points,
-      .decision-board,
-      .action-grid { grid-template-columns: 1fr; }
-      .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
-      .kpi-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-      .kpi, .kpi.feature { grid-column: span 2; }
+      .hero-strip {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+      .hero-message h2 { font-size: 32px; max-width: 26ch; }
+      .action-grid { grid-template-columns: 1fr; gap: 18px; }
+      .action-card + .action-card { padding-top: 16px; border-top: 1px solid var(--line-soft); }
+      .metric-tier.lead { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .metric-tier.lead .kpi .value { font-size: 34px; }
       .row-3 { grid-template-columns: 1fr; }
       .row-2 { grid-template-columns: 1fr; }
       .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1349,17 +1456,26 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
          tall to stay pinned on small viewports — it would eat ~45% of a phone
          screen while scrolling. Let it scroll away with the page instead. */
       .top-shell { position: static; }
-      .title h1 { font-size: 28px; }
-      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .kpi, .kpi.feature { grid-column: span 1; }
+      .title h1 { font-size: 26px; }
+      .hero-message h2 { font-size: 27px; max-width: none; }
+      .hero-message p { font-size: 13.5px; }
+      .metric-tier.lead,
+      .metric-tier.diagnostic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metric-tier.lead .kpi { padding: 16px 18px 18px 18px; }
+      .metric-tier.lead .kpi .value { font-size: 29px; }
       .filter-bar { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
       .header { grid-template-columns: 1fr; }
       .header-meta { justify-items: start; }
       .actions { justify-content: flex-start; }
-      .signal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-content: stretch; }
-      .bench-grid { grid-template-columns: 1fr; }
-      .action-grid { grid-template-columns: 1fr; }
+      .decision-point { grid-template-columns: 1fr; gap: 5px; }
+      .bench-grid { grid-template-columns: 1fr; gap: 16px; }
+      .bench { padding: 0; border-left: 0; }
+      .scenario-cards { grid-template-columns: 1fr; }
       .drawer { width: 100vw; right: -100vw; }
+    }
+    @media (max-width: 520px) {
+      .metric-tier.lead,
+      .metric-tier.diagnostic { grid-template-columns: 1fr; }
     }
     @media print {
       :root {
@@ -1420,7 +1536,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       #tab-overview {
         page-break-before: auto;
       }
-      .panel, .kpi, .scenario-card, .hero-message, .signal-card {
+      .panel, .metric-tier, .kpi, .scenario-cards, .scenario-card, .hero-message, .signal-card {
         box-shadow: none;
         break-inside: avoid;
       }
@@ -1434,8 +1550,17 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       thead th {
         position: static;
       }
-      .row, .kpi-grid, .hero-strip, .signal-grid, .scenario-cards {
+      .row, .kpi-grid, .hero-strip {
         gap: 8px;
+      }
+      /* The banded metrics draw their rules with a 1px grid gap — a print gap
+         override would erase every separator, so they keep their own. */
+      .metric-tier, .scenario-cards {
+        gap: 1px;
+      }
+      .hero-strip {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        border-bottom: 1px solid var(--line);
       }
     }
   </style>
@@ -1886,7 +2011,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     return {
       paper_bgcolor: t.panel,
       plot_bgcolor: t.panel,
-      margin: { l: 56, r: 20, t: 48, b: 84 },
+      // No title slot: the panel's own <h3> is the chart title, so the plot area
+      // starts right below the panel deck instead of reserving space for a repeat.
+      margin: { l: 56, r: 20, t: 20, b: 84 },
       font: { family: 'Geist, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif', size: 12.5, color: t.ink },
       colorway: [t.axis, cssVar('--accent')],
       legend: {
@@ -1897,7 +2024,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         font: { color: t.muted, size: 12 },
         bgcolor: 'rgba(0,0,0,0)',
       },
-      title: { text: '', x: 0, xanchor: 'left', font: { size: 1, color: t.panel } },
       hoverlabel: {
         bgcolor: t.hoverBg,
         bordercolor: t.hoverBg,
@@ -1909,19 +2035,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   function themedLayout(layout) {
     const t = themeTokens();
     const merged = { ...baseLayout(), ...layout };
-    if (merged.title && (merged.title.text || merged.title.text === '')) {
-      const txt = merged.title.text;
-      merged.title = {
-        text: txt,
-        x: 0,
-        xanchor: 'left',
-        y: 0.98,
-        yanchor: 'top',
-        font: { size: 13, color: t.muted, family: 'Geist, -apple-system, Segoe UI, Arial, sans-serif' },
-        ...(typeof merged.title === 'object' ? {} : {}),
-      };
-      merged.title.text = txt;
-      merged.title.font = { size: 13, color: t.muted, family: 'Geist, -apple-system, Segoe UI, Arial, sans-serif' };
+    // The axis defaults below — automargin above all — only reach axes that exist on
+    // the layout object. A chart that declares just an xaxis would otherwise leave its
+    // y tick labels without automargin and crop long category names against margin.l.
+    for (const key of ['xaxis', 'yaxis']) {
+      if (!merged[key]) merged[key] = {};
     }
     const axisKeys = ['xaxis', 'xaxis2', 'xaxis3', 'yaxis', 'yaxis2', 'yaxis3'];
     for (const key of axisKeys) {
@@ -2008,6 +2126,11 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
   function pctSigned(v, d = 1) { return _signed(v, d, '%'); }
   function fixed(v, d = 1) { return Number(v || 0).toFixed(d); }
   function cap(s) { const t = String(s || '').trim(); return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[char]);
+  }
   function governedMetric(key, fallback = 0) {
     const has = Object.prototype.hasOwnProperty.call(APP.officialKpis, key);
     return has ? num(APP.officialKpis[key]) : num(fallback);
@@ -2044,7 +2167,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
 
   function scopeSummaryChips(filters, state) {
     const chips = [];
-    chips.push(`<span class="scope-chip"><strong>Coverage</strong> ${filters.dateFrom} to ${filters.dateTo}</span>`);
+    chips.push(`<span class="scope-chip"><strong>Coverage</strong> ${escapeHtml(filters.dateFrom)} to ${escapeHtml(filters.dateTo)}</span>`);
 
     const dimensions = [
       ['Region', filters.region],
@@ -2056,7 +2179,7 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       ['Risk tier', filters.riskTier],
     ];
     for (const [label, value] of dimensions) {
-      if (value !== '__ALL__') chips.push(`<span class="scope-chip"><strong>${label}</strong> ${value}</span>`);
+      if (value !== '__ALL__') chips.push(`<span class="scope-chip"><strong>${escapeHtml(label)}</strong> ${escapeHtml(value)}</span>`);
     }
 
     chips.push(`<span class="scope-chip"><strong>Orders</strong> ${state.kpi.orders.toLocaleString()}</span>`);
@@ -2515,8 +2638,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         tone: (filtered ? k.subsidyShare : official.subsidyShare) <= 0.03 ? 'good' : (filtered ? k.subsidyShare : official.subsidyShare) <= 0.05 ? 'warn' : 'bad',
       },
     ];
-    const grid = document.getElementById('kpiGrid');
-    grid.innerHTML = cards.map(c => `
+    // The first three cards are the value argument (gross -> protected -> margin);
+    // the rest are the diagnostics that explain it. They are banded separately so the
+    // reader gets a ranking instead of seven equally loud tiles.
+    const cardHtml = (c) => `
       <div class="kpi ${c.tone}">
         <div class="kpi-head">
           <div class="label">${c.label}</div>
@@ -2525,8 +2650,10 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         <div class="value">${c.value}</div>
         <div class="delta"><span class="dir">${c.delta}</span></div>
         <div class="context">${c.context}</div>
-      </div>
-    `).join('');
+      </div>`;
+    document.getElementById('kpiGrid').innerHTML =
+      `<div class="metric-tier lead">${cards.slice(0, 3).map(cardHtml).join('')}</div>`
+      + `<div class="metric-tier diagnostic">${cards.slice(3).map(cardHtml).join('')}</div>`;
   }
 
   function renderHero(state, baseline) {
@@ -2548,13 +2675,18 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const opsHealth = state.rates.onTimeRate >= opsGood ? 'good' : state.rates.onTimeRate >= opsWarn ? 'warn' : 'bad';
     const worstIssue = marginHealth === 'bad' ? 'margin leakage' : riskHealth === 'bad' ? 'fraud and dispute pressure' : growthHealth === 'bad' ? 'fragile growth quality' : 'protecting current quality while scaling';
     const subject = filtered ? 'This scope is' : 'The marketplace is';
-    const headline = `${subject} ${growthHealth === 'good' ? 'expanding with stronger economic quality' : growthHealth === 'warn' ? 'growing with mixed quality signals' : 'growing with deteriorating quality protection'}.`;
+    const verdict = growthHealth === 'good' ? 'expanding with stronger economic quality' : growthHealth === 'warn' ? 'growing with mixed quality signals' : 'growing with deteriorating quality protection';
     const moveWord = qualityDelta >= 0.05 ? 'up' : qualityDelta <= -0.05 ? 'down' : 'flat';
     const moveClause = moveWord === 'flat'
       ? `Risk-adjusted value holds at ${pct(qualRatio)} of net ${cmpLabel}.`
       : `Risk-adjusted value sits at ${pct(qualRatio)} of net, ${moveWord} ${Math.abs(qualityDelta).toFixed(1)}pp ${cmpLabel}.`;
     const message = `${moveClause} The immediate lens is ${worstIssue}, not topline GMV alone.`;
-    document.getElementById('heroHeadline').textContent = headline;
+    // Built from nodes rather than markup: the verdict clause carries the emphasis,
+    // and no string here ever reaches an HTML parser.
+    const headlineEl = document.getElementById('heroHeadline');
+    const emphasis = document.createElement('em');
+    emphasis.textContent = verdict;
+    headlineEl.replaceChildren(document.createTextNode(`${subject} `), emphasis, document.createTextNode('.'));
     document.getElementById('heroMessage').textContent = message;
 
     const decisionPoints = [
@@ -2603,9 +2735,9 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     ];
     document.getElementById('actionQueue').innerHTML = actionQueue.map(a => `
       <div class="action-card ${a.cls}">
-        <div class="name">${a.name}</div>
-        <div class="main">${a.main}</div>
-        <div class="hint">${a.hint}</div>
+        <div class="name">${escapeHtml(a.name)}</div>
+        <div class="main">${escapeHtml(a.main)}</div>
+        <div class="hint">${escapeHtml(a.hint)}</div>
       </div>
     `).join('');
 
@@ -2717,16 +2849,55 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     Plotly.react(divId, traces, themedLayout(layout), { displayModeBar: false, responsive: true });
   }
 
+  // The thesis chart. The distance between the two lines is the entire argument of
+  // this repository, so it is shaded and named rather than left for the reader to
+  // measure by eye. Both series are dollars on one scale.
   function renderGrowth(state, divId) {
     const m = state.monthArr;
     const c = chartPalette();
+    const dark = APP.theme === 'dark';
+    const last = m[m.length - 1];
+    // Anchored to the right edge of the plot area (xref 'paper') rather than to the
+    // final month: an x-positioned annotation is folded into the axis autorange and
+    // would stretch the timeline months past the last observation.
+    // The two series can sit a hair apart, so each label is anchored away from its own
+    // line — one above, one below — and they cannot collide however narrow the gap is.
+    const endLabel = (text, y, color, yanchor) => ({
+      x: 1,
+      y,
+      xref: 'paper',
+      yref: 'y',
+      text,
+      showarrow: false,
+      xanchor: 'left',
+      xshift: 10,
+      yanchor,
+      yshift: yanchor === 'bottom' ? 3 : -3,
+      font: { size: 11, color, family: 'Geist, -apple-system, Segoe UI, Arial, sans-serif' }
+    });
     plotOrEmpty(divId, [
-      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines+markers', name: 'GMV', line: { color: c.steel, width: 2.4 }, marker: { size: 5 } },
-      { x: m.map(x => x.m), y: m.map(x => x.riskAdj), mode: 'lines+markers', name: 'Risk-Adjusted GMV', line: { color: c.accent, width: 3 }, marker: { size: 5 } }
+      { x: m.map(x => x.m), y: m.map(x => x.gmv), mode: 'lines', name: 'GMV', line: { color: c.steel, width: 2 }, hovertemplate: '%{x}<br>GMV %{y:$,.0f}<extra></extra>' },
+      {
+        x: m.map(x => x.m),
+        y: m.map(x => x.riskAdj),
+        mode: 'lines',
+        name: 'Risk-adjusted GMV',
+        line: { color: c.accent, width: 2.4 },
+        fill: 'tonexty',
+        fillcolor: dark ? 'rgba(240,114,107,0.15)' : 'rgba(197,69,59,0.09)',
+        hovertemplate: '%{x}<br>Risk-adjusted %{y:$,.0f}<extra></extra>'
+      }
     ], {
-      margin: { l: 56, r: 20, t: 30, b: 84 },
+      // Both lines are labelled at their own endpoint, so identity never depends on
+      // matching a colour to a legend box across the panel.
+      margin: { l: 62, r: 116, t: 24, b: 66 },
+      showlegend: false,
       yaxis: { title: 'Value ($)' },
-      xaxis: { title: 'Month', tickangle: -35 }
+      xaxis: { title: 'Month', tickangle: -35 },
+      annotations: last ? [
+        endLabel('GMV', last.gmv, c.steel, 'bottom'),
+        endLabel('Risk-adjusted', last.riskAdj, c.accent, 'top')
+      ] : []
     }, m.length > 0);
   }
 
@@ -2761,17 +2932,21 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     }, state.kpi.orders > 0);
   }
 
+  // Dollars and a percentage share do not belong on two y-scales of one plot — the
+  // alignment would be arbitrary and would imply a correlation the data never states.
+  // They get two stacked panels over one shared time axis instead.
   function renderNetSubsidy(state) {
     const m = state.monthArr;
     const c = chartPalette();
     plotOrEmpty('plotNetSubsidy', [
-      { x: m.map(x => x.m), y: m.map(x => x.net), type: 'bar', name: 'Net Value', marker: { color: c.blueSoft } },
-      { x: m.map(x => x.m), y: m.map(x => (x.gmv ? x.subsidy / x.gmv : 0) * 100), type: 'scatter', mode: 'lines+markers', name: 'Subsidy Share (%)', yaxis: 'y2', line: { color: c.orange, width: 2.5 } }
+      { x: m.map(x => x.m), y: m.map(x => x.net), type: 'bar', name: 'Net value', marker: { color: c.steel }, hovertemplate: '%{x}<br>Net value %{y:$,.0f}<extra></extra>' },
+      { x: m.map(x => x.m), y: m.map(x => (x.gmv ? x.subsidy / x.gmv : 0)), type: 'scatter', mode: 'lines', name: 'Subsidy share of GMV', yaxis: 'y2', line: { color: c.accent, width: 2 }, hovertemplate: '%{x}<br>Subsidy share %{y:.2%}<extra></extra>' }
     ], {
-      yaxis: { title: 'Net Value ($)' },
-      yaxis2: { title: 'Subsidy Share (%)', overlaying: 'y', side: 'right' },
-      xaxis: { tickangle: -35 },
-      title: { text: 'Net Value Expansion Frequently Requires Subsidy Support', font: { size: 15 } }
+      margin: { l: 66, r: 20, t: 30, b: 66 },
+      showlegend: false,
+      yaxis: { title: 'Net value ($)', domain: [0.54, 1] },
+      yaxis2: { title: 'Subsidy share', domain: [0, 0.34], anchor: 'x', tickformat: '.1%' },
+      xaxis: { tickangle: -35, anchor: 'y2' }
     }, m.length > 0);
   }
 
@@ -2793,7 +2968,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       zmid: 0,
       colorbar: { title: 'Margin Rate', outlinewidth: 0, thickness: 12 }
     }], {
-      title: { text: 'Category-Month Margin Quality Is Uneven and Persistent' },
       xaxis: { tickangle: -35 },
       yaxis: { automargin: true }
     }, true);
@@ -2806,7 +2980,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       { x: m.map(x => x.m), y: m.map(x => x.orders ? x.disputesCount / x.orders : 0), mode: 'lines+markers', name: 'Dispute Rate', line: { width: 3, color: c.red }, marker: { size: 5 } },
       { x: m.map(x => x.m), y: m.map(x => x.orders ? x.chargebacksCount / x.orders : 0), mode: 'lines+markers', name: 'Chargeback Rate', line: { width: 2.4, color: c.steel }, marker: { size: 5 } }
     ], {
-      title: { text: 'Dispute and Chargeback Rates Co-Move in Risk Bursts', font: { size: 15 } },
       yaxis: { title: 'Rate' },
       xaxis: { tickangle: -35 }
     }, m.length > 0);
@@ -2830,7 +3003,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       },
       hovertemplate: '%{text}<br>Chargeback: %{x:.2%}<br>Dispute: %{y:.2%}<extra></extra>'
     }], {
-      title: { text: 'Higher Payment-Risk Signals Cluster in Elevated Dispute/Chargeback Zone' },
       xaxis: { title: 'Chargeback Rate', tickformat: '.1%' },
       yaxis: { title: 'Dispute Rate', tickformat: '.1%' }
     }, arr.length > 0);
@@ -2853,7 +3025,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       colorscale: sequentialScale(),
       colorbar: { title: '(Disputes + Chargebacks) / Orders', outlinewidth: 0, thickness: 12 }
     }], {
-      title: { text: 'Suspicious Pattern Hotspots by Channel and Payment Method' },
       xaxis: { tickangle: -30 },
       yaxis: { automargin: true }
     }, true);
@@ -2870,7 +3041,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       { x: buyerTiers, y: buyerTiers.map(t => bt[t] || 0), type: 'bar', name: 'Buyer Risk Tier Count', marker: { color: cd.steel } }
     ], {
       barmode: 'group',
-      title: { text: 'Critical Risk Tail Exists in Both Buyer and Order Distributions', font: { size: 15 } },
       yaxis: { title: 'Count' }
     }, state.kpi.orders > 0);
   }
@@ -2885,7 +3055,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: c.blueSoft },
       name: 'Seller Quality Score'
     }], {
-      title: { text: 'Seller Quality Score Tail Indicates Governance Workload', font: { size: 15 } },
       xaxis: { title: 'Seller Quality Score (Higher = Riskier)' },
       yaxis: { title: 'Seller Count' }
     }, sellers.length > 0);
@@ -2897,7 +3066,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: c.accent },
       name: 'Margin Fragility'
     }], {
-      title: { text: 'Margin Fragility Concentration Indicates Structural Economic Risk', font: { size: 15 } },
       xaxis: { title: 'Margin Fragility Score' },
       yaxis: { title: 'Seller Count' }
     }, sellers.length > 0);
@@ -2913,7 +3081,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: chartPalette().steel },
       hovertemplate: '%{x}<br>Dispute rate: %{y:.2%}<extra></extra>'
     }], {
-      title: { text: 'Dispute Burden Persists Across Seller Volume Cohorts', font: { size: 15 } },
       yaxis: { title: 'Dispute Rate', tickformat: '.1%' }
     }, c.length > 0);
   }
@@ -2934,14 +3101,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
         mode: 'markers',
         type: 'scatter',
         name: t,
-        text: d.map(x => `Seller ${x.sid}<br>GMV: ${money(x.gmv)}<br>Quality: ${fixed(x.sqs,1)}<br>Gov: ${fixed(x.gvs,1)}`),
+        text: d.map(x => `Seller ${escapeHtml(x.sid)}<br>GMV: ${money(x.gmv)}<br>Quality: ${fixed(x.sqs,1)}<br>Gov: ${fixed(x.gvs,1)}`),
         marker: { size: d.map(x => 8 + Math.sqrt(x.orders) * 0.4), color: colors[t], opacity: 0.72, line: { color: mLine, width: 0.7 } },
         hovertemplate: '%{text}<extra></extra>'
       };
     });
     plotOrEmpty('plotSellerMatrix', traces, {
-      title: { text: 'High-Volume, Weak-Quality Sellers Form the Primary Governance Risk Quadrant' },
-      xaxis: { title: 'Seller GMV ($)', type: 'log' },
+      // dtick 1 keeps the log axis to whole powers of ten; the default also labels the
+      // 2x and 5x minors, which reads as "1 2 5 10 2 5 100" and looks like noise.
+      xaxis: { title: 'Seller GMV ($)', type: 'log', dtick: 1, tickformat: '$~s' },
       yaxis: { title: 'Seller Quality Score' },
       shapes: [{ type: 'line', x0: 1, x1: Math.max(1, ...s.map(x => x.gmv)), y0: 55, y1: 55, line: { color: chartPalette().steel, dash: 'dot' } }]
     }, s.length > 0);
@@ -2964,7 +3132,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       cliponaxis: false,
       hovertemplate: 'Seller %{y}<br>Governance score: %{x:.1f}<extra></extra>'
     }], {
-      title: { text: 'Top Governance Priority Sellers Concentrate Enterprise Risk' },
       xaxis: { title: 'Governance Priority Score' },
       yaxis: { title: 'Seller ID' }
     }, top.length > 0);
@@ -2980,21 +3147,23 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       line: { color: c.red, width: 3 },
       hovertemplate: 'Delay %{x} days<br>Refund rate: %{y:.2%}<extra></extra>'
     }], {
-      title: { text: 'Refund Rates Increase as Delay Days Rise', font: { size: 15 } },
       xaxis: { title: 'Delay Days (bucketed)' },
       yaxis: { title: 'Refund Rate', tickformat: '.1%' }
     }, delay.length > 0);
 
+    // Rates share one panel because they share one scale; delay days are a different
+    // unit and get their own panel below, over the same time axis.
     const m = state.monthArr;
     plotOrEmpty('plotOpsTrend', [
-      { x: m.map(x => x.m), y: m.map(x => x.delayEligible ? x.delaySum / x.delayEligible : 0), mode: 'lines+markers', name: 'Avg Delay Days', yaxis: 'y1', line: { color: c.orange, width: 2.6 } },
-      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.cancels / x.orders : 0), mode: 'lines+markers', name: 'Cancellation Rate', yaxis: 'y2', line: { color: c.red, width: 2.6 } },
-      { x: m.map(x => x.m), y: m.map(x => x.onTimeEligible ? x.onTimeCount / x.onTimeEligible : 0), mode: 'lines+markers', name: 'On-Time Rate', yaxis: 'y2', line: { color: c.green, width: 2.6 } }
+      { x: m.map(x => x.m), y: m.map(x => x.onTimeEligible ? x.onTimeCount / x.onTimeEligible : 0), mode: 'lines', name: 'On-time rate', line: { color: c.good, width: 2 }, hovertemplate: '%{x}<br>On-time %{y:.2%}<extra></extra>' },
+      { x: m.map(x => x.m), y: m.map(x => x.orders ? x.cancels / x.orders : 0), mode: 'lines', name: 'Cancellation rate', line: { color: c.bad, width: 2 }, hovertemplate: '%{x}<br>Cancellation %{y:.2%}<extra></extra>' },
+      { x: m.map(x => x.m), y: m.map(x => x.delayEligible ? x.delaySum / x.delayEligible : 0), mode: 'lines', name: 'Avg delay days', yaxis: 'y2', line: { color: c.steel, width: 2 }, hovertemplate: '%{x}<br>Avg delay %{y:.1f} d<extra></extra>' }
     ], {
-      title: { text: 'Operational Reliability Volatility Maps to Economic and CX Risk', font: { size: 15 } },
-      xaxis: { tickangle: -35 },
-      yaxis: { title: 'Average Delay Days' },
-      yaxis2: { title: 'Rate', overlaying: 'y', side: 'right', tickformat: '.0%' }
+      margin: { l: 60, r: 20, t: 30, b: 92 },
+      legend: { orientation: 'h', y: -0.3, x: 0, xanchor: 'left', font: { color: cssVar('--muted'), size: 12 }, bgcolor: 'rgba(0,0,0,0)' },
+      xaxis: { tickangle: -35, anchor: 'y2' },
+      yaxis: { title: 'Rate', domain: [0.54, 1], tickformat: '.0%' },
+      yaxis2: { title: 'Avg delay (days)', domain: [0, 0.34], anchor: 'x' }
     }, m.length > 0);
 
     plotOrEmpty('plotDisputeDelay', [{
@@ -3004,7 +3173,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       line: { color: c.red, width: 3 },
       hovertemplate: 'Delay %{x} days<br>Dispute rate: %{y:.2%}<extra></extra>'
     }], {
-      title: { text: 'Dispute Risk Escalates with Higher Delay Buckets', font: { size: 15 } },
       xaxis: { title: 'Delay Days (bucketed)' },
       yaxis: { title: 'Dispute Rate', tickformat: '.1%' }
     }, delay.length > 0);
@@ -3018,7 +3186,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: c.accent },
       hovertemplate: '%{y}<br>Promo dependency: %{x:.2%}<extra></extra>'
     }], {
-      title: { text: 'Promo Dependency by Category Shows Margin Sensitivity Exposure', font: { size: 15 } },
       xaxis: { title: 'Subsidy Share of GMV', tickformat: '.1%' }
     }, cat.length > 0);
   }
@@ -3030,10 +3197,16 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       { x: c.map(x => x.sellerShare), y: c.map(x => x.gmvShare), mode: 'lines', name: 'Observed', line: { color: p.accent, width: 3 }, fill: 'tozeroy', fillcolor: APP.theme === 'dark' ? 'rgba(142,136,255,0.14)' : 'rgba(91,84,224,0.10)' },
       { x: [0, 1], y: [0, 1], mode: 'lines', name: 'Equality', line: { color: p.neutral, dash: 'dash' } }
     ], {
-      title: { text: 'Seller Concentration Curve Indicates Top-Seller Dependency Risk', font: { size: 15 } },
       xaxis: { title: 'Share of Sellers', tickformat: '.0%' },
       yaxis: { title: 'Cumulative GMV Share', tickformat: '.0%' }
     }, c.length > 0);
+  }
+
+  // Scenario keys are snake_case identifiers in the data. They are the analyst's
+  // handle, not a label an executive should have to read, so every surface renders
+  // them through this.
+  function scenarioLabel(name) {
+    return String(name || '').replaceAll('_', ' ');
   }
 
   function renderScenarioCenter() {
@@ -3042,17 +3215,29 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const priority = [...s].sort((a, b) => b.decision_priority_score - a.decision_priority_score);
     cardsEl.innerHTML = priority.slice(0, 4).map(r => `
       <div class="scenario-card">
-        <div class="name">${r.scenario.replaceAll('_', ' ')}</div>
+        <div class="name">${escapeHtml(scenarioLabel(r.scenario))}</div>
         <div class="main">${(r.decision_priority_score).toFixed(1)}</div>
         <div class="hint">priority score | leakage avoided ${money(r.leakage_avoided_vs_baseline)}</div>
       </div>
     `).join('');
 
+    const xs = s.map(r => r.gmv_change_vs_baseline_pct);
+    const ys = s.map(r => r.quality_ratio_change_pp_vs_baseline);
+    const xMin = Math.min(0, ...xs), xMax = Math.max(0, ...xs);
+    const yMin = Math.min(0, ...ys), yMax = Math.max(0, ...ys);
+    const xPad = ((xMax - xMin) || 1) * 0.28;
+    const yPad = ((yMax - yMin) || 1) * 0.2;
+
     plotOrEmpty('plotScenarioComparison', [{
-      x: s.map(r => r.gmv_change_vs_baseline_pct),
-      y: s.map(r => r.quality_ratio_change_pp_vs_baseline),
-      mode: 'markers',
-      text: s.map(r => r.scenario),
+      x: xs,
+      y: ys,
+      mode: 'markers+text',
+      // Five points with identity carried only by a tooltip is unreadable — each one
+      // is named on the plot.
+      text: s.map(r => scenarioLabel(r.scenario)),
+      textposition: 'top center',
+      textfont: { size: 10.5, color: cssVar('--muted') },
+      cliponaxis: false,
       marker: {
         size: s.map(r => 18 + Math.abs(r.top_risk_seller_downside_exposure) / 200000),
         color: s.map(r => r.contribution_margin_change_vs_baseline),
@@ -3064,24 +3249,25 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       },
       hovertemplate: '%{text}<br>GMV delta: %{x:.2f}%<br>Quality delta: %{y:.2f}pp<extra></extra>'
     }], {
-      title: { text: 'Scenario Assumptions Compare Protected Economics with GMV Trade-offs' },
-      xaxis: { title: 'GMV Change vs Baseline (%)' },
-      yaxis: { title: 'Quality Ratio Change (pp)' },
+      // Each point carries a name above it, so the axes are padded outward to give
+      // that text somewhere to sit instead of colliding with the plot edge.
+      xaxis: { title: 'GMV Change vs Baseline (%)', range: [xMin - xPad, xMax + xPad] },
+      yaxis: { title: 'Quality Ratio Change (pp)', range: [yMin - yPad, yMax + yPad * 1.6] },
       shapes: [
-        { type: 'line', x0: 0, x1: 0, y0: Math.min(...s.map(x => x.quality_ratio_change_pp_vs_baseline)) - 0.3, y1: Math.max(...s.map(x => x.quality_ratio_change_pp_vs_baseline)) + 0.3, line: { color: '#8ca0c2', dash: 'dot' } },
-        { type: 'line', x0: Math.min(...s.map(x => x.gmv_change_vs_baseline_pct)) - 0.4, x1: Math.max(...s.map(x => x.gmv_change_vs_baseline_pct)) + 0.4, y0: 0, y1: 0, line: { color: '#8ca0c2', dash: 'dot' } }
+        { type: 'line', x0: 0, x1: 0, y0: yMin - yPad, y1: yMax + yPad, line: { color: chartPalette().steel, dash: 'dot', width: 1 } },
+        { type: 'line', x0: xMin - xPad, x1: xMax + xPad, y0: 0, y1: 0, line: { color: chartPalette().steel, dash: 'dot', width: 1 } }
       ]
     }, s.length > 0);
 
     const sorted = [...s].sort((a, b) => b.contribution_margin_change_vs_baseline - a.contribution_margin_change_vs_baseline);
     plotOrEmpty('plotScenarioMargin', [{
       type: 'bar',
-      x: sorted.map(r => r.scenario),
+      x: sorted.map(r => scenarioLabel(r.scenario)),
       y: sorted.map(r => r.contribution_margin_change_vs_baseline),
       marker: { color: sorted.map(r => r.contribution_margin_change_vs_baseline >= 0 ? chartPalette().good : chartPalette().bad) },
       hovertemplate: '%{x}<br>CM Delta: %{y:$,.0f}<extra></extra>'
     }], {
-      title: { text: 'Margin Protection Ranking Across Strategic Scenarios' },
+      margin: { l: 76, r: 20, t: 20, b: 96 },
       yaxis: { title: 'Contribution Margin Change vs Baseline ($)' },
       xaxis: { tickangle: -30 }
     }, sorted.length > 0);
@@ -3090,13 +3276,13 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     const decision = [...APP.scenarioDecision].sort((a, b) => b.decision_priority_score - a.decision_priority_score);
     tbody.innerHTML = decision.map(r => `
       <tr>
-        <td>${r.scenario.replaceAll('_', ' ')}</td>
-        <td>${fixed(r.decision_priority_score, 1)}</td>
-        <td>${fixed(r.gmv_change_vs_baseline_pct, 2)}%</td>
-        <td>${fixed(r.quality_ratio_change_pp_vs_baseline, 2)}pp</td>
-        <td>${money(r.contribution_margin_change_vs_baseline)}</td>
-        <td>${money(r.leakage_avoided_vs_baseline)}</td>
-        <td>${r.recommended_decision}</td>
+        <td>${escapeHtml(scenarioLabel(r.scenario))}</td>
+        <td class="mono">${fixed(r.decision_priority_score, 1)}</td>
+        <td class="mono">${fixed(r.gmv_change_vs_baseline_pct, 2)}%</td>
+        <td class="mono">${fixed(r.quality_ratio_change_pp_vs_baseline, 2)}pp</td>
+        <td class="mono">${money(r.contribution_margin_change_vs_baseline)}</td>
+        <td class="mono">${money(r.leakage_avoided_vs_baseline)}</td>
+        <td>${escapeHtml(r.recommended_decision)}</td>
       </tr>
     `).join('');
   }
@@ -3129,16 +3315,16 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     } else {
       tbody.innerHTML = pageRows.map(r => `
         <tr>
-          <td>${r.sid}</td>
-          <td><span class="table-pill ${tierClassFromRiskTier(r.gvt)}">${r.gvt}</span></td>
-          <td>${fixed(r.gvs, 1)}</td>
-          <td>${fixed(r.sqs, 1)}</td>
-          <td>${money(r.gmv)}</td>
-          <td>${r.orders.toLocaleString()}</td>
-          <td>${pct(r.refund_rate)}</td>
-          <td>${pct(r.dispute_rate)}</td>
-          <td>${pct(r.delay_rate)}</td>
-          <td><div class="action-text">${r.ract}</div></td>
+          <td class="mono">${escapeHtml(r.sid)}</td>
+          <td><span class="table-pill ${tierClassFromRiskTier(r.gvt)}">${escapeHtml(r.gvt)}</span></td>
+          <td class="mono">${fixed(r.gvs, 1)}</td>
+          <td class="mono">${fixed(r.sqs, 1)}</td>
+          <td class="mono">${money(r.gmv)}</td>
+          <td class="mono">${r.orders.toLocaleString()}</td>
+          <td class="mono">${pct(r.refund_rate)}</td>
+          <td class="mono">${pct(r.dispute_rate)}</td>
+          <td class="mono">${pct(r.delay_rate)}</td>
+          <td><div class="action-text">${escapeHtml(r.ract)}</div></td>
         </tr>
       `).join('');
     }
@@ -3155,7 +3341,6 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
       marker: { color: chartPalette().rose },
       hovertemplate: '%{y}<br>Refund rate: %{x:.2%}<extra></extra>'
     }], {
-      title: { text: 'Refund Rate by Category Is Concentrated in High-Defect Segments', font: { size: 15 } },
       xaxis: { tickformat: '.1%', title: 'Refund Rate' }
     }, cat.length > 0);
   }
@@ -3214,7 +3399,15 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     button.setAttribute('aria-pressed', 'true');
     const tab = button.getAttribute('data-tab');
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(`tab-${tab}`).classList.add('active');
+    const panel = document.getElementById(`tab-${tab}`);
+    panel.classList.add('active');
+    // Plotly sizes a chart when it draws it, and it cannot measure a display:none
+    // container — so every chart outside the initially open tab is laid out at the
+    // library's default width and overflows its panel once revealed. Re-measure them
+    // against the real panel width the moment the section becomes visible.
+    panel.querySelectorAll('.plot').forEach(el => {
+      if (el.data) Plotly.Plots.resize(el);
+    });
   }
 
   function applySellerSort(header) {
@@ -3260,6 +3453,14 @@ def _dashboard_html(data_json: str, plotly_js: str) -> str:
     });
     document.getElementById('printDashboard').addEventListener('click', () => {
       window.print();
+    });
+    // Printing reveals every tab at once, including ones never opened on screen, whose
+    // charts were therefore laid out at Plotly's default width. Re-measure them all
+    // against the print layout before the page is painted.
+    window.addEventListener('beforeprint', () => {
+      document.querySelectorAll('.plot').forEach(el => {
+        if (el.data) Plotly.Plots.resize(el);
+      });
     });
 
     for (const id of ['fDateFrom','fDateTo','fRegion','fCategory','fSellerTier','fSellerType','fAcquisition','fBuyerType','fRiskTier']) {
@@ -3357,13 +3558,18 @@ def build_dashboard(cfg: DashboardConfig) -> Path:
     if cfg.max_orders <= 0:
         raise ValueError("max_orders must be greater than zero.")
     payload = _build_payload(cfg)
-    data_json = json.dumps(_json_safe(payload), separators=(",", ":"), ensure_ascii=True, allow_nan=False)
+    data_json = _serialize_payload(payload)
     plotly_js = get_plotlyjs()
     html = _dashboard_html(data_json=data_json, plotly_js=plotly_js)
 
     cfg.output_file.parent.mkdir(parents=True, exist_ok=True)
     cfg.output_file.write_text(html, encoding="utf-8")
     return cfg.output_file
+
+
+def _serialize_payload(payload: dict[str, object]) -> str:
+    data_json = json.dumps(_json_safe(payload), separators=(",", ":"), ensure_ascii=True, allow_nan=False)
+    return data_json.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
 
 
 def main() -> None:

@@ -3,6 +3,8 @@
 ## Scope
 This dictionary covers all primary raw and processed datasets used by the Marketplace Profitability, Fraud & Seller Quality Command Center.
 
+The official KPI snapshot and publication artifacts use the full dataset. Interactive order-level dashboard panels use a deterministic stratified sample capped at 15,000 orders; the dashboard identifies the source population and keeps official totals separate from sampled calculations.
+
 ## Entity Model and Join Paths
 Primary join spine:
 - `orders.order_id` <- `order_items.order_id`, `payments.order_id`, `refunds.order_id`, `disputes.order_id`, `logistics_events.order_id`
@@ -232,7 +234,7 @@ Processed joins:
 - Grain: one row per current policy simulation
 - Key columns: `recommended_threshold`, `review_rate`, `precision`, `recall`, `net_benefit`, `evaluation_scope`, `deployment_status`
 - Major metrics: retrospective review-capacity and intervention-economics starting point
-- Interpretation guardrail: in-sample simulation; requires later-period holdout validation before deployment
+- Interpretation guardrail: in-sample simulation; distinct from the temporal holdout and not a deployment approval
 
 ## `scenario_monte_carlo_summary.csv`
 - Grain: one row per scenario
@@ -241,9 +243,101 @@ Processed joins:
 
 ---
 
+## Model Governance Tables
+
+## `order_risk_calibrated.csv`
+- Grain: one row per order
+- Primary key: `order_id`
+- Main joins: `order_risk_scores.order_id`, `order_accounting_pnl.order_id`
+- Key columns: `order_risk_score`, `calibrated_probability`, `adverse_flag`, `split`, `calibration_policy_version`
+- Guardrail: `shadow_unmatured` rows have scores but must not contribute outcome-performance metrics
+
+## `model_calibration_parameters.csv`
+- Grain: one row per model policy version
+- Primary key: `policy_version`
+- Key columns: calibration method/outcome, development dates, intercept, slope, score mean/standard deviation, maturation lag
+
+## `model_calibration_curve.csv`
+- Grain: one row per (`split`, `calibration_bin`)
+- Key columns: row count, predicted probability, observed event rate, probability bounds, absolute calibration error
+
+## `temporal_holdout_metrics.csv`
+- Grain: one row per matured evaluation split
+- Primary key: `split`
+- Key columns: date range, event rate, ROC AUC, average precision/lift, Brier score, expected calibration error
+- Splits: `development`, `maturation_gap`, `holdout`; the unmatured shadow is intentionally excluded
+
+## `model_monitoring_monthly.csv`
+- Grain: one row per calendar month
+- Primary key: `month`
+- Key columns: total/matured rows, outcome status, score/probability means, ROC AUC, average precision, Brier, calibration error, PSI
+
+## `model_monitoring_alerts.csv`
+- Grain: one row per breached (`month`, `metric`) rule
+- Primary key: `alert_id`
+- Key columns: observed value, threshold, severity, recommended action
+
+## `model_release_assessment.csv`
+- Grain: one row per assessment run
+- Key columns: as-of/training/holdout dates, shadow rows, release-gate booleans, `release_status`, `automated_decision_status`
+
+---
+
+## Finance Tables
+
+## `order_accounting_pnl.csv`
+- Grain: one row per order
+- Primary key: `order_id`
+- Key columns: gross/net commission, commission reversal, processing/subsidy/refund/dispute/chargeback/fulfillment expense, `accounting_contribution`
+- Policy: `finance_policy_version` references `finance_policy.json`
+
+## `finance_general_ledger.csv`
+- Grain: one row per journal line
+- Primary key: `journal_line_id`
+- Key columns: journal/accounting month, posting date, entry type, account code/name, debit, credit, currency
+
+## `finance_reconciliation.csv`
+- Grain: one row per finance control
+- Primary key: `check_name`
+- Controls: debit-credit balance and general-ledger-to-order-subledger contribution
+
+## `accounting_kpi_summary.csv`
+- Grain: one row per finance policy run
+- Key columns: order count, GMV, gross commission, reversals, operating expense, contribution, accounting basis
+
+---
+
+## Experiment Tables
+
+## `experiment_assignments.csv`
+- Grain: one row per eligible order
+- Primary key: `order_id`
+- Key columns: assignment uniform, treatment flag/arm, baseline outcome/loss, simulated prevention, observed outcome/loss, evidence scope
+
+## `experiment_balance.csv`
+- Grain: one row per governed covariate or categorical level
+- Primary key: `covariate`
+- Key columns: control/treatment means, standardized mean difference, balance status
+
+## `experiment_results.csv`
+- Grain: one row per (`experiment_id`, `metric`)
+- Key columns: arm means, ITT effect, seller-clustered standard error, confidence interval, p-value, sample/cluster counts
+- Guardrail: `evidence_scope=synthetic_randomized_trial` and `operational_decision_status=not approved`
+
+## `experiment_power.csv`
+- Grain: one row per experiment
+- Key columns: alpha, target power, MDE, required/observed rows per arm, estimated power, power status
+
+## `experiment_heterogeneity.csv`
+- Grain: one row per (`dimension`, `segment`)
+- Key columns: arm sizes/rates and exploratory ITT effect
+- Guardrail: exploratory synthetic evidence; not a pre-specified confirmatory claim
+
+---
+
 ## Major Metric Families by Table
-- Economics: `orders`, `order_items`, `order_profitability_features`, `scenario_results_summary`
-- Risk/Fraud: `payments`, `refunds`, `disputes`, `order_risk_scores`, `fraud_exposure_scores`
+- Economics: `orders`, `order_items`, `order_profitability_features`, `order_accounting_pnl`, `finance_general_ledger`, `scenario_results_summary`
+- Risk/Fraud: `payments`, `refunds`, `disputes`, `order_risk_scores`, `order_risk_calibrated`, `model_monitoring_monthly`, `fraud_exposure_scores`
 - Seller Governance: `seller_monthly_quality`, `seller_quality_scores`, `governance_priority_scores`, `seller_scorecard`
 - Operations/CX: `logistics_events`, `seller_monthly_quality`
-- Strategic Planning: scenario tables and validation reports
+- Strategic Planning: scenario tables, experiment tables, and validation reports

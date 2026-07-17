@@ -1,0 +1,16 @@
+{
+  "calibration_bins": 10,
+  "holdout_days": 120,
+  "minimum_development_rows": 50000,
+  "minimum_holdout_rows": 10000,
+  "outcome_maturation_lag_days": 60,
+  "policy_version": "1.0.0",
+  "release_thresholds": {
+    "maximum_brier_score": 0.25,
+    "maximum_expected_calibration_error": 0.05,
+    "maximum_population_stability_index": 0.25,
+    "minimum_average_precision_lift": 1.15,
+    "minimum_roc_auc": 0.6
+  },
+  "shadow_window_months": 4
+}

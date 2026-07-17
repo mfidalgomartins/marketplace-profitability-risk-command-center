@@ -1,0 +1,5 @@
+alert_id,month,metric,observed_value,threshold,severity,recommended_action
+MON-2025-09-roc_auc,2025-09,roc_auc,0.5745278147659928,0.6,high,Review discrimination by segment and retrain only after root-cause analysis.
+MON-2025-10-roc_auc,2025-10,roc_auc,0.5921975125253078,0.6,high,Review discrimination by segment and retrain only after root-cause analysis.
+MON-2025-11-roc_auc,2025-11,roc_auc,0.5800955077331259,0.6,high,Review discrimination by segment and retrain only after root-cause analysis.
+MON-2025-12-roc_auc,2025-12,roc_auc,0.5794580796317353,0.6,high,Review discrimination by segment and retrain only after root-cause analysis.

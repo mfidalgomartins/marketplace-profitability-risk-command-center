@@ -45,6 +45,9 @@ make format    # ruff format + ruff check --fix
 - The suite mixes fast in-process unit tests with an in-process integration
   test (`tests/test_pipeline_integration.py`) that runs the whole analytical
   chain on a small synthetic dataset.
+- API tests use isolated SQLite databases; warehouse tests build a minimal
+  DuckDB catalog; finance, temporal-validation, experiment, and PDF/UA tests
+  exercise the committed release inputs.
 - Coverage is gated at a floor configured in `pyproject.toml`
   (`--cov-fail-under`). New logic should ship with tests that keep coverage at
   or above the floor.
@@ -67,3 +70,12 @@ make format    # ruff format + ruff check --fix
 2. Implement the change with tests.
 3. Run `make verify` until green.
 4. Open a pull request; CI runs the full pipeline plus the gates above.
+
+## Generated artifacts and contracts
+
+- `make artifacts-check` rebuilds the project and fails if any governed data, contract, report, dashboard, chart, PDF, or Pages artifact differs from the committed release.
+- A normal pipeline run validates `config/contracts/v1/schema_contracts.json`; it does not regenerate it.
+- For an intentional schema change, run `make update-schema-contracts`, review the contract and drift report, then rebuild and validate the full pipeline.
+- Do not hand-edit generated CSV, HTML, chart, PDF, or validation outputs.
+- DuckDB and SQLite files under `outputs/warehouse/` and `outputs/runtime/` are
+  reproducible local runtime state and are intentionally not versioned.

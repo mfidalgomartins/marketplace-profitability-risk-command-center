@@ -1,2 +1,2 @@
 recommended_threshold,review_rate,precision,recall,expected_avoided_loss,review_cost,conversion_friction_cost,net_benefit,evaluation_scope,deployment_status,policy_guidance
-60,0.2532074480691259,0.418001062457312,0.31300789907370574,1140666.6775,47437.2,17495.43876,1075734.03874,retrospective in-sample policy simulation,requires holdout validation before operational use,Use as a review-capacity starting point; validate on a later holdout period before deployment.
+60,0.2781496403430672,0.41480713874496256,0.3412134644162831,1144921.0989999997,52110.0,17611.26996,1075199.8290399997,retrospective in-sample policy simulation,requires holdout validation before operational use,Use as a review-capacity starting point; validate on a later holdout period before deployment.

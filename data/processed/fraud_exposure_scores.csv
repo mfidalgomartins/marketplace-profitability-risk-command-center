@@ -22,7 +22,7 @@ S00020,2026-02,1.5151515151515154,Low,critical_payment_share,monitor only
 S00021,2026-02,24.05106970324362,Low,dispute_risk,monitor only
 S00022,2026-02,13.636363636363638,Low,dispute_risk,monitor only
 S00023,2026-02,15.079365079365079,Low,chargeback_risk,monitor only
-S00024,2026-02,39.613095238095234,Moderate,dispute_risk,review fraud controls
+S00024,2026-02,36.488095238095234,Moderate,dispute_risk,review fraud controls
 S00025,2026-02,52.244897959183675,Moderate,chargeback_risk,review fraud controls
 S00026,2026-02,24.02116402116402,Low,critical_payment_share,monitor only
 S00027,2026-02,16.233766233766232,Low,dispute_risk,monitor only
@@ -58,7 +58,7 @@ S00056,2026-02,44.235588972431074,Moderate,chargeback_risk,review fraud controls
 S00057,2026-02,15.674603174603176,Low,dispute_risk,monitor only
 S00058,2026-02,42.08333333333333,Moderate,chargeback_risk,review fraud controls
 S00059,2026-02,19.26083866382374,Low,dispute_risk,monitor only
-S00060,2026-02,23.617724867724863,Low,dispute_risk,monitor only
+S00060,2026-02,23.270502645502642,Low,dispute_risk,monitor only
 S00061,2026-02,28.027210884353742,Low,chargeback_risk,monitor only
 S00062,2026-02,0.0,Low,dispute_risk,monitor only
 S00063,2026-02,23.11165845648604,Low,dispute_risk,monitor only
@@ -144,7 +144,7 @@ S00142,2026-02,22.60651629072682,Low,dispute_risk,monitor only
 S00143,2026-02,18.29004329004329,Low,dispute_risk,monitor only
 S00144,2026-02,15.816326530612244,Low,dispute_risk,monitor only
 S00145,2026-02,18.32010582010582,Low,dispute_risk,monitor only
-S00146,2026-02,22.73109243697479,Low,dispute_risk,monitor only
+S00146,2026-02,22.240896358543417,Low,dispute_risk,monitor only
 S00147,2026-02,57.47899159663866,High,chargeback_risk,review fraud controls
 S00148,2026-02,12.337662337662339,Low,dispute_risk,monitor only
 S00149,2026-02,35.12820512820513,Moderate,dispute_risk,review fraud controls
@@ -161,7 +161,7 @@ S00159,2026-02,22.89915966386555,Low,dispute_risk,monitor only
 S00160,2026-02,14.36130007558579,Low,dispute_risk,monitor only
 S00161,2026-02,54.817927170868344,Moderate,dispute_risk,review fraud controls
 S00162,2026-02,42.135176651305684,Moderate,chargeback_risk,review fraud controls
-S00163,2026-02,44.97126436781609,Moderate,chargeback_risk,review fraud controls
+S00163,2026-02,44.54022988505747,Moderate,chargeback_risk,review fraud controls
 S00164,2026-02,10.970127181307307,Low,dispute_risk,monitor only
 S00165,2026-02,9.821428571428573,Low,dispute_risk,monitor only
 S00166,2026-02,14.081632653061224,Low,critical_payment_share,monitor only
@@ -182,9 +182,9 @@ S00180,2026-02,23.534226190476193,Low,dispute_risk,monitor only
 S00181,2026-02,11.718020541549953,Low,dispute_risk,monitor only
 S00182,2026-02,45.0140056022409,Moderate,dispute_risk,review fraud controls
 S00183,2026-02,17.19047619047619,Low,dispute_risk,monitor only
-S00184,2026-02,41.02360602360602,Moderate,chargeback_risk,review fraud controls
+S00184,2026-02,41.450956450956454,Moderate,chargeback_risk,review fraud controls
 S00185,2026-02,22.43107769423559,Low,dispute_risk,monitor only
-S00186,2026-02,41.67044595616024,Moderate,chargeback_risk,review fraud controls
+S00186,2026-02,42.067271352985635,Moderate,chargeback_risk,review fraud controls
 S00187,2026-02,33.31691297208539,Moderate,dispute_risk,review fraud controls
 S00188,2026-02,10.218253968253967,Low,dispute_risk,monitor only
 S00189,2026-02,22.038327526132406,Low,dispute_risk,monitor only
@@ -199,7 +199,7 @@ S00197,2026-02,19.94047619047619,Low,chargeback_risk,monitor only
 S00198,2026-02,47.982396750169265,Moderate,chargeback_risk,review fraud controls
 S00199,2026-02,52.02380952380952,Moderate,chargeback_risk,review fraud controls
 S00200,2026-02,12.133699633699635,Low,dispute_risk,monitor only
-S00201,2026-02,39.45378151260504,Moderate,chargeback_risk,review fraud controls
+S00201,2026-02,39.698879551820724,Moderate,chargeback_risk,review fraud controls
 S00202,2026-02,15.079365079365079,Low,dispute_risk,monitor only
 S00203,2026-02,23.55212355212355,Low,dispute_risk,monitor only
 S00204,2026-02,8.516483516483518,Low,dispute_risk,monitor only
@@ -249,10 +249,10 @@ S00247,2026-02,8.531746031746032,Low,dispute_risk,monitor only
 S00248,2026-02,14.578754578754577,Low,dispute_risk,monitor only
 S00249,2026-02,36.57142857142858,Moderate,chargeback_risk,review fraud controls
 S00250,2026-02,12.797619047619047,Low,dispute_risk,monitor only
-S00251,2026-02,45.022351797862,Moderate,chargeback_risk,review fraud controls
+S00251,2026-02,44.818270165208936,Moderate,chargeback_risk,review fraud controls
 S00252,2026-02,30.714285714285715,Moderate,dispute_risk,review fraud controls
 S00253,2026-02,29.303006118648575,Low,dispute_risk,monitor only
-S00254,2026-02,52.566137566137556,Moderate,dispute_risk,review fraud controls
+S00254,2026-02,49.78835978835978,Moderate,dispute_risk,review fraud controls
 S00255,2026-02,67.77777777777777,High,dispute_risk,review fraud controls
 S00256,2026-02,19.183673469387752,Low,chargeback_risk,monitor only
 S00257,2026-02,22.82051282051282,Low,chargeback_risk,monitor only
@@ -334,7 +334,7 @@ S00332,2026-02,14.523809523809526,Low,dispute_risk,monitor only
 S00333,2026-02,20.833333333333336,Low,dispute_risk,monitor only
 S00334,2026-02,20.74468085106383,Low,chargeback_risk,monitor only
 S00335,2026-02,16.605616605616607,Low,dispute_risk,monitor only
-S00336,2026-02,35.30721966205837,Moderate,chargeback_risk,review fraud controls
+S00336,2026-02,34.50076804915515,Moderate,chargeback_risk,review fraud controls
 S00337,2026-02,22.53750815394651,Low,dispute_risk,monitor only
 S00338,2026-02,24.577572964669738,Low,dispute_risk,monitor only
 S00339,2026-02,8.662613981762918,Low,dispute_risk,monitor only
@@ -345,7 +345,7 @@ S00343,2026-02,28.551587301587304,Low,dispute_risk,monitor only
 S00344,2026-02,31.611721611721613,Moderate,chargeback_risk,review fraud controls
 S00345,2026-02,43.49567099567099,Moderate,chargeback_risk,review fraud controls
 S00346,2026-02,41.86123202743701,Moderate,chargeback_risk,review fraud controls
-S00347,2026-02,53.19264069264069,Moderate,chargeback_risk,review fraud controls
+S00347,2026-02,52.81385281385281,Moderate,chargeback_risk,review fraud controls
 S00348,2026-02,18.809523809523814,Low,dispute_risk,monitor only
 S00349,2026-02,40.82706766917293,Moderate,chargeback_risk,review fraud controls
 S00350,2026-02,40.0,Moderate,dispute_risk,review fraud controls
@@ -377,14 +377,14 @@ S00375,2026-02,17.64069264069264,Low,dispute_risk,monitor only
 S00376,2026-02,28.444444444444446,Low,dispute_risk,monitor only
 S00377,2026-02,34.30044182621502,Moderate,chargeback_risk,review fraud controls
 S00378,2026-02,42.53644314868804,Moderate,chargeback_risk,review fraud controls
-S00379,2026-02,30.355673133450907,Moderate,dispute_risk,review fraud controls
+S00379,2026-02,30.047031158142268,Moderate,dispute_risk,review fraud controls
 S00380,2026-02,21.27457948353471,Low,dispute_risk,monitor only
 S00381,2026-02,10.741971207087484,Low,dispute_risk,monitor only
 S00382,2026-02,32.98850574712644,Moderate,chargeback_risk,review fraud controls
 S00383,2026-02,15.357142857142858,Low,dispute_risk,monitor only
 S00384,2026-02,29.81684981684982,Low,dispute_risk,monitor only
 S00385,2026-02,22.04527712724434,Low,dispute_risk,monitor only
-S00386,2026-02,49.7251258226868,Moderate,chargeback_risk,review fraud controls
+S00386,2026-02,49.31862175764615,Moderate,chargeback_risk,review fraud controls
 S00387,2026-02,38.50931677018634,Moderate,dispute_risk,review fraud controls
 S00388,2026-02,20.31746031746032,Low,dispute_risk,monitor only
 S00389,2026-02,15.631469979296066,Low,dispute_risk,monitor only
@@ -442,7 +442,7 @@ S00440,2026-02,21.645021645021647,Low,dispute_risk,monitor only
 S00441,2026-02,57.142857142857146,High,chargeback_risk,review fraud controls
 S00442,2026-02,33.19047619047619,Moderate,dispute_risk,review fraud controls
 S00443,2026-02,20.202020202020204,Low,dispute_risk,monitor only
-S00444,2026-02,47.484948002189384,Moderate,chargeback_risk,review fraud controls
+S00444,2026-02,48.059660645867545,Moderate,chargeback_risk,review fraud controls
 S00445,2026-02,17.393483709273184,Low,dispute_risk,monitor only
 S00446,2026-02,46.293436293436294,Moderate,chargeback_risk,review fraud controls
 S00447,2026-02,24.775132275132275,Low,dispute_risk,monitor only
@@ -460,7 +460,7 @@ S00458,2026-02,25.714285714285715,Low,chargeback_risk,monitor only
 S00459,2026-02,14.550264550264549,Low,dispute_risk,monitor only
 S00460,2026-02,31.515151515151516,Moderate,dispute_risk,review fraud controls
 S00461,2026-02,52.04906204906205,Moderate,chargeback_risk,review fraud controls
-S00462,2026-02,49.45812807881774,Moderate,dispute_risk,review fraud controls
+S00462,2026-02,47.73399014778325,Moderate,dispute_risk,review fraud controls
 S00463,2026-02,3.841991341991342,Low,dispute_risk,monitor only
 S00464,2026-02,15.914786967418546,Low,chargeback_risk,monitor only
 S00465,2026-02,30.476190476190478,Moderate,dispute_risk,review fraud controls
@@ -493,7 +493,7 @@ S00491,2026-02,12.523809523809524,Low,dispute_risk,monitor only
 S00492,2026-02,29.76190476190476,Low,chargeback_risk,monitor only
 S00493,2026-02,48.58134920634921,Moderate,chargeback_risk,review fraud controls
 S00494,2026-02,33.544973544973544,Moderate,dispute_risk,review fraud controls
-S00495,2026-02,34.86772486772486,Moderate,chargeback_risk,review fraud controls
+S00495,2026-02,36.719576719576715,Moderate,chargeback_risk,review fraud controls
 S00496,2026-02,23.730323730323732,Low,dispute_risk,monitor only
 S00497,2026-02,20.12987012987013,Low,dispute_risk,monitor only
 S00498,2026-02,20.714285714285715,Low,dispute_risk,monitor only
@@ -573,8 +573,8 @@ S00571,2026-02,15.952380952380954,Low,dispute_risk,monitor only
 S00572,2026-02,12.658227848101266,Low,dispute_risk,monitor only
 S00573,2026-02,40.952380952380956,Moderate,chargeback_risk,review fraud controls
 S00574,2026-02,15.8008658008658,Low,dispute_risk,monitor only
-S00575,2026-02,57.89443488238669,High,chargeback_risk,review fraud controls
-S00576,2026-02,40.64373897707232,Moderate,chargeback_risk,review fraud controls
+S00575,2026-02,57.29202524383247,High,chargeback_risk,review fraud controls
+S00576,2026-02,39.717813051146386,Moderate,chargeback_risk,review fraud controls
 S00577,2026-02,12.797619047619047,Low,dispute_risk,monitor only
 S00578,2026-02,35.73260073260073,Moderate,chargeback_risk,review fraud controls
 S00579,2026-02,33.31691297208539,Moderate,dispute_risk,review fraud controls
@@ -652,8 +652,8 @@ S00650,2026-02,14.285714285714286,Low,dispute_risk,monitor only
 S00651,2026-02,45.23809523809524,Moderate,chargeback_risk,review fraud controls
 S00652,2026-02,15.873015873015877,Low,dispute_risk,monitor only
 S00653,2026-02,29.861111111111114,Low,dispute_risk,monitor only
-S00654,2026-02,27.88332086761406,Low,chargeback_risk,monitor only
-S00655,2026-02,16.58399470899471,Low,dispute_risk,monitor only
+S00654,2026-02,27.62154076290202,Low,chargeback_risk,monitor only
+S00655,2026-02,16.93121693121693,Low,dispute_risk,monitor only
 S00656,2026-02,17.913832199546487,Low,dispute_risk,monitor only
 S00657,2026-02,48.57142857142857,Moderate,chargeback_risk,review fraud controls
 S00658,2026-02,10.426929392446635,Low,chargeback_risk,monitor only
@@ -720,7 +720,7 @@ S00718,2026-02,22.061011904761905,Low,chargeback_risk,monitor only
 S00719,2026-02,9.523809523809522,Low,dispute_risk,monitor only
 S00720,2026-02,37.77777777777778,Moderate,chargeback_risk,review fraud controls
 S00721,2026-02,11.16584564860427,Low,dispute_risk,monitor only
-S00722,2026-02,52.84840541721276,Moderate,chargeback_risk,review fraud controls
+S00722,2026-02,52.38968982088248,Moderate,chargeback_risk,review fraud controls
 S00723,2026-02,17.901234567901234,Low,dispute_risk,monitor only
 S00724,2026-02,15.079365079365079,Low,dispute_risk,monitor only
 S00725,2026-02,40.0,Moderate,dispute_risk,review fraud controls
@@ -729,7 +729,7 @@ S00727,2026-02,8.713272543059777,Low,dispute_risk,monitor only
 S00728,2026-02,32.083333333333336,Moderate,dispute_risk,review fraud controls
 S00729,2026-02,6.462585034013605,Low,dispute_risk,monitor only
 S00730,2026-02,27.48917748917749,Low,chargeback_risk,monitor only
-S00731,2026-02,37.23809523809524,Moderate,dispute_risk,review fraud controls
+S00731,2026-02,39.23809523809524,Moderate,dispute_risk,review fraud controls
 S00732,2026-02,26.48898365316276,Low,dispute_risk,monitor only
 S00733,2026-02,56.12244897959183,High,chargeback_risk,review fraud controls
 S00734,2026-02,35.476190476190474,Moderate,dispute_risk,review fraud controls
@@ -758,7 +758,7 @@ S00756,2026-02,31.428571428571427,Moderate,dispute_risk,review fraud controls
 S00757,2026-02,32.539682539682545,Moderate,dispute_risk,review fraud controls
 S00758,2026-02,12.576312576312578,Low,dispute_risk,monitor only
 S00759,2026-02,12.88515406162465,Low,critical_payment_share,monitor only
-S00760,2026-02,47.11417096959265,Moderate,dispute_risk,review fraud controls
+S00760,2026-02,46.511761331038436,Moderate,dispute_risk,review fraud controls
 S00761,2026-02,9.920634920634921,Low,dispute_risk,monitor only
 S00762,2026-02,18.067226890756306,Low,dispute_risk,monitor only
 S00763,2026-02,12.63227513227513,Low,dispute_risk,monitor only
@@ -802,20 +802,20 @@ S00800,2026-02,49.473684210526315,Moderate,dispute_risk,review fraud controls
 S00801,2026-02,21.861471861471866,Low,chargeback_risk,monitor only
 S00802,2026-02,33.80952380952381,Moderate,chargeback_risk,review fraud controls
 S00803,2026-02,2.5641025641025648,Low,critical_payment_share,monitor only
-S00804,2026-02,40.3019145802651,Moderate,chargeback_risk,review fraud controls
+S00804,2026-02,40.17304860088366,Moderate,chargeback_risk,review fraud controls
 S00805,2026-02,35.824175824175825,Moderate,chargeback_risk,review fraud controls
 S00806,2026-02,47.77777777777778,Moderate,chargeback_risk,review fraud controls
 S00807,2026-02,5.11904761904762,Low,dispute_risk,monitor only
 S00808,2026-02,41.07769423558897,Moderate,chargeback_risk,review fraud controls
-S00809,2026-02,44.68571428571428,Moderate,dispute_risk,review fraud controls
-S00810,2026-02,52.2077922077922,Moderate,chargeback_risk,review fraud controls
+S00809,2026-02,45.68571428571428,Moderate,dispute_risk,review fraud controls
+S00810,2026-02,54.480519480519476,Moderate,chargeback_risk,review fraud controls
 S00811,2026-02,27.678571428571427,Low,dispute_risk,monitor only
 S00812,2026-02,44.705882352941174,Moderate,dispute_risk,review fraud controls
 S00813,2026-02,10.0,Low,critical_payment_share,monitor only
 S00814,2026-02,41.069476971116316,Moderate,dispute_risk,review fraud controls
 S00815,2026-02,12.5,Low,chargeback_risk,monitor only
 S00816,2026-02,23.730158730158728,Low,dispute_risk,monitor only
-S00817,2026-02,15.085714285714285,Low,dispute_risk,monitor only
+S00817,2026-02,16.085714285714285,Low,dispute_risk,monitor only
 S00818,2026-02,16.165413533834588,Low,dispute_risk,monitor only
 S00819,2026-02,34.67062224250723,Moderate,dispute_risk,review fraud controls
 S00820,2026-02,12.838468720821663,Low,chargeback_risk,monitor only
@@ -898,7 +898,7 @@ S00896,2026-02,33.99385560675883,Moderate,dispute_risk,review fraud controls
 S00897,2026-02,41.54002026342452,Moderate,chargeback_risk,review fraud controls
 S00898,2026-02,22.26190476190476,Low,dispute_risk,monitor only
 S00899,2026-02,33.257747543461825,Moderate,dispute_risk,review fraud controls
-S00900,2026-02,44.624413145539904,Moderate,chargeback_risk,review fraud controls
+S00900,2026-02,44.97652582159625,Moderate,chargeback_risk,review fraud controls
 S00901,2026-02,25.12605042016807,Low,dispute_risk,monitor only
 S00902,2026-02,14.210526315789473,Low,dispute_risk,monitor only
 S00903,2026-02,12.285714285714285,Low,dispute_risk,monitor only
@@ -920,7 +920,7 @@ S00918,2026-02,34.26303854875283,Moderate,dispute_risk,review fraud controls
 S00919,2026-02,35.58201058201058,Moderate,dispute_risk,review fraud controls
 S00920,2026-02,18.564213564213564,Low,chargeback_risk,monitor only
 S00921,2026-02,46.054421768707485,Moderate,chargeback_risk,review fraud controls
-S00922,2026-02,49.11202618519691,Moderate,chargeback_risk,review fraud controls
+S00922,2026-02,49.222890930207996,Moderate,chargeback_risk,review fraud controls
 S00923,2026-02,30.844564240790657,Moderate,dispute_risk,review fraud controls
 S00924,2026-02,15.211640211640212,Low,dispute_risk,monitor only
 S00925,2026-02,56.66666666666667,High,dispute_risk,review fraud controls
@@ -938,7 +938,7 @@ S00936,2026-02,42.6007326007326,Moderate,dispute_risk,review fraud controls
 S00937,2026-02,20.32312925170068,Low,dispute_risk,monitor only
 S00938,2026-02,13.227513227513226,Low,dispute_risk,monitor only
 S00939,2026-02,34.20634920634921,Moderate,dispute_risk,review fraud controls
-S00940,2026-02,45.70415400202634,Moderate,chargeback_risk,review fraud controls
+S00940,2026-02,46.05876393110436,Moderate,chargeback_risk,review fraud controls
 S00941,2026-02,9.523809523809522,Low,dispute_risk,monitor only
 S00942,2026-02,20.909090909090907,Low,dispute_risk,monitor only
 S00943,2026-02,11.838624338624337,Low,dispute_risk,monitor only
@@ -946,7 +946,7 @@ S00944,2026-02,26.798941798941797,Low,chargeback_risk,monitor only
 S00945,2026-02,17.573696145124718,Low,dispute_risk,monitor only
 S00946,2026-02,36.27257799671593,Moderate,dispute_risk,review fraud controls
 S00947,2026-02,19.04761904761905,Low,dispute_risk,monitor only
-S00948,2026-02,46.47230320699708,Moderate,dispute_risk,review fraud controls
+S00948,2026-02,46.13216715257532,Moderate,dispute_risk,review fraud controls
 S00949,2026-02,48.52813852813853,Moderate,dispute_risk,review fraud controls
 S00950,2026-02,8.362193362193363,Low,dispute_risk,monitor only
 S00951,2026-02,43.07692307692308,Moderate,chargeback_risk,review fraud controls
@@ -966,13 +966,13 @@ S00964,2026-02,27.310405643738978,Low,dispute_risk,monitor only
 S00965,2026-02,44.391534391534385,Moderate,chargeback_risk,review fraud controls
 S00966,2026-02,29.492063492063494,Low,chargeback_risk,monitor only
 S00967,2026-02,10.0,Low,critical_payment_share,monitor only
-S00968,2026-02,63.19327731092437,High,chargeback_risk,review fraud controls
+S00968,2026-02,63.78151260504202,High,chargeback_risk,review fraud controls
 S00969,2026-02,21.587301587301592,Low,dispute_risk,monitor only
 S00970,2026-02,24.33762978875761,Low,dispute_risk,monitor only
 S00971,2026-02,13.330300272975432,Low,dispute_risk,monitor only
 S00972,2026-02,29.18367346938775,Low,dispute_risk,monitor only
 S00973,2026-02,42.917748917748916,Moderate,dispute_risk,review fraud controls
-S00974,2026-02,16.698679471788715,Low,dispute_risk,monitor only
+S00974,2026-02,17.118847539015608,Low,dispute_risk,monitor only
 S00975,2026-02,25.803571428571427,Low,dispute_risk,monitor only
 S00976,2026-02,59.22077922077922,High,chargeback_risk,review fraud controls
 S00977,2026-02,25.85034013605442,Low,dispute_risk,monitor only
@@ -985,7 +985,7 @@ S00983,2026-02,39.52380952380953,Moderate,dispute_risk,review fraud controls
 S00984,2026-02,9.04761904761905,Low,dispute_risk,monitor only
 S00985,2026-02,41.44078144078144,Moderate,dispute_risk,review fraud controls
 S00986,2026-02,13.650793650793654,Low,dispute_risk,monitor only
-S00987,2026-02,30.003691399040243,Moderate,dispute_risk,review fraud controls
+S00987,2026-02,30.39128829826505,Moderate,dispute_risk,review fraud controls
 S00988,2026-02,47.614541084572636,Moderate,dispute_risk,review fraud controls
 S00989,2026-02,15.079365079365077,Low,dispute_risk,monitor only
 S00990,2026-02,35.21008403361345,Moderate,dispute_risk,review fraud controls
@@ -995,7 +995,7 @@ S00993,2026-02,12.912087912087912,Low,chargeback_risk,monitor only
 S00994,2026-02,14.656084656084655,Low,critical_payment_share,monitor only
 S00995,2026-02,31.03174603174603,Moderate,chargeback_risk,review fraud controls
 S00996,2026-02,38.04232804232804,Moderate,chargeback_risk,review fraud controls
-S00997,2026-02,45.42100283822138,Moderate,chargeback_risk,review fraud controls
+S00997,2026-02,45.08987701040681,Moderate,chargeback_risk,review fraud controls
 S00998,2026-02,8.333333333333334,Low,critical_payment_share,monitor only
 S00999,2026-02,47.14285714285714,Moderate,chargeback_risk,review fraud controls
 S01000,2026-02,6.168831168831169,Low,dispute_risk,monitor only
@@ -1025,11 +1025,11 @@ S01023,2026-02,7.837301587301588,Low,dispute_risk,monitor only
 S01024,2026-02,11.904761904761905,Low,dispute_risk,monitor only
 S01025,2026-02,13.661740558292284,Low,dispute_risk,monitor only
 S01026,2026-02,15.007215007215008,Low,dispute_risk,monitor only
-S01027,2026-02,27.047619047619047,Low,dispute_risk,monitor only
+S01027,2026-02,26.380952380952383,Low,dispute_risk,monitor only
 S01028,2026-02,26.212121212121215,Low,dispute_risk,monitor only
 S01029,2026-02,12.044817927170868,Low,dispute_risk,monitor only
 S01030,2026-02,20.714285714285715,Low,dispute_risk,monitor only
-S01031,2026-02,36.420361247947454,Moderate,dispute_risk,review fraud controls
+S01031,2026-02,34.69622331691298,Moderate,dispute_risk,review fraud controls
 S01032,2026-02,5.366027007818053,Low,dispute_risk,monitor only
 S01033,2026-02,10.582010582010582,Low,chargeback_risk,monitor only
 S01034,2026-02,18.1547619047619,Low,dispute_risk,monitor only
@@ -1092,7 +1092,7 @@ S01090,2026-02,34.14965986394558,Moderate,dispute_risk,review fraud controls
 S01091,2026-02,14.761904761904765,Low,dispute_risk,monitor only
 S01092,2026-02,36.78571428571429,Moderate,dispute_risk,review fraud controls
 S01093,2026-02,37.17086834733894,Moderate,chargeback_risk,review fraud controls
-S01094,2026-02,40.728035895209146,Moderate,chargeback_risk,review fraud controls
+S01094,2026-02,41.0319872629903,Moderate,chargeback_risk,review fraud controls
 S01095,2026-02,28.530377668308702,Low,dispute_risk,monitor only
 S01096,2026-02,36.90854119425548,Moderate,dispute_risk,review fraud controls
 S01097,2026-02,14.285714285714288,Low,chargeback_risk,monitor only
@@ -1162,7 +1162,7 @@ S01160,2026-02,6.746031746031746,Low,dispute_risk,monitor only
 S01161,2026-02,20.714285714285715,Low,dispute_risk,monitor only
 S01162,2026-02,13.133640552995393,Low,dispute_risk,monitor only
 S01163,2026-02,24.87852283770651,Low,dispute_risk,monitor only
-S01164,2026-02,30.970132533650453,Moderate,dispute_risk,review fraud controls
+S01164,2026-02,30.95203626148252,Moderate,dispute_risk,review fraud controls
 S01165,2026-02,22.244897959183675,Low,dispute_risk,monitor only
 S01166,2026-02,33.730158730158735,Moderate,dispute_risk,review fraud controls
 S01167,2026-02,52.27106227106228,Moderate,dispute_risk,review fraud controls

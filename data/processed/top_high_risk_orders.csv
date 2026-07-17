@@ -1,251 +1,251 @@
 order_id,order_date,buyer_id,seller_id,category,order_channel,payment_method,order_risk_score,order_risk_tier,order_risk_main_driver,recommended_action
-O00136848,2024-12-01 16:34:00,B007903,S00922,Electronics,social_commerce,prepaid_card,82.1172128453309,Critical,payment_signal,escalate for manual review
-O00006217,2024-10-17 22:29:00,B000382,S00858,Electronics,social_commerce,prepaid_card,81.25257282597306,Critical,payment_signal,escalate for manual review
-O00091858,2026-01-31 20:59:00,B005356,S00287,Electronics,social_commerce,prepaid_card,80.33483849322842,Critical,payment_signal,escalate for manual review
-O00133790,2026-01-18 13:09:00,B007741,S00006,Electronics,social_commerce,prepaid_card,80.08514148479131,Critical,payment_signal,escalate for manual review
-O00143428,2025-11-10 20:29:00,B008268,S00861,Electronics,social_commerce,prepaid_card,79.91932763363772,Critical,payment_signal,escalate for manual review
-O00050974,2024-10-21 12:41:00,B003007,S00922,Electronics,social_commerce,prepaid_card,79.51025795023561,Critical,payment_signal,escalate for manual review
-O00110763,2025-01-10 10:34:00,B006443,S00201,Electronics,social_commerce,prepaid_card,79.48530433418095,Critical,payment_signal,escalate for manual review
-O00117808,2025-12-18 13:41:00,B006834,S00922,Electronics,social_commerce,prepaid_card,79.40312982250809,Critical,payment_signal,escalate for manual review
-O00116074,2025-06-03 19:36:00,B006737,S00894,Digital Goods,social_commerce,prepaid_card,79.16802523912271,Critical,payment_signal,escalate for manual review
-O00058329,2025-11-07 14:47:00,B003424,S00872,Digital Goods,social_commerce,prepaid_card,79.08995579408618,Critical,payment_signal,escalate for manual review
-O00046888,2025-09-11 15:13:00,B002773,S00058,Electronics,social_commerce,prepaid_card,78.99848662058905,Critical,payment_signal,escalate for manual review
-O00128433,2026-02-23 08:08:00,B007423,S00948,Electronics,mobile_app,prepaid_card,78.97323552623646,Critical,payment_signal,escalate for manual review
-O00082147,2025-10-17 14:22:00,B004774,S00900,Digital Goods,social_commerce,prepaid_card,78.93633827756454,Critical,payment_signal,escalate for manual review
-O00064324,2025-06-28 08:49:00,B003775,S00948,Electronics,social_commerce,prepaid_card,78.78601167461446,Critical,payment_signal,escalate for manual review
-O00041391,2025-09-23 22:21:00,B002441,S00948,Electronics,web,prepaid_card,78.74363481713773,Critical,payment_signal,escalate for manual review
-O00114989,2025-08-16 18:49:00,B006678,S01112,Electronics,social_commerce,prepaid_card,78.72248775546488,Critical,payment_signal,escalate for manual review
-O00053782,2025-11-25 18:43:00,B003156,S00216,Digital Goods,social_commerce,prepaid_card,78.67797783802753,Critical,payment_signal,escalate for manual review
-O00133781,2026-01-11 17:56:00,B007741,S00493,Digital Goods,mobile_app,prepaid_card,78.49483515169611,Critical,payment_signal,escalate for manual review
-O00089930,2025-06-15 20:22:00,B005250,S00576,Electronics,social_commerce,prepaid_card,78.48012418122086,Critical,payment_signal,escalate for manual review
-O00055466,2025-11-06 14:51:00,B003250,S00251,Electronics,social_commerce,prepaid_card,78.45954637792332,Critical,payment_signal,escalate for manual review
-O00138891,2025-07-27 12:21:00,B008023,S00922,Electronics,mobile_app,prepaid_card,78.40894193959389,Critical,payment_signal,escalate for manual review
-O00147290,2025-08-13 19:33:00,B008497,S00257,Digital Goods,mobile_app,digital_wallet,78.36843972250156,Critical,payment_signal,escalate for manual review
-O00049300,2025-09-02 21:29:00,B002898,S00961,Electronics,social_commerce,prepaid_card,78.27240296107522,Critical,payment_signal,escalate for manual review
-O00068783,2025-05-31 20:03:00,B004014,S00184,Electronics,social_commerce,prepaid_card,78.22963238594615,Critical,payment_signal,escalate for manual review
-O00023775,2025-06-27 11:29:00,B001428,S00922,Electronics,mobile_app,prepaid_card,78.15249633394299,Critical,payment_signal,escalate for manual review
-O00110778,2025-02-27 15:38:00,B006443,S00237,Digital Goods,social_commerce,prepaid_card,78.00663398568524,Critical,payment_signal,escalate for manual review
-O00000382,2025-06-07 12:38:00,B000022,S00178,Electronics,web,prepaid_card,77.97434912439148,Critical,payment_signal,escalate for manual review
-O00140279,2025-09-26 10:04:00,B008108,S00114,Electronics,social_commerce,prepaid_card,77.97129779374423,Critical,payment_signal,escalate for manual review
-O00094596,2024-09-14 08:28:00,B005520,S00444,Electronics,mobile_app,prepaid_card,77.96180903410999,Critical,payment_signal,escalate for manual review
-O00094590,2025-09-24 18:19:00,B005520,S00386,Electronics,mobile_app,prepaid_card,77.95486844346773,Critical,payment_signal,escalate for manual review
-O00090026,2025-02-12 19:35:00,B005255,S00257,Digital Goods,social_commerce,prepaid_card,77.93380612868327,Critical,payment_signal,escalate for manual review
-O00041374,2025-05-17 11:03:00,B002441,S00138,Electronics,mobile_app,prepaid_card,77.91737890057071,Critical,payment_signal,escalate for manual review
-O00089923,2025-10-28 09:38:00,B005250,S00922,Electronics,mobile_app,prepaid_card,77.91278272038151,Critical,payment_signal,escalate for manual review
-O00117471,2025-04-27 17:41:00,B006814,S01149,Electronics,social_commerce,prepaid_card,77.72638152071606,Critical,payment_signal,escalate for manual review
-O00086984,2025-12-17 09:21:00,B005073,S00922,Electronics,mobile_app,prepaid_card,77.66864199968396,Critical,payment_signal,escalate for manual review
-O00067209,2025-02-03 20:57:00,B003941,S00130,Electronics,social_commerce,prepaid_card,77.65553956724449,Critical,payment_signal,escalate for manual review
-O00069984,2025-06-08 08:16:00,B004077,S00922,Electronics,social_commerce,prepaid_card,77.65264654616362,Critical,payment_signal,escalate for manual review
-O00026491,2025-04-26 11:37:00,B001578,S00493,Digital Goods,social_commerce,digital_wallet,77.6253919406101,Critical,payment_signal,escalate for manual review
-O00087446,2026-02-01 13:44:00,B005094,S00386,Electronics,mobile_app,prepaid_card,77.61038018812151,Critical,payment_signal,escalate for manual review
-O00009553,2024-06-09 21:16:00,B000570,S00922,Electronics,mobile_app,prepaid_card,77.57856318415345,Critical,payment_signal,escalate for manual review
-O00083048,2026-01-29 13:48:00,B004826,S00393,Electronics,web,prepaid_card,77.5440363231475,Critical,payment_signal,escalate for manual review
-O00092897,2025-05-22 10:24:00,B005413,S00922,Electronics,social_commerce,prepaid_card,77.52773861623277,Critical,payment_signal,escalate for manual review
-O00046855,2025-10-27 09:52:00,B002773,S00851,Electronics,social_commerce,prepaid_card,77.38654741711134,Critical,payment_signal,escalate for manual review
-O00116090,2026-02-07 08:52:00,B006737,S00922,Electronics,mobile_app,digital_wallet,77.35374711912371,Critical,payment_signal,escalate for manual review
-O00095448,2025-09-28 15:39:00,B005574,S00992,Electronics,social_commerce,prepaid_card,77.33473322857539,Critical,payment_signal,escalate for manual review
-O00083054,2025-05-09 16:16:00,B004826,S00795,Electronics,social_commerce,prepaid_card,77.25626896671623,Critical,payment_signal,escalate for manual review
-O00149362,2026-01-17 08:48:00,B008620,S00706,Electronics,social_commerce,digital_wallet,77.18846837506942,Critical,payment_signal,escalate for manual review
-O00000367,2025-05-17 20:36:00,B000022,S00347,Electronics,web,prepaid_card,77.16320096415517,Critical,payment_signal,escalate for manual review
-O00025784,2026-02-25 16:41:00,B001536,S00922,Electronics,mobile_app,prepaid_card,77.13311410579578,Critical,payment_signal,escalate for manual review
-O00151839,2025-12-07 10:32:00,B008750,S00251,Electronics,social_commerce,prepaid_card,77.07808971285283,Critical,payment_signal,escalate for manual review
-O00039298,2025-09-18 13:39:00,B002313,S00948,Electronics,social_commerce,prepaid_card,77.05169008103452,Critical,payment_signal,escalate for manual review
-O00035076,2025-07-06 13:05:00,B002068,S00858,Digital Goods,social_commerce,prepaid_card,77.03692507378535,Critical,payment_signal,escalate for manual review
-O00034051,2025-11-16 13:45:00,B002006,S01122,Digital Goods,social_commerce,prepaid_card,77.01830875217891,Critical,payment_signal,escalate for manual review
-O00022379,2025-01-04 17:33:00,B001347,S00922,Electronics,web,prepaid_card,76.94221149974523,Critical,payment_signal,escalate for manual review
-O00103547,2025-12-07 11:05:00,B006041,S00121,Digital Goods,social_commerce,prepaid_card,76.9249838121207,Critical,payment_signal,escalate for manual review
-O00095898,2025-04-16 14:26:00,B005601,S00462,Electronics,social_commerce,prepaid_card,76.8988326590342,Critical,payment_signal,escalate for manual review
-O00152264,2026-01-17 14:54:00,B008771,S00254,Electronics,social_commerce,prepaid_card,76.85663324437789,Critical,payment_signal,escalate for manual review
-O00066951,2025-06-02 10:15:00,B003927,S01120,Electronics,social_commerce,prepaid_card,76.84830799138538,Critical,payment_signal,escalate for manual review
-O00081961,2025-07-06 17:55:00,B004761,S00178,Electronics,web,prepaid_card,76.83682028462009,Critical,payment_signal,escalate for manual review
-O00121397,2025-11-26 12:57:00,B007039,S00386,Electronics,social_commerce,digital_wallet,76.82150595157866,Critical,payment_signal,escalate for manual review
-O00143420,2025-09-06 16:19:00,B008268,S01056,Home,social_commerce,prepaid_card,76.81652148302395,Critical,payment_signal,escalate for manual review
-O00049301,2026-02-09 18:08:00,B002898,S00922,Electronics,social_commerce,credit_card,76.78024163926688,Critical,payment_signal,escalate for manual review
-O00155950,2025-12-03 10:29:00,B008992,S00524,Electronics,mobile_app,prepaid_card,76.77915316516506,Critical,payment_signal,escalate for manual review
-O00098886,2025-07-14 19:06:00,B005763,S00922,Electronics,social_commerce,prepaid_card,76.76423063545636,Critical,payment_signal,escalate for manual review
-O00002271,2025-07-18 08:17:00,B000138,S00922,Electronics,mobile_app,prepaid_card,76.74500419853702,Critical,payment_signal,escalate for manual review
-O00073126,2024-07-25 22:24:00,B004251,S00922,Digital Goods,mobile_app,prepaid_card,76.73413775490917,Critical,payment_signal,escalate for manual review
-O00124964,2025-12-01 20:17:00,B007228,S00311,Electronics,social_commerce,prepaid_card,76.72288856184014,Critical,payment_signal,escalate for manual review
-O00056893,2024-10-27 20:47:00,B003322,S00276,Electronics,social_commerce,prepaid_card,76.70191169275509,Critical,payment_signal,escalate for manual review
-O00077855,2025-04-12 15:14:00,B004512,S00922,Electronics,mobile_app,prepaid_card,76.70178854399373,Critical,payment_signal,escalate for manual review
-O00073822,2025-08-16 13:01:00,B004292,S00922,Electronics,mobile_app,prepaid_card,76.7013999424589,Critical,payment_signal,escalate for manual review
-O00048451,2024-10-04 20:15:00,B002851,S00922,Electronics,social_commerce,digital_wallet,76.66610812824105,Critical,payment_signal,escalate for manual review
-O00037156,2026-01-25 12:57:00,B002203,S00948,Electronics,mobile_app,prepaid_card,76.66227713985252,Critical,payment_signal,escalate for manual review
-O00124570,2025-11-06 21:23:00,B007204,S00184,Electronics,social_commerce,prepaid_card,76.65072501835766,Critical,payment_signal,escalate for manual review
-O00120573,2025-02-03 14:57:00,B006999,S00922,Electronics,mobile_app,prepaid_card,76.64346162082141,Critical,payment_signal,escalate for manual review
-O00133798,2025-03-24 12:37:00,B007741,S00237,Digital Goods,mobile_app,prepaid_card,76.62181675081202,Critical,payment_signal,escalate for manual review
-O00090969,2026-02-03 16:00:00,B005304,S00922,Electronics,mobile_app,prepaid_card,76.61436141297419,Critical,payment_signal,escalate for manual review
-O00076182,2025-11-11 10:17:00,B004412,S01027,Electronics,social_commerce,prepaid_card,76.5911354660646,Critical,payment_signal,escalate for manual review
-O00075507,2025-08-20 22:25:00,B004372,S00997,Electronics,mobile_app,prepaid_card,76.57092985833913,Critical,payment_signal,escalate for manual review
-O00038816,2025-05-06 11:35:00,B002288,S00376,Electronics,social_commerce,prepaid_card,76.55174710628619,Critical,payment_signal,escalate for manual review
-O00116103,2025-11-26 11:06:00,B006737,S00760,Electronics,web,prepaid_card,76.48488421875929,Critical,payment_signal,escalate for manual review
-O00092240,2026-02-18 09:44:00,B005379,S01149,Electronics,social_commerce,digital_wallet,76.48203847309011,Critical,payment_signal,escalate for manual review
-O00122905,2024-05-29 21:54:00,B007118,S00444,Electronics,social_commerce,prepaid_card,76.32900230315863,Critical,payment_signal,escalate for manual review
-O00018781,2025-07-29 13:36:00,B001123,S00214,Electronics,social_commerce,prepaid_card,76.30296536757116,Critical,payment_signal,escalate for manual review
-O00136858,2025-01-12 10:15:00,B007903,S00502,Electronics,social_commerce,prepaid_card,76.29909452113506,Critical,payment_signal,escalate for manual review
-O00047152,2024-11-22 11:51:00,B002785,S01113,Digital Goods,social_commerce,prepaid_card,76.2847053110864,Critical,payment_signal,escalate for manual review
-O00139106,2025-03-12 09:19:00,B008037,S00948,Electronics,web,prepaid_card,76.28034350812412,Critical,payment_signal,escalate for manual review
-O00108824,2025-12-06 21:17:00,B006341,S00347,Electronics,mobile_app,prepaid_card,76.27653099011482,Critical,payment_signal,escalate for manual review
-O00147334,2026-01-10 10:18:00,B008497,S01037,Electronics,mobile_app,prepaid_card,76.26817849794011,Critical,payment_signal,escalate for manual review
-O00018675,2026-02-23 11:36:00,B001115,S00216,Digital Goods,mobile_app,prepaid_card,76.25318075358075,Critical,payment_signal,escalate for manual review
-O00135724,2025-06-12 15:25:00,B007848,S01144,Sports,social_commerce,prepaid_card,76.21485816023042,Critical,payment_signal,escalate for manual review
-O00005966,2025-11-06 22:34:00,B000364,S00760,Electronics,web,prepaid_card,76.14096691165963,Critical,payment_signal,escalate for manual review
-O00037855,2025-02-09 21:23:00,B002235,S01149,Electronics,social_commerce,prepaid_card,76.11949259649012,Critical,payment_signal,escalate for manual review
-O00054104,2025-10-14 09:24:00,B003178,S01123,Electronics,social_commerce,prepaid_card,76.10608581910327,Critical,payment_signal,escalate for manual review
-O00023766,2025-11-30 19:22:00,B001428,S01164,Electronics,mobile_app,prepaid_card,76.06406265673404,Critical,payment_signal,escalate for manual review
-O00048244,2025-06-24 15:50:00,B002846,S00201,Electronics,social_commerce,prepaid_card,76.01987674338577,Critical,payment_signal,escalate for manual review
-O00129525,2024-11-02 22:49:00,B007483,S00420,Electronics,social_commerce,prepaid_card,76.00268197542411,Critical,payment_signal,escalate for manual review
-O00151424,2026-01-07 22:28:00,B008733,S00922,Electronics,mobile_app,prepaid_card,75.98542959074237,Critical,payment_signal,escalate for manual review
-O00012139,2026-02-01 09:37:00,B000728,S00163,Electronics,social_commerce,digital_wallet,75.96493714394059,Critical,payment_signal,escalate for manual review
-O00138835,2026-02-16 14:55:00,B008021,S00997,Electronics,mobile_app,prepaid_card,75.95047627101229,Critical,payment_signal,escalate for manual review
-O00055252,2026-02-27 13:25:00,B003243,S00251,Electronics,social_commerce,prepaid_card,75.93939156574686,Critical,payment_signal,escalate for manual review
-O00133607,2025-09-18 08:31:00,B007733,S00444,Electronics,social_commerce,prepaid_card,75.93348694394065,Critical,payment_signal,escalate for manual review
-O00067561,2025-11-07 12:11:00,B003961,S00524,Electronics,social_commerce,prepaid_card,75.9201303375068,Critical,payment_signal,escalate for manual review
-O00071423,2024-04-27 08:18:00,B004154,S01027,Electronics,social_commerce,prepaid_card,75.87446806943886,Critical,payment_signal,escalate for manual review
-O00067905,2025-08-18 19:33:00,B003974,S00922,Electronics,web,prepaid_card,75.84036150402294,Critical,payment_signal,escalate for manual review
-O00100925,2024-12-13 15:57:00,B005892,S01164,Electronics,social_commerce,prepaid_card,75.82992103817116,Critical,payment_signal,escalate for manual review
-O00146427,2025-02-25 22:34:00,B008444,S01078,Electronics,social_commerce,digital_wallet,75.78878620281212,Critical,payment_signal,escalate for manual review
-O00009055,2025-09-19 11:24:00,B000534,S00760,Electronics,web,prepaid_card,75.75976875712796,Critical,payment_signal,escalate for manual review
-O00034369,2025-12-29 14:23:00,B002026,S01031,Electronics,social_commerce,prepaid_card,75.71397508422972,Critical,payment_signal,escalate for manual review
-O00138019,2025-11-28 21:17:00,B007975,S00386,Electronics,web,prepaid_card,75.71332916081364,Critical,payment_signal,escalate for manual review
-O00073703,2025-08-13 10:43:00,B004285,S00948,Electronics,social_commerce,digital_wallet,75.69537513427184,Critical,payment_signal,escalate for manual review
-O00071870,2025-12-17 08:24:00,B004179,S00881,Fashion,social_commerce,prepaid_card,75.69178179118568,Critical,payment_signal,escalate for manual review
-O00106543,2025-09-10 19:50:00,B006208,S00654,Electronics,social_commerce,prepaid_card,75.69164508106181,Critical,payment_signal,escalate for manual review
-O00041442,2026-01-12 18:39:00,B002442,S00379,Electronics,social_commerce,prepaid_card,75.676222533928,Critical,payment_signal,escalate for manual review
-O00140369,2025-12-23 20:41:00,B008113,S00575,Electronics,social_commerce,digital_wallet,75.67442679482961,Critical,payment_signal,escalate for manual review
-O00063477,2025-12-10 13:03:00,B003733,S00462,Electronics,social_commerce,prepaid_card,75.66060436553678,Critical,payment_signal,escalate for manual review
-O00041824,2025-08-28 14:20:00,B002460,S00186,Electronics,mobile_app,prepaid_card,75.65905447359562,Critical,payment_signal,escalate for manual review
-O00070281,2025-02-10 22:52:00,B004095,S00851,Electronics,social_commerce,prepaid_card,75.64045863388623,Critical,payment_signal,escalate for manual review
-O00013450,2026-02-10 16:45:00,B000813,S00922,Electronics,social_commerce,prepaid_card,75.63252000319959,Critical,payment_signal,escalate for manual review
-O00148991,2025-07-17 13:23:00,B008594,S00804,Electronics,social_commerce,digital_wallet,75.59704250073077,Critical,payment_signal,escalate for manual review
-O00015729,2025-02-05 08:35:00,B000943,S00922,Electronics,mobile_app,prepaid_card,75.57512833469892,Critical,payment_signal,escalate for manual review
-O00132285,2025-12-02 08:00:00,B007645,S01049,Digital Goods,social_commerce,prepaid_card,75.52573504989297,Critical,payment_signal,escalate for manual review
-O00071883,2025-06-05 21:27:00,B004179,S00216,Digital Goods,mobile_app,prepaid_card,75.51844942075405,Critical,payment_signal,escalate for manual review
-O00049286,2024-09-28 18:55:00,B002898,S00493,Digital Goods,web,prepaid_card,75.51686280773116,Critical,payment_signal,escalate for manual review
-O00046994,2025-03-30 18:09:00,B002778,S00922,Electronics,social_commerce,credit_card,75.4824789282236,Critical,payment_signal,escalate for manual review
-O00077256,2025-01-17 17:25:00,B004471,S00178,Electronics,web,prepaid_card,75.45540130628923,Critical,payment_signal,escalate for manual review
-O00052622,2026-02-11 22:20:00,B003094,S00722,Electronics,mobile_app,prepaid_card,75.38717250395713,Critical,payment_signal,escalate for manual review
-O00071866,2024-12-11 18:35:00,B004179,S00041,Fashion,social_commerce,prepaid_card,75.38357026271514,Critical,payment_signal,escalate for manual review
-O00108852,2025-08-15 10:37:00,B006341,S00056,Digital Goods,mobile_app,prepaid_card,75.3831157874244,Critical,payment_signal,escalate for manual review
-O00082690,2025-02-22 13:01:00,B004801,S00516,Electronics,social_commerce,prepaid_card,75.38246778660377,Critical,payment_signal,escalate for manual review
-O00080863,2024-05-17 15:23:00,B004701,S01149,Electronics,social_commerce,prepaid_card,75.35861478516318,Critical,payment_signal,escalate for manual review
-O00042898,2026-02-06 20:30:00,B002527,S00922,Electronics,social_commerce,prepaid_card,75.35739356651477,Critical,payment_signal,escalate for manual review
-O00089926,2025-12-31 10:27:00,B005250,S01027,Electronics,social_commerce,prepaid_card,75.34412703284654,Critical,payment_signal,escalate for manual review
-O00026358,2025-02-24 09:04:00,B001570,S00251,Electronics,mobile_app,prepaid_card,75.33355749334349,Critical,payment_signal,escalate for manual review
-O00023023,2026-02-26 22:13:00,B001387,S00126,Electronics,mobile_app,prepaid_card,75.33202762078898,Critical,payment_signal,escalate for manual review
-O00123946,2025-06-11 14:19:00,B007174,S00216,Digital Goods,mobile_app,prepaid_card,75.3292134226683,Critical,payment_signal,escalate for manual review
-O00140756,2025-11-24 21:20:00,B008133,S01014,Digital Goods,social_commerce,digital_wallet,75.32527700874606,Critical,payment_signal,escalate for manual review
-O00106732,2025-11-27 13:46:00,B006219,S00575,Electronics,social_commerce,digital_wallet,75.30111465320078,Critical,payment_signal,escalate for manual review
-O00123092,2025-12-09 22:44:00,B007123,S00804,Electronics,social_commerce,prepaid_card,75.30006645010246,Critical,payment_signal,escalate for manual review
-O00011541,2025-12-14 11:14:00,B000698,S00948,Electronics,web,prepaid_card,75.27467622448893,Critical,payment_signal,escalate for manual review
-O00067219,2026-02-08 13:39:00,B003941,S00336,Home,social_commerce,prepaid_card,75.266220426791,Critical,payment_signal,escalate for manual review
-O00090946,2025-08-24 11:45:00,B005302,S00702,Electronics,social_commerce,prepaid_card,75.26556829977653,Critical,payment_signal,escalate for manual review
-O00123981,2026-01-24 16:36:00,B007174,S00024,Electronics,web,prepaid_card,75.25459794365554,Critical,payment_signal,escalate for manual review
-O00097063,2025-12-12 16:49:00,B005664,S00060,Electronics,social_commerce,prepaid_card,75.25206268941389,Critical,payment_signal,escalate for manual review
-O00071444,2025-12-20 21:35:00,B004154,S00386,Electronics,web,prepaid_card,75.23894726146617,Critical,payment_signal,escalate for manual review
-O00125324,2025-12-25 10:47:00,B007248,S00347,Electronics,mobile_app,prepaid_card,75.23335941286138,Critical,payment_signal,escalate for manual review
-O00016415,2026-01-31 11:07:00,B000986,S00347,Electronics,mobile_app,prepaid_card,75.2301647137087,Critical,payment_signal,escalate for manual review
-O00097785,2025-04-12 17:14:00,B005702,S00214,Electronics,social_commerce,digital_wallet,75.20288627894655,Critical,payment_signal,escalate for manual review
-O00060282,2026-01-29 10:42:00,B003532,S00146,Electronics,social_commerce,prepaid_card,75.20282112518449,Critical,payment_signal,escalate for manual review
-O00064914,2025-06-17 22:54:00,B003811,S00284,Digital Goods,social_commerce,prepaid_card,75.19780177535932,Critical,payment_signal,escalate for manual review
-O00074849,2025-05-10 12:50:00,B004345,S00830,Electronics,social_commerce,digital_wallet,75.19227057580868,Critical,payment_signal,escalate for manual review
-O00095881,2025-06-13 22:35:00,B005601,S01164,Electronics,mobile_app,prepaid_card,75.18445129436587,Critical,payment_signal,escalate for manual review
-O00006039,2025-11-17 18:09:00,B000368,S00804,Electronics,social_commerce,prepaid_card,75.17637240093886,Critical,payment_signal,escalate for manual review
-O00140253,2025-12-23 14:56:00,B008108,S00879,Electronics,social_commerce,prepaid_card,75.12146546066211,Critical,payment_signal,escalate for manual review
-O00129570,2026-01-31 16:56:00,B007488,S00922,Electronics,mobile_app,prepaid_card,75.11496146547273,Critical,payment_signal,escalate for manual review
-O00023016,2025-06-20 13:26:00,B001387,S01154,Fashion,social_commerce,prepaid_card,75.10826903405255,Critical,payment_signal,escalate for manual review
-O00048602,2025-06-22 17:03:00,B002860,S00251,Electronics,mobile_app,prepaid_card,75.0909337073723,Critical,payment_signal,escalate for manual review
-O00150041,2026-01-18 10:34:00,B008667,S00576,Electronics,web,prepaid_card,75.07781049227972,Critical,payment_signal,escalate for manual review
-O00068162,2025-04-24 22:01:00,B003987,S00819,Electronics,social_commerce,prepaid_card,75.07106407871815,Critical,payment_signal,escalate for manual review
-O00074237,2026-01-14 22:09:00,B004316,S00722,Electronics,social_commerce,prepaid_card,75.06959547881362,Critical,payment_signal,escalate for manual review
-O00076663,2025-09-20 19:38:00,B004436,S00997,Electronics,mobile_app,prepaid_card,75.06890884560448,Critical,payment_signal,escalate for manual review
-O00088435,2025-04-14 19:00:00,B005157,S01164,Electronics,social_commerce,prepaid_card,75.01384117408064,Critical,payment_signal,escalate for manual review
-O00113041,2025-08-30 18:20:00,B006569,S00922,Electronics,web,prepaid_card,75.01137260808993,Critical,payment_signal,escalate for manual review
-O00154518,2026-01-14 21:41:00,B008906,S00795,Electronics,web,prepaid_card,74.99065220736173,High,payment_signal,review fraud controls
-O00065032,2025-08-06 10:55:00,B003816,S00346,Electronics,social_commerce,prepaid_card,74.95711961457457,High,payment_signal,review fraud controls
-O00023059,2024-07-05 09:50:00,B001387,S00178,Electronics,mobile_app,prepaid_card,74.94456028560671,High,payment_signal,review fraud controls
-O00066240,2025-11-25 22:26:00,B003882,S00397,Electronics,mobile_app,prepaid_card,74.93902216555661,High,payment_signal,review fraud controls
-O00133482,2025-11-07 13:19:00,B007722,S00642,Electronics,mobile_app,prepaid_card,74.92618044240709,High,payment_signal,review fraud controls
-O00136847,2025-12-26 22:44:00,B007903,S00201,Electronics,web,prepaid_card,74.91463892941528,High,payment_signal,review fraud controls
-O00017283,2026-02-18 10:35:00,B001037,S00444,Electronics,mobile_app,prepaid_card,74.90122109120361,High,payment_signal,review fraud controls
-O00064983,2026-01-06 09:55:00,B003815,S00760,Electronics,social_commerce,prepaid_card,74.89158041402882,High,payment_signal,review fraud controls
-O00112298,2025-04-16 18:29:00,B006527,S00346,Electronics,social_commerce,prepaid_card,74.88017060468404,High,payment_signal,review fraud controls
-O00092447,2025-07-06 16:47:00,B005389,S00378,Electronics,mobile_app,prepaid_card,74.87539054155573,High,payment_signal,review fraud controls
-O00052631,2025-11-12 13:59:00,B003094,S00444,Electronics,web,prepaid_card,74.87100280111389,High,payment_signal,review fraud controls
-O00015118,2025-06-04 11:57:00,B000908,S00311,Electronics,web,prepaid_card,74.85563251223874,High,payment_signal,review fraud controls
-O00019879,2025-10-14 22:34:00,B001196,S00922,Electronics,web,prepaid_card,74.84315631307206,High,payment_signal,review fraud controls
-O00095897,2025-10-27 18:28:00,B005601,S00389,Electronics,web,prepaid_card,74.82854095087546,High,payment_signal,review fraud controls
-O00071886,2024-10-17 12:53:00,B004179,S00323,Electronics,web,prepaid_card,74.82126839753822,High,payment_signal,review fraud controls
-O00115846,2025-10-09 16:04:00,B006720,S00201,Electronics,mobile_app,prepaid_card,74.81646056445521,High,payment_signal,review fraud controls
-O00054116,2025-04-08 18:02:00,B003178,S00352,Electronics,mobile_app,prepaid_card,74.81572459060295,High,payment_signal,review fraud controls
-O00132050,2025-12-12 12:52:00,B007634,S01115,Electronics,social_commerce,prepaid_card,74.81095466818802,High,payment_signal,review fraud controls
-O00083932,2025-08-01 09:28:00,B004878,S00997,Electronics,web,prepaid_card,74.79870119541575,High,payment_signal,review fraud controls
-O00106071,2026-01-30 21:52:00,B006185,S00922,Electronics,social_commerce,prepaid_card,74.79798502281736,High,payment_signal,review fraud controls
-O00121314,2024-10-30 19:50:00,B007032,S00444,Electronics,web,prepaid_card,74.78643541226508,High,payment_signal,review fraud controls
-O00071411,2025-04-28 09:41:00,B004154,S00817,Digital Goods,social_commerce,prepaid_card,74.7610741380253,High,payment_signal,review fraud controls
-O00114898,2024-08-02 14:14:00,B006673,S00325,Electronics,social_commerce,prepaid_card,74.74544788919852,High,payment_signal,review fraud controls
-O00110750,2025-03-27 17:18:00,B006443,S00804,Electronics,social_commerce,credit_card,74.73739542216514,High,payment_signal,review fraud controls
-O00127671,2025-05-23 13:04:00,B007381,S00922,Electronics,social_commerce,digital_wallet,74.73140320231437,High,payment_signal,review fraud controls
-O00133487,2026-02-19 11:19:00,B007722,S00495,Digital Goods,mobile_app,prepaid_card,74.72847215346704,High,payment_signal,review fraud controls
-O00023019,2025-10-20 17:11:00,B001387,S01094,Grocery,social_commerce,prepaid_card,74.72409528586907,High,payment_signal,review fraud controls
-O00091892,2024-11-05 20:08:00,B005356,S00948,Electronics,mobile_app,prepaid_card,74.71657395756723,High,payment_signal,review fraud controls
-O00017294,2025-08-17 15:30:00,B001038,S00922,Electronics,mobile_app,prepaid_card,74.70269404390764,High,payment_signal,review fraud controls
-O00072935,2024-11-09 19:11:00,B004240,S00352,Electronics,social_commerce,prepaid_card,74.70122134052923,High,payment_signal,review fraud controls
-O00026068,2025-05-24 09:56:00,B001553,S01014,Digital Goods,social_commerce,digital_wallet,74.69623785411476,High,payment_signal,review fraud controls
-O00021050,2026-01-30 16:29:00,B001268,S01044,Electronics,social_commerce,prepaid_card,74.69047584576148,High,payment_signal,review fraud controls
-O00149146,2025-12-01 21:40:00,B008604,S00184,Electronics,web,prepaid_card,74.6820283350982,High,payment_signal,review fraud controls
-O00106742,2024-11-23 11:15:00,B006219,S00116,Electronics,social_commerce,prepaid_card,74.6791410501198,High,payment_signal,review fraud controls
-O00007181,2025-08-29 18:11:00,B000429,S00881,Digital Goods,social_commerce,prepaid_card,74.6786441061024,High,payment_signal,review fraud controls
-O00097064,2026-02-20 10:14:00,B005664,S00216,Digital Goods,mobile_app,prepaid_card,74.65202357840536,High,payment_signal,review fraud controls
-O00022350,2025-07-19 21:42:00,B001347,S00253,Fashion,mobile_app,prepaid_card,74.62168483579052,High,payment_signal,review fraud controls
-O00135477,2024-10-04 20:19:00,B007835,S00178,Electronics,mobile_app,prepaid_card,74.62088798397671,High,payment_signal,review fraud controls
-O00132293,2025-06-25 12:26:00,B007645,S00576,Electronics,mobile_app,prepaid_card,74.61883699124103,High,payment_signal,review fraud controls
-O00011281,2025-07-09 22:51:00,B000680,S00922,Electronics,mobile_app,prepaid_card,74.61534238149369,High,payment_signal,review fraud controls
-O00063526,2026-01-22 12:23:00,B003734,S00968,Fashion,social_commerce,prepaid_card,74.58726346564279,High,payment_signal,review fraud controls
-O00098431,2024-11-29 12:11:00,B005737,S00493,Digital Goods,mobile_app,prepaid_card,74.58708392097898,High,payment_signal,review fraud controls
-O00073707,2025-10-11 17:44:00,B004285,S00900,Digital Goods,social_commerce,prepaid_card,74.58577815811685,High,payment_signal,review fraud controls
-O00046979,2025-12-07 21:23:00,B002777,S00184,Electronics,mobile_app,prepaid_card,74.58496368616872,High,payment_signal,review fraud controls
-O00073690,2025-09-20 14:05:00,B004285,S00452,Digital Goods,mobile_app,prepaid_card,74.5795205823251,High,payment_signal,review fraud controls
-O00052310,2026-02-22 18:41:00,B003074,S00119,Digital Goods,web,prepaid_card,74.57785067603704,High,payment_signal,review fraud controls
-O00016641,2025-04-21 19:39:00,B001000,S01164,Electronics,mobile_app,prepaid_card,74.57397169021112,High,payment_signal,review fraud controls
-O00115259,2026-02-16 10:54:00,B006691,S00531,Electronics,social_commerce,prepaid_card,74.56645803813967,High,payment_signal,review fraud controls
-O00148477,2024-12-22 20:27:00,B008563,S00320,Digital Goods,social_commerce,digital_wallet,74.5645318220649,High,payment_signal,review fraud controls
-O00114892,2025-06-05 08:33:00,B006673,S00014,Digital Goods,web,prepaid_card,74.56270887696495,High,payment_signal,review fraud controls
-O00048000,2025-05-18 19:54:00,B002832,S00322,Electronics,mobile_app,prepaid_card,74.54879060875948,High,payment_signal,review fraud controls
-O00143160,2026-01-20 12:36:00,B008247,S00881,Digital Goods,social_commerce,prepaid_card,74.54735281715351,High,payment_signal,review fraud controls
-O00026722,2024-11-16 15:12:00,B001589,S00576,Electronics,web,prepaid_card,74.54148271811187,High,payment_signal,review fraud controls
-O00021488,2026-02-27 22:24:00,B001299,S00922,Digital Goods,social_commerce,prepaid_card,74.53961238301646,High,payment_signal,review fraud controls
-O00031303,2024-10-09 08:32:00,B001863,S01078,Electronics,mobile_app,prepaid_card,74.53425955020846,High,payment_signal,review fraud controls
-O00098743,2025-02-15 13:45:00,B005757,S00948,Electronics,web,prepaid_card,74.53011750575511,High,payment_signal,review fraud controls
-O00133774,2025-03-18 16:27:00,B007741,S01065,Digital Goods,mobile_app,prepaid_card,74.51469251413967,High,payment_signal,review fraud controls
-O00107740,2025-06-10 17:08:00,B006281,S00819,Electronics,social_commerce,prepaid_card,74.51199835300129,High,payment_signal,review fraud controls
-O00013209,2025-01-17 08:41:00,B000799,S00014,Digital Goods,social_commerce,prepaid_card,74.51180001942937,High,payment_signal,review fraud controls
-O00152275,2025-05-30 10:28:00,B008771,S00234,Electronics,web,prepaid_card,74.50952777622729,High,payment_signal,review fraud controls
-O00114067,2026-02-15 10:58:00,B006634,S00948,Electronics,web,prepaid_card,74.50386731831979,High,payment_signal,review fraud controls
-O00051901,2026-02-19 16:38:00,B003054,S00386,Electronics,mobile_app,prepaid_card,74.49378378337055,High,payment_signal,review fraud controls
-O00016267,2025-08-18 14:50:00,B000981,S00760,Electronics,web,prepaid_card,74.49314158577246,High,payment_signal,review fraud controls
-O00062034,2026-01-13 08:10:00,B003637,S00997,Electronics,web,prepaid_card,74.47625956404013,High,payment_signal,review fraud controls
-O00061996,2025-08-08 21:01:00,B003637,S00556,Electronics,mobile_app,prepaid_card,74.46912005151452,High,payment_signal,review fraud controls
-O00052619,2025-10-20 21:51:00,B003094,S00997,Electronics,web,prepaid_card,74.46739772295138,High,payment_signal,review fraud controls
-O00063533,2026-02-18 08:12:00,B003734,S00153,Digital Goods,mobile_app,prepaid_card,74.46020765423229,High,payment_signal,review fraud controls
-O00147324,2025-07-04 16:56:00,B008497,S00016,Electronics,web,digital_wallet,74.45749385072062,High,payment_signal,review fraud controls
-O00154142,2025-10-20 14:25:00,B008890,S00462,Electronics,social_commerce,prepaid_card,74.45025524570751,High,payment_signal,review fraud controls
-O00141520,2025-06-02 17:55:00,B008174,S00876,Electronics,web,prepaid_card,74.44735327612884,High,payment_signal,review fraud controls
-O00106674,2025-02-15 18:01:00,B006217,S00830,Electronics,mobile_app,digital_wallet,74.44216271531555,High,payment_signal,review fraud controls
-O00114102,2025-09-19 12:40:00,B006634,S00940,Toys,social_commerce,prepaid_card,74.43145231102955,High,payment_signal,review fraud controls
-O00078269,2025-07-05 21:49:00,B004535,S00251,Electronics,social_commerce,digital_wallet,74.41978693871478,High,payment_signal,review fraud controls
-O00130233,2026-02-18 14:48:00,B007525,S00320,Digital Goods,mobile_app,prepaid_card,74.41422757028202,High,payment_signal,review fraud controls
-O00101141,2024-12-21 16:00:00,B005903,S00948,Electronics,mobile_app,prepaid_card,74.41093395826053,High,payment_signal,review fraud controls
-O00114086,2025-10-22 08:24:00,B006634,S00974,Electronics,social_commerce,prepaid_card,74.40955113954837,High,payment_signal,review fraud controls
-O00064287,2025-12-20 12:33:00,B003774,S00760,Electronics,mobile_app,prepaid_card,74.40523585833056,High,payment_signal,review fraud controls
-O00145394,2026-01-01 12:58:00,B008378,S01044,Electronics,social_commerce,prepaid_card,74.39056143367837,High,payment_signal,review fraud controls
-O00053788,2026-01-27 10:38:00,B003156,S01164,Electronics,mobile_app,prepaid_card,74.390351270207,High,payment_signal,review fraud controls
-O00019043,2026-02-27 10:33:00,B001142,S00722,Electronics,mobile_app,prepaid_card,74.38608398693961,High,payment_signal,review fraud controls
-O00120592,2025-12-14 16:22:00,B006999,S00194,Electronics,social_commerce,credit_card,74.38294635937146,High,payment_signal,review fraud controls
-O00134259,2026-01-19 13:27:00,B007767,S01183,Electronics,mobile_app,prepaid_card,74.37323370798987,High,payment_signal,review fraud controls
-O00106651,2026-02-10 15:35:00,B006214,S00922,Electronics,social_commerce,credit_card,74.36703924752433,High,payment_signal,review fraud controls
-O00117822,2024-10-21 22:46:00,B006834,S00575,Electronics,social_commerce,digital_wallet,74.34575413896802,High,payment_signal,review fraud controls
-O00047490,2024-03-20 17:28:00,B002805,S00322,Electronics,social_commerce,prepaid_card,74.33643770866924,High,payment_signal,review fraud controls
-O00070190,2025-07-22 20:04:00,B004089,S00495,Digital Goods,social_commerce,prepaid_card,74.33617263998343,High,payment_signal,review fraud controls
-O00103729,2025-09-02 22:09:00,B006052,S00788,Electronics,social_commerce,prepaid_card,74.33458976544068,High,payment_signal,review fraud controls
-O00134251,2025-11-15 19:32:00,B007767,S00089,Electronics,mobile_app,prepaid_card,74.32742440389417,High,payment_signal,review fraud controls
+O00116074,2025-06-03 19:36:00,B006737,S00894,Digital Goods,social_commerce,prepaid_card,81.9653991382678,Critical,payment_signal,escalate for manual review
+O00006217,2024-10-17 22:29:00,B000382,S00858,Electronics,social_commerce,prepaid_card,80.54494761904762,Critical,payment_signal,escalate for manual review
+O00136848,2024-12-01 16:34:00,B007903,S00922,Electronics,social_commerce,prepaid_card,79.89143886711733,Critical,payment_signal,escalate for manual review
+O00133790,2026-01-18 13:09:00,B007741,S00006,Electronics,social_commerce,prepaid_card,79.63793169289089,Critical,payment_signal,escalate for manual review
+O00128433,2026-02-23 08:08:00,B007423,S00948,Electronics,mobile_app,prepaid_card,79.59776861358594,Critical,payment_signal,escalate for manual review
+O00110778,2025-02-27 15:38:00,B006443,S00237,Digital Goods,social_commerce,prepaid_card,79.5675780779571,Critical,payment_signal,escalate for manual review
+O00143428,2025-11-10 20:29:00,B008268,S00861,Electronics,social_commerce,prepaid_card,79.48523549699354,Critical,payment_signal,escalate for manual review
+O00082147,2025-10-17 14:22:00,B004774,S00900,Digital Goods,social_commerce,prepaid_card,79.42075444378335,Critical,payment_signal,escalate for manual review
+O00091858,2026-01-31 20:59:00,B005356,S00287,Electronics,social_commerce,prepaid_card,79.08462334110743,Critical,payment_signal,escalate for manual review
+O00041391,2025-09-23 22:21:00,B002441,S00948,Electronics,web,prepaid_card,78.96117820797966,Critical,payment_signal,escalate for manual review
+O00071866,2024-12-11 18:35:00,B004179,S00041,Fashion,social_commerce,prepaid_card,78.79789086675578,Critical,payment_signal,escalate for manual review
+O00089930,2025-06-15 20:22:00,B005250,S00576,Electronics,social_commerce,prepaid_card,78.77621362131123,Critical,payment_signal,escalate for manual review
+O00110763,2025-01-10 10:34:00,B006443,S00201,Electronics,social_commerce,prepaid_card,78.76911438701359,Critical,payment_signal,escalate for manual review
+O00064324,2025-06-28 08:49:00,B003775,S00948,Electronics,social_commerce,prepaid_card,78.73756724962021,Critical,payment_signal,escalate for manual review
+O00138891,2025-07-27 12:21:00,B008023,S00922,Electronics,mobile_app,prepaid_card,78.56368881869825,Critical,payment_signal,escalate for manual review
+O00117471,2025-04-27 17:41:00,B006814,S01149,Electronics,social_commerce,prepaid_card,78.51644027248759,Critical,payment_signal,escalate for manual review
+O00090026,2025-02-12 19:35:00,B005255,S00257,Digital Goods,social_commerce,prepaid_card,78.46099050983665,Critical,payment_signal,escalate for manual review
+O00133781,2026-01-11 17:56:00,B007741,S00493,Digital Goods,mobile_app,prepaid_card,78.42831890794777,Critical,payment_signal,escalate for manual review
+O00058329,2025-11-07 14:47:00,B003424,S00872,Digital Goods,social_commerce,prepaid_card,78.23451153607292,Critical,payment_signal,escalate for manual review
+O00055466,2025-11-06 14:51:00,B003250,S00251,Electronics,social_commerce,prepaid_card,78.1955043909782,Critical,payment_signal,escalate for manual review
+O00114989,2025-08-16 18:49:00,B006678,S01112,Electronics,social_commerce,prepaid_card,78.19277631035695,Critical,payment_signal,escalate for manual review
+O00083054,2025-05-09 16:16:00,B004826,S00795,Electronics,social_commerce,prepaid_card,78.12426705605239,Critical,payment_signal,escalate for manual review
+O00046855,2025-10-27 09:52:00,B002773,S00851,Electronics,social_commerce,prepaid_card,78.06289061514482,Critical,payment_signal,escalate for manual review
+O00140279,2025-09-26 10:04:00,B008108,S00114,Electronics,social_commerce,prepaid_card,78.05148749537173,Critical,payment_signal,escalate for manual review
+O00149362,2026-01-17 08:48:00,B008620,S00706,Electronics,social_commerce,digital_wallet,78.03748201786462,Critical,payment_signal,escalate for manual review
+O00046888,2025-09-11 15:13:00,B002773,S00058,Electronics,social_commerce,prepaid_card,77.94789273308528,Critical,payment_signal,escalate for manual review
+O00117808,2025-12-18 13:41:00,B006834,S00922,Electronics,social_commerce,prepaid_card,77.94593497024013,Critical,payment_signal,escalate for manual review
+O00035076,2025-07-06 13:05:00,B002068,S00858,Digital Goods,social_commerce,prepaid_card,77.86469411276762,Critical,payment_signal,escalate for manual review
+O00089923,2025-10-28 09:38:00,B005250,S00922,Electronics,mobile_app,prepaid_card,77.81369162185,Critical,payment_signal,escalate for manual review
+O00053782,2025-11-25 18:43:00,B003156,S00216,Digital Goods,social_commerce,prepaid_card,77.70240585967343,Critical,payment_signal,escalate for manual review
+O00147290,2025-08-13 19:33:00,B008497,S00257,Digital Goods,mobile_app,digital_wallet,77.6640507676305,Critical,payment_signal,escalate for manual review
+O00121397,2025-11-26 12:57:00,B007039,S00386,Electronics,social_commerce,digital_wallet,77.51108343156218,Critical,payment_signal,escalate for manual review
+O00087446,2026-02-01 13:44:00,B005094,S00386,Electronics,mobile_app,prepaid_card,77.43769865668821,Critical,payment_signal,escalate for manual review
+O00151839,2025-12-07 10:32:00,B008750,S00251,Electronics,social_commerce,prepaid_card,77.4330742341372,Critical,payment_signal,escalate for manual review
+O00048451,2024-10-04 20:15:00,B002851,S00922,Electronics,social_commerce,digital_wallet,77.38885572932293,Critical,payment_signal,escalate for manual review
+O00023775,2025-06-27 11:29:00,B001428,S00922,Electronics,mobile_app,prepaid_card,77.35427083333333,Critical,payment_signal,escalate for manual review
+O00143420,2025-09-06 16:19:00,B008268,S01056,Home,social_commerce,prepaid_card,77.34638630281057,Critical,payment_signal,escalate for manual review
+O00018781,2025-07-29 13:36:00,B001123,S00214,Electronics,social_commerce,prepaid_card,77.25872078237727,Critical,payment_signal,escalate for manual review
+O00147334,2026-01-10 10:18:00,B008497,S01037,Electronics,mobile_app,prepaid_card,77.19141967612197,Critical,payment_signal,escalate for manual review
+O00155950,2025-12-03 10:29:00,B008992,S00524,Electronics,mobile_app,prepaid_card,77.1712701362682,Critical,payment_signal,escalate for manual review
+O00086984,2025-12-17 09:21:00,B005073,S00922,Electronics,mobile_app,prepaid_card,77.15033171772112,Critical,payment_signal,escalate for manual review
+O00106732,2025-11-27 13:46:00,B006219,S00575,Electronics,social_commerce,digital_wallet,77.11460484220173,Critical,payment_signal,escalate for manual review
+O00039298,2025-09-18 13:39:00,B002313,S00948,Electronics,social_commerce,prepaid_card,77.08385043935812,Critical,payment_signal,escalate for manual review
+O00034051,2025-11-16 13:45:00,B002006,S01122,Digital Goods,social_commerce,prepaid_card,77.02168229020897,Critical,payment_signal,escalate for manual review
+O00049300,2025-09-02 21:29:00,B002898,S00961,Electronics,social_commerce,prepaid_card,76.99168677151303,Critical,payment_signal,escalate for manual review
+O00143418,2025-09-22 21:46:00,B008268,S00809,Digital Goods,social_commerce,prepaid_card,76.97188460954425,Critical,payment_signal,escalate for manual review
+O00083048,2026-01-29 13:48:00,B004826,S00393,Electronics,web,prepaid_card,76.92396562204306,Critical,payment_signal,escalate for manual review
+O00037855,2025-02-09 21:23:00,B002235,S01149,Electronics,social_commerce,prepaid_card,76.86677536231885,Critical,payment_signal,escalate for manual review
+O00090969,2026-02-03 16:00:00,B005304,S00922,Electronics,mobile_app,prepaid_card,76.83046728261353,Critical,payment_signal,escalate for manual review
+O00067209,2025-02-03 20:57:00,B003941,S00130,Electronics,social_commerce,prepaid_card,76.79107502088014,Critical,payment_signal,escalate for manual review
+O00129525,2024-11-02 22:49:00,B007483,S00420,Electronics,social_commerce,prepaid_card,76.79000678786967,Critical,payment_signal,escalate for manual review
+O00075507,2025-08-20 22:25:00,B004372,S00997,Electronics,mobile_app,prepaid_card,76.78360199211157,Critical,payment_signal,escalate for manual review
+O00151424,2026-01-07 22:28:00,B008733,S00922,Electronics,mobile_app,prepaid_card,76.7135880939526,Critical,payment_signal,escalate for manual review
+O00095448,2025-09-28 15:39:00,B005574,S00992,Electronics,social_commerce,prepaid_card,76.67839762766481,Critical,payment_signal,escalate for manual review
+O00049301,2026-02-09 18:08:00,B002898,S00922,Electronics,social_commerce,credit_card,76.63549595056521,Critical,payment_signal,escalate for manual review
+O00124570,2025-11-06 21:23:00,B007204,S00184,Electronics,social_commerce,prepaid_card,76.6163944964922,Critical,payment_signal,escalate for manual review
+O00116103,2025-11-26 11:06:00,B006737,S00760,Electronics,web,prepaid_card,76.61172274612746,Critical,payment_signal,escalate for manual review
+O00047152,2024-11-22 11:51:00,B002785,S01113,Digital Goods,social_commerce,prepaid_card,76.57376761806408,Critical,payment_signal,escalate for manual review
+O00000382,2025-06-07 12:38:00,B000022,S00178,Electronics,web,prepaid_card,76.5108010206111,Critical,payment_signal,escalate for manual review
+O00155963,2025-05-27 17:40:00,B008992,S00555,Grocery,social_commerce,prepaid_card,76.49352250121888,Critical,payment_signal,escalate for manual review
+O00071870,2025-12-17 08:24:00,B004179,S00881,Fashion,social_commerce,prepaid_card,76.42626069380964,Critical,payment_signal,escalate for manual review
+O00042898,2026-02-06 20:30:00,B002527,S00922,Electronics,social_commerce,prepaid_card,76.41676650072682,Critical,payment_signal,escalate for manual review
+O00108824,2025-12-06 21:17:00,B006341,S00347,Electronics,mobile_app,prepaid_card,76.38629862151035,Critical,payment_signal,escalate for manual review
+O00094590,2025-09-24 18:19:00,B005520,S00386,Electronics,mobile_app,prepaid_card,76.3736833185228,Critical,payment_signal,escalate for manual review
+O00114067,2026-02-15 10:58:00,B006634,S00948,Electronics,web,prepaid_card,76.37360517385103,Critical,payment_signal,escalate for manual review
+O00084480,2025-09-24 13:54:00,B004910,S00810,Electronics,mobile_app,prepaid_card,76.37009040322476,Critical,payment_signal,escalate for manual review
+O00022350,2025-07-19 21:42:00,B001347,S00253,Fashion,mobile_app,prepaid_card,76.34242744326079,Critical,payment_signal,escalate for manual review
+O00048244,2025-06-24 15:50:00,B002846,S00201,Electronics,social_commerce,prepaid_card,76.31531797402971,Critical,payment_signal,escalate for manual review
+O00067561,2025-11-07 12:11:00,B003961,S00524,Electronics,social_commerce,prepaid_card,76.26733513057252,Critical,payment_signal,escalate for manual review
+O00073703,2025-08-13 10:43:00,B004285,S00948,Electronics,social_commerce,digital_wallet,76.23256335485567,Critical,payment_signal,escalate for manual review
+O00002271,2025-07-18 08:17:00,B000138,S00922,Electronics,mobile_app,prepaid_card,76.22841187870172,Critical,payment_signal,escalate for manual review
+O00073822,2025-08-16 13:01:00,B004292,S00922,Electronics,mobile_app,prepaid_card,76.21930164185333,Critical,payment_signal,escalate for manual review
+O00081961,2025-07-06 17:55:00,B004761,S00178,Electronics,web,prepaid_card,76.21493979966598,Critical,payment_signal,escalate for manual review
+O00063526,2026-01-22 12:23:00,B003734,S00968,Fashion,social_commerce,prepaid_card,76.20701947396722,Critical,payment_signal,escalate for manual review
+O00077855,2025-04-12 15:14:00,B004512,S00922,Electronics,mobile_app,prepaid_card,76.17977225672877,Critical,payment_signal,escalate for manual review
+O00154500,2026-02-10 17:26:00,B008906,S00940,Toys,social_commerce,prepaid_card,76.1636467216042,Critical,payment_signal,escalate for manual review
+O00067905,2025-08-18 19:33:00,B003974,S00922,Electronics,web,prepaid_card,76.14194221672845,Critical,payment_signal,escalate for manual review
+O00000367,2025-05-17 20:36:00,B000022,S00347,Electronics,web,prepaid_card,76.112,Critical,payment_signal,escalate for manual review
+O00116090,2026-02-07 08:52:00,B006737,S00922,Electronics,mobile_app,digital_wallet,76.07049756610903,Critical,payment_signal,escalate for manual review
+O00089926,2025-12-31 10:27:00,B005250,S01027,Electronics,social_commerce,prepaid_card,76.06243618305021,Critical,payment_signal,escalate for manual review
+O00082690,2025-02-22 13:01:00,B004801,S00516,Electronics,social_commerce,prepaid_card,76.04758859728582,Critical,payment_signal,escalate for manual review
+O00013450,2026-02-10 16:45:00,B000813,S00922,Electronics,social_commerce,prepaid_card,76.03974345814517,Critical,payment_signal,escalate for manual review
+O00056893,2024-10-27 20:47:00,B003322,S00276,Electronics,social_commerce,prepaid_card,76.03717192097727,Critical,payment_signal,escalate for manual review
+O00130560,2025-01-25 17:11:00,B007548,S00997,Electronics,mobile_app,prepaid_card,76.01609866930553,Critical,payment_signal,escalate for manual review
+O00140253,2025-12-23 14:56:00,B008108,S00879,Electronics,social_commerce,prepaid_card,76.00416033183419,Critical,payment_signal,escalate for manual review
+O00124964,2025-12-01 20:17:00,B007228,S00311,Electronics,social_commerce,prepaid_card,75.98328324436555,Critical,payment_signal,escalate for manual review
+O00026491,2025-04-26 11:37:00,B001578,S00493,Digital Goods,social_commerce,digital_wallet,75.95771964713204,Critical,payment_signal,escalate for manual review
+O00098886,2025-07-14 19:06:00,B005763,S00922,Electronics,social_commerce,prepaid_card,75.92702286599418,Critical,payment_signal,escalate for manual review
+O00042329,2025-04-18 19:36:00,B002488,S00320,Digital Goods,mobile_app,prepaid_card,75.92326175199926,Critical,payment_signal,escalate for manual review
+O00092897,2025-05-22 10:24:00,B005413,S00922,Electronics,social_commerce,prepaid_card,75.92244424305852,Critical,payment_signal,escalate for manual review
+O00054104,2025-10-14 09:24:00,B003178,S01123,Electronics,social_commerce,prepaid_card,75.89901324217114,Critical,payment_signal,escalate for manual review
+O00123092,2025-12-09 22:44:00,B007123,S00804,Electronics,social_commerce,prepaid_card,75.83243445634125,Critical,payment_signal,escalate for manual review
+O00108852,2025-08-15 10:37:00,B006341,S00056,Digital Goods,mobile_app,prepaid_card,75.82807997910854,Critical,payment_signal,escalate for manual review
+O00123946,2025-06-11 14:19:00,B007174,S00216,Digital Goods,mobile_app,prepaid_card,75.82338580924441,Critical,payment_signal,escalate for manual review
+O00054096,2026-01-11 16:33:00,B003178,S00987,Digital Goods,social_commerce,prepaid_card,75.80515535436218,Critical,payment_signal,escalate for manual review
+O00026306,2025-07-08 21:04:00,B001568,S00575,Digital Goods,social_commerce,digital_wallet,75.80159669182089,Critical,payment_signal,escalate for manual review
+O00132293,2025-06-25 12:26:00,B007645,S00576,Electronics,mobile_app,prepaid_card,75.78775441865568,Critical,payment_signal,escalate for manual review
+O00073707,2025-10-11 17:44:00,B004285,S00900,Digital Goods,social_commerce,prepaid_card,75.77184402770878,Critical,payment_signal,escalate for manual review
+O00152466,2025-11-16 09:57:00,B008781,S00817,Digital Goods,social_commerce,prepaid_card,75.76305515271979,Critical,payment_signal,escalate for manual review
+O00005966,2025-11-06 22:34:00,B000364,S00760,Electronics,web,prepaid_card,75.70004093637654,Critical,payment_signal,escalate for manual review
+O00136847,2025-12-26 22:44:00,B007903,S00201,Electronics,web,prepaid_card,75.69032382622981,Critical,payment_signal,escalate for manual review
+O00132776,2026-02-03 18:46:00,B007672,S00186,Electronics,social_commerce,prepaid_card,75.68980769975266,Critical,payment_signal,escalate for manual review
+O00007181,2025-08-29 18:11:00,B000429,S00881,Digital Goods,social_commerce,prepaid_card,75.68581094340487,Critical,payment_signal,escalate for manual review
+O00050974,2024-10-21 12:41:00,B003007,S00922,Electronics,social_commerce,prepaid_card,75.68402640264026,Critical,payment_signal,escalate for manual review
+O00023019,2025-10-20 17:11:00,B001387,S01094,Grocery,social_commerce,prepaid_card,75.68347261539103,Critical,payment_signal,escalate for manual review
+O00133607,2025-09-18 08:31:00,B007733,S00444,Electronics,social_commerce,prepaid_card,75.65966243781094,Critical,payment_signal,escalate for manual review
+O00071444,2025-12-20 21:35:00,B004154,S00386,Electronics,web,prepaid_card,75.65641412887652,Critical,payment_signal,escalate for manual review
+O00071883,2025-06-05 21:27:00,B004179,S00216,Digital Goods,mobile_app,prepaid_card,75.64261074970207,Critical,payment_signal,escalate for manual review
+O00018675,2026-02-23 11:36:00,B001115,S00216,Digital Goods,mobile_app,prepaid_card,75.63801393442888,Critical,payment_signal,escalate for manual review
+O00147301,2025-09-28 15:04:00,B008497,S00655,Fashion,mobile_app,prepaid_card,75.62926866531846,Critical,payment_signal,escalate for manual review
+O00025784,2026-02-25 16:41:00,B001536,S00922,Electronics,mobile_app,prepaid_card,75.59849477375752,Critical,payment_signal,escalate for manual review
+O00070190,2025-07-22 20:04:00,B004089,S00495,Digital Goods,social_commerce,prepaid_card,75.54850338000423,Critical,payment_signal,escalate for manual review
+O00133487,2026-02-19 11:19:00,B007722,S00495,Digital Goods,mobile_app,prepaid_card,75.54179052181524,Critical,payment_signal,escalate for manual review
+O00071886,2024-10-17 12:53:00,B004179,S00323,Electronics,web,prepaid_card,75.52859167852255,Critical,payment_signal,escalate for manual review
+O00149146,2025-12-01 21:40:00,B008604,S00184,Electronics,web,prepaid_card,75.49963166577638,Critical,payment_signal,escalate for manual review
+O00092240,2026-02-18 09:44:00,B005379,S01149,Electronics,social_commerce,digital_wallet,75.4519375989356,Critical,payment_signal,escalate for manual review
+O00125324,2025-12-25 10:47:00,B007248,S00347,Electronics,mobile_app,prepaid_card,75.45145787706734,Critical,payment_signal,escalate for manual review
+O00095898,2025-04-16 14:26:00,B005601,S00462,Electronics,social_commerce,prepaid_card,75.42656392131265,Critical,payment_signal,escalate for manual review
+O00125926,2025-07-15 20:53:00,B007277,S00187,Digital Goods,social_commerce,digital_wallet,75.41026297131422,Critical,payment_signal,escalate for manual review
+O00132285,2025-12-02 08:00:00,B007645,S01049,Digital Goods,social_commerce,prepaid_card,75.40066972355824,Critical,payment_signal,escalate for manual review
+O00094596,2024-09-14 08:28:00,B005520,S00444,Electronics,mobile_app,prepaid_card,75.36166666666666,Critical,payment_signal,escalate for manual review
+O00069984,2025-06-08 08:16:00,B004077,S00922,Electronics,social_commerce,prepaid_card,75.35692495241868,Critical,payment_signal,escalate for manual review
+O00140245,2025-02-17 10:54:00,B008108,S00416,Digital Goods,social_commerce,prepaid_card,75.33589999380908,Critical,payment_signal,escalate for manual review
+O00056133,2025-11-02 12:26:00,B003281,S00731,Digital Goods,mobile_app,prepaid_card,75.32735946532978,Critical,payment_signal,escalate for manual review
+O00028583,2026-02-27 21:21:00,B001706,S01094,Grocery,social_commerce,prepaid_card,75.32149136504631,Critical,payment_signal,escalate for manual review
+O00103547,2025-12-07 11:05:00,B006041,S00121,Digital Goods,social_commerce,prepaid_card,75.3188771962684,Critical,payment_signal,escalate for manual review
+O00114102,2025-09-19 12:40:00,B006634,S00940,Toys,social_commerce,prepaid_card,75.30093964283864,Critical,payment_signal,escalate for manual review
+O00052622,2026-02-11 22:20:00,B003094,S00722,Electronics,mobile_app,prepaid_card,75.28735293826753,Critical,payment_signal,escalate for manual review
+O00140756,2025-11-24 21:20:00,B008133,S01014,Digital Goods,social_commerce,digital_wallet,75.27564049523701,Critical,payment_signal,escalate for manual review
+O00114086,2025-10-22 08:24:00,B006634,S00974,Electronics,social_commerce,prepaid_card,75.1997663813832,Critical,payment_signal,escalate for manual review
+O00101141,2024-12-21 16:00:00,B005903,S00948,Electronics,mobile_app,prepaid_card,75.1899430049966,Critical,payment_signal,escalate for manual review
+O00019879,2025-10-14 22:34:00,B001196,S00922,Electronics,web,prepaid_card,75.16422446858681,Critical,payment_signal,escalate for manual review
+O00143851,2025-12-14 18:41:00,B008291,S00444,Electronics,social_commerce,prepaid_card,75.15792588032933,Critical,payment_signal,escalate for manual review
+O00037874,2025-03-17 11:48:00,B002235,S00881,Digital Goods,social_commerce,prepaid_card,75.15089501833847,Critical,payment_signal,escalate for manual review
+O00052631,2025-11-12 13:59:00,B003094,S00444,Electronics,web,prepaid_card,75.13848191175491,Critical,payment_signal,escalate for manual review
+O00091877,2025-05-02 22:07:00,B005356,S00031,Digital Goods,social_commerce,prepaid_card,75.13533759582185,Critical,payment_signal,escalate for manual review
+O00046979,2025-12-07 21:23:00,B002777,S00184,Electronics,mobile_app,prepaid_card,75.10875463431076,Critical,payment_signal,escalate for manual review
+O00026358,2025-02-24 09:04:00,B001570,S00251,Electronics,mobile_app,prepaid_card,75.08095504697731,Critical,payment_signal,escalate for manual review
+O00023023,2026-02-26 22:13:00,B001387,S00126,Electronics,mobile_app,prepaid_card,75.05985812703416,Critical,payment_signal,escalate for manual review
+O00135477,2024-10-04 20:19:00,B007835,S00178,Electronics,mobile_app,prepaid_card,75.05793601893865,Critical,payment_signal,escalate for manual review
+O00070669,2025-02-21 09:55:00,B004115,S00248,Digital Goods,social_commerce,prepaid_card,75.054428404108,Critical,payment_signal,escalate for manual review
+O00106071,2026-01-30 21:52:00,B006185,S00922,Electronics,social_commerce,prepaid_card,75.045465990118,Critical,payment_signal,escalate for manual review
+O00054465,2024-09-26 12:58:00,B003205,S00922,Electronics,social_commerce,digital_wallet,75.04078041127619,Critical,payment_signal,escalate for manual review
+O00038816,2025-05-06 11:35:00,B002288,S00376,Electronics,social_commerce,prepaid_card,75.03155279388349,Critical,payment_signal,escalate for manual review
+O00062034,2026-01-13 08:10:00,B003637,S00997,Electronics,web,prepaid_card,75.01104683757936,Critical,payment_signal,escalate for manual review
+O00146427,2025-02-25 22:34:00,B008444,S01078,Electronics,social_commerce,digital_wallet,75.00399929284141,Critical,payment_signal,escalate for manual review
+O00023766,2025-11-30 19:22:00,B001428,S01164,Electronics,mobile_app,prepaid_card,74.99585902522854,High,payment_signal,review fraud controls
+O00100925,2024-12-13 15:57:00,B005892,S01164,Electronics,social_commerce,prepaid_card,74.99296203215317,High,payment_signal,review fraud controls
+O00065250,2025-08-11 15:35:00,B003825,S00253,Fashion,mobile_app,prepaid_card,74.98253506402702,High,payment_signal,review fraud controls
+O00031297,2025-04-26 14:25:00,B001863,S00495,Digital Goods,web,prepaid_card,74.97779021967227,High,payment_signal,review fraud controls
+O00076663,2025-09-20 19:38:00,B004436,S00997,Electronics,mobile_app,prepaid_card,74.9498262147924,High,payment_signal,review fraud controls
+O00063477,2025-12-10 13:03:00,B003733,S00462,Electronics,social_commerce,prepaid_card,74.93887832997255,High,payment_signal,review fraud controls
+O00045348,2026-02-25 12:11:00,B002683,S00194,Electronics,mobile_app,prepaid_card,74.91854140403905,High,payment_signal,review fraud controls
+O00066251,2026-02-13 21:11:00,B003882,S00347,Electronics,mobile_app,digital_wallet,74.91324871472958,High,payment_signal,review fraud controls
+O00114892,2025-06-05 08:33:00,B006673,S00014,Digital Goods,web,prepaid_card,74.9111201251526,High,payment_signal,review fraud controls
+O00055252,2026-02-27 13:25:00,B003243,S00251,Electronics,social_commerce,prepaid_card,74.90893600136502,High,payment_signal,review fraud controls
+O00065404,2025-07-30 22:22:00,B003835,S00216,Digital Goods,social_commerce,prepaid_card,74.90713974016667,High,payment_signal,review fraud controls
+O00152264,2026-01-17 14:54:00,B008771,S00254,Electronics,social_commerce,prepaid_card,74.90330569798874,High,payment_signal,review fraud controls
+O00095897,2025-10-27 18:28:00,B005601,S00389,Electronics,web,prepaid_card,74.88623359272471,High,payment_signal,review fraud controls
+O00106742,2024-11-23 11:15:00,B006219,S00116,Electronics,social_commerce,prepaid_card,74.87958333333334,High,payment_signal,review fraud controls
+O00047237,2025-02-13 13:27:00,B002789,S00922,Electronics,web,prepaid_card,74.8793848672867,High,payment_signal,review fraud controls
+O00140759,2026-02-21 12:46:00,B008133,S00855,Electronics,mobile_app,prepaid_card,74.8371919040799,High,payment_signal,review fraud controls
+O00125948,2025-12-09 18:29:00,B007277,S00840,Electronics,social_commerce,prepaid_card,74.83128413196788,High,payment_signal,review fraud controls
+O00059495,2025-02-05 09:20:00,B003489,S01113,Digital Goods,social_commerce,prepaid_card,74.82241564526875,High,payment_signal,review fraud controls
+O00148479,2025-02-23 19:13:00,B008563,S00922,Electronics,web,prepaid_card,74.82049242424242,High,payment_signal,review fraud controls
+O00090720,2025-11-12 10:38:00,B005287,S00379,Electronics,social_commerce,prepaid_card,74.81939476818233,High,payment_signal,review fraud controls
+O00133798,2025-03-24 12:37:00,B007741,S00237,Digital Goods,mobile_app,prepaid_card,74.81026176104325,High,payment_signal,review fraud controls
+O00037156,2026-01-25 12:57:00,B002203,S00948,Electronics,mobile_app,prepaid_card,74.7946301610267,High,payment_signal,review fraud controls
+O00063518,2025-12-05 10:00:00,B003734,S00198,Toys,social_commerce,prepaid_card,74.79366536525676,High,payment_signal,review fraud controls
+O00154518,2026-01-14 21:41:00,B008906,S00795,Electronics,web,prepaid_card,74.78559588627418,High,payment_signal,review fraud controls
+O00037233,2025-11-18 16:51:00,B002207,S01184,Fashion,social_commerce,prepaid_card,74.78051499356913,High,payment_signal,review fraud controls
+O00064287,2025-12-20 12:33:00,B003774,S00760,Electronics,mobile_app,prepaid_card,74.77718073593073,High,payment_signal,review fraud controls
+O00140798,2025-12-11 18:38:00,B008134,S00237,Electronics,social_commerce,prepaid_card,74.75069206465636,High,payment_signal,review fraud controls
+O00031259,2026-02-06 08:42:00,B001863,S00922,Electronics,web,prepaid_card,74.74707312910192,High,payment_signal,review fraud controls
+O00051901,2026-02-19 16:38:00,B003054,S00386,Electronics,mobile_app,prepaid_card,74.74391692887079,High,payment_signal,review fraud controls
+O00014955,2024-05-12 10:12:00,B000901,S00192,Electronics,social_commerce,prepaid_card,74.74380484434678,High,payment_signal,review fraud controls
+O00070701,2024-07-28 15:19:00,B004115,S00252,Electronics,social_commerce,prepaid_card,74.73002983331206,High,payment_signal,review fraud controls
+O00065236,2025-12-27 20:19:00,B003825,S00216,Digital Goods,social_commerce,digital_wallet,74.72878593195156,High,payment_signal,review fraud controls
+O00082145,2025-11-15 22:53:00,B004774,S00855,Electronics,mobile_app,prepaid_card,74.71924377795327,High,payment_signal,review fraud controls
+O00028440,2024-10-03 09:23:00,B001693,S01113,Digital Goods,social_commerce,prepaid_card,74.70563759816798,High,payment_signal,review fraud controls
+O00140755,2025-12-29 13:47:00,B008133,S00575,Digital Goods,mobile_app,digital_wallet,74.7052498481644,High,payment_signal,review fraud controls
+O00135724,2025-06-12 15:25:00,B007848,S01144,Sports,social_commerce,prepaid_card,74.70230443616998,High,payment_signal,review fraud controls
+O00072935,2024-11-09 19:11:00,B004240,S00352,Electronics,social_commerce,prepaid_card,74.69672874053376,High,payment_signal,review fraud controls
+O00032563,2025-10-22 13:16:00,B001925,S00216,Digital Goods,mobile_app,prepaid_card,74.69373968595018,High,payment_signal,review fraud controls
+O00067219,2026-02-08 13:39:00,B003941,S00336,Home,social_commerce,prepaid_card,74.69139945437996,High,payment_signal,review fraud controls
+O00140369,2025-12-23 20:41:00,B008113,S00575,Electronics,social_commerce,digital_wallet,74.68218238150129,High,payment_signal,review fraud controls
+O00074849,2025-05-10 12:50:00,B004345,S00830,Electronics,social_commerce,digital_wallet,74.65571600204454,High,payment_signal,review fraud controls
+O00093261,2025-12-29 22:26:00,B005438,S00819,Electronics,social_commerce,prepaid_card,74.65081109685889,High,payment_signal,review fraud controls
+O00155960,2025-12-23 12:32:00,B008992,S01135,Fashion,mobile_app,prepaid_card,74.64921068709984,High,payment_signal,review fraud controls
+O00068894,2025-12-24 17:53:00,B004019,S00788,Digital Goods,social_commerce,prepaid_card,74.64711728755486,High,payment_signal,review fraud controls
+O00123934,2025-10-02 08:19:00,B007174,S00819,Electronics,mobile_app,digital_wallet,74.64672336358366,High,payment_signal,review fraud controls
+O00103539,2025-12-02 11:25:00,B006041,S00968,Beauty,social_commerce,prepaid_card,74.62328674128473,High,payment_signal,review fraud controls
+O00091892,2024-11-05 20:08:00,B005356,S00948,Electronics,mobile_app,prepaid_card,74.61846026021954,High,payment_signal,review fraud controls
+O00088435,2025-04-14 19:00:00,B005157,S01164,Electronics,social_commerce,prepaid_card,74.61481480446211,High,payment_signal,review fraud controls
+O00064983,2026-01-06 09:55:00,B003815,S00760,Electronics,social_commerce,prepaid_card,74.61099161765209,High,payment_signal,review fraud controls
+O00130233,2026-02-18 14:48:00,B007525,S00320,Digital Goods,mobile_app,prepaid_card,74.60893598924251,High,payment_signal,review fraud controls
+O00049303,2025-10-31 09:43:00,B002898,S01014,Digital Goods,mobile_app,prepaid_card,74.60515070362108,High,payment_signal,review fraud controls
+O00118409,2024-09-12 18:24:00,B006873,S00272,Digital Goods,social_commerce,prepaid_card,74.6047673801133,High,payment_signal,review fraud controls
+O00082808,2025-03-28 15:49:00,B004810,S00855,Home,social_commerce,prepaid_card,74.59004519720986,High,payment_signal,review fraud controls
+O00149001,2025-11-03 08:13:00,B008594,S00251,Electronics,web,prepaid_card,74.5838020027326,High,payment_signal,review fraud controls
+O00034369,2025-12-29 14:23:00,B002026,S01031,Electronics,social_commerce,prepaid_card,74.58120351994955,High,payment_signal,review fraud controls
+O00066853,2026-01-10 10:12:00,B003922,S00858,Digital Goods,mobile_app,prepaid_card,74.56875490291615,High,payment_signal,review fraud controls
+O00023016,2025-06-20 13:26:00,B001387,S01154,Fashion,social_commerce,prepaid_card,74.56329189452593,High,payment_signal,review fraud controls
+O00085965,2025-10-01 16:00:00,B005016,S00531,Electronics,social_commerce,prepaid_card,74.5618763086944,High,payment_signal,review fraud controls
+O00068162,2025-04-24 22:01:00,B003987,S00819,Electronics,social_commerce,prepaid_card,74.5580591212058,High,payment_signal,review fraud controls
+O00117988,2026-02-25 15:45:00,B006842,S00900,Digital Goods,mobile_app,prepaid_card,74.54956100383811,High,payment_signal,review fraud controls
+O00064901,2025-11-06 12:23:00,B003811,S00760,Electronics,social_commerce,debit_card,74.54948115065876,High,payment_signal,review fraud controls
+O00080870,2026-01-21 18:58:00,B004701,S00393,Electronics,mobile_app,digital_wallet,74.54817108195438,High,payment_signal,review fraud controls
+O00134234,2025-02-27 17:42:00,B007767,S00940,Toys,social_commerce,prepaid_card,74.53766033634768,High,payment_signal,review fraud controls
+O00115259,2026-02-16 10:54:00,B006691,S00531,Electronics,social_commerce,prepaid_card,74.53362375461037,High,payment_signal,review fraud controls
+O00121314,2024-10-30 19:50:00,B007032,S00444,Electronics,web,prepaid_card,74.53158987898883,High,payment_signal,review fraud controls
+O00054116,2025-04-08 18:02:00,B003178,S00352,Electronics,mobile_app,prepaid_card,74.53044656658099,High,payment_signal,review fraud controls
+O00078269,2025-07-05 21:49:00,B004535,S00251,Electronics,social_commerce,digital_wallet,74.52837847970088,High,payment_signal,review fraud controls
+O00136846,2026-01-29 22:54:00,B007903,S00151,Digital Goods,mobile_app,prepaid_card,74.49704635482705,High,payment_signal,review fraud controls
+O00132050,2025-12-12 12:52:00,B007634,S01115,Electronics,social_commerce,prepaid_card,74.49541987808577,High,payment_signal,review fraud controls
+O00148477,2024-12-22 20:27:00,B008563,S00320,Digital Goods,social_commerce,digital_wallet,74.49470600111997,High,payment_signal,review fraud controls
+O00021488,2026-02-27 22:24:00,B001299,S00922,Digital Goods,social_commerce,prepaid_card,74.49399555535332,High,payment_signal,review fraud controls
+O00145208,2026-02-06 17:26:00,B008369,S00036,Digital Goods,social_commerce,prepaid_card,74.47693165890585,High,payment_signal,review fraud controls
+O00076182,2025-11-11 10:17:00,B004412,S01027,Electronics,social_commerce,prepaid_card,74.47651334155888,High,payment_signal,review fraud controls
+O00008648,2025-07-10 15:57:00,B000515,S00216,Digital Goods,social_commerce,prepaid_card,74.47610441787674,High,payment_signal,review fraud controls
+O00067279,2025-02-21 15:32:00,B003944,S01070,Fashion,web,prepaid_card,74.45452961115838,High,payment_signal,review fraud controls
+O00145394,2026-01-01 12:58:00,B008378,S01044,Electronics,social_commerce,prepaid_card,74.45232628298538,High,payment_signal,review fraud controls
+O00084628,2026-02-18 12:05:00,B004923,S00386,Electronics,web,prepaid_card,74.44342678908258,High,payment_signal,review fraud controls
+O00124602,2025-08-10 09:13:00,B007204,S00734,Digital Goods,social_commerce,prepaid_card,74.4285966876056,High,payment_signal,review fraud controls
+O00023034,2025-12-09 21:15:00,B001387,S01164,Fashion,social_commerce,prepaid_card,74.41339093085178,High,payment_signal,review fraud controls
+O00136829,2025-11-09 19:18:00,B007903,S01164,Fashion,social_commerce,prepaid_card,74.40203569634684,High,payment_signal,review fraud controls
+O00036071,2025-06-28 13:24:00,B002138,S00922,Electronics,mobile_app,digital_wallet,74.38956565986143,High,payment_signal,review fraud controls
+O00041824,2025-08-28 14:20:00,B002460,S00186,Electronics,mobile_app,prepaid_card,74.36732245228853,High,payment_signal,review fraud controls
+O00143415,2026-02-24 18:02:00,B008268,S00886,Digital Goods,mobile_app,prepaid_card,74.36607284648103,High,payment_signal,review fraud controls
+O00048602,2025-06-22 17:03:00,B002860,S00251,Electronics,mobile_app,prepaid_card,74.36373324086917,High,payment_signal,review fraud controls
+O00107271,2025-09-07 12:09:00,B006252,S00788,Digital Goods,mobile_app,prepaid_card,74.36252485948445,High,payment_signal,review fraud controls
+O00130577,2026-02-10 22:55:00,B007548,S00234,Electronics,web,prepaid_card,74.35884327317758,High,payment_signal,review fraud controls
+O00097064,2026-02-20 10:14:00,B005664,S00216,Digital Goods,mobile_app,prepaid_card,74.32696272316531,High,payment_signal,review fraud controls
+O00011281,2025-07-09 22:51:00,B000680,S00922,Electronics,mobile_app,prepaid_card,74.31729307724697,High,payment_signal,review fraud controls
+O00074752,2025-12-19 21:23:00,B004342,S01120,Electronics,social_commerce,digital_wallet,74.31249255469969,High,payment_signal,review fraud controls
+O00133479,2026-02-28 18:50:00,B007722,S01013,Electronics,mobile_app,prepaid_card,74.30953350914703,High,payment_signal,review fraud controls
+O00090000,2025-11-02 22:11:00,B005255,S00575,Fashion,mobile_app,prepaid_card,74.29736040461795,High,payment_signal,review fraud controls
+O00040920,2025-04-12 14:44:00,B002413,S00341,Electronics,social_commerce,prepaid_card,74.29310606060606,High,payment_signal,review fraud controls
+O00115846,2025-10-09 16:04:00,B006720,S00201,Electronics,mobile_app,prepaid_card,74.28612323610321,High,payment_signal,review fraud controls
+O00116109,2026-02-15 09:38:00,B006737,S00652,Fashion,social_commerce,prepaid_card,74.27984517187552,High,payment_signal,review fraud controls
+O00090946,2025-08-24 11:45:00,B005302,S00702,Electronics,social_commerce,prepaid_card,74.27704022988506,High,payment_signal,review fraud controls
+O00106651,2026-02-10 15:35:00,B006214,S00922,Electronics,social_commerce,credit_card,74.2758799468783,High,payment_signal,review fraud controls
+O00042429,2026-01-11 11:58:00,B002496,S00444,Electronics,social_commerce,digital_wallet,74.25891854439786,High,payment_signal,review fraud controls
+O00129487,2024-09-02 10:52:00,B007482,S00420,Electronics,social_commerce,digital_wallet,74.24759494192584,High,payment_signal,review fraud controls
+O00017294,2025-08-17 15:30:00,B001038,S00922,Electronics,mobile_app,prepaid_card,74.24251945202951,High,payment_signal,review fraud controls
+O00053371,2025-09-27 11:36:00,B003133,S00311,Digital Goods,mobile_app,prepaid_card,74.24132166967972,High,payment_signal,review fraud controls
+O00005991,2024-12-10 15:10:00,B000365,S00251,Electronics,mobile_app,prepaid_card,74.23207543380992,High,payment_signal,review fraud controls
+O00121196,2025-09-12 10:18:00,B007028,S00138,Electronics,social_commerce,digital_wallet,74.2278746003824,High,payment_signal,review fraud controls
+O00053788,2026-01-27 10:38:00,B003156,S01164,Electronics,mobile_app,prepaid_card,74.22622219585274,High,payment_signal,review fraud controls
+O00056902,2025-06-25 17:40:00,B003322,S00922,Electronics,mobile_app,digital_wallet,74.22369763824835,High,payment_signal,review fraud controls

@@ -178,6 +178,9 @@ def _build_order_actions(
 
 
 def build_action_register(cfg: GovernanceConfig) -> pd.DataFrame:
+    if cfg.max_seller_actions <= 0 or cfg.max_order_actions <= 0:
+        raise ValueError("max_seller_actions and max_order_actions must be greater than zero.")
+
     tables = _load_tables(cfg.processed_dir)
 
     seller_actions = _build_seller_actions(

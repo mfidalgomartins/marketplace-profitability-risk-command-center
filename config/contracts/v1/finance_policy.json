@@ -1,0 +1,22 @@
+{
+  "accounting_basis": "synthetic_marketplace_management_accounts",
+  "accounts": {
+    "1100": "Settlement receivable",
+    "2100": "Cash and settlement payable",
+    "4000": "Commission revenue",
+    "4010": "Commission reversals",
+    "5000": "Marketplace subsidy",
+    "5010": "Payment processing",
+    "5020": "Unrecovered refund loss",
+    "5030": "Dispute loss",
+    "5040": "Chargeback loss",
+    "5050": "Fulfillment support"
+  },
+  "commission_refund_reversal_rate": 1.0,
+  "dispute_platform_loss_rate": 0.35,
+  "fulfillment_support_rate": 0.2,
+  "payment_fixed_fee": 0.3,
+  "payment_variable_rate": 0.025,
+  "policy_version": "1.0.0",
+  "refund_unrecovered_rate": 0.08
+}

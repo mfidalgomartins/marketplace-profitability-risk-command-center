@@ -57,10 +57,8 @@ def test_index_html_redirects_and_links_to_target() -> None:
     assert "<title>" in html
 
 
-def test_index_html_matches_apple_design_language() -> None:
-    # The landing page must stay consistent with the dashboard's design system:
-    # system/SF type, Apple-grey canvas, indigo accent, pill control — and must
-    # NOT reintroduce the banned "AI smell" (gradients, glass, eyebrow pills, serif).
+def test_index_html_matches_dashboard_design_tokens() -> None:
+    # Keep the redirect page aligned with the dashboard's established tokens.
     html = _build_index_html("d.html")
     assert "-apple-system" in html
     assert "#f5f5f7" in html

@@ -29,9 +29,10 @@ dist/
 
 # Logs / runtime
 *.log
+outputs/runtime/
+outputs/warehouse/*.duckdb*
 
 # Local temp artifacts
-.tmp/
 tmp/
 
 # GitHub Pages build staging

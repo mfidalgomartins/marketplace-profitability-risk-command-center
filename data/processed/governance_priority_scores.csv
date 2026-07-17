@@ -22,7 +22,7 @@ S00020,2026-02,31.72456383159086,Moderate,seller_quality,seller coaching require
 S00021,2026-02,46.45208331727719,Moderate,seller_quality,seller coaching required
 S00022,2026-02,41.70850045013259,Moderate,concentration_risk,seller coaching required
 S00023,2026-02,33.199514539414984,Moderate,seller_quality,seller coaching required
-S00024,2026-02,49.74435281571736,Moderate,seller_quality,seller coaching required
+S00024,2026-02,48.83810281571736,Moderate,seller_quality,seller coaching required
 S00025,2026-02,45.71870045395187,Moderate,seller_quality,seller coaching required
 S00026,2026-02,29.53047817762367,Low,seller_quality,monitor only
 S00027,2026-02,41.5711450171027,Moderate,seller_quality,seller coaching required
@@ -58,7 +58,7 @@ S00056,2026-02,52.651815236473595,Moderate,seller_quality,seller coaching requir
 S00057,2026-02,37.771460817441366,Moderate,seller_quality,seller coaching required
 S00058,2026-02,42.37230092100924,Moderate,seller_quality,seller coaching required
 S00059,2026-02,52.6274880369798,Moderate,seller_quality,seller coaching required
-S00060,2026-02,51.704577689156956,Moderate,concentration_risk,seller coaching required
+S00060,2026-02,51.603883244712506,Moderate,concentration_risk,seller coaching required
 S00061,2026-02,34.0929367794733,Moderate,margin_fragility,seller coaching required
 S00062,2026-02,14.484884599099429,Low,seller_quality,monitor only
 S00063,2026-02,43.352600155557234,Moderate,concentration_risk,seller coaching required
@@ -144,7 +144,7 @@ S00142,2026-02,34.41588791863684,Moderate,concentration_risk,seller coaching req
 S00143,2026-02,51.49929129393776,Moderate,seller_quality,seller coaching required
 S00144,2026-02,37.04935028180342,Moderate,seller_quality,seller coaching required
 S00145,2026-02,34.3608279582052,Moderate,seller_quality,seller coaching required
-S00146,2026-02,52.67732417123109,Moderate,seller_quality,seller coaching required
+S00146,2026-02,52.53516730848599,Moderate,seller_quality,seller coaching required
 S00147,2026-02,45.99615185311397,Moderate,seller_quality,seller coaching required
 S00148,2026-02,25.867498996324624,Low,seller_quality,monitor only
 S00149,2026-02,46.02031393615789,Moderate,seller_quality,seller coaching required
@@ -161,7 +161,7 @@ S00159,2026-02,38.7010534093812,Moderate,seller_quality,seller coaching required
 S00160,2026-02,45.72369448501943,Moderate,seller_quality,seller coaching required
 S00161,2026-02,58.258927946634,High,seller_quality,audit seller operations
 S00162,2026-02,59.9029721744446,High,seller_quality,audit seller operations
-S00163,2026-02,69.34473314978669,High,seller_quality,audit seller operations
+S00163,2026-02,69.21973314978669,High,seller_quality,audit seller operations
 S00164,2026-02,43.65854253521293,Moderate,concentration_risk,seller coaching required
 S00165,2026-02,39.54281766680785,Moderate,seller_quality,seller coaching required
 S00166,2026-02,31.19519798397566,Moderate,seller_quality,seller coaching required
@@ -182,9 +182,9 @@ S00180,2026-02,51.33894483379591,Moderate,concentration_risk,seller coaching req
 S00181,2026-02,35.705867750415784,Moderate,seller_quality,seller coaching required
 S00182,2026-02,49.44104950289814,Moderate,seller_quality,seller coaching required
 S00183,2026-02,38.29600883520245,Moderate,concentration_risk,seller coaching required
-S00184,2026-02,61.532825202038836,High,seller_quality,audit seller operations
+S00184,2026-02,61.65675682597046,High,seller_quality,audit seller operations
 S00185,2026-02,38.78766624571477,Moderate,seller_quality,seller coaching required
-S00186,2026-02,59.31807945361429,High,seller_quality,audit seller operations
+S00186,2026-02,59.433158818693656,High,seller_quality,audit seller operations
 S00187,2026-02,47.84831398884186,Moderate,seller_quality,seller coaching required
 S00188,2026-02,38.766213471289255,Moderate,concentration_risk,seller coaching required
 S00189,2026-02,40.48136030925652,Moderate,concentration_risk,seller coaching required
@@ -199,7 +199,7 @@ S00197,2026-02,37.586690834670776,Moderate,seller_quality,seller coaching requir
 S00198,2026-02,59.971324420865855,High,seller_quality,audit seller operations
 S00199,2026-02,44.74270221471132,Moderate,fraud_exposure,seller coaching required
 S00200,2026-02,37.66960237839891,Moderate,concentration_risk,seller coaching required
-S00201,2026-02,57.81912852093574,High,concentration_risk,investigate dispute cluster
+S00201,2026-02,57.89020695230829,High,concentration_risk,investigate dispute cluster
 S00202,2026-02,41.79491546407013,Moderate,seller_quality,seller coaching required
 S00203,2026-02,48.374538166831464,Moderate,seller_quality,seller coaching required
 S00204,2026-02,30.26079124061583,Moderate,seller_quality,seller coaching required
@@ -249,10 +249,10 @@ S00247,2026-02,30.099268020058467,Moderate,seller_quality,seller coaching requir
 S00248,2026-02,29.52168995738892,Low,concentration_risk,monitor only
 S00249,2026-02,48.79000927310362,Moderate,seller_quality,seller coaching required
 S00250,2026-02,29.032646713653232,Low,seller_quality,monitor only
-S00251,2026-02,64.182264141865,High,seller_quality,audit seller operations
+S00251,2026-02,64.12308046839561,High,seller_quality,audit seller operations
 S00252,2026-02,43.5617322043652,Moderate,seller_quality,seller coaching required
 S00253,2026-02,57.73188087698814,High,seller_quality,audit seller operations
-S00254,2026-02,50.99376951392642,Moderate,seller_quality,seller coaching required
+S00254,2026-02,50.188213958370866,Moderate,seller_quality,seller coaching required
 S00255,2026-02,50.3788168731328,Moderate,seller_quality,seller coaching required
 S00256,2026-02,36.83232669909495,Moderate,seller_quality,seller coaching required
 S00257,2026-02,34.135583791011385,Moderate,seller_quality,seller coaching required
@@ -334,7 +334,7 @@ S00332,2026-02,32.496342868316304,Moderate,seller_quality,seller coaching requir
 S00333,2026-02,37.86602650423088,Moderate,seller_quality,seller coaching required
 S00334,2026-02,43.35956919953151,Moderate,concentration_risk,seller coaching required
 S00335,2026-02,43.97044121815362,Moderate,seller_quality,seller coaching required
-S00336,2026-02,52.503818279752714,Moderate,seller_quality,seller coaching required
+S00336,2026-02,52.26994731201078,Moderate,seller_quality,seller coaching required
 S00337,2026-02,42.237235244022955,Moderate,seller_quality,seller coaching required
 S00338,2026-02,36.5825815448229,Moderate,seller_quality,seller coaching required
 S00339,2026-02,37.471653170943824,Moderate,concentration_risk,seller coaching required
@@ -345,7 +345,7 @@ S00343,2026-02,37.63687413870035,Moderate,seller_quality,seller coaching require
 S00344,2026-02,44.292314910961835,Moderate,seller_quality,seller coaching required
 S00345,2026-02,55.2664200553522,High,seller_quality,audit seller operations
 S00346,2026-02,63.31222289927264,High,seller_quality,audit seller operations
-S00347,2026-02,66.30253613822666,High,seller_quality,audit seller operations
+S00347,2026-02,66.19268765337817,High,seller_quality,audit seller operations
 S00348,2026-02,36.00377628510755,Moderate,seller_quality,seller coaching required
 S00349,2026-02,39.43774018245526,Moderate,seller_quality,seller coaching required
 S00350,2026-02,43.60233251837981,Moderate,seller_quality,seller coaching required
@@ -377,14 +377,14 @@ S00375,2026-02,38.85364630035561,Moderate,seller_quality,seller coaching require
 S00376,2026-02,49.092383582368086,Moderate,seller_quality,seller coaching required
 S00377,2026-02,52.26461346696412,Moderate,seller_quality,seller coaching required
 S00378,2026-02,54.18565265958857,Moderate,seller_quality,seller coaching required
-S00379,2026-02,56.24826541336069,High,concentration_risk,investigate dispute cluster
+S00379,2026-02,56.15875924052119,High,concentration_risk,investigate dispute cluster
 S00380,2026-02,49.54857852508212,Moderate,concentration_risk,seller coaching required
 S00381,2026-02,37.8428276847482,Moderate,concentration_risk,seller coaching required
 S00382,2026-02,36.94356012150189,Moderate,seller_quality,seller coaching required
 S00383,2026-02,34.39907677181916,Moderate,seller_quality,seller coaching required
 S00384,2026-02,39.60334440836263,Moderate,seller_quality,seller coaching required
 S00385,2026-02,41.12893646513911,Moderate,seller_quality,seller coaching required
-S00386,2026-02,61.93279510729502,High,seller_quality,audit seller operations
+S00386,2026-02,61.81490892843324,High,seller_quality,audit seller operations
 S00387,2026-02,52.092108888381475,Moderate,concentration_risk,seller coaching required
 S00388,2026-02,45.21775522637803,Moderate,seller_quality,seller coaching required
 S00389,2026-02,37.5810021857927,Moderate,seller_quality,seller coaching required
@@ -442,7 +442,7 @@ S00440,2026-02,31.09909573855723,Moderate,seller_quality,seller coaching require
 S00441,2026-02,43.13489649250528,Moderate,seller_quality,seller coaching required
 S00442,2026-02,52.82108978598818,Moderate,seller_quality,seller coaching required
 S00443,2026-02,36.37605209979134,Moderate,seller_quality,seller coaching required
-S00444,2026-02,61.11195157001638,High,seller_quality,audit seller operations
+S00444,2026-02,61.27861823668305,High,seller_quality,audit seller operations
 S00445,2026-02,44.33747202238044,Moderate,seller_quality,seller coaching required
 S00446,2026-02,56.20588043327168,High,seller_quality,audit seller operations
 S00447,2026-02,41.18197763141486,Moderate,seller_quality,seller coaching required
@@ -460,7 +460,7 @@ S00458,2026-02,33.762894946979344,Moderate,seller_quality,seller coaching requir
 S00459,2026-02,41.36537002073889,Moderate,seller_quality,seller coaching required
 S00460,2026-02,44.81746330089839,Moderate,seller_quality,seller coaching required
 S00461,2026-02,61.80313617085787,High,seller_quality,audit seller operations
-S00462,2026-02,55.560647103023626,High,seller_quality,audit seller operations
+S00462,2026-02,55.060647103023626,High,seller_quality,audit seller operations
 S00463,2026-02,35.591848553557256,Moderate,concentration_risk,seller coaching required
 S00464,2026-02,32.430709617972354,Moderate,seller_quality,seller coaching required
 S00465,2026-02,49.241941856929486,Moderate,seller_quality,seller coaching required
@@ -493,7 +493,7 @@ S00491,2026-02,37.6386738055573,Moderate,seller_quality,seller coaching required
 S00492,2026-02,44.37756709220811,Moderate,seller_quality,seller coaching required
 S00493,2026-02,54.42034246747646,Moderate,seller_quality,seller coaching required
 S00494,2026-02,42.32474557130686,Moderate,seller_quality,seller coaching required
-S00495,2026-02,46.84433244032478,Moderate,seller_quality,seller coaching required
+S00495,2026-02,47.381369477361815,Moderate,seller_quality,seller coaching required
 S00496,2026-02,59.32828993290471,High,seller_quality,audit seller operations
 S00497,2026-02,46.45186738878277,Moderate,seller_quality,seller coaching required
 S00498,2026-02,27.708321531033175,Low,seller_quality,monitor only
@@ -573,8 +573,8 @@ S00571,2026-02,38.82344860076687,Moderate,seller_quality,seller coaching require
 S00572,2026-02,41.19445922945569,Moderate,concentration_risk,seller coaching required
 S00573,2026-02,42.1998187672187,Moderate,seller_quality,seller coaching required
 S00574,2026-02,49.288707640481356,Moderate,concentration_risk,seller coaching required
-S00575,2026-02,64.57108965668932,High,seller_quality,audit seller operations
-S00576,2026-02,54.56052209195295,Moderate,seller_quality,seller coaching required
+S00575,2026-02,64.3963908615086,High,seller_quality,audit seller operations
+S00576,2026-02,54.29200357343443,Moderate,seller_quality,seller coaching required
 S00577,2026-02,34.54113806633903,Moderate,seller_quality,seller coaching required
 S00578,2026-02,52.65699636209051,Moderate,seller_quality,seller coaching required
 S00579,2026-02,49.1261370648577,Moderate,seller_quality,seller coaching required
@@ -652,8 +652,8 @@ S00650,2026-02,32.22553040310568,Moderate,seller_quality,seller coaching require
 S00651,2026-02,41.97432799585921,Moderate,seller_quality,seller coaching required
 S00652,2026-02,36.475535138164844,Moderate,seller_quality,seller coaching required
 S00653,2026-02,42.8559042792552,Moderate,seller_quality,seller coaching required
-S00654,2026-02,50.65322734374614,Moderate,concentration_risk,seller coaching required
-S00655,2026-02,52.528837420712186,Moderate,seller_quality,seller coaching required
+S00654,2026-02,50.57731111337965,Moderate,concentration_risk,seller coaching required
+S00655,2026-02,52.62953186515663,Moderate,seller_quality,seller coaching required
 S00656,2026-02,27.305806623457617,Low,seller_quality,monitor only
 S00657,2026-02,46.44740394526799,Moderate,seller_quality,seller coaching required
 S00658,2026-02,36.68931493351642,Moderate,seller_quality,seller coaching required
@@ -720,7 +720,7 @@ S00718,2026-02,48.44084239381944,Moderate,seller_quality,seller coaching require
 S00719,2026-02,29.046151340458174,Low,seller_quality,monitor only
 S00720,2026-02,31.268433410880434,Moderate,seller_quality,seller coaching required
 S00721,2026-02,31.88373415753639,Moderate,seller_quality,seller coaching required
-S00722,2026-02,59.45613243402795,High,concentration_risk,investigate dispute cluster
+S00722,2026-02,59.32310491109217,High,concentration_risk,investigate dispute cluster
 S00723,2026-02,41.65093844674229,Moderate,seller_quality,seller coaching required
 S00724,2026-02,21.315555640711043,Low,seller_quality,monitor only
 S00725,2026-02,44.80452311698428,Moderate,seller_quality,seller coaching required
@@ -729,7 +729,7 @@ S00727,2026-02,41.53448415325332,Moderate,concentration_risk,seller coaching req
 S00728,2026-02,38.584952565482844,Moderate,seller_quality,seller coaching required
 S00729,2026-02,23.1089805444222,Low,seller_quality,monitor only
 S00730,2026-02,41.790715959876245,Moderate,seller_quality,seller coaching required
-S00731,2026-02,47.35398150096556,Moderate,seller_quality,seller coaching required
+S00731,2026-02,47.93398150096556,Moderate,seller_quality,seller coaching required
 S00732,2026-02,45.7059713471331,Moderate,concentration_risk,seller coaching required
 S00733,2026-02,50.819899261991466,Moderate,seller_quality,seller coaching required
 S00734,2026-02,31.873131254641144,Moderate,seller_quality,seller coaching required
@@ -758,7 +758,7 @@ S00756,2026-02,47.084758087080075,Moderate,seller_quality,seller coaching requir
 S00757,2026-02,42.69044311514172,Moderate,seller_quality,seller coaching required
 S00758,2026-02,36.9372747943971,Moderate,concentration_risk,seller coaching required
 S00759,2026-02,35.52976951502509,Moderate,seller_quality,seller coaching required
-S00760,2026-02,66.4324880124338,High,seller_quality,audit seller operations
+S00760,2026-02,66.25778921725308,High,seller_quality,audit seller operations
 S00761,2026-02,30.31897590952602,Moderate,seller_quality,seller coaching required
 S00762,2026-02,30.432908852763195,Moderate,seller_quality,seller coaching required
 S00763,2026-02,38.872989417817394,Moderate,seller_quality,seller coaching required
@@ -802,20 +802,20 @@ S00800,2026-02,65.40736503090893,High,seller_quality,audit seller operations
 S00801,2026-02,41.465173999471546,Moderate,seller_quality,seller coaching required
 S00802,2026-02,23.38145670457476,Low,fraud_exposure,monitor only
 S00803,2026-02,23.17209118935515,Low,margin_fragility,monitor only
-S00804,2026-02,61.368622416797635,High,seller_quality,audit seller operations
+S00804,2026-02,61.33125128277702,High,seller_quality,audit seller operations
 S00805,2026-02,39.26436607608987,Moderate,seller_quality,seller coaching required
 S00806,2026-02,33.11419101583497,Moderate,seller_quality,seller coaching required
 S00807,2026-02,24.108656672104125,Low,seller_quality,monitor only
 S00808,2026-02,46.955357570568296,Moderate,seller_quality,seller coaching required
-S00809,2026-02,51.22522781278077,Moderate,seller_quality,seller coaching required
-S00810,2026-02,58.05399145673734,High,seller_quality,audit seller operations
+S00809,2026-02,51.515227812780765,Moderate,seller_quality,seller coaching required
+S00810,2026-02,58.71308236582825,High,seller_quality,audit seller operations
 S00811,2026-02,40.22625564517068,Moderate,seller_quality,seller coaching required
 S00812,2026-02,50.02915888394573,Moderate,seller_quality,seller coaching required
 S00813,2026-02,34.37228240307211,Moderate,seller_quality,seller coaching required
 S00814,2026-02,50.64439801989547,Moderate,seller_quality,seller coaching required
 S00815,2026-02,32.603234142403586,Moderate,seller_quality,seller coaching required
 S00816,2026-02,41.104304875701665,Moderate,seller_quality,seller coaching required
-S00817,2026-02,38.50058406616684,Moderate,seller_quality,seller coaching required
+S00817,2026-02,38.790584066166836,Moderate,seller_quality,seller coaching required
 S00818,2026-02,31.389359762714037,Moderate,seller_quality,seller coaching required
 S00819,2026-02,59.16038176745158,High,concentration_risk,investigate dispute cluster
 S00820,2026-02,42.526770014968584,Moderate,seller_quality,seller coaching required
@@ -898,7 +898,7 @@ S00896,2026-02,52.83681391512897,Moderate,concentration_risk,seller coaching req
 S00897,2026-02,56.1344727133196,High,seller_quality,audit seller operations
 S00898,2026-02,30.900415740373298,Moderate,seller_quality,seller coaching required
 S00899,2026-02,55.96389000176169,High,seller_quality,audit seller operations
-S00900,2026-02,57.80005797502645,High,seller_quality,audit seller operations
+S00900,2026-02,57.902170651082784,High,seller_quality,audit seller operations
 S00901,2026-02,36.72088763055376,Moderate,seller_quality,seller coaching required
 S00902,2026-02,42.78723895735686,Moderate,concentration_risk,seller coaching required
 S00903,2026-02,41.511055124439835,Moderate,seller_quality,seller coaching required
@@ -920,7 +920,7 @@ S00918,2026-02,44.11925845299474,Moderate,seller_quality,seller coaching require
 S00919,2026-02,47.60543351605578,Moderate,seller_quality,seller coaching required
 S00920,2026-02,41.97757343862695,Moderate,concentration_risk,seller coaching required
 S00921,2026-02,38.460373140351706,Moderate,seller_quality,seller coaching required
-S00922,2026-02,66.46868111090052,High,seller_quality,audit seller operations
+S00922,2026-02,66.50083188695373,High,seller_quality,audit seller operations
 S00923,2026-02,49.440774250008225,Moderate,concentration_risk,seller coaching required
 S00924,2026-02,34.65026952796945,Moderate,seller_quality,seller coaching required
 S00925,2026-02,54.495339077675254,Moderate,seller_quality,seller coaching required
@@ -938,7 +938,7 @@ S00936,2026-02,51.43030624746537,Moderate,seller_quality,seller coaching require
 S00937,2026-02,48.776496584325216,Moderate,seller_quality,seller coaching required
 S00938,2026-02,21.96608665723727,Low,seller_quality,monitor only
 S00939,2026-02,56.77812719669727,High,seller_quality,audit seller operations
-S00940,2026-02,69.27366013730075,High,seller_quality,audit seller operations
+S00940,2026-02,69.37649701673338,High,seller_quality,audit seller operations
 S00941,2026-02,22.842592995446747,Low,seller_quality,monitor only
 S00942,2026-02,45.458534235974064,Moderate,seller_quality,seller coaching required
 S00943,2026-02,32.600900927583815,Moderate,concentration_risk,seller coaching required
@@ -946,7 +946,7 @@ S00944,2026-02,41.577090090850284,Moderate,seller_quality,seller coaching requir
 S00945,2026-02,48.809413122175556,Moderate,seller_quality,seller coaching required
 S00946,2026-02,52.17193676620535,Moderate,seller_quality,seller coaching required
 S00947,2026-02,36.251281704365994,Moderate,seller_quality,seller coaching required
-S00948,2026-02,66.19327836081726,High,seller_quality,audit seller operations
+S00948,2026-02,66.09463890503496,High,seller_quality,audit seller operations
 S00949,2026-02,49.98921635863594,Moderate,seller_quality,seller coaching required
 S00950,2026-02,45.15636496056293,Moderate,concentration_risk,seller coaching required
 S00951,2026-02,34.36806565423275,Moderate,seller_quality,seller coaching required
@@ -966,13 +966,13 @@ S00964,2026-02,56.09121958620767,High,seller_quality,audit seller operations
 S00965,2026-02,56.71427995619273,High,seller_quality,audit seller operations
 S00966,2026-02,33.190026140081805,Moderate,seller_quality,seller coaching required
 S00967,2026-02,24.335,Low,seller_quality,monitor only
-S00968,2026-02,70.13051303203547,High,seller_quality,audit seller operations
+S00968,2026-02,70.30110126732959,High,seller_quality,audit seller operations
 S00969,2026-02,40.42085721018411,Moderate,seller_quality,seller coaching required
 S00970,2026-02,52.72243511780073,Moderate,concentration_risk,seller coaching required
 S00971,2026-02,45.03981223673719,Moderate,concentration_risk,seller coaching required
 S00972,2026-02,42.98853921835789,Moderate,seller_quality,seller coaching required
 S00973,2026-02,50.104372806873926,Moderate,seller_quality,seller coaching required
-S00974,2026-02,43.33411127563325,Moderate,concentration_risk,seller coaching required
+S00974,2026-02,43.45596001512905,Moderate,concentration_risk,seller coaching required
 S00975,2026-02,55.47520370061271,High,seller_quality,audit seller operations
 S00976,2026-02,43.062149915783976,Moderate,seller_quality,seller coaching required
 S00977,2026-02,42.14185216109009,Moderate,seller_quality,seller coaching required
@@ -985,7 +985,7 @@ S00983,2026-02,38.61010658140815,Moderate,seller_quality,seller coaching require
 S00984,2026-02,36.978201702536545,Moderate,seller_quality,seller coaching required
 S00985,2026-02,55.21468146363701,High,seller_quality,audit seller operations
 S00986,2026-02,25.070259744881877,Low,seller_quality,monitor only
-S00987,2026-02,57.42882559161988,High,seller_quality,audit seller operations
+S00987,2026-02,57.54122869239507,High,seller_quality,audit seller operations
 S00988,2026-02,69.75307448401603,High,seller_quality,audit seller operations
 S00989,2026-02,29.387662227780233,Low,seller_quality,monitor only
 S00990,2026-02,49.134926951992725,Moderate,seller_quality,seller coaching required
@@ -995,7 +995,7 @@ S00993,2026-02,38.044385397747945,Moderate,concentration_risk,seller coaching re
 S00994,2026-02,36.082181758279184,Moderate,seller_quality,seller coaching required
 S00995,2026-02,38.52766990136551,Moderate,seller_quality,seller coaching required
 S00996,2026-02,37.726361933684196,Moderate,seller_quality,seller coaching required
-S00997,2026-02,55.768993443750794,High,concentration_risk,investigate dispute cluster
+S00997,2026-02,55.67296695368457,High,concentration_risk,investigate dispute cluster
 S00998,2026-02,16.137141775301565,Low,seller_quality,monitor only
 S00999,2026-02,40.2653061714995,Moderate,seller_quality,seller coaching required
 S01000,2026-02,29.076760382331813,Low,margin_fragility,monitor only
@@ -1025,11 +1025,11 @@ S01023,2026-02,33.96037399899001,Moderate,seller_quality,seller coaching require
 S01024,2026-02,37.77756262916439,Moderate,seller_quality,seller coaching required
 S01025,2026-02,37.28372102921993,Moderate,concentration_risk,seller coaching required
 S01026,2026-02,28.867480099959458,Low,seller_quality,monitor only
-S01027,2026-02,53.706596914076044,Moderate,concentration_risk,seller coaching required
+S01027,2026-02,53.513263580742716,Moderate,concentration_risk,seller coaching required
 S01028,2026-02,52.705588662241965,Moderate,concentration_risk,seller coaching required
 S01029,2026-02,35.26066481472437,Moderate,seller_quality,seller coaching required
 S01030,2026-02,35.36993266502652,Moderate,seller_quality,seller coaching required
-S01031,2026-02,44.66303716146664,Moderate,seller_quality,seller coaching required
+S01031,2026-02,44.16303716146665,Moderate,seller_quality,seller coaching required
 S01032,2026-02,43.36772347162611,Moderate,seller_quality,seller coaching required
 S01033,2026-02,21.392065848556214,Low,seller_quality,monitor only
 S01034,2026-02,42.522847367771405,Moderate,seller_quality,seller coaching required
@@ -1092,7 +1092,7 @@ S01090,2026-02,37.7966364995604,Moderate,seller_quality,seller coaching required
 S01091,2026-02,31.459638645294522,Moderate,seller_quality,seller coaching required
 S01092,2026-02,39.527110335464215,Moderate,seller_quality,seller coaching required
 S01093,2026-02,45.99356279116073,Moderate,seller_quality,seller coaching required
-S01094,2026-02,65.21902676126982,High,seller_quality,audit seller operations
+S01094,2026-02,65.30717265792636,High,seller_quality,audit seller operations
 S01095,2026-02,48.95783295107073,Moderate,seller_quality,seller coaching required
 S01096,2026-02,50.25870373358383,Moderate,seller_quality,seller coaching required
 S01097,2026-02,37.941353359517564,Moderate,seller_quality,seller coaching required
@@ -1162,7 +1162,7 @@ S01160,2026-02,35.34379550633621,Moderate,seller_quality,seller coaching require
 S01161,2026-02,37.27770794735071,Moderate,seller_quality,seller coaching required
 S01162,2026-02,38.25406888912918,Moderate,concentration_risk,seller coaching required
 S01163,2026-02,40.14315768712801,Moderate,seller_quality,seller coaching required
-S01164,2026-02,55.33381735953921,High,concentration_risk,investigate dispute cluster
+S01164,2026-02,55.32856944061051,High,concentration_risk,investigate dispute cluster
 S01165,2026-02,32.58574129506265,Moderate,seller_quality,seller coaching required
 S01166,2026-02,42.52417465928701,Moderate,seller_quality,seller coaching required
 S01167,2026-02,55.13249984326473,High,seller_quality,audit seller operations

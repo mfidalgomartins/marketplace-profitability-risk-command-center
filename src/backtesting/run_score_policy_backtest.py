@@ -6,9 +6,6 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
-_matplotlib_cache = Path(".tmp/matplotlib").resolve()
-_matplotlib_cache.mkdir(parents=True, exist_ok=True)
-os.environ.setdefault("MPLCONFIGDIR", str(_matplotlib_cache))
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 import matplotlib.pyplot as plt
@@ -21,7 +18,7 @@ class BacktestConfig:
     raw_dir: Path = Path("data/raw")
     processed_dir: Path = Path("data/processed")
     output_dir: Path = Path("data/processed")
-    charts_dir: Path = Path(".tmp/charts")
+    charts_dir: Path | None = None
     thresholds: tuple[int, ...] = tuple(range(30, 96, 5))
     manual_review_cost: float = 1.20
     friction_rate: float = 0.003
@@ -241,10 +238,11 @@ def save_outputs(outputs: dict[str, pd.DataFrame], cfg: BacktestConfig) -> None:
     for name, df in outputs.items():
         df.to_csv(cfg.output_dir / f"{name}.csv", index=False)
 
-    _plot(
-        curve=outputs["backtesting_threshold_curve"],
-        output_path=cfg.charts_dir / "17_order_risk_backtesting_thresholds.png",
-    )
+    if cfg.charts_dir is not None:
+        _plot(
+            curve=outputs["backtesting_threshold_curve"],
+            output_path=cfg.charts_dir / "17_order_risk_backtesting_thresholds.png",
+        )
 
 
 def main() -> None:
@@ -252,7 +250,7 @@ def main() -> None:
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
+    parser.add_argument("--charts-dir", type=Path)
     parser.add_argument("--manual-review-cost", type=float, default=1.20)
     parser.add_argument("--friction-rate", type=float, default=0.003)
     parser.add_argument("--base-efficacy", type=float, default=0.35)
@@ -274,7 +272,8 @@ def main() -> None:
     print("Backtesting outputs generated:")
     for name, df in outputs.items():
         print(f"  - {name}: {len(df):,} rows")
-    print("  - chart: 17_order_risk_backtesting_thresholds.png")
+    if cfg.charts_dir is not None:
+        print("  - chart: 17_order_risk_backtesting_thresholds.png")
 
 
 if __name__ == "__main__":

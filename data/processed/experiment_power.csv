@@ -1,0 +1,2 @@
+experiment_id,alpha,target_power,minimum_detectable_effect_pp,control_baseline_rate,required_rows_per_arm,observed_minimum_rows_per_arm,estimated_power_at_mde,power_status
+EXP-ENHANCED-REVIEW-001,0.05,0.8,2.5,0.42981718848497585,6108,9465,0.9367079195871302,passed

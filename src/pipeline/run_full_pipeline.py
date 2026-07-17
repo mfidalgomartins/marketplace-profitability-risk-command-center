@@ -38,7 +38,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run full marketplace analytics pipeline end-to-end.")
     parser.add_argument("--raw-dir", type=Path, default=Path("data/raw"))
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed"))
-    parser.add_argument("--charts-dir", type=Path, default=Path(".tmp/charts"))
+    parser.add_argument(
+        "--charts-dir",
+        type=Path,
+        help="Optional directory for exploratory Monte Carlo and backtest charts.",
+    )
     parser.add_argument(
         "--dashboard-file",
         type=Path,
@@ -59,6 +63,26 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--schema-history-dir", type=Path, default=Path("config/contracts/history"))
     parser.add_argument("--reports-dir", type=Path, default=Path("reports"))
+    parser.add_argument(
+        "--model-policy-file",
+        type=Path,
+        default=Path("config/contracts/v1/model_monitoring_policy.json"),
+    )
+    parser.add_argument(
+        "--finance-policy-file",
+        type=Path,
+        default=Path("config/contracts/v1/finance_policy.json"),
+    )
+    parser.add_argument(
+        "--experiment-policy-file",
+        type=Path,
+        default=Path("config/contracts/v1/experiment_policy.json"),
+    )
+    parser.add_argument(
+        "--warehouse-db-file",
+        type=Path,
+        default=Path("outputs/warehouse/marketplace.duckdb"),
+    )
     parser.add_argument(
         "--required-release-state",
         type=str,
@@ -104,6 +128,49 @@ def build_pipeline_steps(args: argparse.Namespace, python_executable: str | None
                 str(args.raw_dir),
                 "--processed-dir",
                 str(args.processed_dir),
+                "--monitoring-policy-file",
+                str(args.model_policy_file),
+            ],
+        ),
+        PipelineStep(
+            "run temporal model validation",
+            [
+                py,
+                _script("src/model_validation/run_temporal_validation.py"),
+                "--raw-dir",
+                str(args.raw_dir),
+                "--processed-dir",
+                str(args.processed_dir),
+                "--policy-file",
+                str(args.model_policy_file),
+                "--output-dir",
+                str(args.processed_dir),
+            ],
+        ),
+        PipelineStep(
+            "build governed management accounts",
+            [
+                py,
+                _script("src/finance/build_accounting_pnl.py"),
+                "--processed-dir",
+                str(args.processed_dir),
+                "--policy-file",
+                str(args.finance_policy_file),
+                "--output-dir",
+                str(args.processed_dir),
+            ],
+        ),
+        PipelineStep(
+            "run controlled intervention trial",
+            [
+                py,
+                _script("src/experimentation/run_controlled_experiment.py"),
+                "--processed-dir",
+                str(args.processed_dir),
+                "--policy-file",
+                str(args.experiment_policy_file),
+                "--output-dir",
+                str(args.processed_dir),
             ],
         ),
         PipelineStep(
@@ -141,8 +208,7 @@ def build_pipeline_steps(args: argparse.Namespace, python_executable: str | None
                 str(args.processed_dir),
                 "--output-dir",
                 str(args.processed_dir),
-                "--charts-dir",
-                str(args.charts_dir),
+                *(["--charts-dir", str(args.charts_dir)] if args.charts_dir is not None else []),
                 "--iterations",
                 str(args.monte_carlo_iterations),
             ],
@@ -158,8 +224,24 @@ def build_pipeline_steps(args: argparse.Namespace, python_executable: str | None
                 str(args.processed_dir),
                 "--output-dir",
                 str(args.processed_dir),
-                "--charts-dir",
-                str(args.charts_dir),
+                *(["--charts-dir", str(args.charts_dir)] if args.charts_dir is not None else []),
+            ],
+        ),
+        PipelineStep(
+            "synchronize DuckDB warehouse",
+            [
+                py,
+                _script("src/warehouse/build_duckdb_warehouse.py"),
+                "--raw-dir",
+                str(args.raw_dir),
+                "--processed-dir",
+                str(args.processed_dir),
+                "--database-file",
+                str(args.warehouse_db_file),
+                "--manifest-file",
+                str(args.reports_dir / "warehouse_load_manifest.csv"),
+                "--validation-file",
+                str(args.reports_dir / "warehouse_validation.csv"),
             ],
         ),
         PipelineStep(
@@ -173,19 +255,6 @@ def build_pipeline_steps(args: argparse.Namespace, python_executable: str | None
                 str(args.processed_dir),
                 "--reports-dir",
                 str(args.reports_dir),
-            ],
-        ),
-        PipelineStep(
-            "generate schema contracts",
-            [
-                py,
-                _script("src/validation/generate_schema_contracts.py"),
-                "--raw-dir",
-                str(args.raw_dir),
-                "--processed-dir",
-                str(args.processed_dir),
-                "--output-file",
-                str(args.schema_file),
             ],
         ),
         PipelineStep(

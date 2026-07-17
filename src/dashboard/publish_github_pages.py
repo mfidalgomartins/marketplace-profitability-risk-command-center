@@ -5,10 +5,7 @@ from pathlib import Path
 
 
 def _build_index_html(target_filename: str) -> str:
-    # Matches the executive dashboard's Apple-grade design language: system/SF
-    # type, #f5f5f7 canvas, hairline card, soft ambient shadow, indigo accent,
-    # pill control. No gradients/glass/eyebrow-pill/serif (the dashboard's
-    # banned "AI smell"). Adapts to light/dark via prefers-color-scheme.
+    # Reuse the dashboard's typography, color tokens, and motion preferences.
     return f"""<!doctype html>
 <html lang="en">
 <head>

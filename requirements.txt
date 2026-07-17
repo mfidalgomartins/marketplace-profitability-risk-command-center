@@ -4,3 +4,10 @@ matplotlib==3.10.8
 seaborn==0.13.2
 plotly==6.6.0
 reportlab==4.5.1
+duckdb==1.5.4
+fastapi==0.139.0
+pydantic==2.13.4
+pydyf==0.12.1
+uvicorn==0.51.0
+weasyprint==69.0
+pypdf==6.14.2

@@ -1,6 +1,12 @@
 from pathlib import Path
 
-from src.dashboard.build_executive_dashboard import DashboardConfig, _build_payload, _dashboard_html, _json_safe
+from src.dashboard.build_executive_dashboard import (
+    DashboardConfig,
+    _build_payload,
+    _dashboard_html,
+    _json_safe,
+    _serialize_payload,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,6 +26,7 @@ def test_dashboard_payload_includes_governed_kpis_and_official_path() -> None:
     assert str(payload["meta"]["official_kpi_source"]).endswith("reports/executive_kpi_snapshot.csv")
     assert payload["meta"]["is_sampled"] is True
     assert payload["meta"]["orders"] <= 2000
+    assert "generated_at_utc" not in payload["meta"]
 
     official = payload["official_kpis"]
     required_metrics = {
@@ -72,3 +79,10 @@ def test_dashboard_payload_serializes_without_nonstandard_nan_tokens() -> None:
 
     assert '"bad": null' in encoded
     assert '"v": null' in encoded
+
+
+def test_dashboard_payload_serialization_cannot_close_script_tag() -> None:
+    encoded = _serialize_payload({"value": "</script><script>alert('x')</script>"})
+
+    assert "</script>" not in encoded
+    assert "\\u003c/script\\u003e" in encoded

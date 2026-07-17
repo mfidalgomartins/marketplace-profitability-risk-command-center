@@ -80,6 +80,13 @@ def test_generate_contract_covers_raw_and_processed_tables() -> None:
     assert "order_id" in orders["columns"]
     assert set(orders["column_types"]) == set(orders["columns"])
     assert "order_id" in orders["primary_key_candidate"]
+    assert "order_id" in orders["not_null_columns"]
+    assert tables["payments"]["unique_constraints"] == [["order_id"]]
+
+
+def test_generate_contract_rejects_incomplete_artifact_set(tmp_path: Path) -> None:
+    with pytest.raises(FileNotFoundError, match="complete schema contract"):
+        generate_contract(tmp_path / "raw", tmp_path / "processed")
 
 
 @pytest.mark.parametrize(
@@ -127,10 +134,18 @@ def test_build_action_register_respects_caps_and_writes(tmp_path: Path) -> None:
     assert out.exists()
 
 
+def test_build_action_register_rejects_nonpositive_caps() -> None:
+    cfg = GovernanceConfig(processed_dir=PROC, max_seller_actions=0, max_order_actions=10)
+    with pytest.raises(ValueError, match="greater than zero"):
+        build_action_register(cfg)
+
+
 # --- executive snapshot ------------------------------------------------------
 def test_generate_snapshot_writes_csv_and_markdown(tmp_path: Path) -> None:
     cfg = ExecutiveSnapshotConfig(raw_dir=RAW, processed_dir=PROC, reports_dir=tmp_path)
     csv_path, md_path = generate_snapshot(cfg)
     assert csv_path.exists() and csv_path.suffix == ".csv"
     assert md_path.exists() and md_path.suffix == ".md"
-    assert md_path.read_text(encoding="utf-8").strip()
+    markdown = md_path.read_text(encoding="utf-8")
+    assert markdown.strip()
+    assert "Generated at" not in markdown

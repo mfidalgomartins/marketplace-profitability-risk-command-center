@@ -108,6 +108,15 @@ def _clip(v: float, low: float, high: float) -> float:
     return float(min(max(v, low), high))
 
 
+def _validate_config(cfg: GenerationConfig) -> None:
+    if cfg.n_buyers <= 0 or cfg.n_sellers <= 0:
+        raise ValueError("n_buyers and n_sellers must be greater than zero.")
+    start_date = pd.Timestamp(cfg.start_date)
+    end_date = pd.Timestamp(cfg.end_date)
+    if start_date > end_date:
+        raise ValueError("start_date must be on or before end_date.")
+
+
 def _month_starts(start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DatetimeIndex:
     return pd.date_range(start=start_date, end=end_date, freq="MS")
 
@@ -441,7 +450,7 @@ def _compute_buyer_order_counts(
     lam = lam.clip(lower=0.25, upper=46.0)
     counts = rng.poisson(lam.to_numpy())
 
-    # Keep minimum activity for clearly active segments and cap extremes.
+    # Keep minimum activity for active repeat segments and cap extremes.
     active_idx = merged["segment"].isin(["repeat_good", "repeat_bad"]).to_numpy() & (counts == 0)
     counts[active_idx] = 1
     counts = np.clip(counts, 0, 140)
@@ -1074,6 +1083,7 @@ def generate_transactions(
 
 
 def generate_all_tables(cfg: GenerationConfig) -> dict[str, pd.DataFrame]:
+    _validate_config(cfg)
     rng = np.random.default_rng(cfg.seed)
     buyers, buyer_latent = generate_buyers(cfg, rng)
     sellers, seller_latent = generate_sellers(cfg, rng)
