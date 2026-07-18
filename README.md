@@ -4,7 +4,9 @@ A reproducible marketplace decision system spanning management P&L, point-in-tim
 
 ![CI](https://github.com/mfidalgomartins/marketplace-profitability-risk-command-center/actions/workflows/ci.yml/badge.svg) ![GitHub Pages](https://github.com/mfidalgomartins/marketplace-profitability-risk-command-center/actions/workflows/pages.yml/badge.svg) ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB) ![Coverage 88.7%](https://img.shields.io/badge/coverage-88.7%25-1F8A55) ![Lint ruff](https://img.shields.io/badge/lint-ruff-2b2b2b) ![License MIT](https://img.shields.io/badge/license-MIT-black)
 
-**[Live dashboard](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/)** · **[Analytical report](outputs/reports/marketplace-command-center-report.pdf)** · **[Executive summary](docs/executive_summary.md)** · **[Architecture](docs/architecture.md)**
+[![Open the Live Dashboard](https://img.shields.io/badge/Open%20the%20Live%20Dashboard-5B54E0?style=for-the-badge&logoColor=white)](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/) [![Read the Analytical Report](https://img.shields.io/badge/Read%20the%20Analytical%20Report-0A1628?style=for-the-badge&logoColor=white)](outputs/reports/marketplace-command-center-report.pdf)
+
+**[Executive summary](docs/executive_summary.md)** · **[Architecture](docs/architecture.md)**
 
 | GMV (current run) | Realized contribution margin | Top-10 seller GMV share | Model release status | Test suite |
 |---|---|---|---|---|
@@ -20,6 +22,8 @@ Topline growth is not the control metric here. On the current synthetic run, GMV
 
 ### [Interactive dashboard](https://mfidalgomartins.github.io/marketplace-profitability-risk-command-center/) — the primary review surface
 
+![Dashboard overview tab: ranked KPI band, executive read, guardrail checklist, and leakage waterfall](assets/screenshots/dashboard-overview.png)
+
 Built for a live seller-quality committee session, not a static export:
 
 - **Ranked KPI band** — GMV, protected value, and contribution margin lead at 40px; take rate, refund rate, dispute rate, and subsidy share sit as a secondary diagnostic tier. The hierarchy mirrors the argument, not a flat grid of equally loud tiles.
@@ -29,6 +33,8 @@ Built for a live seller-quality committee session, not a static export:
 - Single self-contained HTML file (embedded Plotly + data), no backend, deployable straight to GitHub Pages.
 
 ### [Analytical report](outputs/reports/marketplace-command-center-report.pdf) — the primary decision-support deliverable
+
+<img src="assets/screenshots/report-cover.png" alt="Analytical report cover: Marketplace Profitability, Fraud & Seller Quality — prepared for the CFO and Marketplace Executive Committee" width="500">
 
 The narrative counterpart to the dashboard, typeset as a single production PDF: leakage waterfall, refund/dispute composition, seller governance distribution and concentration curve, model calibration and holdout evidence, and the scenario ranges behind the recommended policy. It states the model's failed release gate (ROC AUC 0.582 against a 0.600 threshold) in the same typographic voice as its passing gates — the report demonstrates model-risk control, not a manufactured "all green" outcome.
 
